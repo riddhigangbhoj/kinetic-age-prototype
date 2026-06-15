@@ -1,0 +1,9 @@
+# local tooling & backups — not part of the site
+.cutout/
+.venv/
+.img-orig/
+.hero-orig/
+.*.py
+__pycache__/
+*.pyc
+.DS_Store

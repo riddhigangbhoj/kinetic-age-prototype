@@ -37,6 +37,9 @@
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* TRIAL fonts, home page only — revert by removing .tryfont toggle in render() */
+.tryfont{--fd:'Haas Grotesk Display Trial','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --fb:'Satoshi','DM Sans',system-ui,sans-serif}
 html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{font-family:var(--fb);background:#0a1020;color:var(--ink);
   display:grid;place-items:center;min-height:100svh;
@@ -87,6 +90,8 @@ button{font:inherit;cursor:pointer}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 26px;width:fit-content;
   background:var(--ink);color:#fff;border-radius:var(--r-pill);font-weight:600;font-size:var(--fs-body);border:none;transition:transform .2s var(--ease)}
 .btn:active{transform:scale(.98)}
+#app[data-page="home"] .btn,#app[data-page="home"] .btn.line{background:var(--green);color:#fff;border:none}
+#app[data-page="home"] .btn.light{background:var(--ink);color:#fff;border:none}
 .btn.light{background:#fff;color:var(--ink)}
 .btn.blue{background:var(--blue);color:#fff}
 .btn.orange{background:var(--orange-ink);color:#fff}
@@ -144,6 +149,41 @@ button{font:inherit;cursor:pointer}
 .hlink:active{text-decoration-color:#fff}
 .hero.tall.top .hcta{margin-top:auto}
 .hero.tall.top .scrollcue{margin-top:16px;justify-content:center;padding-top:0}
+/* home hero: green-blue theme with a zoomed cut-out figure that morphs across the move/eat/feel pillars. scoped so other gradient heroes are untouched */
+.hero.scene{color:var(--ink)}
+.hero.scene .bgslide.scenebg{opacity:1;animation:none;background:
+  radial-gradient(125% 80% at 50% 102%,rgba(31,140,106,.32),rgba(31,140,106,0) 58%),
+  radial-gradient(95% 60% at 82% 6%,rgba(33,63,153,.16),transparent 62%),
+  linear-gradient(180deg,#f4f9f7 0%,#e9f4f1 44%,#d6ebe6 100%)}
+.hero.scene .herofig{position:absolute;left:50%;bottom:0;height:76%;width:auto;z-index:-2;pointer-events:none;transform:translateX(-50%);will-change:opacity,filter,transform;animation:heroMorph 15s infinite ease-in-out}
+.hero.scene .figB{animation-delay:-10s}
+.hero.scene .figC{animation-delay:-5s}
+.hero.scene .herolabel{position:absolute;left:50%;top:42%;z-index:1;transform:translateX(-50%);
+  font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);color:var(--green);
+  background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
+  padding:7px 16px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0;
+  box-shadow:0 8px 24px rgba(16,58,52,.14);will-change:opacity,transform;
+  animation:heroLabel 15s infinite ease-in-out}
+.hero.scene .labC{animation-delay:-5s}
+.hero.scene .labB{animation-delay:-10s}
+@keyframes heroLabel{
+  0%{opacity:0;transform:translateX(-50%) translateY(9px)}
+  4%,29%{opacity:1;transform:translateX(-50%) translateY(0)}
+  34%,100%{opacity:0;transform:translateX(-50%) translateY(9px)}}
+@keyframes heroMorph{
+  0%{opacity:0;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(8px);transform:translateX(-50%) scale(1.05)}
+  4%,29%{opacity:1;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(0px);transform:translateX(-50%) scale(1)}
+  34%,100%{opacity:0;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(8px);transform:translateX(-50%) scale(1.05)}}
+.hero.scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(214,235,230,0) 0%,rgba(214,235,230,.55) 55%,rgba(208,230,224,.95) 100%)}
+.hero.scene .scrim{display:none}
+.hero.scene h1{text-shadow:none;color:var(--ink)}
+.hero.scene h1 .it{color:var(--green)}
+.hero.scene .sub{color:var(--ink2)}
+.hero.scene .sub em{color:var(--green)}
+.hero.scene .scrollcue{color:var(--muted)}
+.hero.scene .scrollcue i{background:linear-gradient(rgba(19,38,90,.5),transparent)}
+.hero.scene .btn.light,.hero.scene .btn.xl.light{background:var(--ink);color:#fff}
+.hero.scene .hlink{color:var(--ink2);text-decoration-color:rgba(19,38,90,.4)}
 
 /* ---- content ---- */
 .sec{padding:40px 22px}
@@ -174,6 +214,13 @@ main{padding-bottom:96px}
 .swipe{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:22px;margin:22px -22px 0;padding:4px 22px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .swipe::-webkit-scrollbar{display:none}
 .swipe>.card{flex:0 0 84%;scroll-snap-align:start;margin-top:0}
+.socrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.soc{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--glass);border:1px solid var(--glass-line);color:var(--blue);
+  transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease)}
+.soc svg{width:23px;height:23px}
+.soc:hover{background:var(--blue);color:#fff}
+.soc:active{transform:scale(.93)}
 .slot{position:relative;border-radius:18px;overflow:hidden;min-height:150px;display:flex;align-items:flex-end;padding:14px;
   background:linear-gradient(150deg,#e9eeff,#9fb0ec 40%,#3f54bd 70%,#23286e 100%)}
 .slot.green{background:linear-gradient(150deg,#e6f3ef,#86c8bd 38%,#2f7f64 70%,#173f33 100%)}
@@ -183,6 +230,25 @@ main{padding-bottom:96px}
 .slot.round{border-radius:50%;min-height:0;aspect-ratio:1}
 .slot.video .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.9);z-index:1}
 .slot.video .play::after{content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent}
+
+/* journey explainer video block (poster placeholder) */
+.vblock{position:relative;margin-top:24px;border-radius:20px;overflow:hidden;aspect-ratio:16/10;
+  display:grid;place-items:center;cursor:pointer;
+  background:linear-gradient(152deg,#27387f,#16285c 56%,#0c1942);
+  box-shadow:0 20px 44px -26px rgba(20,32,80,.75)}
+.vblock::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(115% 85% at 50% -8%,rgba(130,160,235,.3),transparent 58%)}
+.vplay{position:relative;z-index:1;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.95);
+  display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.34);transition:transform .2s var(--ease)}
+.vblock:active .vplay{transform:scale(.93)}
+.vplay::after{content:"";margin-left:5px;border-left:19px solid var(--ink);
+  border-top:12px solid transparent;border-bottom:12px solid transparent}
+.vtag{position:absolute;z-index:1;top:14px;left:14px;font-size:var(--fs-micro);letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.9);background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);padding:5px 11px;border-radius:var(--r-pill);
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.vcap{position:absolute;z-index:1;left:18px;right:18px;bottom:16px;color:rgba(255,255,255,.94);
+  font-family:var(--fd);font-weight:440;font-size:var(--fs-h4);line-height:1.32;letter-spacing:-.01em}
 .tag{display:inline-flex;align-self:flex-start;font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.08em;
   padding:5px 11px;border-radius:var(--r-pill);background:#eef0f6;color:var(--blue)}
 .tag.green{background:#e6f4ee;color:var(--green)}
@@ -203,13 +269,27 @@ main{padding-bottom:96px}
 .av.c5{background:linear-gradient(150deg,#2a4aa0,#16264f)}
 
 /* vetted team: equal-weight provider grid */
-.provrow{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;margin-top:22px}
-.provslot{position:relative}
-.provslot .slot{min-height:0;aspect-ratio:4/5;border-radius:16px;padding:10px}
-.vtick{position:absolute;top:8px;right:8px;z-index:1;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--green);display:grid;place-items:center;box-shadow:0 2px 6px rgba(20,32,80,.2)}
-.vtick svg{width:12px;height:12px}
-.prov-name{font-family:var(--fd);font-weight:460;font-size:var(--fs-h4);line-height:1.15;letter-spacing:-.01em;color:var(--ink);margin-top:10px}
-.prov-role{font-size:var(--fs-cap);color:var(--muted);margin-top:2px}
+/* team — specialty-coded provider cards */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.pcard{position:relative;border-radius:20px;overflow:hidden;background:#fff;
+  border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(40,70,150,.5)}
+.pphoto{position:relative;aspect-ratio:1/1;overflow:hidden}
+.pphoto::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 58%,rgba(255,255,255,.5))}
+.pphoto img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.pcard.n .pphoto{background:linear-gradient(157deg,#eef1f7,#dfe6f1)}
+.pcard.g .pphoto{background:linear-gradient(157deg,#e7f5ef,#d2ebdf)}
+.pcard.b .pphoto{background:linear-gradient(157deg,#eaeffb,#d8e3fb)}
+.pcard.o .pphoto{background:linear-gradient(157deg,#fef0e6,#fbdfce)}
+.pbody{padding:13px 14px 16px}
+.pname{font-family:var(--fd);font-weight:480;font-size:var(--fs-h4);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.ptag{display:inline-block;margin-top:9px;font-size:var(--fs-micro);font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill)}
+.pcard.n .ptag{background:#eef1f7;color:var(--ink2)}
+.pcard.g .ptag{background:#e6f4ee;color:var(--green)}
+.pcard.b .ptag{background:#e9eefb;color:var(--blue)}
+.pcard.o .ptag{background:#fdeae0;color:var(--orange-ink)}
+.pmeta{margin-top:10px;font-size:var(--fs-cap);color:var(--muted);line-height:1.45}
 
 /* testimonial — compact clipping: media is the header, metric floats across its edge */
 .tcard2{padding:0;overflow:hidden}
@@ -237,19 +317,69 @@ main{padding-bottom:96px}
 .t2-foot .av.lead{width:31px;height:31px;font-size:12.5px}
 .t2-lead{font-size:var(--fs-cap);color:var(--muted);line-height:1.45;min-width:0}
 .t2-lead b{display:block;font-weight:600;font-size:var(--fs-ui);color:var(--ink);margin-bottom:1px}
-/* the ripple, quiet: one row of soft before->after chips */
-.t2-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
-.t2-chiplbl{font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--orange-ink);font-weight:700;margin-right:2px}
-.t2-chip{display:inline-flex;align-items:baseline;gap:5px;padding:6px 12px;border-radius:var(--r-pill);
-  background:#f7f5f0;border:1px solid var(--line);font-size:var(--fs-cap);color:var(--muted);white-space:nowrap}
-.t2-chip s{opacity:.6}
-.t2-chip i{font-style:normal;color:var(--orange-ink)}
-.t2-chip b{font-family:var(--fd);font-weight:600;font-size:var(--fs-sm);color:var(--ink)}
+.t2-team{display:flex;width:fit-content;align-items:center;gap:5px;margin-top:7px;font-size:var(--fs-micro);font-weight:700;
+  letter-spacing:.03em;color:var(--green);background:#e6f4ee;border:1px solid #cfe9de;border-radius:var(--r-pill);padding:3px 9px}
+.t2-team::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
 /* conditions teaser link under the carousel */
 .btn.line{background:rgba(255,255,255,.55);border:1.5px solid rgba(19,38,90,.28);color:var(--ink);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .btn.line:active{background:rgba(255,255,255,.8)}
 .secta{display:flex;justify-content:center;margin-top:20px}
+
+/* metrics — donut rings + grounded base stat */
+.metsecC{padding-top:22px;padding-bottom:22px}
+.metricsC{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;padding:26px 18px 20px;
+  border:1px solid rgba(255,255,255,.75);
+  background:
+    radial-gradient(115% 80% at 16% -12%,rgba(255,255,255,.92),transparent 52%),
+    radial-gradient(95% 75% at 102% -6%,rgba(142,198,242,.6),transparent 58%),
+    radial-gradient(120% 95% at 50% 122%,rgba(31,140,106,.18),transparent 60%),
+    linear-gradient(168deg,#d9eefb 0%,#bce3f9 50%,#a6d6f2 100%);
+  box-shadow:0 26px 56px -28px rgba(33,63,120,.55),inset 0 1.5px 0 rgba(255,255,255,.85),inset 0 -40px 70px -50px rgba(31,140,106,.45)}
+.metricsC::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.45;mix-blend-mode:overlay;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.4px);background-size:7px 7px}
+.metricsC::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(130% 48% at 50% -22%,rgba(255,255,255,.6),transparent 55%)}
+.cring{display:flex;align-items:stretch;gap:10px}
+.cring .cell{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;
+  align-items:center;gap:14px;padding:4px 6px 0}
+.cring .cell+.cell::before{content:"";position:absolute;left:-5px;top:10%;bottom:34%;width:1px;
+  background:linear-gradient(rgba(33,63,120,0),rgba(33,63,120,.16),rgba(33,63,120,0))}
+.ringwrap{position:relative;width:118px;max-width:38vw;aspect-ratio:1}
+.ringwrap::before{content:"";position:absolute;inset:5%;border-radius:50%;z-index:0;
+  background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,.3));
+  box-shadow:0 12px 28px -14px rgba(33,63,120,.5),inset 0 1px 0 rgba(255,255,255,.95)}
+.ringwrap::after{content:"";position:absolute;inset:-6%;border-radius:50%;z-index:-1;filter:blur(20px);opacity:.55}
+.cell.b .ringwrap::after{background:radial-gradient(closest-side,rgba(33,63,120,.42),transparent 70%)}
+.cell.o .ringwrap::after{background:radial-gradient(closest-side,rgba(207,90,52,.42),transparent 70%)}
+.ring,.ring-val{position:relative;z-index:1}
+.ring{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.ring-bg{fill:none;stroke:rgba(33,63,120,.13);stroke-width:7}
+.ring-fg{fill:none;stroke-width:10;stroke-linecap:round;stroke-dasharray:var(--c);stroke-dashoffset:var(--c)}
+.cell.b .ring-fg{stroke:url(#gradB);filter:drop-shadow(0 3px 6px rgba(33,63,120,.4))}
+.cell.o .ring-fg{stroke:url(#gradO);filter:drop-shadow(0 3px 6px rgba(207,90,52,.36))}
+.ring-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-weight:500;font-size:clamp(26px,8.2vw,35px);letter-spacing:-.025em;white-space:nowrap}
+.ring-val .mu{font-size:.5em;font-weight:500;margin-left:1px;transform:translateY(-.5em);display:inline-block}
+.cell.b .ring-val{color:var(--blue)}
+.cell.o .ring-val{color:var(--orange-ink)}
+.cdesc{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.15em;color:var(--ink2);
+  font-weight:600;text-align:center;line-height:1.5;max-width:15ch;opacity:.85}
+.cbase{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;
+  padding:15px 22px;border-radius:18px;border:1px solid rgba(255,255,255,.85);
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.5));
+  box-shadow:0 14px 30px -20px rgba(33,63,120,.55),inset 0 1px 0 rgba(255,255,255,.95)}
+.cbase .cbico{flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--green);opacity:.92}
+.cbase .cbico svg{width:30px;height:30px}
+.cbase .cbnum{position:relative;font-family:var(--fd);font-weight:500;font-size:clamp(36px,12vw,48px);
+  line-height:.85;letter-spacing:-.03em;color:var(--green);display:flex;align-items:baseline}
+.cbase .cbnum .mu{font-size:.4em;font-weight:500;margin-left:2px;transform:translateY(-.62em);display:inline-block}
+.cbase .mtxt{flex:0 1 auto;font-size:var(--fs-cap);line-height:1.45;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);font-weight:700;max-width:14ch}
+.metricsC.in .ring-fg{stroke-dashoffset:var(--off);transition:stroke-dashoffset 1.3s var(--ease) .15s}
+.metricsC.pre .cell,.metricsC.pre .cbase{opacity:0;transform:translateY(14px)}
+.metricsC.in .cell,.metricsC.in .cbase{opacity:1;transform:none;
+  transition:opacity .6s var(--ease) var(--d),transform .6s var(--ease) var(--d)}
 
 /* condition breakdown card (v2 comparison) */
 .bcard{padding:18px}
@@ -279,49 +409,54 @@ main{padding-bottom:96px}
 .wbig{font-family:var(--fd);font-weight:460;font-size:var(--fs-h2);line-height:1.05;letter-spacing:-.015em;color:var(--blue);margin-top:7px}
 .wsub{font-size:var(--fs-sm);color:var(--muted);margin-top:7px;padding-bottom:16px;border-bottom:1px solid rgba(40,70,150,.1)}
 .wsub em{font-family:var(--fd);font-style:italic;font-weight:500;font-size:1.08em;color:var(--orange-ink);white-space:nowrap}
-.wheel{position:relative;width:94%;margin:20px auto 2px}
-.wdonut{display:block;width:100%;height:auto;overflow:visible}
-.wslices{filter:drop-shadow(0 8px 14px rgba(40,70,150,.16))}
-.wslice{transform-box:fill-box;transform-origin:center;stroke:#fff;stroke-width:1.5;
-  opacity:0;animation:wpop .55s var(--ease) forwards}
-.wslice:nth-child(1){animation-delay:.08s}.wslice:nth-child(2){animation-delay:.18s}
-.wslice:nth-child(3){animation-delay:.28s}.wslice:nth-child(4){animation-delay:.38s}
-@keyframes wpop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
-.wlabel{font-family:var(--satoshi);font-weight:600;font-size:var(--fs-cap);fill:var(--ink);pointer-events:none;dominant-baseline:middle;
-  paint-order:stroke;stroke:rgba(255,255,255,.88);stroke-width:3;stroke-linejoin:round}
-.wlabel.sub{font-size:var(--fs-micro);fill:var(--faint);font-weight:500;letter-spacing:.03em}
-.wnum{fill:#fff;stroke-width:1.5}
-.wnum-t{font-family:var(--haas);font-weight:600;font-size:var(--fs-micro);fill:var(--ink2);dominant-baseline:central;pointer-events:none}
-.whub{position:absolute;top:50%;left:50%;width:33%;aspect-ratio:1.52/1;transform:translate(-50%,-50%);border-radius:50%;
-  background:radial-gradient(125% 125% at 50% 28%,#fff,#eef3fb);display:grid;place-items:center;text-align:center;pointer-events:none;
-  box-shadow:0 0 0 4px rgba(255,255,255,.4),0 11px 24px -9px rgba(40,70,150,.45),inset 0 0 0 1px rgba(255,255,255,.95)}
-.whub b{font-family:var(--haas);font-weight:600;font-size:var(--fs-h4);line-height:1;letter-spacing:-.01em;color:var(--ink)}
-.wm-head{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-style:italic;font-weight:430;font-size:var(--fs-sm);letter-spacing:.02em;text-transform:lowercase;color:var(--ink2);margin-top:20px}
-.wm-head::after{content:"";flex:1;height:1px;background:rgba(40,70,150,.13)}
-.wmap{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:13px}
-.wmap li{display:flex;align-items:flex-start;gap:11px}
-.wm-num{flex:0 0 auto;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;margin-top:1px;
-  font-family:var(--haas);font-weight:600;font-size:var(--fs-lbl);color:#fff;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 3px 8px -2px rgba(40,70,150,.4)}
-.wm-num.green{background:linear-gradient(150deg,#8fd0b4,#58ab8b)}
-.wm-num.warm{background:linear-gradient(150deg,#8fc6d6,#58a3bb)}
-.wm-num.blue{background:linear-gradient(150deg,#92b4e4,#5b8cd2)}
-.wm-txt{display:flex;flex-direction:column;gap:2px}
-.wm-name{font-family:var(--fd);font-weight:460;font-size:var(--fs-h4);letter-spacing:-.01em;color:var(--ink);line-height:1.2}
-.wm-need{font-size:var(--fs-sm);color:var(--muted);line-height:1.4}
-.wm-more{font-size:var(--fs-cap);color:var(--faint);margin:13px 0 0 34px}
-.wcap{font-family:var(--satoshi);font-style:italic;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2);margin-top:15px;padding-top:15px;border-top:1px solid rgba(40,70,150,.1)}
+/* photo replaces the donut */
+.wphoto{margin:18px 0 0;border-radius:18px;overflow:hidden;animation:wfade .4s var(--ease) both;
+  box-shadow:0 12px 28px -14px rgba(40,70,150,.4)}
+.wphoto .slot{min-height:196px;border-radius:18px}
+.wphoto img{display:block;width:100%;height:196px;object-fit:cover;background:#fff}
 @keyframes wfade{from{opacity:0}to{opacity:1}}
-.wdonut{animation:wfade .4s var(--ease) both}
-@media (prefers-reduced-motion:reduce){.wdonut,.wslice{animation:none;opacity:1}}
+.wm-head{font-family:var(--fd);font-style:italic;font-weight:430;font-size:var(--fs-sm);letter-spacing:.01em;color:var(--ink2);text-align:center;margin-top:16px}
+/* rotating root-deck — 4 colored cards cycle, one on screen at a time */
+.wdeck{position:relative;height:152px;margin-top:8px}
+/* each root is a tear-off ticket: side notches punched at the perforation line */
+.wrc{position:absolute;inset:0;opacity:0;animation:wrot 12s ease-in-out infinite;
+  filter:drop-shadow(0 14px 20px var(--wsh,rgba(20,38,90,.45)))}
+.wrc-in{position:absolute;inset:0;border-radius:19px;display:flex;flex-direction:column;color:#fff;background:var(--bg);--nr:13px;
+  -webkit-mask:radial-gradient(circle var(--nr) at left 50%,#0000 calc(var(--nr) - .5px),#000 var(--nr)) left/50.4% 100% no-repeat,radial-gradient(circle var(--nr) at right 50%,#0000 calc(var(--nr) - .5px),#000 var(--nr)) right/50.4% 100% no-repeat;
+  mask:radial-gradient(circle var(--nr) at left 50%,#0000 calc(var(--nr) - .5px),#000 var(--nr)) left/50.4% 100% no-repeat,radial-gradient(circle var(--nr) at right 50%,#0000 calc(var(--nr) - .5px),#000 var(--nr)) right/50.4% 100% no-repeat}
+.wrc-in::before{content:"";position:absolute;left:var(--nr);right:var(--nr);top:50%;border-top:3px dashed rgba(255,255,255,.62)}
+.wrc-top{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:13px 22px 18px}
+.wrc-bot{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:18px 22px 13px}
+.wrc-t1{font-family:var(--fd);font-weight:480;font-size:var(--fs-h3);letter-spacing:-.01em;color:#fff;line-height:1.1}
+.wrc-t2{font-size:var(--fs-sm);color:rgba(255,255,255,.85);line-height:1.4}
+.wrc-t2 b{font-weight:600}
+.wrc.green .wrc-t2 b,.wrc.blue .wrc-t2 b{color:#ffb27a}
+.wrc.warm .wrc-t2 b{color:var(--blue)}
+.wrc.green{--bg:var(--green);--wsh:rgba(15,90,68,.45)}
+.wrc.warm{--bg:var(--orange-ink);--wsh:rgba(150,50,20,.45)}
+.wrc.blue{--bg:var(--blue);--wsh:rgba(20,38,90,.5)}
+@keyframes wrot{0%{opacity:0;transform:translateY(6px)}
+  7%{opacity:1;transform:translateY(0)}28%{opacity:1;transform:translateY(0)}
+  36%,100%{opacity:0;transform:translateY(-6px)}}
+.wdots{display:flex;justify-content:center;gap:7px;margin-top:14px}
+.wdots i{width:6px;height:6px;border-radius:50%;background:rgba(40,70,150,.16);animation:wdot 12s ease-in-out infinite}
+.wdots i.green{--don:var(--green)}.wdots i.warm{--don:var(--orange-ink)}.wdots i.blue{--don:var(--blue)}
+@keyframes wdot{0%,33.33%,100%{transform:scale(1);background:rgba(40,70,150,.16)}
+  7%,28%{transform:scale(1.4);background:var(--don)}}
+.wcap{font-family:var(--satoshi);font-style:italic;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2);margin-top:18px;padding-top:15px;border-top:1px solid rgba(40,70,150,.1)}
+@media (prefers-reduced-motion:reduce){
+  .wphoto{animation:none}
+  .wdeck{height:auto}.wrc{position:relative;inset:auto;height:152px;opacity:1;animation:none;margin-bottom:12px;transform:none}
+  .wrc:last-child{margin-bottom:0}.wdots{display:none}}
 
 /* five pillars: folding sticky-stack deck — each card slides up and covers the previous */
 .pstack{position:relative;padding:4px 0 0}
-.pscard{position:sticky;top:68px;border-radius:20px;
+.pscard{position:sticky;top:68px;border-radius:20px;overflow:hidden;
   background:linear-gradient(140deg,rgba(255,255,255,.86),rgba(255,255,255,.68));border:1px solid var(--glass-line);
   -webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
-  padding:18px 19px;min-height:336px;display:flex;align-items:stretch;gap:15px;margin-bottom:16px;text-decoration:none;
+  padding:18px 19px;min-height:336px;display:flex;flex-direction:column;margin-bottom:16px;text-decoration:none;
   box-shadow:0 -14px 28px -20px rgba(20,32,107,.5),0 22px 44px -26px rgba(20,32,107,.5)}
+.ps-head{display:flex;gap:15px;align-items:flex-start}
 .pscard:last-child{margin-bottom:0}
 /* staggered stick: each card stops 62px lower, so every covered card
    keeps a visible strip with its number + heading — a fanned deck */
@@ -335,12 +470,13 @@ main{padding-bottom:96px}
 .ps-ico.c3{background:linear-gradient(150deg,#f5a86a,#cf5a34)}
 .ps-ico.c4{background:linear-gradient(150deg,#f5824f,#c0392b)}
 .ps-ico.c5{background:linear-gradient(150deg,#2a4aa0,#16264f)}
-.ps-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.ps-body{flex:1;min-width:0}
 .ps-num{font-family:var(--fd);font-weight:600;color:var(--orange-ink);font-size:var(--fs-ui);letter-spacing:.06em}
 .ps-name{font-family:var(--fd);font-weight:460;color:var(--ink);font-size:var(--fs-h3);line-height:1.1;margin-top:2px}
 .ps-desc{color:var(--muted);font-size:var(--fs-sm);line-height:1.5;margin-top:8px;max-width:42ch}
-.ps-visual{flex:1 1 auto;min-height:118px;margin-top:16px;border-radius:14px;border:1px dashed #cfdfeb;
+.ps-visual{position:relative;flex:1 1 auto;min-height:118px;margin:16px -19px -18px;
   background:linear-gradient(160deg,rgba(243,249,252,.9),rgba(228,240,247,.8));display:flex;align-items:flex-end;padding:11px 13px}
+.ps-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ps-visual span{font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:6px}
 .ps-visual span::before{content:"";width:13px;height:13px;border-radius:3px;border:1.4px solid currentColor;opacity:.7;
   background:radial-gradient(circle at 30% 35%,currentColor 0 1.5px,transparent 2px)}
@@ -457,12 +593,21 @@ main{padding-bottom:96px}
   background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 
 /* footer */
-.foot{background:#11204a;color:#fff;padding:40px 22px max(36px,env(safe-area-inset-bottom));border-radius:30px 30px 0 0}
-.foot .brand{color:#fff;margin-bottom:14px}
-.foot p{color:rgba(255,255,255,.6);font-size:var(--fs-sm);max-width:32ch;margin-bottom:18px}
-.foot h5{font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.5);margin:22px 0 10px}
-.foot a{display:block;color:rgba(255,255,255,.8);font-size:var(--fs-sm);padding:8px 0}
-.foot .fbot{margin-top:26px;border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:var(--fs-cap);color:rgba(255,255,255,.45);display:flex;flex-direction:column;gap:6px}
+.foot{position:relative;isolation:isolate;overflow:hidden;color:var(--ink);
+  padding:40px 22px max(36px,env(safe-area-inset-bottom));border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.7);
+  background:
+    radial-gradient(115% 70% at 16% -8%,rgba(255,255,255,.92),transparent 52%),
+    radial-gradient(95% 65% at 102% -4%,rgba(142,198,242,.6),transparent 58%),
+    radial-gradient(120% 80% at 50% 118%,rgba(31,140,106,.18),transparent 60%),
+    linear-gradient(168deg,#d9eefb 0%,#bce3f9 50%,#a6d6f2 100%)}
+.foot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.45;mix-blend-mode:overlay;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.4px);background-size:7px 7px}
+.foot .btn.light{background:var(--ink);color:#fff;border:none}
+.foot .brand{color:var(--ink);margin-bottom:14px}
+.foot p{color:rgba(19,38,90,.7);font-size:var(--fs-sm);max-width:32ch;margin-bottom:18px}
+.foot h5{font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.14em;color:rgba(19,38,90,.55);margin:22px 0 10px}
+.foot a{display:block;color:rgba(19,38,90,.8);font-size:var(--fs-sm);padding:8px 0}
+.foot .fbot{margin-top:26px;border-top:1px solid rgba(19,38,90,.15);padding-top:18px;font-size:var(--fs-cap);color:rgba(19,38,90,.55);display:flex;flex-direction:column;gap:6px}
 
 /* sticky cta */
 .sticky{position:absolute;left:0;right:0;bottom:0;z-index:35;padding:12px 16px max(12px,env(safe-area-inset-bottom));
@@ -494,6 +639,8 @@ main{padding-bottom:96px}
 
 @media (prefers-reduced-motion:reduce){
   .hero.tall .bgslide{animation:none}.hero.tall .bgslide:nth-child(1){opacity:1}
+  .hero.scene .herofig{animation:none}.hero.scene .figB,.hero.scene .figC{opacity:0}
+  .hero.scene .herolabel{animation:none}.hero.scene .labA{opacity:1}.hero.scene .labB,.hero.scene .labC{opacity:0}
   .scrollcue i{animation:none}.scroll{scroll-behavior:auto}
 }
 </style>
@@ -529,7 +676,7 @@ main{padding-bottom:96px}
       <a class="svc" data-go="/services/physiotherapy">Physiotherapy</a>
       <a class="svc" data-go="/services/strength-training">Strength Training</a>
       <a class="svc" data-go="/services/nutrition">Nutrition</a>
-      <a class="svc" data-go="/services/mental-wellness">Mental Wellness</a>
+      <a class="svc" data-go="/services/mental-wellness">Emotional Wellbeing</a>
       <a class="svc" data-go="/services/doctor-oversight">Doctor Oversight</a>
       <div class="d-cta"><button class="btn block" data-go="/quiz">Book Trial</button></div>
     </div>
@@ -543,11 +690,11 @@ var wa=function(t){return WA+encodeURIComponent(t)};
 var lc=function(s){return s.charAt(0).toLowerCase()+s.slice(1)};
 
 var PILLARS=[
- {slug:'physiotherapy',name:'Physiotherapy',blurb:'We guide and care for you through your condition, at home, until you are ready for physical training.',who:'[PLACEHOLDER] For older adults with joint pain, stiffness, or recovery needs.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']},
- {slug:'strength-training',name:'Physical Training',blurb:'We help you rebuild the strength and confidence you had before.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain']},
- {slug:'nutrition',name:'Nutrition',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
- {slug:'mental-wellness',name:'Mental Wellness',blurb:'Someone to listen in the hard moments and walk with you, so the journey keeps moving.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls']},
- {slug:'doctor-oversight',name:'Doctor Oversight',blurb:'One personal doctor watching every part, adjusting your plan as you progress.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']}
+ {slug:'physiotherapy',name:'Physiotherapy',photo:'physio-warm.png',blurb:'We guide and care for you through your condition, at home, until you are ready for physical training.',who:'[PLACEHOLDER] For older adults with joint pain, stiffness, or recovery needs.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']},
+ {slug:'strength-training',name:'Physical Training',photo:'training-warm.png',blurb:'We help you rebuild the strength and confidence you had before.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain']},
+ {slug:'nutrition',name:'Nutrition',photo:'nutrition-img.png?v=4',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
+ {slug:'mental-wellness',name:'Emotional Wellbeing',photo:'emotional-wellbeing.png',blurb:'Someone to listen in the hard moments and walk with you, so the journey keeps moving.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls']},
+ {slug:'doctor-oversight',name:'Doctor Oversight',photo:'doctor-oversight.png?v=2',blurb:'One personal doctor watching every part, adjusting your plan as you progress.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']}
 ];
 var CONDITIONS=[
  {slug:'knee-pain',name:'Knee Pain',symptom:'Knee pain that cuts the walk short',intro:'[PLACEHOLDER] When the knees hurt, the whole day shrinks. Here is what is usually going on, and what helps.',
@@ -572,11 +719,11 @@ var BREAKDOWN={
  'post-stroke-recovery':{feel:'Strength that did not come back',problems:[
    {t:'Therapy stopped too early',pill:'Physiotherapy',lane:'blue',line:'Consistent physiotherapy keeps recovery moving.'},
    {t:'Strength and balance split apart',pill:'Strength Training',lane:'green',line:'They are rebuilt together, not separately.'},
-   {t:'Motivation quietly faded',pill:'Mental Wellness',lane:'warm',line:'Mood support is what makes the gains stick.'}
+   {t:'Motivation quietly faded',pill:'Emotional Wellbeing',lane:'warm',line:'Mood support is what makes the gains stick.'}
  ]},
  'balance-and-falls':{feel:'When standing up feels risky',problems:[
    {t:'Legs and core weakened',pill:'Strength Training',lane:'green',line:'Strength gives a stumble something to recover on.'},
-   {t:'Confidence dropped',pill:'Mental Wellness',lane:'warm',line:'Rebuilding nerve gets them moving again.'},
+   {t:'Confidence dropped',pill:'Emotional Wellbeing',lane:'warm',line:'Rebuilding nerve gets them moving again.'},
    {t:'A hidden medical layer',pill:'Doctor Oversight',lane:'blue',line:'A doctor reviews medication and vision risks.'}
  ]}
 };
@@ -589,22 +736,24 @@ var TESTIMONIALS=[
  metric:{k:'Knee flexion',before:'95&deg;',after:'132&deg;',delta:'+37&deg;'},
  quote:'I used to climb stairs sideways. Now I walk to the temple every morning before the sun is up.',
  lead:{name:'Vikram Shetty',role:'Senior Physiotherapist'},leadIdx:0,
- team:['Physiotherapy','Strength','Nutrition','Mental wellness','Doctor oversight'],
- ripple:[{k:'Daily painkillers',before:'3',after:'0'},{k:'Vitamin D',before:'14',after:'38'}]},
+ team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']},
 {slug:'post-stroke-recovery',name:'Mr. Iyer',age:71,her:'his',label:'Post-stroke',storyLen:'0:18',lane:'',
  metric:{k:'Walk distance',before:'50m',after:'400m',delta:'8&times;'},
  quote:'Three months ago I could not stand without help. Last week I walked my granddaughter to school.',
  lead:{name:'Ananya Rao',role:'Neuro Physiotherapist'},leadIdx:0,
- team:['Physiotherapy','Strength','Nutrition','Mental wellness','Doctor oversight'],
- ripple:[{k:'Monthly falls',before:'4',after:'0'},{k:'Grip strength',before:'9kg',after:'24kg'}]},
+ team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']},
 {slug:'balance-and-falls',name:'Mrs. Dsouza',age:74,her:'her',label:'Balance',storyLen:'0:12',lane:'green',
  metric:{k:'Balance hold',before:'8s',after:'45s',delta:'+37s'},
  quote:'I stopped being afraid of my own bathroom. That fear was the heaviest thing I carried.',
  lead:{name:'Rohan Mehta',role:'Strength &amp; Balance Coach'},leadIdx:1,
- team:['Physiotherapy','Strength','Nutrition','Mental wellness','Doctor oversight'],
- ripple:[{k:'Near-falls / week',before:'5',after:'0'},{k:'Active minutes',before:'10',after:'40'}]}
+ team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']}
 ];
-var PROVIDERS=[{name:'[PLACEHOLDER] Dr. Name',role:'Medical oversight'},{name:'[PLACEHOLDER] Name',role:'Physiotherapist'},{name:'[PLACEHOLDER] Name',role:'Strength coach'},{name:'[PLACEHOLDER] Name',role:'Nutritionist'}];
+var PROVIDERS=[
+ {name:'Dr. Arjun Mehta',role:'Medical oversight',edu:'MD, Internal Medicine',exp:'14 yrs',lane:'n',photo:'provider1-cut.png?v=3'},
+ {name:'Kavya Nair',role:'Physiotherapist',edu:'MPT, Neuro-rehab',lane:'g',photo:'provider2-cut.png?v=3'},
+ {name:'Rohan Iyer',role:'Strength & balance coach',exp:'9 yrs',lane:'b',photo:'provider3-cut.png?v=3'},
+ {name:'Sneha Reddy',role:'Nutritionist',lane:'o',photo:'provider4-cut.png?v=3'}
+];
 var ONBOARDING=[{t:'[PLACEHOLDER] Tell us what is going on',d:'[PLACEHOLDER] A short call or quiz to understand your situation, for you or a parent.'},{t:'[PLACEHOLDER] Home assessment',d:'[PLACEHOLDER] A provider visits and assesses in person.'},{t:'[PLACEHOLDER] You get a plan',d:'[PLACEHOLDER] A doctor-reviewed plan and a report for you and your family.'},{t:'[PLACEHOLDER] Ongoing sessions',d:'[PLACEHOLDER] Regular visits with progress you can see.'}];
 var JOURNEY=[
  {n:'01',node:'',short:'Assessment',mini:'An <em>at-home</em> assessment to understand the full picture',title:'A thorough assessment, and your report',
@@ -616,7 +765,7 @@ var JOURNEY=[
   list:['Every parameter considered, never a template','One connected plan, built around the condition']},
  {n:'03',node:'o',short:'Daily care',mini:'<em>Daily</em> sessions and regular nutrition check-ins',title:'We execute it, every day',
   lead:'Once the plan is live we run it with you and track everything at the right rhythm.',
-  cadence:[['Daily','d','Meal tracking'],['Weekly','w','Multiple physiotherapy &amp; physical-training sessions'],['Weekly','w','Follow-up call on the meals'],['Monthly','m','Doctor check-in &amp; plan update'],['Ongoing','o','Mental wellbeing, tracked throughout']],
+  cadence:[['Daily','d','Meal tracking'],['Weekly','w','Multiple physiotherapy &amp; physical-training sessions'],['Weekly','w','Follow-up call on the meals'],['Monthly','m','Doctor check-in &amp; plan update'],['Ongoing','o','Emotional wellbeing, tracked throughout']],
   callout:'We never let you or your family be left alone worrying. We execute, and we own every outcome.',
   resp:'Your family, our responsibility.'},
  {n:'04',node:'n',short:'Reports',mini:'Progress updates on WhatsApp, for <em>the whole family</em>',title:'Reports your whole family can see',
@@ -639,18 +788,28 @@ var pillarBy=function(s){for(var i=0;i<PILLARS.length;i++)if(PILLARS[i].slug===s
 
 /* ===================== fragments ===================== */
 function ARR(d){return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
-function CHK(){return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function link(to,txt,dark){return '<a class="link'+(dark?' on-dark':'')+'" data-go="'+to+'">'+txt+' '+ARR()+'</a>'}
 function waBtn(text,label,cls){return '<a class="btn '+(cls||'orange')+'" target="_blank" rel="noreferrer" href="'+wa(text)+'">'+label+'</a>'}
 function slot(label,cls){return '<div class="slot '+(cls||'')+'"><span class="lbl">'+label+'</span></div>'}
+function videoBlock(){return '<div class="vblock" role="button" aria-label="Play walkthrough video">'+
+ '<span class="vtag">Video &middot; coming soon</span><span class="vplay"></span>'+
+ '<div class="vcap">Watch the full walk-through of these four steps, start to finish.</div>'+
+'</div>'}
+var SOCIAL=[
+ {name:'Instagram',url:'#',icon:'<path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 10.72a4.22 4.22 0 1 1 0-8.44 4.22 4.22 0 0 1 0 8.44zm6.76-10.97a1.52 1.52 0 1 1-3.04 0 1.52 1.52 0 0 1 3.04 0z"/>'},
+ {name:'Facebook',url:'#',icon:'<path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/>'},
+ {name:'X',url:'#',icon:'<path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.01 4.13H5.04l12.04 15.64z"/>'},
+ {name:'YouTube',url:'#',icon:'<path d="M23.5 7.2a3 3 0 0 0-2.1-2.12C19.5 4.55 12 4.55 12 4.55s-7.5 0-9.4.53A3 3 0 0 0 .5 7.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.12c1.9.53 9.4.53 9.4.53s7.5 0 9.4-.53a3 3 0 0 0 2.1-2.12A31 31 0 0 0 24 12a31 31 0 0 0-.5-4.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>'},
+ {name:'LinkedIn',url:'#',icon:'<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>'}];
+function socialStrip(){return '<section class="sec"><span class="kick">Follow along</span><h2 class="h2">Find us where you already <span class="it">scroll</span></h2><p class="p muted">Quick clips and tips on strength, balance, nutrition and recovery, every week.</p>'+
+ '<div class="socrow">'+SOCIAL.map(function(s){return '<a class="soc" href="'+s.url+'" target="_blank" rel="noreferrer" aria-label="'+s.name+'"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+s.icon+'</svg></a>'}).join('')+'</div>'+
+'</section>'}
 var TEAM_INI=['P','S','N','M','D'];
-function avStack(leadIdx){return '<div class="avstack">'+TEAM_INI.map(function(L,i){return '<span class="av c'+(i+1)+(i===leadIdx?' lead':'')+'">'+L+'</span>'}).join('')+'</div>'}
 function testiCard2(t){return '<div class="card tcard2">'+
  '<div class="slot video '+t.lane+' t2-media"><span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+' &middot; '+t.label+'</div></div></div>'+
  '<div class="t2-metric"><span class="t2-mk">'+t.metric.k+'</span><span class="t2-mv"><s>'+t.metric.before+'</s> &rarr; <b>'+t.metric.after+'</b></span><span class="t2-delta">'+t.metric.delta+'</span></div>'+
  '<div class="t2-body"><p class="t2-quote">'+t.quote+'</p>'+
- '<div class="t2-foot">'+avStack(t.leadIdx)+'<div class="t2-lead"><b>'+t.lead.name+'</b>'+t.lead.role+' &middot; led the team of 5</div></div>'+
- '<div class="t2-chips"><span class="t2-chiplbl">The ripple</span>'+t.ripple.map(function(o){return '<span class="t2-chip">'+o.k+' <s>'+o.before+'</s><i>&rarr;</i><b>'+o.after+'</b></span>'}).join('')+'</div>'+
+ '<div class="t2-foot"><div class="avstack"><span class="av lead c'+(t.leadIdx+1)+'">'+TEAM_INI[t.leadIdx]+'</span></div><div class="t2-lead"><b>'+t.lead.name+'</b>'+t.lead.role+'<span class="t2-team">Backed by a team of 5</span></div></div>'+
  '</div></div>'}
 var WA_ICON='<span class="jwa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5l-.3.5-.5.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 .9.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>';
 var CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -670,19 +829,43 @@ function journey(){return '<div class="journey">'+JOURNEY.map(function(p){
 function faqList(items){return '<div class="faq">'+items.map(function(f,i){return '<details'+(i===0?' open':'')+'><summary>'+f.q+'<span class="pm"></span></summary><div class="ans">'+f.a+'</div></details>'}).join('')+'</div>'}
 function pillars(){return '<div class="pillars">'+PILLARS.map(function(p){return '<a class="pillar" data-go="/services/'+p.slug+'"><span class="node">'+p.name[0]+'</span><span><h4>'+p.name+'</h4><p>'+p.blurb+'</p></span><span class="arr">'+ARR()+'</span></a>'}).join('')+'</div>'}
 var PS_ICONS=['<path d="M9.5 4h5v5h5v5h-5v5h-5v-5h-5V9h5z"></path>','<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"></path>','<path d="M5 19c-1-7 4-13 14-14 1 9-5 14-11 14"></path><path d="M6 18 13 11"></path>','<path d="M12 20c-4-2.4-7-5.4-7-9a3.6 3.6 0 0 1 7-1.4A3.6 3.6 0 0 1 19 11c0 3.6-3 6.6-7 9z"></path>','<path d="M6 3v4a4 4 0 0 0 8 0V3"></path><path d="M10 15a5 5 0 0 0 9 0v-3"></path><circle cx="19" cy="9" r="2"></circle>'];
-function pillarsStack(){return '<div class="pstack">'+PILLARS.map(function(p,i){return '<a class="pscard" data-go="/services/'+p.slug+'"><span class="ps-ico c'+(i+1)+'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+PS_ICONS[i]+'</svg></span><div class="ps-body"><div class="ps-name">'+p.name+'</div><p class="ps-desc">'+p.blurb+'</p><div class="ps-visual"><span>Visual</span></div></div></a>'}).join('')+'</div>'}
+function pillarsStack(){return '<div class="pstack">'+PILLARS.map(function(p,i){return '<a class="pscard" data-go="/services/'+p.slug+'"><div class="ps-head"><span class="ps-ico c'+(i+1)+'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+PS_ICONS[i]+'</svg></span><div class="ps-body"><div class="ps-name">'+p.name+'</div><p class="ps-desc">'+p.blurb+'</p></div></div><div class="ps-visual">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" loading="lazy">':'<span>Visual</span>')+'</div></a>'}).join('')+'</div>'}
+function metricsRow3(){
+ var R=52,C=2*Math.PI*R;
+ var rings=[{lane:'b',pct:98,num:'<span class="m-num" data-count="98">0</span>',u:'%',l:'Customer satisfaction'},
+            {lane:'o',pct:33,num:'1 in 3',u:'',l:'Refer us to a friend or family'}];
+ var grad=function(lane){return '<defs><linearGradient id="grad'+(lane==='b'?'B':'O')+'" x1="0" y1="0" x2="1" y2="1">'+
+   (lane==='b'?'<stop offset="0" stop-color="#3a63d6"/><stop offset="1" stop-color="#1a2f6e"/>'
+             :'<stop offset="0" stop-color="#f7a06f"/><stop offset="1" stop-color="#c44e29"/>')+
+   '</linearGradient></defs>'};
+ var cells=rings.map(function(m,i){var off=C*(1-m.pct/100),unit=m.u?'<span class="mu">'+m.u+'</span>':'';
+  return '<div class="cell '+m.lane+'" style="--d:'+(i*130)+'ms"><div class="ringwrap">'+
+   '<svg class="ring" viewBox="0 0 120 120">'+grad(m.lane)+'<circle class="ring-bg" cx="60" cy="60" r="'+R+'"></circle>'+
+   '<circle class="ring-fg" cx="60" cy="60" r="'+R+'" style="--c:'+C.toFixed(1)+';--off:'+off.toFixed(1)+'"></circle></svg>'+
+   '<div class="ring-val">'+m.num+unit+'</div></div><div class="cdesc">'+m.l+'</div></div>';
+ }).join('');
+ var homeIco='<span class="cbico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.6V20h12V9.6"/><path d="M12 20v-4.2a1.8 1.8 0 0 1 3.6 0V20"/></svg></span>';
+ return '<section class="sec metsecC"><h2 class="h2" style="margin-bottom:20px">Why families <span class="it">trust</span> us</h2><div class="metricsC pre"><div class="cring">'+cells+'</div>'+
+  '<div class="cbase" style="--d:260ms">'+homeIco+'<div class="cbnum"><span class="m-num" data-count="120">0</span><span class="mu">+</span></div>'+
+  '<div class="mtxt">Families cared for at home</div></div></div></section>';
+}
 function reframe(eb,ttl,intro,reasons){return '<div class="reframe">'+(eb?'<span class="kick orange">'+eb+'</span>':'')+'<h2 class="h2">'+ttl+'</h2>'+(intro?'<p class="p">'+intro+'</p>':'')+(reasons?'<div class="r-list">'+reasons.map(function(r,i){return '<div class="r-row"><span class="n">0'+(i+1)+'</span><span>'+r+'</span></div>'}).join('')+'</div>':'')+'</div>'}
 function heroTall(){
- return '<section class="hero tall top">'+
-  '<div class="bgwrap"><div class="bgslide g-sun"></div><div class="bgslide g-dusk"></div><div class="bgslide g-field"></div><div class="bgslide g-gold"></div></div>'+
-  '<div class="grain"></div><div class="scrim"></div>'+
-  '<h1>Care that comes to you<span class="it">and stays with you</span></h1>'+
-  '<p class="sub">Care for seniors, at home in Bangalore. One team looks after how they <em>eat, move, and feel.</em></p>'+
+ return '<section class="hero tall top scene">'+
+  '<div class="bgwrap"><div class="bgslide scenebg"></div></div>'+
+  '<img class="herofig figA" src="hero-move.png?v=2" alt="">'+
+  '<img class="herofig figB" src="hero-eat.png?v=2" alt="">'+
+  '<img class="herofig figC" src="hero-feel.png?v=2" alt="">'+
+  '<span class="herolabel labA">by how they move</span>'+
+  '<span class="herolabel labC">by how they feel</span>'+
+  '<span class="herolabel labB">by how they eat</span>'+
+  '<div class="grain"></div>'+
+  '<h1>Care that comes to you<span class="it">and owns the outcome</span></h1>'+
+  '<p class="sub">One team for seniors and adults, caring for their health and lifestyle at home</p>'+
   '<div class="hcta col">'+
     '<button class="btn light xl block" data-go="/quiz">Book a trial</button>'+
     '<a class="hlink" data-go="/how-we-work">See how we work</a>'+
   '</div>'+
-  '<div class="scrollcue"><i></i>Scroll</div>'+
  '</section>'}
 function heroBand(g,eyebrow,h1,sub,cta){
  return '<section class="hero" style="padding-bottom:38px">'+
@@ -698,65 +881,57 @@ function breakdownCard(c){var b=BREAKDOWN[c.slug];return '<div class="card bcard
  '<div class="bprobs">'+b.problems.map(function(p){return '<div class="bprob '+p.lane+'"><div class="bp-t">'+p.t+'</div><span class="tag '+(p.lane==='blue'?'':p.lane)+'">'+p.pill+'</span><p class="bp-l">'+p.line+'</p></div>'}).join('')+'</div>'+
  '<p class="bclose">Fix all three, not just the label. That is how the pain actually leaves.</p>'+
 '</div>'}
-// green + blue shades, tuned to equal lightness so no slice dominates
-var WGRAD={green:['#a6dcc6','#76c2a2'],warm:['#a3d2e0','#76b7cb'],blue:['#a9c4ec','#7fa5e2']};
-var DICON={
- Physio:'<path d="M2 8h3l2-4 2.6 8L13 8h1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
- Nutrition:'<path d="M12.5 2.6C5.5 3.6 3 9 6.6 13.2 11.4 12.2 13.4 7.6 12.5 2.6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 12.4C8.3 9.3 9.9 7.6 12 6.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
- Strength:'<path d="M3 6v4M5 4.6v6.8M11 4.6v6.8M13 6v4M5 8h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
- Mental:'<path d="M8 2l1.5 4.3L14 8l-4.5 1.7L8 14l-1.5-4.3L2 8l4.5-1.7Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>',
- Dr:'<path d="M6.4 2.4h3.2v4h4v3.2h-4v4H6.4v-4h-4V6.4h4z" fill="currentColor"/>'};
-function dIcon(care){var ks=['Physio','Nutrition','Strength','Mental','Dr'];for(var i=0;i<ks.length;i++)if(care.indexOf(ks[i])>-1)return '<svg viewBox="0 0 16 16" aria-hidden="true">'+DICON[ks[i]]+'</svg>';return ''}
 var WHEELS=[
- {ex:'Arthritis',hub:'Arthritis',naive:'joint pain',segs:[
-   {label:'Decreased mobility',pct:34,lane:'green',need:'physiotherapy'},
-   {label:'Increased fatigue',pct:32,lane:'warm',need:'a nutrition plan and a doctor'},
-   {label:'Inflamed joints',pct:28,lane:'blue',need:'doctor oversight'},
-   {label:'+ many more',pct:6,lane:'mut'}
+ {ex:'Arthritis',hub:'Arthritis',naive:'joint pain',photo:'knee-arthritis.png',segs:[
+   {label:'Decreased mobility',lane:'green',need:'physiotherapy'},
+   {label:'Increased fatigue',lane:'warm',need:'a nutrition plan and a doctor'},
+   {label:'Inflamed joints',lane:'blue',need:'doctor oversight'}
  ]},
- {ex:'Post-stroke recovery',hub:'Post-stroke',naive:'lost strength',segs:[
-   {label:'Lost strength',pct:36,lane:'green',need:'strength training'},
-   {label:'Stalled therapy',pct:32,lane:'blue',need:'physiotherapy'},
-   {label:'Low drive',pct:26,lane:'warm',need:'mental wellness support'},
-   {label:'+ many more',pct:6,lane:'mut'}
+ {ex:'Stroke recovery',hub:'Stroke recovery',naive:'a weak side',photo:'stroke-face.png?v=4',segs:[
+   {label:'One-sided weakness',lane:'green',need:'physiotherapy'},
+   {label:'Low mood and drive',lane:'warm',need:'emotional wellbeing support'},
+   {label:'Stalled recovery',lane:'blue',need:'doctor oversight'}
  ]},
- {ex:'Balance & falls',hub:'Balance',naive:'shaky legs',segs:[
-   {label:'Weak legs',pct:38,lane:'green',need:'strength training'},
-   {label:'Lost nerve',pct:30,lane:'warm',need:'mental wellness support'},
-   {label:'Medical risks',pct:26,lane:'blue',need:'doctor oversight'},
-   {label:'+ many more',pct:6,lane:'mut'}
+ {ex:'Parkinson&rsquo;s',hub:'Parkinson&rsquo;s',naive:'shaky hands',photo:'parkinsons.png',segs:[
+   {label:'Stiff, slow movement',lane:'green',need:'physiotherapy'},
+   {label:'Low mood and drive',lane:'warm',need:'emotional wellbeing support'},
+   {label:'Off-timed medication',lane:'blue',need:'doctor oversight'}
+ ]},
+ {ex:'Osteoporosis',hub:'Osteoporosis',naive:'weak bones',photo:'osteoporosis.png',segs:[
+   {label:'Weak muscles and posture',lane:'green',need:'strength training'},
+   {label:'Low calcium intake',lane:'warm',need:'a nutrition plan'},
+   {label:'High fracture risk',lane:'blue',need:'doctor oversight'}
+ ]},
+ {ex:'Diabetes',hub:'Diabetes',naive:'high sugar',photo:'diabetes.png',segs:[
+   {label:'Weak, tired legs',lane:'green',need:'physiotherapy'},
+   {label:'Spiking blood sugar',lane:'warm',need:'a nutrition plan'},
+   {label:'Nerve and foot risks',lane:'blue',need:'doctor oversight'}
+ ]},
+ {ex:'Regaining balance',hub:'Balance',naive:'unsteady feet',photo:'balance-feet.png',segs:[
+   {label:'Weak legs',lane:'green',need:'strength training'},
+   {label:'Fear of falling',lane:'warm',need:'emotional wellbeing support'},
+   {label:'Hidden medical risks',lane:'blue',need:'doctor oversight'}
  ]}
 ];
-function wslug(s){return s.toLowerCase().replace(/[^a-z]+/g,'-').replace(/^-|-$/g,'')}
-function wheelCard(w){
- var cx=160,cy=110,rxO=146,ryO=96,rxI=63,ryI=42,g=1.7,a=0,ni=0,slices=[],labels=[];
- function ept(rx,ry,d){var r=d*Math.PI/180;return (cx+rx*Math.sin(r)).toFixed(2)+' '+(cy-ry*Math.cos(r)).toFixed(2)}
- w.segs.forEach(function(s){
-   var deg=s.pct*3.6,a0=a+g,a1=a+deg-g,mid=a+deg/2,mr=mid*Math.PI/180,laf=(a1-a0)>180?1:0,gh=s.lane==='mut',
-       d='M'+ept(rxO,ryO,a0)+'A'+rxO+' '+ryO+' 0 '+laf+' 1 '+ept(rxO,ryO,a1)+'L'+ept(rxI,ryI,a1)+'A'+rxI+' '+ryI+' 0 '+laf+' 0 '+ept(rxI,ryI,a0)+'Z';
-   slices.push('<path class="wslice '+s.lane+(gh?' ghost':'')+'" d="'+d+'" fill="url(#wg-'+s.lane+')"></path>');
-   if(gh){var ox=cx+(rxO+15)*Math.sin(mr),oy=cy-(ryO+15)*Math.cos(mr);
-     labels.push('<text class="wlabel sub" x="'+ox.toFixed(1)+'" y="'+oy.toFixed(1)+'" text-anchor="middle">'+s.label+'</text>');
-   }else{var lx=cx+(rxI+(rxO-rxI)*0.62)*Math.sin(mr),ly=cy-(ryI+(ryO-ryI)*0.62)*Math.cos(mr),
-       nx=cx+(rxI+13)*Math.sin(mr),ny=cy-(ryI+11)*Math.cos(mr),
-       p=(s.label.length>9&&s.label.indexOf(' ')>-1)?s.label.split(' '):null,
-       t=p?'<tspan x="'+lx.toFixed(1)+'" dy="-0.45em">'+p[0]+'</tspan><tspan x="'+lx.toFixed(1)+'" dy="1.05em">'+p.slice(1).join(' ')+'</tspan>':s.label;
-     ni++;
-     labels.push('<circle class="wnum" cx="'+nx.toFixed(1)+'" cy="'+ny.toFixed(1)+'" r="8" stroke="'+WGRAD[s.lane][1]+'"/><text class="wnum-t" x="'+nx.toFixed(1)+'" y="'+ny.toFixed(1)+'" text-anchor="middle">'+ni+'</text>');
-     labels.push('<text class="wlabel" x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="middle">'+t+'</text>');}
-   a+=deg});
- var defs='<defs>'+['green','warm','blue'].map(function(l){return '<linearGradient id="wg-'+l+'" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="'+WGRAD[l][0]+'"/><stop offset="1" stop-color="'+WGRAD[l][1]+'"/></linearGradient>'}).join('')+'<linearGradient id="wg-mut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7edf5"/><stop offset="1" stop-color="#dbe4f0"/></linearGradient></defs>';
- var rows=w.segs.filter(function(s){return s.need}).map(function(s,i){
-   return '<li><span class="wm-num '+s.lane+'">'+(i+1)+'</span><div class="wm-txt"><span class="wm-name">'+s.label+'</span><span class="wm-need">'+s.need+'</span></div></li>'}).join('');
+function wheelCard(w,idx){
+ // rotating ticket-deck: one root on screen at a time, cycling green/warm/blue
+ var cards=w.segs.map(function(s,i){
+   return '<div class="wrc '+s.lane+'" style="animation-delay:'+(i*4)+'s">'+
+     '<div class="wrc-in">'+
+       '<div class="wrc-top"><div class="wrc-t1">'+s.label+'</div></div>'+
+       '<div class="wrc-bot"><div class="wrc-t2">needs <b>'+s.need+'</b></div></div>'+
+     '</div>'+
+   '</div>'}).join('');
+ var dots=w.segs.map(function(s,i){return '<i class="'+s.lane+'" style="animation-delay:'+(i*4)+'s"></i>'}).join('');
  return '<div class="card wcard">'+
   '<div class="weyebrow">Example condition</div>'+
   '<h3 class="wbig">'+w.hub+'</h3>'+
-  '<p class="wsub">Not just <em>'+w.naive+'</em>. Something you might have felt too.</p>'+
-  '<div class="wheel"><svg class="wdonut" viewBox="0 0 320 220" role="img" aria-label="'+w.ex+' symptom wheel">'+defs+'<g class="wslices">'+slices.join('')+'</g>'+labels.join('')+'</svg><div class="whub"><b>'+w.hub+'</b></div></div>'+
-  '<p class="wm-head">Each one needs its own care</p>'+
-  '<ul class="wmap">'+rows+'</ul>'+
-  '<p class="wm-more">+ several more roots, all under one connected plan.</p>'+
-  '<p class="wcap">Each symptom is treated at the root, to improve the whole condition.</p>'+
+  '<p class="wsub">Not just <em>'+w.naive+'</em>, but something you might have felt too.</p>'+
+  '<div class="wphoto">'+(w.photo?'<img src="'+w.photo+'" alt="'+w.hub+'" loading="lazy">':slot(w.hub+' &middot; photo',['green','warm','blue'][idx%3]))+'</div>'+
+  '<div class="wdeck">'+cards+'</div>'+
+  '<div class="wdots">'+dots+'</div>'+
+  '<p class="wm-head">Each root needs its own care</p>'+
+  '<p class="wcap">We treat each symptom at the root, to improve the whole condition.</p>'+
 '</div>'}
 function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Browse free exercises')+'</div></div>'}
 function footer(){
@@ -771,28 +946,32 @@ function footer(){
 /* ===================== VIEWS ===================== */
 function vHome(){
  return heroTall()+
- '<section class="sec"><h2 class="h2">What our <span class="it">member</span> says</h2>'+
+ '<section class="sec"><h2 class="h2">What our <span class="it">members</span> say</h2>'+
    '<div class="swipe">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
-   '<div class="secta"><a class="btn line" data-go="/conditions">See what all conditions we treat '+ARR()+'</a></div>'+
+   '<div class="secta"><a class="btn line" data-go="/conditions">See what all conditions we treat</a></div>'+
  '</section>'+
+ metricsRow3()+
  '<section class="sec wsec"><h2 class="h2">Where you feel it isn&rsquo;t where it starts</h2><p class="p muted">The surface symptom is one slice. Each hidden root maps to the care that fixes it.</p>'+
    '<div class="swipe">'+WHEELS.map(wheelCard).join('')+'</div>'+
+   '<div class="secta"><a class="btn line" data-go="/conditions">Understand your condition</a></div>'+
  '</section>'+
  '<section class="sec">'+
    '<h2 class="h2" style="max-width:16ch">Why recovery feels long</h2>'+
    '<p class="p muted" style="max-width:40ch">A trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
    '<p class="p" style="max-width:40ch;color:var(--ink)">So we put everything under one roof</p>'+
-   pillarsStack()+'<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect '+ARR()+'</a></div>'+
+   pillarsStack()+'<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">The team behind <span class="it">your plan</span></h2><p class="p muted">Each specialist is chosen for their experience with older adults, and they all work from the same plan.</p>'+
-   '<div class="provrow">'+PROVIDERS.map(function(p,i){return '<div><div class="provslot">'+slot('Photo',['','green','warm',''][i])+'<span class="vtick">'+CHK()+'</span></div><div class="prov-name">'+p.name+'</div><div class="prov-role">'+p.role+'</div></div>'}).join('')+'</div>'+
-   '<div class="secta"><a class="btn line" data-go="/about">Meet the team '+ARR()+'</a></div>'+
+   '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"></div><div class="pbody"><div class="pname">'+p.name+'</div><span class="ptag">'+p.role+'</span>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'+
+   '<div class="secta"><a class="btn line" data-go="/about">Meet the team</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
    journeyMini()+
-   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works '+ARR()+'</a></div>'+
+   videoBlock()+
+   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
  '</section>'+
- '<section class="sec"><span class="kick">Backed by &middot; operators from</span><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
+ '<section class="sec"><h2 class="h2">Backed by | operators from</h2><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
+ socialStrip()+
  '<section class="sec"><h2 class="h2">The things families ask first</h2><div style="margin-top:22px">'+faqList(HOME_FAQS)+'</div></section>'+
  footer()}
 
@@ -857,7 +1036,7 @@ function vAbout(){
  '<section class="sec"><span class="kick">Our journey</span><h2 class="h2">A short history.</h2><div class="steps tline">'+HISTORY.map(function(j){return '<div class="step"><span class="w">'+j.y+'</span><div><h4>'+j.t+'</h4></div></div>'}).join('')+'</div></section>'+
  '<section class="sec">'+slot('Team group photo')+'</section>'+
  '<section class="sec"><span class="kick">From the founder</span><h2 class="h2">Why we keep it personal.</h2>'+slot('Founder&rsquo;s message','video')+'<p class="p muted">[PLACEHOLDER] A short framing of the founder’s message in the video.</p></section>'+
- '<section class="sec"><span class="kick">Backed by &middot; operators from</span><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
+ '<section class="sec"><h2 class="h2">Backed by | operators from</h2><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
  '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">[PLACEHOLDER] One reassuring line before the trial ask.</p><button class="btn" data-go="/quiz">Book Trial</button></section>'+
  footer()}
 
@@ -937,9 +1116,11 @@ function render(){
  else if(isQuiz) html=vQuiz();
  else html=vHome();
  app.innerHTML=html;
+ app.setAttribute('data-page', parts[0]||'home');
  // chrome visibility
  topbar.style.display=isQuiz?'none':'';
  var isHome=!parts.length;
+ app.classList.toggle('tryfont', isHome);
  if(isQuiz||isHome){sticky.innerHTML='';}
  else if(exCta){sticky.innerHTML='<button class="btn blue block" data-go="/quiz">Take the 2-Minute Quiz</button>';}
  else {sticky.innerHTML='<button class="btn block" data-go="/quiz">Book Trial</button>';}
@@ -948,6 +1129,18 @@ function render(){
  var jm=app.querySelector('.jmini');
  if(jm){jm.classList.add('pre');
    new IntersectionObserver(function(es,o){if(es[0].isIntersecting){jm.classList.add('in');o.disconnect();}},{threshold:.3}).observe(jm);}
+ app.querySelectorAll('.metricsC').forEach(function(mx){
+   new IntersectionObserver(function(es,o){if(!es[0].isIntersecting)return;
+     mx.classList.replace('pre','in');
+     mx.querySelectorAll('[data-count]').forEach(function(el){
+       var t=+el.getAttribute('data-count'),dur=1000,s=null;
+       (function tick(ts){if(s===null)s=ts;var p=Math.min((ts-s)/dur,1);
+         el.textContent=Math.round((1-Math.pow(1-p,3))*t);
+         if(p<1)requestAnimationFrame(tick);})(performance.now());
+     });
+     o.disconnect();
+   },{threshold:.35}).observe(mx);
+ });
  var cs=document.getElementById('condSwipe');
  if(cs){cs.addEventListener('scroll',function(){
    var dots=document.querySelectorAll('#condDots i'); if(!dots.length||!cs.firstElementChild)return;
