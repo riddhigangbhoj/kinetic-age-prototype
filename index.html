@@ -644,9 +644,118 @@ main{padding-bottom:96px}
   .scrollcue i{animation:none}.scroll{scroll-behavior:auto}
 }
 </style>
+
+<style id="desktop">
+/* desktop nav is hidden on phone — the mobile frame never sees it */
+.dnav{display:none}
+/* ============================================================
+   DESKTOP (laptop) LAYER :: additive, only at min-width:1024px.
+   The phone build below 1024px is left completely untouched.
+   This releases the device shell into a full-width document,
+   swaps the phone chrome for a real top nav, and reflows the
+   shared section/grid classes into multi-column desktop layouts.
+   No mobile rule above is modified.
+   ============================================================ */
+@media (min-width:1024px){
+  /* release the device shell into a real page */
+  body{display:block;min-height:0;background:#e7f0f3;background-image:none}
+  .phone{position:static;width:100%;max-width:none;height:auto;
+    overflow:visible;border-radius:0;box-shadow:none;isolation:auto;background:var(--bg)}
+  .scroll{position:static;overflow:visible;height:auto}
+  main{padding-bottom:0}
+
+  /* phone-only chrome off, desktop nav on */
+  .topbar,.sticky,.drawer{display:none!important}
+  .dnav{display:flex}
+
+  /* ---- desktop top nav ---- */
+  .dnav{position:sticky;top:0;z-index:50;align-items:center;gap:34px;
+    padding:15px max(40px,calc((100vw - 1200px)/2));
+    background:rgba(237,245,247,.86);box-shadow:0 1px 0 var(--line);
+    -webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px)}
+  .dn-brand{display:flex;align-items:center;gap:9px;font-family:var(--fb);
+    font-size:18px;font-weight:600;letter-spacing:.01em;color:var(--ink)}
+  .dn-brand svg{width:18px;height:18px}
+  .dn-links{display:flex;gap:30px;margin-left:6px}
+  .dn-links a{font-size:15px;font-weight:500;color:var(--ink2);
+    padding:7px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  .dn-links a:hover{color:var(--blue);border-color:var(--blue)}
+  .dn-cta{margin-left:auto;min-height:46px;padding:0 24px;background:var(--ink);color:#fff}
+
+  /* ---- section rhythm: center each block in a reading column ---- */
+  .sec{max-width:1200px;margin-inline:auto;padding:76px 40px}
+  .sec .h2{font-size:34px}
+  .sec .p{font-size:16.5px}
+
+  /* ---- hero: full-bleed band, content aligned to the 1200 column ---- */
+  .hero{padding-left:max(40px,calc((100vw - 1200px)/2));
+        padding-right:max(40px,calc((100vw - 1200px)/2))}
+  .hero h1{font-size:clamp(46px,4.6vw,64px);max-width:20ch}
+  .hero .eyebrow{font-size:13px}
+  .hero .sub{font-size:18px;max-width:50ch}
+  .hero .hcta{margin-top:30px}
+  .hero.tall{min-height:600px;padding-top:120px;padding-bottom:80px}
+  .hero.tall.top{justify-content:center}
+  .hero.tall.top h1{font-size:clamp(46px,4.4vw,62px);max-width:16ch}
+  .hero.tall.top .hcta{margin-top:34px}
+  /* home scene hero: text on the left, morphing figure on the right */
+  .hero.scene{padding-right:48%}
+  .hero.scene .herofig{left:74%;height:86%}
+  .hero.scene .herolabel{left:74%;top:34%}
+  .hero .hcta.col{flex-direction:row;width:auto;align-items:center;gap:16px}
+  .hero .hcta.col .btn.block{width:auto}
+  .hero .hlink{align-self:center}
+
+  /* ---- grids: vertical card stacks become multi-column ---- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+    gap:24px;align-items:start;margin-top:30px}
+  .swipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:24px;margin:30px 0 0;padding:0;overflow:visible}
+  .swipe>.card{flex:none;width:auto}
+  .swipe-dots,.wdots{display:none}
+  .team{grid-template-columns:repeat(4,1fr)}
+  .lead-list{max-width:60ch}
+
+  /* five pillars: unfold the sticky deck into a real grid */
+  .pstack{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0}
+  .pscard{position:static;min-height:0;margin-bottom:0}
+
+  /* metrics card: cap and center */
+  .metsecC .metricsC{max-width:760px;margin-inline:auto}
+  .cta-block{padding:72px 40px}
+
+  /* ---- footer: stacked links become balanced columns ---- */
+  .foot{columns:3;column-gap:48px;border-radius:34px 34px 0 0;
+    padding:72px max(40px,calc((100vw - 1200px)/2)) 44px}
+  .foot .brand,.foot>p,.foot>.btn,.foot .fbot{column-span:all}
+  .foot>p{max-width:46ch}
+  .foot h5{break-after:avoid}
+  .foot a{break-inside:avoid}
+  .foot .fbot{flex-direction:row;justify-content:space-between;margin-top:32px}
+
+  /* quiz flow centers as a card */
+  .quiz{max-width:640px;margin-inline:auto;min-height:100vh}
+}
+</style>
 </head>
 <body>
 <div class="phone">
+  <!-- desktop-only top nav; display:none on phone, so the mobile frame is untouched -->
+  <header class="dnav">
+    <a class="dn-brand" data-go="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Kinetic Age
+    </a>
+    <nav class="dn-links">
+      <a data-go="/conditions">Conditions</a>
+      <a data-go="/how-we-work">How We Work</a>
+      <a data-go="/exercises">Exercises</a>
+      <a data-go="/about">About</a>
+      <a data-go="/blogs">Blogs</a>
+    </nav>
+    <button class="btn dn-cta" data-go="/quiz">Book Trial</button>
+  </header>
+
   <div class="scroll" id="scroll">
     <main id="app"><!-- routed --></main>
   </div>
@@ -950,7 +1059,6 @@ function vHome(){
    '<div class="swipe">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">See what all conditions we treat</a></div>'+
  '</section>'+
- metricsRow3()+
  '<section class="sec wsec"><h2 class="h2">Where you feel it isn&rsquo;t where it starts</h2><p class="p muted">The surface symptom is one slice. Each hidden root maps to the care that fixes it.</p>'+
    '<div class="swipe">'+WHEELS.map(wheelCard).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">Understand your condition</a></div>'+
@@ -970,6 +1078,7 @@ function vHome(){
    videoBlock()+
    '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
  '</section>'+
+ metricsRow3()+
  '<section class="sec"><h2 class="h2">Backed by | operators from</h2><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
  socialStrip()+
  '<section class="sec"><h2 class="h2">The things families ask first</h2><div style="margin-top:22px">'+faqList(HOME_FAQS)+'</div></section>'+
@@ -1182,6 +1291,8 @@ drawer.addEventListener('click',function(e){if(e.target===drawer)closeDrawer();}
 
 window.addEventListener('hashchange',function(){ if(path()!=='/quiz'){/*reset quiz when leaving*/} render(); });
 render();
+/* on desktop the window scrolls (not the .scroll element), so reset it on route change */
+addEventListener('hashchange',function(){if(innerWidth>=1024)scrollTo(0,0);});
 </script>
 </body>
 </html>
