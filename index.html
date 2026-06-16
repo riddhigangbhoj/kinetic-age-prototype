@@ -71,20 +71,33 @@ button{font:inherit;cursor:pointer}
 .menu span::before{position:absolute;top:-5px}.menu span::after{position:absolute;top:5px}
 
 /* ---- drawer ---- */
-.drawer{position:absolute;inset:0;z-index:60;background:rgba(10,12,20,.5);opacity:0;visibility:hidden;transition:.3s}
+.drawer{position:absolute;inset:0;z-index:60;background:rgba(10,16,32,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s}
 .drawer.open{opacity:1;visibility:visible}
-.drawer-panel{position:absolute;top:0;right:0;bottom:0;width:84%;max-width:330px;background:var(--bg);
-  padding:max(20px,env(safe-area-inset-top)) 22px 28px;display:flex;flex-direction:column;gap:4px;
-  transform:translateX(100%);transition:transform .34s var(--ease);overflow-y:auto}
+.drawer-panel{position:absolute;top:0;right:0;bottom:0;width:88%;max-width:348px;
+  padding:max(20px,env(safe-area-inset-top)) 24px calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .4s var(--ease);overflow-y:auto;
+  background:
+    radial-gradient(125% 55% at 100% 0%,rgba(142,198,242,.34),transparent 62%),
+    radial-gradient(120% 45% at 0% 100%,rgba(31,140,106,.13),transparent 60%),
+    linear-gradient(180deg,#eff6fa 0%,#e6f0f6 100%);
+  box-shadow:-34px 0 64px -34px rgba(10,20,50,.55)}
 .drawer.open .drawer-panel{transform:none}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.drawer-head .brand{color:var(--ink)}
-.drawer-x{width:40px;height:40px;border:1px solid var(--line);border-radius:12px;background:none;display:grid;place-items:center;font-size:20px;color:var(--ink)}
-.drawer a{padding:13px 6px;font-family:var(--fd);font-size:var(--fs-h3);letter-spacing:-.01em;color:var(--ink);border-bottom:1px solid var(--line)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.drawer-head .brand{color:var(--ink);font-size:var(--fs-body);font-weight:500}
+.drawer-head .brand svg{color:var(--green)}
+.drawer-x{width:42px;height:42px;border:1px solid rgba(33,63,120,.16);border-radius:13px;background:rgba(255,255,255,.55);display:grid;place-items:center;font-size:19px;color:var(--ink);transition:transform .18s var(--ease),background .18s}
+.drawer-x:active{background:#fff;transform:scale(.93)}
+/* shared row: text left, chevron right, slides on tap */
+.drawer a{position:relative;display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink);transition:color .2s var(--ease)}
+.drawer a::after{content:"";margin-left:auto;width:8px;height:8px;border-right:1.7px solid var(--faint);border-bottom:1.7px solid var(--faint);transform:rotate(-45deg);transition:transform .2s var(--ease),border-color .2s var(--ease)}
 .drawer a:active{color:var(--blue)}
-.drawer .grp{margin-top:16px;font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.16em;color:var(--faint)}
-.drawer .svc{font-size:var(--fs-body);font-family:var(--fb);padding:11px 6px}
-.drawer .d-cta{margin-top:18px}
+.drawer a:active::after{border-color:var(--blue);transform:translateX(3px) rotate(-45deg)}
+/* one consistent nav list — same Fraunces size for primary and services */
+.drawer-panel>a{font-family:var(--fd);font-weight:450;font-size:21px;letter-spacing:-.012em;padding:15px 4px;border-bottom:1px solid rgba(33,63,120,.1)}
+.drawer .grp{margin:24px 0 6px;padding:0 4px;font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.18em;color:var(--green);font-weight:700}
+.drawer .svc:last-of-type{border-bottom:none}
+.drawer .d-cta{margin-top:auto;padding-top:24px}
+.drawer .d-cta .btn{width:100%}
 
 /* ---- buttons ---- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 26px;width:fit-content;
@@ -104,6 +117,11 @@ button{font:inherit;cursor:pointer}
 
 /* ---- hero band (every page opens with one) ---- */
 .hero{position:relative;overflow:hidden;color:#fff;padding:118px 24px 40px;isolation:isolate}
+#app[data-page="case-studies"] .hero{padding-top:84px;color:var(--ink)}
+#app[data-page="case-studies"] .hero .scrim{display:none}
+#app[data-page="case-studies"] .hero h1{text-shadow:none;color:var(--ink)}
+#app[data-page="case-studies"] .hero h1 .it{color:var(--green)}
+#app[data-page="case-studies"] .hero .sub{color:var(--ink2)}
 .hero.tall{min-height:88svh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:30px}
 .hero .bgwrap{position:absolute;inset:0;z-index:-2}
 .hero .bgslide{position:absolute;inset:0}
@@ -118,6 +136,8 @@ button{font:inherit;cursor:pointer}
 .g-field{background:radial-gradient(90% 56% at 50% 100%,rgba(232,178,92,.8),transparent 62%),linear-gradient(177deg,#102a3a,#14403f 40%,#2f6a55 62%,#9c7a3a 86%,#b88a3a 100%)}
 .g-gold{background:radial-gradient(100% 58% at 50% 100%,rgba(245,180,90,.85),transparent 62%),linear-gradient(177deg,#16263f,#284258 44%,#7a6048 78%,#d99a52 100%)}
 .g-blue{background:radial-gradient(80% 60% at 78% 8%,rgba(120,150,235,.45),transparent 60%),linear-gradient(170deg,#16204a,#23306e 46%,#33489c 100%)}
+.g-gb{background:radial-gradient(100% 58% at 50% 100%,rgba(42,170,128,.82),transparent 62%),linear-gradient(177deg,#13234a,#1c3a72 42%,#1f7060 76%,#2aa178 100%)}
+.g-home{background:radial-gradient(125% 80% at 50% 102%,rgba(31,140,106,.32),rgba(31,140,106,0) 58%),radial-gradient(95% 60% at 82% 6%,rgba(33,63,153,.16),transparent 62%),linear-gradient(180deg,#f4f9f7 0%,#e9f4f1 44%,#d6ebe6 100%)}
 .hero .scrim{position:absolute;inset:0;z-index:-1;
   background:linear-gradient(180deg,rgba(8,14,24,.66),rgba(8,14,24,.2) 24%,rgba(10,10,16,.18) 55%,rgba(8,6,4,.74) 100%)}
 .hero .grain{position:absolute;inset:0;z-index:-1;opacity:.07;mix-blend-mode:overlay;
@@ -523,6 +543,88 @@ main{padding-bottom:96px}
 .cta-block{text-align:center;padding:46px 22px}
 .cta-block .h2{margin-bottom:20px}
 
+/* ---- case studies ---- */
+.csban{background:linear-gradient(178deg,#e1ecf3 0%,#e9f1f7 40%,var(--bg) 100%);padding:96px 22px 30px;text-align:center}
+.csban h1{font-family:var(--fd);font-weight:440;font-size:var(--fs-h1);line-height:1.06;letter-spacing:-.014em;color:var(--ink)}
+.csban h1 .it{display:block;font-style:italic;color:var(--orange)}
+.csban .sub{margin:14px auto 0;max-width:32ch;font-size:var(--fs-body);line-height:1.55;color:var(--muted)}
+.csgrid{display:flex;flex-direction:column;gap:16px;margin-top:26px}
+.cscard{display:flex;flex-direction:column;text-align:left;padding:22px;overflow:hidden;
+  background:#fff;border:1px solid #eef1f6;border-radius:22px;
+  box-shadow:0 14px 34px -24px rgba(40,70,150,.28);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+/* each card leads with a white-background condition photo, inset inside the card */
+.cs-cardimg{margin:0 0 16px;height:172px;border-radius:16px;overflow:hidden;background:#eff3f8}
+.cs-cardimg img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+.cscard:hover{transform:translateY(-3px);box-shadow:0 28px 52px -28px rgba(40,70,150,.4);border-color:#e4eaf3}
+.cscard:active{transform:scale(.99)}
+.cs-no{font-size:var(--fs-lbl);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
+/* number sits inline with the heading; age reads beneath it */
+.cs-head{display:flex;align-items:flex-start;gap:13px}
+.cs-num{display:grid;place-items:center;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--fd);font-weight:500;font-size:15px;line-height:1;flex:none}
+.cs-htext{min-width:0}
+.cs-ttl{font-family:var(--fd);font-weight:500;font-size:var(--fs-h3);line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.cs-sub{margin-top:8px;font-size:var(--fs-sm);line-height:1.5;color:var(--muted)}
+.cs-age{display:block;margin-top:6px;font-size:var(--fs-cap);color:var(--muted);letter-spacing:.02em}
+/* improvement: a calm coloured sub-component, highlighted by colour not size */
+.cs-result{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:16px;padding:13px 16px;border-radius:14px;background:#fdeee2;border:1px solid #f6dccb}
+.cs-result b{font-family:var(--fd);font-weight:600;font-size:var(--fs-body);line-height:1;color:var(--orange-ink)}
+.cs-result span{font-size:var(--fs-sm);font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#b05a35}
+/* service label pills */
+.cs-svc{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.cs-svc span{display:inline-flex;align-items:center;font-size:var(--fs-ui);font-weight:600;padding:6px 12px;border-radius:var(--r-pill)}
+.cs-svc .s-physio{background:#e7effb;color:var(--blue)}
+.cs-svc .s-nutrition{background:#e6f4ee;color:var(--green)}
+.cs-svc .s-strength{background:#eceffb;color:#4a5db0}
+.cs-svc .s-fitness{background:#f1ecfb;color:#6b4fc2}
+/* read = a real button */
+.csbtn{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:18px;width:100%;min-height:48px;border-radius:var(--r-pill);background:linear-gradient(120deg,var(--green) 0%,#2a6f8e 52%,var(--blue) 100%);border:none;color:#fff;font-weight:600;font-size:var(--fs-ui);letter-spacing:.04em;text-transform:uppercase;box-shadow:0 12px 26px -14px rgba(31,77,120,.6)}
+.cscard:active .csbtn{filter:brightness(.94)}
+/* case 01: photo hero — top half image, content sits below */
+/* case detail: a larger lead paragraph sets the scene before the dense blocks */
+.cs-lead{font-size:17px;line-height:1.58;color:var(--ink)}
+/* intro summary sits in its own soft box */
+.cs-introbox{margin-top:18px;padding:22px 24px;border-radius:22px;background:linear-gradient(150deg,#f3f7fe,#edf2fc);border:1px solid #e1e8f7}
+.cs-introbox .cs-lead{margin-top:0}
+/* case detail: heading + kicker — dark/green, never grey */
+.cs-circle{display:grid;place-items:center;width:46px;height:46px;margin:12px 0 0;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--fd);font-weight:500;font-size:21px;line-height:1;box-shadow:0 8px 20px -8px rgba(33,63,120,.6)}
+.cs-h1{font-family:var(--fd);font-weight:450;font-size:var(--fs-h3);line-height:1.24;letter-spacing:-.01em;margin:12px 0 0;color:var(--ink)}
+/* their saying — sits right under the heading, orange quote mark */
+.cs-saying{position:relative;margin:20px 0 0;padding:24px 22px 22px 28px;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#eaf0ff,#e3ecfb);border:1px solid #d8e2fb}
+.cs-saying::before{content:"\201C";position:absolute;left:13px;top:0;font-family:var(--fd);font-style:italic;font-size:82px;line-height:1;color:var(--orange);opacity:.55}
+.cs-saying blockquote{position:relative;font-family:var(--fd);font-style:italic;font-weight:430;font-size:var(--fs-h4);line-height:1.5;letter-spacing:-.005em;color:var(--ink)}
+.cs-saying figcaption{margin-top:14px;font-size:var(--fs-cap);font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}
+/* each content section is its own card component */
+.cs-comp{margin-top:16px;padding:22px 22px 24px;border-radius:22px;background:#fff;border:1px solid #e7ecf5;box-shadow:0 16px 36px -28px rgba(33,63,120,.5)}
+/* section headings read at body size, bold — not tiny labels */
+.csread .kick{font-size:var(--fs-body);font-weight:700;letter-spacing:0;text-transform:none}
+.cs-comp .p{margin-top:10px}
+/* no grey text in the detail — labels/captions read dark blue */
+.csread .bk{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:13px;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:20px;line-height:1;box-shadow:0 2px 8px -4px rgba(40,70,150,.25)}
+.csread .bk:active{background:#f1f5fb;transform:scale(.96)}
+.csread .cs-stat .k,.csread .cs-score span{color:var(--ink2)}
+.cs-hero{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:16px;padding:13px 16px;border-radius:14px;background:#fdeee2;border:1px solid #f6dccb}
+.cs-hero b{font-family:var(--fd);font-weight:600;font-size:var(--fs-body);line-height:1;letter-spacing:-.01em;color:var(--orange-ink)}
+.cs-hero span{font-size:var(--fs-sm);font-weight:600;color:#b05a35;text-transform:uppercase;letter-spacing:.05em;line-height:1.25}
+.cs-note{margin-top:14px;font-size:var(--fs-sm);line-height:1.55;color:var(--muted)}
+.cs-notek{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:var(--fs-lbl);color:var(--ink2);margin-right:6px}
+.cs-stat.hot{border-color:#f6d6c5;background:#fff7f2}
+.cs-stat.hot .v{color:var(--orange-ink)}
+.cs-statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.cs-stat{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.cs-stat .k{display:block;font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:600}
+.cs-stat .v{display:block;margin-top:5px;font-family:var(--fd);font-weight:460;font-size:var(--fs-h4);color:var(--ink)}
+.cs-out{margin-top:14px;display:flex;flex-direction:column;gap:11px;list-style:none}
+.cs-out li{position:relative;padding-left:30px;font-size:var(--fs-body);line-height:1.5;color:var(--ink2)}
+.cs-out li::before{content:"";position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:#e6f4ee}
+.cs-out li::after{content:"";position:absolute;left:6.5px;top:5px;width:5px;height:9px;border-right:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(40deg)}
+.cs-scores{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.cs-score{flex:1 1 84px;border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;background:#fff}
+.cs-score b{display:block;font-family:'Geist Mono',ui-monospace,monospace;font-weight:600;font-size:var(--fs-h4);letter-spacing:-.02em;color:var(--green)}
+.cs-score span{display:block;margin-top:4px;font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.cs-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.cs-tags span{font-size:var(--fs-ui);color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);padding:7px 12px}
+
 /* timeline / stepper */
 .steps{margin-top:22px;display:flex;flex-direction:column;gap:0}
 .step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
@@ -531,25 +633,19 @@ main{padding-bottom:96px}
 .step h4{font-family:var(--fd);font-weight:450;font-size:var(--fs-h4);color:var(--ink)}
 .step p{font-size:var(--fs-sm);color:var(--muted);margin-top:3px}
 
-/* home: heading stepper — gradient spine, halo nodes, staggered reveal */
-.jmini{position:relative;margin-top:22px;margin-bottom:4px}
-.jmini::before{content:"";position:absolute;left:18px;top:30px;bottom:30px;width:2px;border-radius:2px;z-index:0;
-  background:linear-gradient(180deg,#5b73d6,#1f8c6a 36%,#f5824f 68%,#16264f);
-  transform-origin:top;transition:transform .9s var(--ease) .1s}
-.jmstep{position:relative;z-index:1;display:flex;align-items:center;gap:16px;padding:11px 0;
-  transition:opacity .55s var(--ease),transform .55s var(--ease)}
-.jmstep:nth-child(2){transition-delay:.1s}.jmstep:nth-child(3){transition-delay:.2s}.jmstep:nth-child(4){transition-delay:.3s}
-.jmini .jnode{position:static;flex:0 0 auto;width:38px;height:38px;font-size:13.5px;
-  box-shadow:0 0 0 5px var(--bg),0 10px 20px -8px rgba(20,32,80,.45)}
-.jmh{font-family:var(--fb);font-weight:400;font-size:var(--fs-body);line-height:1.5;color:var(--ink2);text-wrap:balance}
-.jmh em{font-family:var(--fd);font-style:italic;font-size:1.06em;color:var(--ink)}
-.jmh .wamini{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#25d366;color:#fff;vertical-align:-2.5px;margin-right:2px}
-.jmh .wamini svg{width:11px;height:11px}
-.jmini.pre::before{transform:scaleY(0)}
-.jmini.pre .jmstep{opacity:0;transform:translateY(12px)}
-.jmini.in::before{transform:scaleY(1)}
-.jmini.in .jmstep{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.jmini.pre::before,.jmini.pre .jmstep{transform:none;opacity:1;transition:none}}
+/* journey timeline — single green-to-blue gradient (matches the case-study button) */
+.jm2{position:relative;margin-top:20px}
+.jm2::before{content:"";position:absolute;left:22px;top:32px;bottom:32px;width:2px;border-radius:2px;z-index:0;
+  background:linear-gradient(180deg,rgba(31,140,106,.5),rgba(33,63,120,.45) 55%,rgba(33,63,120,.14))}
+.jm2-step{position:relative;z-index:1;display:flex;align-items:center;gap:17px;padding:12px 0}
+.jm2-node{flex:0 0 auto;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:500;font-size:16px;color:#fff;
+  background:linear-gradient(150deg,var(--green) 0%,#2a6f8e 52%,var(--blue) 100%);
+  box-shadow:0 0 0 5px var(--bg),0 12px 24px -10px rgba(20,32,80,.6),inset 0 1px 0 rgba(255,255,255,.35)}
+.jm2-h{font-family:var(--fb);font-weight:400;font-size:var(--fs-body);line-height:1.5;color:var(--ink2);text-wrap:balance}
+.jm2-h em{font-family:var(--fd);font-style:italic;font-size:1.06em;color:var(--blue)}
+.jm2-h .wamini{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#25d366;color:#fff;vertical-align:-2.5px;margin-right:2px}
+.jm2-h .wamini svg{width:11px;height:11px}
 /* full journey timeline (how-we-work) */
 .journey{position:relative;margin-top:22px}
 .jphase{position:relative;padding:0 0 26px 48px}
@@ -713,6 +809,9 @@ main{padding-bottom:96px}
     gap:24px;margin:30px 0 0;padding:0;overflow:visible}
   .swipe>.card{flex:none;width:auto}
   .swipe-dots,.wdots{display:none}
+  /* symptom-wheel cards stay in one horizontal row that scrolls, not a wrapping grid */
+  .wsec .swipe{display:flex;gap:24px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
+  .wsec .swipe>.card{flex:0 0 300px;width:auto;scroll-snap-align:start}
   .team{grid-template-columns:repeat(4,1fr)}
   .lead-list{max-width:60ch}
 
@@ -723,6 +822,15 @@ main{padding-bottom:96px}
   /* metrics card: cap and center */
   .metsecC .metricsC{max-width:760px;margin-inline:auto}
   .cta-block{padding:72px 40px}
+
+  /* case studies: scannable card grid + a readable detail column */
+  .csban{padding:118px 40px 44px}
+  .csban .sub{font-size:18px;max-width:48ch}
+  .csgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+  .csread{max-width:760px;margin-inline:auto}
+  .csread .cs-h1{font-size:30px;line-height:1.16}
+  .csread .cs-saying blockquote{font-size:20px}
+  .csread .cs-statgrid{grid-template-columns:repeat(4,1fr)}
 
   /* ---- footer: stacked links become balanced columns ---- */
   .foot{columns:3;column-gap:48px;border-radius:34px 34px 0 0;
@@ -751,7 +859,7 @@ main{padding-bottom:96px}
       <a data-go="/how-we-work">How We Work</a>
       <a data-go="/exercises">Exercises</a>
       <a data-go="/about">About</a>
-      <a data-go="/blogs">Blogs</a>
+      <a data-go="/case-studies">Case studies</a>
     </nav>
     <button class="btn dn-cta" data-go="/quiz">Book Trial</button>
   </header>
@@ -780,7 +888,7 @@ main{padding-bottom:96px}
       <a data-go="/how-we-work">How We Work</a>
       <a data-go="/exercises">Exercises</a>
       <a data-go="/about">About</a>
-      <a data-go="/blogs">Blogs</a>
+      <a data-go="/case-studies">Case studies</a>
       <div class="grp">Services</div>
       <a class="svc" data-go="/services/physiotherapy">Physiotherapy</a>
       <a class="svc" data-go="/services/strength-training">Strength Training</a>
@@ -868,7 +976,7 @@ var JOURNEY=[
  {n:'01',node:'',short:'Assessment',mini:'An <em>at-home</em> assessment to understand the full picture',title:'A thorough assessment, and your report',
   lead:'We begin with a deep, in-person assessment, then send you a clear report of exactly where you stand.',
   list:['A detailed assessment of the condition and daily life','A written report you and your family can read']},
- {n:'02',node:'g',short:'The plan',mini:'A plan built around <em>their health, their home, their routine</em>',title:'A hyper-personalised plan',
+ {n:'02',node:'g',short:'The plan',mini:'A plan built around <em>your health, your home, your routine</em>',title:'A hyper-personalised plan',
   lead:'Our experts weigh every parameter and build the one plan most suited to you and your condition.',
   chips:[['Nutrition meal plan','warm'],['Exercise plan','green'],['Doctor consultation','']],
   list:['Every parameter considered, never a template','One connected plan, built around the condition']},
@@ -883,14 +991,118 @@ var JOURNEY=[
   wa:'Shared with you and your family on WhatsApp, with a dedicated family group for full transparency and trust.'}
 ];
 var REPORT_TIMELINE=[{w:'Week 1',t:'[PLACEHOLDER] Baseline and first plan',d:'[PLACEHOLDER] What we found and where we are starting.'},{w:'Week 2',t:'[PLACEHOLDER] First check-in',d:'[PLACEHOLDER] Early adjustments and what to expect.'},{w:'Week 4',t:'[PLACEHOLDER] Progress review',d:'[PLACEHOLDER] Measured changes shared with the family.'},{w:'Week 8',t:'[PLACEHOLDER] Plan update',d:'[PLACEHOLDER] What is working, what changes next.'}];
-var BLOG_FILTERS=['Knee pain','Balance and falls'];
-var BLOG_POSTS=[
- {filter:'Knee pain',condition:'knee-pain',audience:'senior',title:'[PLACEHOLDER] Why knee pain in seniors is rarely just the knee',body:'[PLACEHOLDER] Body of the post explaining the reframe in plain language.'},
- {filter:'Balance and falls',condition:'balance-and-falls',audience:'family',title:'[PLACEHOLDER] When a parent stops trusting their own footing',body:'[PLACEHOLDER] Body written for the family member who has noticed the change.'},
- {filter:'Knee pain',condition:'knee-pain',audience:'family',title:'[PLACEHOLDER] What to do when a parent waves off their knee pain',body:'[PLACEHOLDER] Body for the son or daughter weighing when to step in.'},
- {filter:'Balance and falls',condition:'balance-and-falls',audience:'senior',title:'[PLACEHOLDER] The quiet reasons balance gets worse with age',body:'[PLACEHOLDER] Body of the post explaining contributing causes.'}
+var CASE_STUDIES=[
+ {n:'01',title:'Twenty years of knee pain, and real improvement after starting with Kinetic Age',
+  intro:'A woman in her early 60s came to Kinetic Age with bilateral knee pain she had lived with for two decades, alongside left shoulder pain and a thyroid condition. She reported a maximum pain improvement score, rated every service dimension 5/5, and has already referred two people to Kinetic Age.',
+  stats:[['Age group','60–65'],['Service','Physio + nutrition'],['Pain improvement','10/10'],['Referrals','2 made']],
+  challenge:'Bilateral knee pain for 20 years, left shoulder pain, thyroid condition, hypertension, and high cholesterol. Postural imbalance with increased lumbar lordosis and bow-leg posture. Weakness across quadriceps, glutes, core, and shoulder muscle groups.',
+  worked:'Mobility and flexibility training, strength and balance, and pain management and rehab for knees and shoulder. A personalised nutrition plan targeting thyroid, hypertension, and cholesterol which the client followed consistently throughout.',
+  outcomes:['10/10 pain improvement','100% session adherence, zero rescheduling','Personalised nutrition plan followed throughout','2 referrals made to Kinetic Age','Planning to renew'],
+  quote:'I’ve been with Kinetic Age for seven months now and I’m happy with the service. My physio is excellent and sessions are always on time. My knee pain is still there, but I can feel some improvement and I’m sticking with it.',attr:'',
+  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
+  tags:['Bilateral knee pain','Shoulder rehab','Thyroid','Hypertension','Personalised nutrition','Home physiotherapy'],
+  metric:['10/10','pain improvement']},
+ {n:'02',title:'Holistic recovery after hip replacement, managing multi-joint pain at 85+',
+  intro:'A man in his late 80s came to Kinetic Age following a hip replacement, with multi-joint pain across knees, shoulders, and lower back, and a cardiac history that required careful, low-impact rehabilitation. A four-pillar plan combining mobility, strength, pain management, and nutrition restored confidence and function.',
+  stats:[['Age group','85+'],['Service','Physio + nutrition'],['Programme','Four-pillar plan'],['Pain','Improved']],
+  challenge:'Post-hip-replacement rehabilitation alongside multi-joint pain across knees, shoulders, and lower back. Cardiac history meant every session needed cardiac-safe pacing. Risk of deconditioning was significant given age and surgical recovery.',
+  worked:'Mobility and flexibility training to restore range, gentle strength and balance work to rebuild stability, pain management and rehab tailored to surgical recovery, and a nutrition plan supporting healing and cardiac health, all delivered safely at home.',
+  outcomes:['Pain improvement reported across multiple joints','Cardiac-safe rehab delivered consistently','Sessions ran full duration with regular team check-ins','Family expressed satisfaction with overall care'],
+  quote:'Sessions ran the full duration and the team stayed in regular touch. Overall the care has been very good.',attr:'',
+  scores:[['5/5','Physiotherapist'],['4/5','Nutritionist'],['4/5','Overall quality']],
+  tags:['Post-hip replacement','Multi-joint pain','Mobility & flexibility','Cardiac-safe rehab','Seniors 85+','Home physiotherapy'],
+  metric:['Improved','across multiple joints']},
+ {n:'03',title:'Regaining balance and coordination with cerebellar ataxia, at 74',
+  intro:'A 74-year-old man living with cerebellar ataxia came to Kinetic Age with severely compromised balance, an unsteady gait, and limited coordination. Through a targeted home physiotherapy programme, he made meaningful progress and reported feeling happy with both the care and his improvement.',
+  stats:[['Age group','70–75'],['Service','Physiotherapy'],['Condition','Neurological'],['Audit','Excellent']],
+  challenge:'Cerebellar ataxia causing loss of balance and coordination, making walking unsafe. Increased walking cadence with shortened step length and prolonged stance time. Single-leg balance not achievable at baseline. No prior physiotherapy undertaken for the condition.',
+  worked:'Specialised neuro-rehabilitation combining mobility and flexibility training, strength and balance work focused on gait retraining and fall prevention, and pain management techniques tailored to neurological recovery.',
+  outcomes:['10/10 pain improvement','Measurable improvement in gait and balance','Zero rescheduling across the programme','Specialist neuro-rehab delivered at home'],
+  quote:'Everything is going good. I am happy with the physiotherapy and the progression.',attr:'',
+  scores:[['5/5','Physiotherapist'],['5/5','Customer service'],['5/5','Overall quality']],
+  tags:['Cerebellar ataxia','Neurological rehab','Gait training','Balance & coordination','Fall prevention','Seniors 70–75'],
+  metric:['10/10','pain improvement']},
+ {n:'04',title:'From chronic knee pain and a sedentary lifestyle to a stronger, more active daily routine',
+  intro:'A woman in her late 50s came to Kinetic Age with knee pain, upper back pain, and a largely sedentary lifestyle driven by type 2 diabetes. A combined physiotherapy and personalised nutrition programme helped her rebuild strength and manage her condition more effectively.',
+  stats:[['Age group','55–60'],['Service','Physio + nutrition'],['Condition','Diabetes mgmt'],['Referral','Made']],
+  challenge:'Type 2 diabetes, upper back pain, quadriceps weakness, and a sedentary lifestyle. Muscle imbalance across key groups and limited daily activity.',
+  worked:'Strength training and mobility work for back and lower body. A personalised nutrition plan specifically designed to support diabetes management alongside the physical programme.',
+  outcomes:['Knee pain improvement reported','Strength rebuilt across key muscle groups','Nutrition plan followed consistently','Referral made to Kinetic Age'],
+  quote:'Since starting with Kinetic Age, my knee pain has reduced significantly, I can feel the difference. The sessions are always on time, and the physio and trainer have been excellent. I have already recommended Kinetic Age to people I know.',attr:'',
+  scores:[['5/5','Physiotherapist'],['4/5','Overall quality']],
+  tags:['Type 2 diabetes','Back pain','Knee pain','Diabetes nutrition plan','Sedentary to active','Physio + nutrition'],
+  metric:['Reduced','knee pain, more active']},
+ {n:'05',title:'Managing OA knee, back pain, and shoulder pain, and choosing to renew',
+  intro:'A 61-year-old woman came to Kinetic Age with grade 3 osteoarthritis in the knee, persistent back pain from spinal stenosis, and shoulder pain that limited her daily life. She made enough progress through a combined physiotherapy and nutrition programme to renew her plan.',
+  stats:[['Age group','60–65'],['Service','Physio + nutrition'],['Pain improvement','6/10'],['Status','Renewed']],
+  challenge:'Grade 3 knee OA, spinal stenosis causing back pain, shoulder pain, hypertension, and diabetes. Multiple overlapping conditions requiring a carefully integrated approach.',
+  worked:'Mobility and flexibility, strength and balance, and pain management for knee, back, and shoulder. Nutrition plan aligned to her diabetes and hypertension. Four-pillar approach delivered entirely at home.',
+  outcomes:['6/10 pain improvement reported','Renewed the programme after completion','Multi-condition progress across knee, back, and shoulder','Zero rescheduling across all sessions'],
+  quote:'I have no suggestions, I’m happy with everything and very satisfied with the overall service. I’ve renewed and I’m continuing because the care has been great.',attr:'',
+  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
+  tags:['OA knee grade 3','Spinal stenosis','Shoulder pain','Diabetes','Hypertension','Renewed'],
+  metric:['6/10','pain improvement']},
+ {n:'06',title:'From zero seconds of balance to walking confidently, at 84',
+  intro:'An 84-year-old woman managing diabetes and hypertension came to Kinetic Age unable to balance on either leg, with a limping gait, stooped posture, and significant lower limb weakness. She reported 7/10 pain improvement and expressed strong intent to renew.',
+  stats:[['Age group','80+'],['Service','Physiotherapy'],['Pain improvement','7/10'],['Renewal intent','Strong']],
+  challenge:'Bilateral knee pain, zero single-leg balance at baseline, limping gait, stooped posture, and lower limb weakness. Managing both diabetes and hypertension alongside mobility rehabilitation.',
+  worked:'Progressive balance and fall prevention training, lower limb strengthening, gait retraining, and mobility work, with sessions carefully calibrated to her age and multi-condition profile.',
+  outcomes:['7/10 pain improvement reported','Balance measurably improved from zero baseline','All sessions delivered on time','Strong renewal intent expressed'],
+  quote:'I’m happy with my sessions and I’m planning to continue. The physiotherapist has been very good and I can feel myself getting better little by little.',attr:'',
+  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
+  tags:['Knee pain','Balance training','Fall prevention','Diabetes','Hypertension','Seniors 80+'],
+  metric:['7/10','pain improvement']},
+ {n:'07',title:'Real pain relief at 81, and already referring her neighbours',
+  intro:'An 81-year-old woman managing bilateral knee OA, varicose veins, hypertension, and a cardiac condition enrolled for online physiotherapy. She reported maximum pain improvement, rated every category 5/5, and referred a neighbour to Kinetic Age.',
+  stats:[['Age group','80+'],['Service','Online physio'],['Pain improvement','10/10'],['Referral','Made']],
+  challenge:'Severe left knee pain peaking in evenings and at night, moderate right knee pain, varicose veins, a recent cardiac issue, and hypertension. On blood thinners and antihypertensives. Reduced knee flexion and lower limb muscle imbalance confirmed on assessment.',
+  worked:'Targeted lower limb strengthening, balance training for fall prevention, and pain management, all delivered online, carefully accounting for her cardiac profile throughout.',
+  outcomes:['10/10 pain improvement','Zero rescheduling throughout the programme','1 referral made'],
+  quote:'I am really happy with the progress and with my physio. She explains each exercise clearly and her behaviour has been excellent throughout.',attr:'',
+  scores:[['5/5','Physio on time'],['5/5','Session duration'],['5/5','Physio knowledge'],['5/5','Customer service']],
+  tags:['Bilateral knee OA','Varicose veins','Hypertension','Cardiovascular','Online physiotherapy','Seniors 80+'],
+  metric:['10/10','pain improvement']},
+ {n:'08',title:'Strong pain relief and already planning to renew',
+  intro:'A 61-year-old man came to Kinetic Age with chronic knee pain, mild scoliosis, and left-side weakness affecting his daily mobility.',
+  stats:[['Age group','60–65'],['Service','Physio + nutrition'],['Pain improvement','9/10'],['Status','Renewing']],
+  challenge:'Chronic knee pain with notable left-right asymmetry (8 sec vs 13 sec single-leg balance at baseline), mild scoliosis, and left-side weakness. Limited functional mobility affecting daily life.',
+  worked:'Strength and balance training with focus on correcting the bilateral asymmetry, pain management for knee and back, and progressive fitness work to improve overall endurance and function. Nutrition support alongside.',
+  outcomes:['9/10 pain improvement','Balance asymmetry reduced','Renewal confirmed','Referral intent expressed'],
+  quote:'My experience with Kinetic Age has been nice. I’ve seen improvement since starting the sessions and everything is going properly. No complaints at all.',attr:'',
+  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
+  tags:['Knee pain','Scoliosis','Left-side weakness','Balance training','Renewing'],
+  metric:['9/10','pain improvement']},
+ {n:'09',title:'Rebuilding movement after stroke, adapting the plan to deliver real progress',
+  intro:'A 66-year-old man left unable to move his right hand and leg following a stroke came to Kinetic Age for neurorehabilitation physiotherapy and strength training. Although the initial programme did not deliver the pain improvement hoped for, the team realigned the plan to his needs and after that, he saw real progress.',
+  stats:[['Age group','65–70'],['Service','Physio + strength'],['Pain improvement','8/10'],['Sessions','49 completed']],
+  challenge:'Post-stroke right-sided hemiplegia, unable to use the right hand or leg for daily activities. Required specialist neurorehabilitation delivered safely at home alongside standard medications.',
+  worked:'Neurorehabilitation techniques for motor function recovery, strength training adapted for hemiplegia, balance and gait retraining, and progressive functional mobility work. After the first phase, the plan was realigned around his specific response and pace.',
+  outcomes:['8/10 pain improvement reported after realignment','49 sessions completed with continued engagement','Measurable motor function progress','All sessions delivered on time'],
+  quote:'Initially the plan didn’t really improve the pain much, but the team realigned it based on my needs. After that I started seeing real progress.',attr:'',
+  scores:[['5/5','Physiotherapist'],['5/5','Customer service'],['5/5','Overall quality']],
+  tags:['Post-stroke rehab','Hemiplegia','Neurorehabilitation','Gait retraining','Adaptive care','Home physiotherapy'],
+  metric:['8/10','pain improvement']},
+ {n:'10',title:'From limping gait and bilateral knee pain to meaningful recovery, at 56',
+  intro:'A 56-year-old woman came to Kinetic Age with severe bilateral knee pain, back pain, loss of balance, ankle swelling, and breathlessness limiting her ability to walk, climb stairs, or perform basic daily activities. Within 10 sessions, she reported a significant improvement and received a full personalised nutrition plan.',
+  stats:[['Age group','50–60'],['Service','Physio + nutrition'],['Sessions','10 completed'],['Condition','Multi-symptom']],
+  challenge:'Bilateral knee pain (right more severe), lower back pain, intermittent loss of balance, bilateral ankle swelling, and breathlessness for two months. Multiple symptoms restricting daily walking, stair use, and basic activity.',
+  worked:'Pain management and rehab for the knees and back, balance and strength work to restore safe walking, and a full personalised nutrition plan addressing her overall health alongside the physical programme.',
+  outcomes:['Significant improvement reported within 10 sessions','Restored ability to walk and perform daily activities','Full personalised nutrition plan delivered','All sessions completed without rescheduling'],
+  quote:'My physio is very perfect in her job, she comes on time, is very polite and supportive. I’m really happy with the overall service and the care she has shown.',attr:'',
+  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
+  tags:['Bilateral knee pain','Back pain','Balance loss','Ankle swelling','Breathlessness','Physio + nutrition'],
+  metric:['Major','gains in 10 sessions']},
+ {n:'11',title:'Rebuilding strength and mobility after years of knee, ankle and foot pain, at 49',
+  intro:'A 49-year-old woman managing chronic knee and foot pain, postural issues, and an old wrist fracture enrolled for home physiotherapy and strength training. After 49 sessions she reported pain improvement, scored the service 5/5 overall, and was already recommending Kinetic Age to family and friends.',
+  stats:[['Age group','45–55'],['Service','Physio + fitness'],['Sessions','49 completed'],['Nutrition','Enrolled']],
+  challenge:'Knee pain (4/10 at intake), ankle and foot pain, IBS, history of wrist fracture, flat feet, genu varum, waddling gait, and forward head with rounded shoulders. An orthotist was also involved to advise on shoe modifications.',
+  worked:'Lower limb and upper body strength training, balance and core strengthening to address gait and reduce fall risk, and pain management for knee, ankle, and foot. Nutrition enrolled alongside her existing gastroenterologist-guided diet.',
+  outcomes:['Pain improvement reported after 49 sessions','All sessions delivered on time, none rescheduled','5/5 overall quality score','Referring family and friends to Kinetic Age'],
+  quote:'Very happy with the services and very happy with the physio, happy with everything overall.',attr:'',
+  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
+  tags:['Knee pain','Ankle & foot pain','Strength training','Balance & gait','IBS','Home physiotherapy'],
+  metric:['Improved','over 49 sessions']}
 ];
-var AUDIENCES=[{key:'senior',title:'For older adults',blurb:'[PLACEHOLDER] Plain, practical reading for staying strong, steady and independent.'},{key:'family',title:'For the family caring for them',blurb:'[PLACEHOLDER] For the son or daughter noticing the small changes and wondering what to do.'}];
 var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, steady and independent.',blurb:'[PLACEHOLDER] When there is no one condition to name, start with free guided movement and a two-minute check.',to:'/exercises'};
 var condBy=function(s){for(var i=0;i<CONDITIONS.length;i++)if(CONDITIONS[i].slug===s)return CONDITIONS[i];return null};
 var pillarBy=function(s){for(var i=0;i<PILLARS.length;i++)if(PILLARS[i].slug===s)return PILLARS[i];return null};
@@ -922,8 +1134,9 @@ function testiCard2(t){return '<div class="card tcard2">'+
  '</div></div>'}
 var WA_ICON='<span class="jwa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5l-.3.5-.5.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 .9.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>';
 var CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-function journeyMini(){return '<div class="jmini">'+JOURNEY.map(function(p){
- return '<div class="jmstep"><span class="jnode '+p.node+'">'+p.n+'</span><div class="jmh">'+p.mini.replace('WhatsApp','<span style="white-space:nowrap">'+WA_ICON.replace('jwa-ic','wamini')+'WhatsApp</span>')+'</div></div>';
+// single-hue iteration of the journey timeline (one blue family, calmer)
+function journeyMini2(){return '<div class="jm2">'+JOURNEY.map(function(p){
+ return '<div class="jm2-step"><span class="jm2-node">'+p.n+'</span><div class="jm2-h">'+p.mini.replace('WhatsApp','<span style="white-space:nowrap">'+WA_ICON.replace('jwa-ic','wamini')+'WhatsApp</span>')+'</div></div>';
 }).join('')+'</div>'}
 function journey(){return '<div class="journey">'+JOURNEY.map(function(p){
  var b='<div class="jhead">'+p.title+'</div><p class="jlead">'+p.lead+'</p>';
@@ -979,7 +1192,7 @@ function heroTall(){
 function heroBand(g,eyebrow,h1,sub,cta){
  return '<section class="hero" style="padding-bottom:38px">'+
   '<div class="bgwrap"><div class="bgslide '+g+'"></div></div><div class="grain"></div><div class="scrim"></div>'+
-  '<p class="eyebrow">'+eyebrow+'</p><h1>'+h1+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+(cta?'<div class="hcta">'+cta+'</div>':'')+
+  (eyebrow?'<p class="eyebrow">'+eyebrow+'</p>':'')+'<h1>'+h1+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+(cta?'<div class="hcta">'+cta+'</div>':'')+
  '</section>'}
 function condCard(c,lane){return '<div class="card">'+slot(c.name+' &middot; photo',lane)+'<span class="tag '+lane+'" style="margin-top:14px">'+c.name+'</span><div class="cardttl">'+c.symptom+'</div><p class="p muted" style="margin-top:4px;font-size:var(--fs-sm)">'+c.intro+'</p><div class="cardcta">'+arguments[2]+'</div></div>'}
 function breakdownCard(c){var b=BREAKDOWN[c.slug];return '<div class="card bcard">'+
@@ -1047,7 +1260,7 @@ function footer(){
  return '<footer class="foot"><span class="brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Kinetic Age</span>'+
   '<p>[PLACEHOLDER] One line on what Kinetic Age does for older adults and the families who care for them.</p>'+
   '<button class="btn light" data-go="/quiz">Book Trial</button>'+
-  '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/exercises">Exercises</a><a data-go="/about">About</a><a data-go="/blogs">Blogs</a>'+
+  '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/exercises">Exercises</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
   '<h5>Contact</h5><a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'">WhatsApp us</a><a href="#">[PLACEHOLDER] phone</a><a href="#">[PLACEHOLDER] email</a><a href="#">[PLACEHOLDER] city</a>'+
   '<div class="fbot"><span>&copy; Kinetic Age [PLACEHOLDER]</span><span>[PLACEHOLDER] Privacy &middot; Terms</span></div></footer>'}
@@ -1074,7 +1287,7 @@ function vHome(){
    '<div class="secta"><a class="btn line" data-go="/about">Meet the team</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
-   journeyMini()+
+   journeyMini2()+
    videoBlock()+
    '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
  '</section>'+
@@ -1149,25 +1362,47 @@ function vAbout(){
  '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">[PLACEHOLDER] One reassuring line before the trial ask.</p><button class="btn" data-go="/quiz">Book Trial</button></section>'+
  footer()}
 
-var blogTab='All', blogAud='all', blogOpen=null;
-function vBlogs(){
- if(blogOpen!==null){var po=BLOG_POSTS[blogOpen];var cc=condBy(po.condition);
-  return '<section class="sec" style="padding-top:84px"><button class="bk" data-blogback style="background:none;border:none;color:var(--muted);font-size:var(--fs-sm);padding:6px 0">&larr; All posts</button>'+
-   '<span class="tag green" style="margin-top:8px">'+po.filter+'</span><h1 style="font-family:var(--fd);font-weight:440;font-size:var(--fs-h2);line-height:1.12;letter-spacing:-.01em;margin:12px 0 16px">'+po.title+'</h1>'+slot('Post hero')+
-   '<p class="p">'+po.body+'</p><p class="p">[PLACEHOLDER] Further paragraphs of the post body.</p><p class="p">[PLACEHOLDER] More body content for the template.</p>'+
-   '<div class="band" style="margin-top:26px"><span class="kick">Keep going</span>'+
-     (po.audience==='family'
-       ? '<div class="cardttl" style="margin-top:0">See how we’d care for '+lc(cc.name)+'.</div><div style="margin-top:12px">'+link('/how-we-work','See how we work')+'</div>'
-       : '<div class="cardttl" style="margin-top:0">Read more about '+lc(cc.name)+'.</div><div style="margin-top:12px">'+link('/conditions/'+cc.slug,'Go to '+lc(cc.name))+'</div>')+
-     '<div style="margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></div></div></section>'+footer();
+var csSvc='all', csOpen=null, csBackScroll=0;
+var SVC=[['Physiotherapy','s-physio','physio'],['Nutrition','s-nutrition','nutrition'],['Strength','s-strength','strength'],['Fitness','s-fitness','fitness']];
+/* one white-background photo per case, matched to the condition */
+var CS_IMG=['cs-01.png','cs-02.png','cs-03.png','cs-04.png','cs-05.png','cs-06.png','cs-07.png','cs-08.png','cs-09.png','cs-10.png','cs-11.png'];
+/* short heading (max 3 words) + one-line statement per case */
+var CS_HEAD=['Twenty-year knee pain','Recovery after surgery','Regaining balance','Knee pain, diabetes','Knee osteoarthritis','Balance management','Relief at 81','Knee and scoliosis','Movement after stroke','Multi-symptom recovery','Strength rebuilt'];
+var CS_SUB=['Two decades of bilateral knee pain, now meaningfully eased, in her early 60s.','Multi-joint pain rehabilitated safely after a hip replacement at 85-plus.','Balance and coordination rebuilt while living with cerebellar ataxia, at 74.','Strength rebuilt and knee pain reduced for a client managing type-2 diabetes, in her late 50s.','Grade-3 knee osteoarthritis, with back and shoulder pain eased, at 61.','From zero seconds of balance to walking confidently again, at 84.','Online physiotherapy brought real pain relief at 81.','Chronic knee pain and left-side weakness improved, at 61.','Right-sided movement rebuilt after stroke once the plan was realigned, at 66.','Knee, back and balance restored within ten sessions, walking again at 56.','Strength and mobility restored after years of knee, ankle and foot pain, at 49.'];
+function svcOf(c){var s=c.stats[1][1].toLowerCase();return SVC.filter(function(x){return s.indexOf(x[2])>-1})}
+function svcChips(c){return '<div class="cs-svc">'+svcOf(c).map(function(x){return '<span class="'+x[1]+'">'+x[0]+'</span>'}).join('')+'</div>'}
+function csCard(c,i){
+ return '<button class="card cscard" data-csopen="'+i+'">'+
+  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=1" alt="'+c.title+'" loading="lazy"></div>'+
+  '<h3 class="cs-ttl">'+CS_HEAD[i]+'</h3>'+
+  '<p class="cs-sub">'+CS_SUB[i]+'</p>'+
+  '<span class="csbtn">Read case study</span>'+
+ '</button>'}
+function vCases(){
+ if(csOpen!==null){var c=CASE_STUDIES[csOpen];
+  var lead=c.intro.replace(/\.\s+[A-Z][^]*$/,'.');
+  var note=c.stats.slice(2).filter(function(s){return !/improv|^pain$/i.test(s[0])&&!/renew|referr/i.test(s[0]+s[1])}).map(function(s){return s[0]+': '+s[1]}).join(' · ');
+  return '<section class="sec csread" style="padding-top:92px">'+
+   '<button class="bk" data-csback aria-label="Back to all case studies">&larr;</button>'+
+   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=1" alt="'+c.title+'" loading="eager"></div>'+
+   '<h1 class="cs-h1">'+c.title+'</h1>'+
+   '<figure class="cs-saying"><blockquote>'+c.quote+'</blockquote><figcaption>'+(c.attr||'In the client&rsquo;s own words')+'</figcaption></figure>'+
+   '<div class="cs-introbox"><p class="p cs-lead">'+lead+'</p></div>'+
+   '<div class="cs-hero"><b>'+c.metric[0]+'</b><span>'+c.metric[1]+'</span></div>'+
+   '<div class="cs-statgrid">'+c.stats.slice(0,2).map(function(s){return '<div class="cs-stat"><span class="k">'+s[0]+'</span><span class="v">'+s[1]+'</span></div>'}).join('')+'</div>'+
+   (note?'<p class="cs-note"><span class="cs-notek">Note</span> '+note+'</p>':'')+
+   '<div class="cs-comp"><span class="kick orange">The challenge</span><p class="p">'+c.challenge+'</p></div>'+
+   '<div class="cs-comp"><span class="kick">What we worked on</span><p class="p">'+c.worked+'</p></div>'+
+   '<div class="cs-comp"><span class="kick green">Outcomes</span><ul class="cs-out">'+c.outcomes.map(function(o){return '<li>'+o+'</li>'}).join('')+'</ul></div>'+
+   '<div class="cs-comp"><span class="kick green">Satisfaction scores</span><div class="cs-scores">'+c.scores.map(function(s){return '<div class="cs-score"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join('')+'</div></div>'+
+   '<div class="cs-comp"><span class="kick">Areas of care</span><div class="cs-tags">'+c.tags.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div>'+
+   '<div class="band blue" style="margin-top:28px"><span class="kick">See if we can help</span><div class="cardttl" style="margin-top:0">Find the right starting point in two minutes.</div><div style="margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></div></div>'+
+  '</section>'+footer();
  }
- var posts=BLOG_POSTS.map(function(p,i){return {p:p,i:i}}).filter(function(o){return (blogTab==='All'||o.p.filter===blogTab)&&(blogAud==='all'||o.p.audience===blogAud)});
- var filters=['All'].concat(BLOG_FILTERS);
- return heroBand('g-dusk','Blogs','Plain reading on<span class="it">ageing well.</span>','[PLACEHOLDER] A line on what the blog covers and who it is for.')+
- '<section class="sec"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'+AUDIENCES.map(function(a){var on=blogAud===a.key;return '<button class="card" data-aud="'+a.key+'" style="text-align:left;'+(on?'border-color:var(--green);background:#f1f9f5':'')+'"><span class="tag green">'+(on?'Showing':'Read as')+'</span><div class="cardttl" style="font-size:var(--fs-h4);margin:10px 0 4px">'+a.title+'</div><p class="p muted" style="margin:0;font-size:var(--fs-cap)">'+a.blurb+'</p><div class="link" style="margin-top:10px;border:none;padding:0;color:var(--green)">'+(on?'Clear filter':'Show these posts')+'</div></button>'}).join('')+'</div>'+
-   '<div class="chips">'+filters.map(function(f){return '<button class="chip'+(f===blogTab?' on':'')+'" data-blogf="'+f+'">'+f+'</button>'}).join('')+'</div>'+
-   '<div class="grid">'+posts.map(function(o){return '<button class="card" data-blogopen="'+o.i+'" style="text-align:left">'+slot('Post cover')+'<span class="tag green" style="margin-top:14px">'+o.p.filter+'</span><div class="cardttl">'+o.p.title+'</div><div class="link" style="margin-top:6px;border:none;padding:0">Read post '+ARR()+'</div></button>'}).join('')+'</div></section>'+
- '<section class="sec"><span class="kick">From our feed</span><h2 class="h2">Short videos you can follow along.</h2><div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'+[1,2,3,4].map(function(){return slot('Social embed','video')}).join('')+'</div></section>'+
+ var list=CASE_STUDIES.map(function(c,i){return {c:c,i:i}}).filter(function(o){return csSvc==='all'||svcOf(o.c).some(function(x){return x[0]===csSvc})});
+ return heroBand('g-home','','Real recoveries,<span class="it">in their own words.</span>','Eleven clients, from twenty years of knee pain to post-stroke rehab, who rebuilt strength, balance and confidence with care delivered at home.')+
+  '<section class="sec" style="padding-top:22px"><div class="chips">'+['All'].concat(SVC.map(function(x){return x[0]})).map(function(f){var k=(f==='All'?'all':f);return '<button class="chip'+(k===csSvc?' on':'')+'" data-cssvc="'+k+'">'+f+'</button>'}).join('')+'</div>'+
+   '<div class="csgrid">'+list.map(function(o){return csCard(o.c,o.i)}).join('')+'</div></section>'+
  footer()}
 
 /* ---- quiz ---- */
@@ -1221,7 +1456,7 @@ function render(){
  else if(parts[0]==='how-we-work') html=vHow();
  else if(parts[0]==='exercises') html=vExercises();
  else if(parts[0]==='about') html=vAbout();
- else if(parts[0]==='blogs') html=vBlogs();
+ else if(parts[0]==='case-studies') html=vCases();
  else if(isQuiz) html=vQuiz();
  else html=vHome();
  app.innerHTML=html;
@@ -1234,10 +1469,8 @@ function render(){
  else if(exCta){sticky.innerHTML='<button class="btn blue block" data-go="/quiz">Take the 2-Minute Quiz</button>';}
  else {sticky.innerHTML='<button class="btn block" data-go="/quiz">Book Trial</button>';}
  sticky.style.display=(isQuiz||isHome)?'none':'';
+ forceSolid=(parts[0]==='case-studies');
  scroller.scrollTop=0; onScroll();
- var jm=app.querySelector('.jmini');
- if(jm){jm.classList.add('pre');
-   new IntersectionObserver(function(es,o){if(es[0].isIntersecting){jm.classList.add('in');o.disconnect();}},{threshold:.3}).observe(jm);}
  app.querySelectorAll('.metricsC').forEach(function(mx){
    new IntersectionObserver(function(es,o){if(!es[0].isIntersecting)return;
      mx.classList.replace('pre','in');
@@ -1258,7 +1491,8 @@ function render(){
    dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});
  },{passive:true});}
 }
-function onScroll(){topbar.classList.toggle('solid', scroller.scrollTop>60);}
+var forceSolid=false;
+function onScroll(){topbar.classList.toggle('solid', forceSolid||scroller.scrollTop>60);}
 scroller.addEventListener('scroll',onScroll,{passive:true});
 
 /* delegated nav */
@@ -1266,10 +1500,9 @@ function go(to){ if(to.charAt(0)!=='/') to='/'+to; location.hash=to; }
 document.addEventListener('click',function(e){
  var g=e.target.closest('[data-go]'); if(g){e.preventDefault(); closeDrawer(); go(g.getAttribute('data-go')); return;}
  var ex=e.target.closest('[data-exf]'); if(ex){exFilter=ex.getAttribute('data-exf'); render(); return;}
- var bf=e.target.closest('[data-blogf]'); if(bf){blogTab=bf.getAttribute('data-blogf'); render(); return;}
- var ba=e.target.closest('[data-aud]'); if(ba){var k=ba.getAttribute('data-aud'); blogAud=(blogAud===k?'all':k); render(); return;}
- var bo=e.target.closest('[data-blogopen]'); if(bo){blogOpen=+bo.getAttribute('data-blogopen'); render(); return;}
- if(e.target.closest('[data-blogback]')){blogOpen=null; render(); return;}
+ var ba=e.target.closest('[data-cssvc]'); if(ba){csSvc=ba.getAttribute('data-cssvc'); render(); return;}
+ var bo=e.target.closest('[data-csopen]'); if(bo){csBackScroll=scroller.scrollTop; csOpen=+bo.getAttribute('data-csopen'); render(); return;}
+ if(e.target.closest('[data-csback]')){csOpen=null; render(); scroller.scrollTop=csBackScroll; return;}
  // quiz
  var qo=e.target.closest('[data-qopt]'); if(qo){var Q=QUESTIONS[qStep],v=qo.getAttribute('data-qopt');
    if(Q.multi){var a=qAns[qStep]||[];var ix=a.indexOf(v);if(ix>-1)a.splice(ix,1);else a.push(v);qAns[qStep]=a;render();}
