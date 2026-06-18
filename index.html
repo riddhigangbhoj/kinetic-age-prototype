@@ -200,6 +200,16 @@ button{font:inherit;cursor:pointer}
 .hero.scene h1 .it{color:var(--green)}
 .hero.scene .sub{color:var(--ink2)}
 .hero.scene .sub em{color:var(--green)}
+/* "backed by" — single horizontal marquee line */
+.herobackers{display:flex;align-items:center;gap:11px;margin-top:18px;position:relative;z-index:1}
+.bk-lead{flex:none;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.bk-marquee{position:relative;flex:1;min-width:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 86%,transparent)}
+.bk-track{display:flex;width:max-content;animation:bktrack 20s linear infinite}
+.bpill{flex:0 0 auto;display:inline-flex;align-items:center;white-space:nowrap;
+  font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--ink2)}
+.bpill::after{content:"";flex:none;width:3px;height:3px;border-radius:50%;background:rgba(19,38,90,.32);margin:0 12px}
+@keyframes bktrack{to{transform:translateX(-50%)}}
 .hero.scene .scrollcue{color:var(--muted)}
 .hero.scene .scrollcue i{background:linear-gradient(rgba(19,38,90,.5),transparent)}
 .hero.scene .btn.light,.hero.scene .btn.xl.light{background:var(--ink);color:#fff}
@@ -290,12 +300,18 @@ main{padding-bottom:96px}
 
 /* vetted team: equal-weight provider grid */
 /* team — specialty-coded provider cards */
-.team{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+/* providers: one horizontal scroll row, snap + hidden scrollbar, full-bleed so
+   the next card peeks past the screen edge and invites the swipe */
+.team{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  align-items:stretch;margin:24px -22px 0;padding:4px 22px 12px;scroll-padding-left:22px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.team::-webkit-scrollbar{display:none}
+.team>.pcard{flex:0 0 62%;scroll-snap-align:start}
 .pcard{position:relative;border-radius:20px;overflow:hidden;background:#fff;
   border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(40,70,150,.5)}
 .pphoto{position:relative;aspect-ratio:1/1;overflow:hidden}
 .pphoto::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,transparent 58%,rgba(255,255,255,.5))}
+  background:linear-gradient(180deg,transparent 50%,rgba(12,18,38,.62))}
 .pphoto img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .pcard.n .pphoto{background:linear-gradient(157deg,#eef1f7,#dfe6f1)}
 .pcard.g .pphoto{background:linear-gradient(157deg,#e7f5ef,#d2ebdf)}
@@ -303,12 +319,15 @@ main{padding-bottom:96px}
 .pcard.o .pphoto{background:linear-gradient(157deg,#fef0e6,#fbdfce)}
 .pbody{padding:13px 14px 16px}
 .pname{font-family:var(--fd);font-weight:480;font-size:var(--fs-h4);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
-.ptag{display:inline-block;margin-top:9px;font-size:var(--fs-micro);font-weight:700;
-  letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill)}
-.pcard.n .ptag{background:#eef1f7;color:var(--ink2)}
-.pcard.g .ptag{background:#e6f4ee;color:var(--green)}
-.pcard.b .ptag{background:#e9eefb;color:var(--blue)}
-.pcard.o .ptag{background:#fdeae0;color:var(--orange-ink)}
+/* role label: white caption over the bottom of the photo, lane-coloured dot, no pill */
+.ptag{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;display:inline-flex;align-items:center;
+  gap:8px;margin:0;font-size:var(--fs-micro);font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  line-height:1.1;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.ptag::before{content:"";width:7px;height:7px;border-radius:50%;flex:none}
+.pcard.n .ptag::before{background:#9db0ee}
+.pcard.g .ptag::before{background:#5fd0aa}
+.pcard.b .ptag::before{background:#86a6f2}
+.pcard.o .ptag::before{background:#f7a079}
 .pmeta{margin-top:10px;font-size:var(--fs-cap);color:var(--muted);line-height:1.45}
 
 /* testimonial — compact clipping: media is the header, metric floats across its edge */
@@ -385,21 +404,47 @@ main{padding-bottom:96px}
 .cell.o .ring-val{color:var(--orange-ink)}
 .cdesc{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.15em;color:var(--ink2);
   font-weight:600;text-align:center;line-height:1.5;max-width:15ch;opacity:.85}
-.cbase{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;
-  padding:15px 22px;border-radius:18px;border:1px solid rgba(255,255,255,.85);
+.cbase{position:relative;z-index:1;display:flex;align-items:stretch;gap:12px;margin-top:18px;
+  padding:16px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.85);
   background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.5));
   box-shadow:0 14px 30px -20px rgba(33,63,120,.55),inset 0 1px 0 rgba(255,255,255,.95)}
-.cbase .cbico{flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--green);opacity:.92}
-.cbase .cbico svg{width:30px;height:30px}
-.cbase .cbnum{position:relative;font-family:var(--fd);font-weight:500;font-size:clamp(36px,12vw,48px);
+.bstat{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.bstat+.bstat::before{content:"";position:absolute;left:-6px;top:8%;bottom:8%;width:1px;
+  background:linear-gradient(rgba(33,63,120,0),rgba(33,63,120,.16),rgba(33,63,120,0))}
+.cbase .cbnum{position:relative;font-family:var(--fd);font-weight:500;font-size:clamp(30px,9.5vw,42px);
   line-height:.85;letter-spacing:-.03em;color:var(--green);display:flex;align-items:baseline}
-.cbase .cbnum .mu{font-size:.4em;font-weight:500;margin-left:2px;transform:translateY(-.62em);display:inline-block}
-.cbase .mtxt{flex:0 1 auto;font-size:var(--fs-cap);line-height:1.45;letter-spacing:.1em;
+.cbase .cbnum .mu{font-size:.42em;font-weight:500;margin-left:2px;transform:translateY(-.62em);display:inline-block}
+.cbase .mtxt{font-size:var(--fs-cap);line-height:1.4;letter-spacing:.1em;text-align:center;
   text-transform:uppercase;color:var(--ink);font-weight:700;max-width:14ch}
 .metricsC.in .ring-fg{stroke-dashoffset:var(--off);transition:stroke-dashoffset 1.3s var(--ease) .15s}
 .metricsC.pre .cell,.metricsC.pre .cbase{opacity:0;transform:translateY(14px)}
 .metricsC.in .cell,.metricsC.in .cbase{opacity:1;transform:none;
   transition:opacity .6s var(--ease) var(--d),transform .6s var(--ease) var(--d)}
+
+/* stat strip under the hero — 2x2 echo of the metrics section */
+.statstrip{display:grid;grid-template-columns:1fr 1fr;position:relative;isolation:isolate;z-index:2;padding:4px 10px;
+  background:
+    radial-gradient(120% 95% at 12% -25%,rgba(255,255,255,.9),transparent 55%),
+    radial-gradient(90% 85% at 100% -15%,rgba(142,198,242,.5),transparent 62%),
+    linear-gradient(168deg,#dcf0fb 0%,#c4e6fa 55%,#aedaf4 100%);
+  border-bottom:1px solid rgba(255,255,255,.6);
+  box-shadow:0 12px 28px -24px rgba(19,38,90,.55),inset 0 1px 0 rgba(255,255,255,.82)}
+.statstrip::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;mix-blend-mode:overlay;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.4px);background-size:7px 7px}
+.statstrip .stat{position:relative;display:flex;align-items:center;gap:10px;padding:14px 8px;
+  opacity:0;transform:translateY(9px);animation:statin .55s var(--ease) forwards;animation-delay:calc(.12s + var(--i)*.07s)}
+.statstrip .stat:nth-child(odd)::after{content:"";position:absolute;right:-1px;top:12%;bottom:12%;width:2px;
+  background:linear-gradient(90deg,rgba(19,38,90,.26),rgba(255,255,255,.9));border-radius:2px}
+.statstrip .stat:nth-child(n+3)::before{content:"";position:absolute;left:7%;right:7%;top:-1px;height:2px;
+  background:linear-gradient(180deg,rgba(19,38,90,.24),rgba(255,255,255,.9));border-radius:2px}
+.stat-n{flex:none;font-family:var(--fd);font-weight:500;font-size:clamp(21px,6.2vw,27px);line-height:1;letter-spacing:-.025em;display:flex;align-items:baseline}
+.stat-n .stat-u{font-size:.5em;font-weight:500;margin-left:1px;transform:translateY(-.05em)}
+.stat-l{font-size:11px;line-height:1.22;color:var(--ink2);font-weight:500;max-width:13ch}
+.stat.b .stat-n{color:var(--blue)}
+.stat.o .stat-n{color:var(--orange-ink)}
+.stat.g .stat-n{color:var(--green)}
+.stat.n .stat-n{color:var(--ink)}
+@keyframes statin{to{opacity:1;transform:none}}
 
 /* condition breakdown card (v2 comparison) */
 .bcard{padding:18px}
@@ -470,20 +515,44 @@ main{padding-bottom:96px}
   .wrc:last-child{margin-bottom:0}.wdots{display:none}}
 
 /* five pillars: folding sticky-stack deck — each card slides up and covers the previous */
-.pstack{position:relative;padding:4px 0 0}
-.pscard{position:sticky;top:68px;border-radius:20px;overflow:hidden;
-  background:linear-gradient(140deg,rgba(255,255,255,.86),rgba(255,255,255,.68));border:1px solid var(--glass-line);
+/* pillars: a static fanned deck — cards overlap so each leaves a header strip,
+   the last card sits fully open at the bottom; tap a strip's chevron to lift it. */
+/* scroll-stacking deck (mobile): each card sticks as you scroll and the next rises
+   over it, leaving a ~62px header strip. Earlier cards are made taller (mobile block
+   below) so every card's bottom lands on the SAME line (top + height = 652px). With
+   equal margins they therefore hit the container's bottom edge at the SAME scroll
+   point: the assembled fan (doctor on top) holds for one short runway, then the WHOLE
+   deck releases and scrolls away as a single block, instead of the doctor peeling off
+   over the others. z-index ladder = doctor is the firm top; a lifted card jumps above
+   the stack and opens to its natural height. */
+.pstack{position:relative;padding:4px 0 clamp(140px,32vh,260px)}
+.pscard{position:sticky;top:68px;height:336px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(140deg,rgba(255,255,255,.92),rgba(255,255,255,.78));border:1px solid var(--glass-line);
   -webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
-  padding:18px 19px;min-height:336px;display:flex;flex-direction:column;margin-bottom:16px;text-decoration:none;
-  box-shadow:0 -14px 28px -20px rgba(20,32,107,.5),0 22px 44px -26px rgba(20,32,107,.5)}
+  padding:18px 19px;display:flex;flex-direction:column;cursor:pointer;margin-bottom:16px;
+  box-shadow:0 -14px 28px -20px rgba(20,32,107,.5),0 22px 44px -26px rgba(20,32,107,.5);
+  transition:box-shadow .3s var(--ease)}
+.pscard:nth-child(1){z-index:1}
+.pscard:nth-child(2){top:130px;z-index:2}
+.pscard:nth-child(3){top:192px;z-index:3}
+.pscard:nth-child(4){top:254px;z-index:4}
+.pscard:nth-child(5){top:316px;z-index:5}
+.pscard.lift{z-index:12;box-shadow:0 -14px 28px -20px rgba(20,32,107,.5),0 32px 62px -22px rgba(20,32,107,.6)}
+/* taller earlier cards so all five bottoms align (top+height=652) -> they release
+   together; extra height is hidden behind the next card, shown only when lifted.
+   mobile-only: the desktop grid keeps height:auto. */
+@media (max-width:1023px){
+  .pscard:nth-child(1){height:584px}
+  .pscard:nth-child(2){height:522px}
+  .pscard:nth-child(3){height:460px}
+  .pscard:nth-child(4){height:398px}
+  .pscard.lift{height:auto}
+}
 .ps-head{display:flex;gap:15px;align-items:flex-start}
-.pscard:last-child{margin-bottom:0}
-/* staggered stick: each card stops 62px lower, so every covered card
-   keeps a visible strip with its number + heading — a fanned deck */
-.pscard:nth-child(2){top:130px}
-.pscard:nth-child(3){top:192px}
-.pscard:nth-child(4){top:254px}
-.pscard:nth-child(5){top:316px}
+.ps-chevbtn{flex:none;margin:-4px -6px 0 auto;width:34px;height:34px;border:none;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.ps-chev{width:11px;height:11px;border-right:2.5px solid var(--ink2);border-bottom:2.5px solid var(--ink2);transform:translateY(-2px) rotate(45deg);transition:transform .3s var(--ease);opacity:.55}
+.pscard.lift .ps-chev{transform:translateY(2px) rotate(-135deg)}
+.pscard:last-child .ps-chevbtn{display:none}
 .ps-ico{width:50px;height:50px;border-radius:15px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff}
 .ps-ico.c1{background:linear-gradient(150deg,#5b73d6,#213f99)}
 .ps-ico.c2{background:linear-gradient(150deg,#2b54b0,#1f8c6a)}
@@ -491,7 +560,6 @@ main{padding-bottom:96px}
 .ps-ico.c4{background:linear-gradient(150deg,#f5824f,#c0392b)}
 .ps-ico.c5{background:linear-gradient(150deg,#2a4aa0,#16264f)}
 .ps-body{flex:1;min-width:0}
-.ps-num{font-family:var(--fd);font-weight:600;color:var(--orange-ink);font-size:var(--fs-ui);letter-spacing:.06em}
 .ps-name{font-family:var(--fd);font-weight:460;color:var(--ink);font-size:var(--fs-h3);line-height:1.1;margin-top:2px}
 .ps-desc{color:var(--muted);font-size:var(--fs-sm);line-height:1.5;margin-top:8px;max-width:42ch}
 .ps-visual{position:relative;flex:1 1 auto;min-height:118px;margin:16px -19px -18px;
@@ -684,9 +752,16 @@ main{padding-bottom:96px}
 .tline .w{color:var(--orange-ink);font-family:'Geist Mono',monospace;font-size:var(--fs-cap)}
 
 /* logos */
+.backed{display:flex;flex-direction:column;gap:26px}
 .logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .logo{flex:1 1 28%;min-width:90px;height:46px;border:1px solid var(--glass-line);border-radius:12px;display:grid;place-items:center;color:var(--faint);font-size:var(--fs-lbl);letter-spacing:.08em;text-transform:uppercase;
   background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.marquee{overflow:hidden;margin-top:12px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.mtrack{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.mtrack.rev{animation-direction:reverse}
+.mtrack .logo{flex:0 0 auto;width:124px;margin-right:10px}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
 /* footer */
 .foot{position:relative;isolation:isolate;overflow:hidden;color:var(--ink);
@@ -812,12 +887,41 @@ main{padding-bottom:96px}
   /* symptom-wheel cards stay in one horizontal row that scrolls, not a wrapping grid */
   .wsec .swipe{display:flex;gap:24px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
   .wsec .swipe>.card{flex:0 0 300px;width:auto;scroll-snap-align:start}
-  .team{grid-template-columns:repeat(4,1fr)}
+  /* providers stay one scroll row on desktop, sized cards within the column */
+  .team{margin:30px 0 0;padding:4px 0 14px;gap:22px;scroll-padding-left:0}
+  .team>.pcard{flex:0 0 262px}
   .lead-list{max-width:60ch}
 
-  /* five pillars: unfold the sticky deck into a real grid */
-  .pstack{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0}
-  .pscard{position:static;min-height:0;margin-bottom:0}
+  /* five pillars: editorial media-card grid (hero image + floating icon badge) */
+  .pstack{display:grid;grid-template-columns:repeat(6,1fr);gap:26px;padding:0;margin-top:34px}
+  .pscard{position:static;grid-column:span 2;height:auto;min-height:0;margin:0;
+    padding:0;overflow:hidden;border-radius:22px;border:1px solid rgba(20,32,107,.07);
+    background:#fff;display:flex;flex-direction:column;cursor:pointer;
+    box-shadow:0 1px 2px rgba(20,32,107,.04),0 20px 44px -30px rgba(20,32,107,.5);
+    transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+  .pscard:hover{transform:translateY(-7px);
+    box-shadow:0 2px 4px rgba(20,32,107,.06),0 40px 64px -34px rgba(20,32,107,.6)}
+  /* centre the bottom row so 5 cards read as 3 + 2, not 3 + orphan */
+  .pscard:nth-child(4){grid-column:2/4}
+  .pscard:nth-child(5){grid-column:4/6}
+  .pscard .ps-chevbtn{display:none}
+  /* image lifts to a full-bleed hero on top, with a soft base scrim */
+  .pscard .ps-visual{order:-1;margin:0;min-height:0;height:198px;padding:0;border-radius:0;
+    background:linear-gradient(160deg,#eef5f9,#dfeaf2)}
+  .pscard .ps-visual::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent 56%,rgba(13,24,68,.24))}
+  .pscard .ps-visual img{transition:transform .7s var(--ease)}
+  .pscard:hover .ps-visual img{transform:scale(1.06)}
+  /* body: icon badge straddles the image edge */
+  .pscard .ps-head{padding:22px 24px 26px;gap:15px;align-items:flex-start}
+  .pscard .ps-ico{width:54px;height:54px;border-radius:16px;margin-top:-50px;
+    position:relative;z-index:2;box-shadow:0 10px 22px -10px rgba(20,32,107,.55),0 0 0 4px #fff}
+  .pscard .ps-name{font-size:21px;margin-top:6px}
+  .pscard .ps-desc{font-size:14.5px;margin-top:9px}
+
+  /* "what happens when you reach out": steps left, video right */
+  .jvgrid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;margin-top:34px}
+  .jvgrid .jm2,.jvgrid .vblock{margin-top:0}
 
   /* metrics card: cap and center */
   .metsecC .metricsC{max-width:760px;margin-inline:auto}
@@ -966,10 +1070,11 @@ var TESTIMONIALS=[
  team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']}
 ];
 var PROVIDERS=[
- {name:'Dr. Arjun Mehta',role:'Medical oversight',edu:'MD, Internal Medicine',exp:'14 yrs',lane:'n',photo:'provider1-cut.png?v=3'},
- {name:'Kavya Nair',role:'Physiotherapist',edu:'MPT, Neuro-rehab',lane:'g',photo:'provider2-cut.png?v=3'},
- {name:'Rohan Iyer',role:'Strength & balance coach',exp:'9 yrs',lane:'b',photo:'provider3-cut.png?v=3'},
- {name:'Sneha Reddy',role:'Nutritionist',lane:'o',photo:'provider4-cut.png?v=3'}
+ {name:'Taseena Banu',role:'Medical oversight',lane:'n',photo:'taseena-real.png?v=1'},
+ {name:'Vighnesh R',role:'Physiotherapist',edu:'MPT, Neuro-rehab',lane:'g',photo:'vighnesh-cut.png?v=1'},
+ {name:'Vighnesh G',role:'Senior physical trainer',lane:'b',photo:'trainer2-cut.png?v=2'},
+ {name:'Sneha Reddy',role:'Nutritionist',lane:'o',photo:'provider4-cut.png?v=3'},
+ {name:'Ashfaqullah',role:'Senior physiotherapist',lane:'g',photo:'ashfaqullah-dr.png?v=1'}
 ];
 var ONBOARDING=[{t:'[PLACEHOLDER] Tell us what is going on',d:'[PLACEHOLDER] A short call or quiz to understand your situation, for you or a parent.'},{t:'[PLACEHOLDER] Home assessment',d:'[PLACEHOLDER] A provider visits and assesses in person.'},{t:'[PLACEHOLDER] You get a plan',d:'[PLACEHOLDER] A doctor-reviewed plan and a report for you and your family.'},{t:'[PLACEHOLDER] Ongoing sessions',d:'[PLACEHOLDER] Regular visits with progress you can see.'}];
 var JOURNEY=[
@@ -1151,11 +1256,11 @@ function journey(){return '<div class="journey">'+JOURNEY.map(function(p){
 function faqList(items){return '<div class="faq">'+items.map(function(f,i){return '<details'+(i===0?' open':'')+'><summary>'+f.q+'<span class="pm"></span></summary><div class="ans">'+f.a+'</div></details>'}).join('')+'</div>'}
 function pillars(){return '<div class="pillars">'+PILLARS.map(function(p){return '<a class="pillar" data-go="/services/'+p.slug+'"><span class="node">'+p.name[0]+'</span><span><h4>'+p.name+'</h4><p>'+p.blurb+'</p></span><span class="arr">'+ARR()+'</span></a>'}).join('')+'</div>'}
 var PS_ICONS=['<path d="M9.5 4h5v5h5v5h-5v5h-5v-5h-5V9h5z"></path>','<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"></path>','<path d="M5 19c-1-7 4-13 14-14 1 9-5 14-11 14"></path><path d="M6 18 13 11"></path>','<path d="M12 20c-4-2.4-7-5.4-7-9a3.6 3.6 0 0 1 7-1.4A3.6 3.6 0 0 1 19 11c0 3.6-3 6.6-7 9z"></path>','<path d="M6 3v4a4 4 0 0 0 8 0V3"></path><path d="M10 15a5 5 0 0 0 9 0v-3"></path><circle cx="19" cy="9" r="2"></circle>'];
-function pillarsStack(){return '<div class="pstack">'+PILLARS.map(function(p,i){return '<a class="pscard" data-go="/services/'+p.slug+'"><div class="ps-head"><span class="ps-ico c'+(i+1)+'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+PS_ICONS[i]+'</svg></span><div class="ps-body"><div class="ps-name">'+p.name+'</div><p class="ps-desc">'+p.blurb+'</p></div></div><div class="ps-visual">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" loading="lazy">':'<span>Visual</span>')+'</div></a>'}).join('')+'</div>'}
+function pillarsStack(){return '<div class="pstack">'+PILLARS.map(function(p,i){return '<div class="pscard" data-go="/services/'+p.slug+'"><div class="ps-head"><span class="ps-ico c'+(i+1)+'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+PS_ICONS[i]+'</svg></span><div class="ps-body"><div class="ps-name">'+p.name+'</div><p class="ps-desc">'+p.blurb+'</p></div><button class="ps-chevbtn" data-ps="'+i+'" aria-label="Reopen '+p.name+'"><span class="ps-chev"></span></button></div><div class="ps-visual">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" loading="lazy">':'<span>Visual</span>')+'</div></div>'}).join('')+'</div>'}
 function metricsRow3(){
  var R=52,C=2*Math.PI*R;
- var rings=[{lane:'b',pct:98,num:'<span class="m-num" data-count="98">0</span>',u:'%',l:'Customer satisfaction'},
-            {lane:'o',pct:33,num:'1 in 3',u:'',l:'Refer us to a friend or family'}];
+ var rings=[{lane:'b',pct:95,num:'<span class="m-num" data-count="95">0</span>',u:'%',l:'Customer satisfaction'},
+            {lane:'o',pct:80,num:'<span class="m-num" data-count="80">0</span>',u:'%',l:'See results within 45 days'}];
  var grad=function(lane){return '<defs><linearGradient id="grad'+(lane==='b'?'B':'O')+'" x1="0" y1="0" x2="1" y2="1">'+
    (lane==='b'?'<stop offset="0" stop-color="#3a63d6"/><stop offset="1" stop-color="#1a2f6e"/>'
              :'<stop offset="0" stop-color="#f7a06f"/><stop offset="1" stop-color="#c44e29"/>')+
@@ -1166,10 +1271,19 @@ function metricsRow3(){
    '<circle class="ring-fg" cx="60" cy="60" r="'+R+'" style="--c:'+C.toFixed(1)+';--off:'+off.toFixed(1)+'"></circle></svg>'+
    '<div class="ring-val">'+m.num+unit+'</div></div><div class="cdesc">'+m.l+'</div></div>';
  }).join('');
- var homeIco='<span class="cbico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.6V20h12V9.6"/><path d="M12 20v-4.2a1.8 1.8 0 0 1 3.6 0V20"/></svg></span>';
  return '<section class="sec metsecC"><h2 class="h2" style="margin-bottom:20px">Why families <span class="it">trust</span> us</h2><div class="metricsC pre"><div class="cring">'+cells+'</div>'+
-  '<div class="cbase" style="--d:260ms">'+homeIco+'<div class="cbnum"><span class="m-num" data-count="120">0</span><span class="mu">+</span></div>'+
-  '<div class="mtxt">Families cared for at home</div></div></div></section>';
+  '<div class="cbase" style="--d:260ms">'+
+   '<div class="bstat"><div class="cbnum"><span class="m-num" data-count="10000">0</span><span class="mu">+</span></div><div class="mtxt">Sessions delivered</div></div>'+
+   '<div class="bstat"><div class="cbnum"><span class="m-num" data-count="1000">0</span><span class="mu">+</span></div><div class="mtxt">Clients assessed</div></div>'+
+  '</div></div></section>';
+}
+function statStrip(){
+ var stats=[['95','%','Customer satisfaction','b'],
+            ['80','%','See results within 45 days','o'],
+            ['10,000','+','Sessions delivered','g'],
+            ['1,000','+','Clients assessed','n']];
+ return '<div class="statstrip">'+stats.map(function(s,i){return '<div class="stat '+s[3]+'" style="--i:'+i+'">'+
+  '<div class="stat-n">'+s[0]+'<span class="stat-u">'+s[1]+'</span></div><div class="stat-l">'+s[2]+'</div></div>'}).join('')+'</div>';
 }
 function reframe(eb,ttl,intro,reasons){return '<div class="reframe">'+(eb?'<span class="kick orange">'+eb+'</span>':'')+'<h2 class="h2">'+ttl+'</h2>'+(intro?'<p class="p">'+intro+'</p>':'')+(reasons?'<div class="r-list">'+reasons.map(function(r,i){return '<div class="r-row"><span class="n">0'+(i+1)+'</span><span>'+r+'</span></div>'}).join('')+'</div>':'')+'</div>'}
 function heroTall(){
@@ -1187,6 +1301,12 @@ function heroTall(){
   '<div class="hcta col">'+
     '<button class="btn light xl block" data-go="/quiz">Book a trial</button>'+
     '<a class="hlink" data-go="/how-we-work">See how we work</a>'+
+  '</div>'+
+  '<div class="herobackers">'+
+    '<span class="bk-lead">Operators from</span>'+
+    '<div class="bk-marquee"><div class="bk-track">'+
+      (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
+    '</div></div>'+
   '</div>'+
  '</section>'}
 function heroBand(g,eyebrow,h1,sub,cta){
@@ -1265,9 +1385,18 @@ function footer(){
   '<h5>Contact</h5><a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'">WhatsApp us</a><a href="#">[PLACEHOLDER] phone</a><a href="#">[PLACEHOLDER] email</a><a href="#">[PLACEHOLDER] city</a>'+
   '<div class="fbot"><span>&copy; Kinetic Age [PLACEHOLDER]</span><span>[PLACEHOLDER] Privacy &middot; Terms</span></div></footer>'}
 
+function backedBy(){
+ var row=function(n,rev){var items=Array.from({length:n},function(_,i){return '<div class="logo">Logo '+(i+1)+'</div>'}).join('');
+   return '<div class="marquee"><div class="mtrack'+(rev?' rev':'')+'">'+items+items+'</div></div>'};
+ return '<section class="sec"><div class="backed">'+
+  '<div class="bgroup"><span class="kick">Backed by</span>'+row(6,false)+'</div>'+
+  '<div class="bgroup"><span class="kick">Operators from</span>'+row(6,true)+'</div></div></section>';
+}
+
 /* ===================== VIEWS ===================== */
 function vHome(){
  return heroTall()+
+ statStrip()+
  '<section class="sec"><h2 class="h2">What our <span class="it">members</span> say</h2>'+
    '<div class="swipe">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">See what all conditions we treat</a></div>'+
@@ -1276,6 +1405,10 @@ function vHome(){
    '<div class="swipe">'+WHEELS.map(wheelCard).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">Understand your condition</a></div>'+
  '</section>'+
+ '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
+   '<div class="jvgrid">'+journeyMini2()+videoBlock()+'</div>'+
+   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
+ '</section>'+
  '<section class="sec">'+
    '<h2 class="h2" style="max-width:16ch">Why recovery feels long</h2>'+
    '<p class="p muted" style="max-width:40ch">A trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
@@ -1283,16 +1416,11 @@ function vHome(){
    pillarsStack()+'<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">The team behind <span class="it">your plan</span></h2><p class="p muted">Each specialist is chosen for their experience with older adults, and they all work from the same plan.</p>'+
-   '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"></div><div class="pbody"><div class="pname">'+p.name+'</div><span class="ptag">'+p.role+'</span>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'+
+   '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"><span class="ptag">'+p.role+'</span></div><div class="pbody"><div class="pname">'+p.name+'</div>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/about">Meet the team</a></div>'+
  '</section>'+
- '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
-   journeyMini2()+
-   videoBlock()+
-   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
- '</section>'+
  metricsRow3()+
- '<section class="sec"><h2 class="h2">Backed by | operators from</h2><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
+ backedBy()+
  socialStrip()+
  '<section class="sec"><h2 class="h2">The things families ask first</h2><div style="margin-top:22px">'+faqList(HOME_FAQS)+'</div></section>'+
  footer()}
@@ -1358,7 +1486,7 @@ function vAbout(){
  '<section class="sec"><span class="kick">Our journey</span><h2 class="h2">A short history.</h2><div class="steps tline">'+HISTORY.map(function(j){return '<div class="step"><span class="w">'+j.y+'</span><div><h4>'+j.t+'</h4></div></div>'}).join('')+'</div></section>'+
  '<section class="sec">'+slot('Team group photo')+'</section>'+
  '<section class="sec"><span class="kick">From the founder</span><h2 class="h2">Why we keep it personal.</h2>'+slot('Founder&rsquo;s message','video')+'<p class="p muted">[PLACEHOLDER] A short framing of the founder’s message in the video.</p></section>'+
- '<section class="sec"><h2 class="h2">Backed by | operators from</h2><div class="logos">'+[1,2,3,4,5].map(function(i){return '<div class="logo">Logo '+i+'</div>'}).join('')+'</div></section>'+
+ backedBy()+
  '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">[PLACEHOLDER] One reassuring line before the trial ask.</p><button class="btn" data-go="/quiz">Book Trial</button></section>'+
  footer()}
 
@@ -1477,7 +1605,7 @@ function render(){
      mx.querySelectorAll('[data-count]').forEach(function(el){
        var t=+el.getAttribute('data-count'),dur=1000,s=null;
        (function tick(ts){if(s===null)s=ts;var p=Math.min((ts-s)/dur,1);
-         el.textContent=Math.round((1-Math.pow(1-p,3))*t);
+         el.textContent=Math.round((1-Math.pow(1-p,3))*t).toLocaleString('en-US');
          if(p<1)requestAnimationFrame(tick);})(performance.now());
      });
      o.disconnect();
@@ -1498,6 +1626,9 @@ scroller.addEventListener('scroll',onScroll,{passive:true});
 /* delegated nav */
 function go(to){ if(to.charAt(0)!=='/') to='/'+to; location.hash=to; }
 document.addEventListener('click',function(e){
+ var ps=e.target.closest('[data-ps]'); if(ps){e.stopPropagation();var card=ps.closest('.pscard'),lifted=card.classList.contains('lift');
+   card.parentElement.querySelectorAll('.pscard.lift').forEach(function(c){c.classList.remove('lift');});
+   if(!lifted)card.classList.add('lift'); return;}
  var g=e.target.closest('[data-go]'); if(g){e.preventDefault(); closeDrawer(); go(g.getAttribute('data-go')); return;}
  var ex=e.target.closest('[data-exf]'); if(ex){exFilter=ex.getAttribute('data-exf'); render(); return;}
  var ba=e.target.closest('[data-cssvc]'); if(ba){csSvc=ba.getAttribute('data-cssvc'); render(); return;}
