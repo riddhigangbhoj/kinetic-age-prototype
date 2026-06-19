@@ -169,6 +169,32 @@ button{font:inherit;cursor:pointer}
 .hlink:active{text-decoration-color:#fff}
 .hero.tall.top .hcta{margin-top:auto}
 .hero.tall.top .scrollcue{margin-top:16px;justify-content:center;padding-top:0}
+/* home hero, brochure style: full-bleed photos crossfading under the dark scrim, white text on top */
+.hero.photo .herophoto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 26%}
+.hero.photo .figFeel,.hero.photo .figMove,.hero.photo .figEat{opacity:0;animation:heroXfade 21s infinite ease-in-out}
+.hero.photo .figMove{animation-delay:-14s}
+.hero.photo .figEat{animation-delay:-7s}
+.hero.photo .herolabel{position:absolute;left:50%;top:52%;z-index:1;transform:translateX(-50%);
+  font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);color:#fff;
+  background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.34);padding:8px 20px;border-radius:999px;white-space:nowrap;
+  pointer-events:none;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.28);
+  animation:heroLabelX 21s infinite ease-in-out}
+.hero.photo .labMove{animation-delay:-14s}
+.hero.photo .labEat{animation-delay:-7s}
+/* light sky tint behind the top heading + logo: a soft blue wash that keeps the sky reading light while holding just enough contrast for white text */
+.hero.photo .herosky{position:absolute;left:0;right:0;top:0;height:60%;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(70,104,168,.55) 0%,rgba(120,158,212,.36) 28%,rgba(165,196,235,.2) 50%,rgba(220,180,130,.12) 72%,transparent 100%)}
+/* lighter scrim top for the photo hero so the sky shows through; keep the bottom dark for the CTAs */
+.hero.photo .scrim{background:linear-gradient(180deg,rgba(10,16,30,.4),rgba(10,16,30,.12) 26%,rgba(10,10,16,.12) 55%,rgba(8,6,4,.72) 100%)}
+@keyframes heroXfade{0%{opacity:1}25%{opacity:1}33.33%{opacity:0}91.66%{opacity:0}100%{opacity:1}}
+@keyframes heroLabelX{
+  0%{opacity:1;transform:translateX(-50%) translateY(0)}
+  25%{opacity:1;transform:translateX(-50%) translateY(0)}
+  33.33%{opacity:0;transform:translateX(-50%) translateY(-8px)}
+  91.66%{opacity:0;transform:translateX(-50%) translateY(-8px)}
+  100%{opacity:1;transform:translateX(-50%) translateY(0)}}
+#app[data-page="home"] .hero.photo .btn.light{background:#fff;color:var(--ink);border:none}
 /* home hero: green-blue theme with a zoomed cut-out figure that morphs across the move/eat/feel pillars. scoped so other gradient heroes are untouched */
 .hero.scene{color:var(--ink)}
 .hero.scene .bgslide.scenebg{opacity:1;animation:none;background:
@@ -217,6 +243,11 @@ button{font:inherit;cursor:pointer}
   font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--ink2)}
 .bpill::after{content:"";flex:none;width:3px;height:3px;border-radius:50%;background:rgba(19,38,90,.32);margin:0 12px}
 @keyframes bktrack{to{transform:translateX(-50%)}}
+/* operators marquee sitting snug under the team cards, sized up a touch */
+.team-backers{margin-top:14px;gap:13px}
+.team-backers .bk-lead{font-size:10.5px}
+.team-backers .bpill{font-size:14px}
+.team-backers .bpill::after{width:3.5px;height:3.5px;margin:0 13px}
 .hero.scene .scrollcue{color:var(--muted)}
 .hero.scene .scrollcue i{background:linear-gradient(rgba(19,38,90,.5),transparent)}
 .hero.scene .btn.light,.hero.scene .btn.xl.light{background:var(--ink);color:#fff}
@@ -429,28 +460,15 @@ main{padding-bottom:96px}
   transition:opacity .6s var(--ease) var(--d),transform .6s var(--ease) var(--d)}
 
 /* stat strip under the hero — 2x2 echo of the metrics section */
-.statstrip{display:grid;grid-template-columns:1fr 1fr;position:relative;isolation:isolate;z-index:2;padding:4px 10px;
-  background:
-    radial-gradient(120% 95% at 12% -25%,rgba(255,255,255,.9),transparent 55%),
-    radial-gradient(90% 85% at 100% -15%,rgba(142,198,242,.5),transparent 62%),
-    linear-gradient(168deg,#dcf0fb 0%,#c4e6fa 55%,#aedaf4 100%);
-  border-bottom:1px solid rgba(255,255,255,.6);
-  box-shadow:0 12px 28px -24px rgba(19,38,90,.55),inset 0 1px 0 rgba(255,255,255,.82)}
-.statstrip::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;mix-blend-mode:overlay;
-  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.4px);background-size:7px 7px}
-.statstrip .stat{position:relative;display:flex;align-items:center;gap:10px;padding:14px 8px;
+.statstrip{display:grid;grid-template-columns:1fr 1fr;position:relative;isolation:isolate;z-index:2;padding:8px 16px;background:#fff}
+.statstrip .stat{position:relative;display:flex;align-items:center;gap:12px;padding:16px 8px;
   opacity:0;transform:translateY(9px);animation:statin .55s var(--ease) forwards;animation-delay:calc(.12s + var(--i)*.07s)}
-.statstrip .stat:nth-child(odd)::after{content:"";position:absolute;right:-1px;top:12%;bottom:12%;width:2px;
-  background:linear-gradient(90deg,rgba(19,38,90,.26),rgba(255,255,255,.9));border-radius:2px}
-.statstrip .stat:nth-child(n+3)::before{content:"";position:absolute;left:7%;right:7%;top:-1px;height:2px;
-  background:linear-gradient(180deg,rgba(19,38,90,.24),rgba(255,255,255,.9));border-radius:2px}
-.stat-n{flex:none;font-family:var(--fd);font-weight:500;font-size:clamp(21px,6.2vw,27px);line-height:1;letter-spacing:-.025em;display:flex;align-items:baseline}
-.stat-n .stat-u{font-size:.5em;font-weight:500;margin-left:1px;transform:translateY(-.05em)}
-.stat-l{font-size:11px;line-height:1.22;color:var(--ink2);font-weight:500;max-width:13ch}
-.stat.b .stat-n{color:var(--blue)}
-.stat.o .stat-n{color:var(--orange-ink)}
-.stat.g .stat-n{color:var(--green)}
-.stat.n .stat-n{color:var(--ink)}
+.statstrip .stat:nth-child(odd)::after{content:"";position:absolute;right:0;top:10%;bottom:10%;width:1px;background:var(--line)}
+.statstrip .stat:nth-child(n+3)::before{content:"";position:absolute;left:6%;right:6%;top:0;height:1px;background:var(--line)}
+.stat-n{flex:none;font-family:var(--fd);font-weight:600;font-size:clamp(23px,6.8vw,30px);line-height:1;letter-spacing:-.025em;color:var(--orange-ink);display:flex;align-items:baseline}
+.stat-n .stat-u{font-size:.5em;font-weight:600;margin-left:1px;transform:translateY(-.5em)}
+.stat-n .stat-u.plus{color:var(--green)}
+.stat-l{font-size:12px;line-height:1.22;color:var(--ink);font-weight:500;max-width:13ch}
 @keyframes statin{to{opacity:1;transform:none}}
 
 /* condition breakdown card (v2 comparison) */
@@ -517,6 +535,43 @@ main{padding-bottom:96px}
   7%,28%{transform:scale(1.4);background:var(--don)}}
 .wcap{font-family:var(--satoshi);font-style:italic;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2);margin-top:18px;padding-top:15px;border-top:1px solid rgba(40,70,150,.1)}
 .wcap-out{margin:18px auto 0;max-width:36ch;text-align:center;font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);line-height:1.4;color:var(--ink2)}
+/* full-screen vertical reel player */
+.t2-media{cursor:pointer}
+.t2-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;z-index:0}
+.t2-scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(8,12,22,.42),transparent 24%,transparent 50%,rgba(8,10,18,.76) 100%)}
+.reel{position:fixed;inset:0;z-index:300;background:#04060c;display:flex;align-items:center;justify-content:center;animation:reelIn .22s ease}
+@keyframes reelIn{from{opacity:0}to{opacity:1}}
+.reel-stage{position:relative;width:100%;height:100%;max-width:480px;background:#000;overflow:hidden}
+.reel-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.reel-top{position:absolute;top:0;left:0;right:0;height:130px;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);pointer-events:none;z-index:2}
+.reel-bot{position:absolute;bottom:0;left:0;right:0;height:320px;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent);pointer-events:none;z-index:2}
+.reel-prog{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.25);z-index:5}
+.reel-prog i{display:block;height:100%;width:0;background:#fff}
+.reel-tap{position:absolute;inset:0;z-index:3;background:none;border:none;cursor:pointer}
+.reel-btn{position:absolute;top:16px;width:40px;height:40px;padding:9px;border-radius:50%;border:none;z-index:5;
+  background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;cursor:pointer}
+.reel-btn svg{width:100%;height:100%;display:block}
+.reel-x{right:16px}.reel-mute{left:16px}.reel-cc{left:64px}
+.reel-cc{opacity:.5}.reel-cc.on{opacity:1;background:rgba(255,255,255,.28)}
+.reel-cc-line{position:absolute;left:20px;right:20px;bottom:148px;z-index:4;text-align:center;color:#fff;
+  font-size:18px;line-height:1.4;text-shadow:0 1px 8px rgba(0,0,0,.85);pointer-events:none}
+.reel-info{position:absolute;left:20px;right:20px;bottom:34px;z-index:4;color:#fff}
+.reel-name{font-family:var(--fd);font-size:23px;line-height:1.1}
+.reel-sub{font-size:13px;opacity:.82;margin-top:3px}
+.reel-chip{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:8px 13px;border-radius:999px;
+  font-size:13px;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.reel-chip s{opacity:.7}.reel-chip b{font-weight:700}.reel-chip em{font-style:normal;color:#9be3c2;font-weight:700}
+.reel-end{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;justify-content:center;align-items:center;
+  gap:14px;padding:34px;text-align:center;color:#fff;background:rgba(4,6,12,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.reel-end.show{display:flex;animation:reelIn .25s ease}
+.reel-end-k{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#9be3c2;font-weight:700}
+.reel-end h3{font-family:var(--fd);font-weight:430;font-size:26px;line-height:1.2;margin:2px 0 10px;max-width:18ch}
+/* clips with their own burned-in lower-third: lift our chrome to the top, leave the bottom clear */
+.reel-baked .reel-info{top:66px;bottom:auto}
+.reel-baked .reel-top{height:230px}
+.reel-baked .reel-bot{display:none}
+.reel-end .btn.block{width:100%;max-width:300px}
+.reel-replay{margin-top:6px;background:none;border:none;color:rgba(255,255,255,.8);font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   .wphoto{animation:none}
   .wdeck{height:auto}.wrc{position:relative;inset:auto;height:152px;opacity:1;animation:none;margin-bottom:12px;transform:none}
@@ -526,13 +581,10 @@ main{padding-bottom:96px}
 /* pillars: a static fanned deck — cards overlap so each leaves a header strip,
    the last card sits fully open at the bottom; tap a strip's chevron to lift it. */
 /* scroll-stacking deck (mobile): each card sticks as you scroll and the next rises
-   over it, leaving a ~62px header strip. Earlier cards are made taller (mobile block
-   below) so every card's bottom lands on the SAME line (top + height = 652px). With
-   equal margins they therefore hit the container's bottom edge at the SAME scroll
-   point: the assembled fan (doctor on top) holds for one short runway, then the WHOLE
-   deck releases and scrolls away as a single block, instead of the doctor peeling off
-   over the others. z-index ladder = doctor is the firm top; a lifted card jumps above
-   the stack and opens to its natural height. */
+   over it, leaving a ~62px header strip. All five cards share one height, so as the
+   deck releases the cards peel off one at a time (top card first). z-index ladder =
+   doctor is the firm top; a lifted card jumps above the stack and opens to its
+   natural height. */
 .pstack{position:relative;padding:4px 0 clamp(140px,32vh,260px)}
 .pscard{position:sticky;top:68px;height:336px;border-radius:20px;overflow:hidden;
   background:linear-gradient(140deg,rgba(255,255,255,.92),rgba(255,255,255,.78));border:1px solid var(--glass-line);
@@ -546,14 +598,10 @@ main{padding-bottom:96px}
 .pscard:nth-child(4){top:254px;z-index:4}
 .pscard:nth-child(5){top:316px;z-index:5}
 .pscard.lift{z-index:12;box-shadow:0 -14px 28px -20px rgba(20,32,107,.5),0 32px 62px -22px rgba(20,32,107,.6)}
-/* taller earlier cards so all five bottoms align (top+height=652) -> they release
-   together; extra height is hidden behind the next card, shown only when lifted.
-   mobile-only: the desktop grid keeps height:auto. */
+/* all five cards share one height; staggered tops still leave equal header
+   strips, so the deck peels one card at a time as you scroll. lift opens a
+   card to its natural height. */
 @media (max-width:1023px){
-  .pscard:nth-child(1){height:584px}
-  .pscard:nth-child(2){height:522px}
-  .pscard:nth-child(3){height:460px}
-  .pscard:nth-child(4){height:398px}
   .pscard.lift{height:auto}
 }
 .ps-head{display:flex;gap:15px;align-items:flex-start}
@@ -825,6 +873,8 @@ main{padding-bottom:96px}
   .hero.tall .bgslide{animation:none}.hero.tall .bgslide:nth-child(1){opacity:1}
   .hero.scene .herofig{animation:none}.hero.scene .figB,.hero.scene .figC{opacity:0}
   .hero.scene .herolabel{animation:none}.hero.scene .labA{opacity:1}.hero.scene .labB,.hero.scene .labC{opacity:0}
+  .hero.photo .herophoto{animation:none}.hero.photo .figMove,.hero.photo .figEat{opacity:0}.hero.photo .figFeel{opacity:1}
+  .hero.photo .herolabel{animation:none}.hero.photo .labFeel{opacity:1}.hero.photo .labMove,.hero.photo .labEat{opacity:0}
   .scrollcue i{animation:none}.scroll{scroll-behavior:auto}
 }
 
@@ -1144,24 +1194,6 @@ main{padding-bottom:96px}
 .pc-foot{margin-top:16px;font-size:var(--fs-sm);line-height:1.45;color:var(--ink2)}
 .jw-pricing .jw-cta{margin-top:18px}
 .jw-btns{display:flex;flex-direction:column;gap:10px}
-/* how-we-work v3 — each point is a full-screen swipe panel */
-.scroll.jw3snap{scroll-snap-type:y mandatory}
-#app[data-page="how-we-work-3"]{padding-bottom:0}
-.jw3-panel{min-height:100%;scroll-snap-align:start;scroll-snap-stop:always;
-  display:flex;flex-direction:column;padding:78px 22px 26px;position:relative}
-.jw3-body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
-.jw3-body .jw-lead{margin-top:14px}
-.jw3nav{padding-top:18px}
-/* cover panel */
-.jw3-cover{justify-content:flex-end;color:#fff;overflow:hidden;isolation:isolate;padding-bottom:44px}
-.jw3-cover .bgslide{position:absolute;inset:0;z-index:-2}
-.jw3-cover:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(12,18,42,.2),rgba(12,18,42,.58))}
-.jw3-cover h1{font-family:var(--fd);font-weight:430;font-size:clamp(34px,9vw,46px);line-height:1.04;letter-spacing:-.012em;text-shadow:0 1px 24px rgba(0,0,0,.3)}
-.jw3-cover h1 .it{font-style:italic;color:#f7a172}
-.jw3-cover p{margin-top:12px;font-size:var(--fs-sm);line-height:1.5;color:rgba(255,255,255,.88);max-width:30ch}
-.jw3-cue{margin-top:22px;display:flex;align-items:center;gap:9px;font-size:var(--fs-lbl);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-.jw3-cue:before{content:'';width:24px;height:1px;background:rgba(255,255,255,.6)}
-
 @media (prefers-reduced-motion:reduce){
   .vcard,.vc-bars i,.vc-bp path.ln,.vc-bp circle,.vc-paper{animation:none;opacity:1;transform:none}
   .vc-bars i{transform:scaleY(1)} .vc-bp path.ln{stroke-dashoffset:0} .vc-paper{transform:rotateY(-13deg) rotateX(3deg)}
@@ -1225,6 +1257,24 @@ main{padding-bottom:96px}
   .hero.scene{padding-right:48%}
   .hero.scene .herofig{left:auto;width:52%;height:100%}
   .hero.scene .herolabel{left:74%;top:34%}
+  /* home photo hero: dark text panel on the left, full-height morphing photo on the right */
+  .hero.photo{min-height:58vh;padding-top:0;padding-bottom:0;padding-right:52%;justify-content:center;
+    background:linear-gradient(140deg,#10203c 0%,#17294f 55%,#0d1a33 100%)}
+  .hero.photo .bgwrap{left:0;right:0;width:100%;height:100%}
+  .hero.photo .herophoto{object-position:50% 32%}
+  .hero.photo .figFeel{object-position:50% 50%}
+  .hero.photo .figMove{object-position:50% 50%}
+  .hero.photo .figEat{object-position:50% 50%}
+  .hero.photo .scrim{left:0;right:0;width:100%;z-index:-1;
+    -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
+    background:linear-gradient(90deg,rgba(11,22,50,.94) 0%,rgba(11,22,50,.66) 26%,rgba(11,22,50,0) 50%);
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 52%);
+            mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 52%)}
+  .hero.photo .herosky,.hero.photo .grain{display:none}
+  .hero.photo .herolabel{left:auto;right:7%;top:auto;bottom:8%;transform:none}
+  .hero.photo h1{font-size:clamp(40px,3.5vw,56px);color:#fff;text-shadow:none;max-width:14ch}
+  .hero.photo .sub{color:rgba(255,255,255,.82);max-width:40ch}
+  .hero.photo .hlink{color:rgba(255,255,255,.9)}
   .hero .hcta.col{flex-direction:row;width:auto;align-items:center;gap:16px}
   .hero .hcta.col .btn.block{width:auto}
   .hero .hlink{align-self:center}
@@ -1313,9 +1363,8 @@ main{padding-bottom:96px}
     <nav class="dn-links">
       <a data-go="/conditions">Conditions</a>
       <a data-go="/how-we-work">How We Work</a>
-      <a data-go="/how-we-work-2">How We Work v2</a>
-      <a data-go="/how-we-work-3">How We Work v3</a>
-      <a data-go="/exercises">Exercises</a>
+      <a data-go="/pricing">Plans &amp; Pricing</a>
+      <a data-go="/stories">Stories</a>
       <a data-go="/about">About</a>
       <a data-go="/case-studies">Case studies</a>
     </nav>
@@ -1344,9 +1393,8 @@ main{padding-bottom:96px}
       </div>
       <a data-go="/conditions">Conditions</a>
       <a data-go="/how-we-work">How We Work</a>
-      <a data-go="/how-we-work-2">How We Work v2</a>
-      <a data-go="/how-we-work-3">How We Work v3</a>
-      <a data-go="/exercises">Exercises</a>
+      <a data-go="/pricing">Plans &amp; Pricing</a>
+      <a data-go="/stories">Stories</a>
       <a data-go="/about">About</a>
       <a data-go="/case-studies">Case studies</a>
       <div class="grp">Services</div>
@@ -1369,7 +1417,7 @@ var lc=function(s){return s.charAt(0).toLowerCase()+s.slice(1)};
 var PILLARS=[
  {slug:'physiotherapy',name:'Physiotherapy',photo:'physio-warm.png',blurb:'We guide and care for you through your condition, at home, until you are ready for physical training.',who:'[PLACEHOLDER] For older adults with joint pain, stiffness, or recovery needs.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']},
  {slug:'strength-training',name:'Physical Training',photo:'training-warm.png',blurb:'We help you rebuild the strength and confidence you had before.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain']},
- {slug:'nutrition',name:'Nutrition',photo:'nutrition-img.png?v=4',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
+ {slug:'nutrition',name:'Nutrition',photo:'nutrition-img.png?v=4',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste, with daily tracking.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
  {slug:'mental-wellness',name:'Emotional Wellbeing',photo:'emotional-wellbeing.png',blurb:'Someone to listen in the hard moments and walk with you, so the journey keeps moving.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls']},
  {slug:'doctor-oversight',name:'Doctor Oversight',photo:'doctor-oversight.png?v=2',blurb:'One personal doctor watching every part, adjusting your plan as you progress.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']}
 ];
@@ -1409,7 +1457,7 @@ var HOME_FAQS=[{q:'[PLACEHOLDER] How does the first visit work?',a:'[PLACEHOLDER
 var CONDITIONS_FAQS=[{q:'[PLACEHOLDER] My parent’s condition is not listed. Can you help?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you treat more than one condition at once?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How do you decide what to focus on?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Is a diagnosis required to start?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can the plan change over time?',a:'[PLACEHOLDER]'}];
 var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
 var TESTIMONIALS=[
-{slug:'knee-pain',name:'Mrs. Sharma',age:68,her:'her',label:'Knee pain',storyLen:'0:14',lane:'green',
+{slug:'knee-pain',name:'Mrs. Sharma',age:68,her:'her',label:'Knee pain',storyLen:'0:58',lane:'green',video:'sharma-testimonial.mp4',bakedCC:true,poster:'sharma-poster.jpg',
  metric:{k:'Knee flexion',before:'95&deg;',after:'132&deg;',delta:'+37&deg;'},
  quote:'I used to climb stairs sideways. Now I walk to the temple every morning before the sun is up.',
  lead:{name:'Vikram Shetty',role:'Senior Physiotherapist'},leadIdx:0,
@@ -1437,11 +1485,11 @@ var JOURNEY=[
  {n:'01',node:'',short:'Assessment',mini:'An <em>at-home</em> assessment to understand the full picture',title:'A thorough assessment, and your report',
   lead:'We begin with a deep, in-person assessment, then send you a clear report of exactly where you stand.',
   list:['A detailed assessment of the condition and daily life','A written report you and your family can read']},
- {n:'02',node:'g',short:'The plan',mini:'A plan built around <em>your health, your home, your routine</em>',title:'A hyper-personalised plan',
+ {n:'02',node:'g',short:'The plan',mini:'A personalised plan built around <em>your health, your home, your routine</em>',title:'A hyper-personalised plan',
   lead:'Our experts weigh every parameter and build the one plan most suited to you and your condition.',
   chips:[['Nutrition meal plan','warm'],['Exercise plan','green'],['Doctor consultation','']],
   list:['Every parameter considered, never a template','One connected plan, built around the condition']},
- {n:'03',node:'o',short:'Daily care',mini:'<em>Daily</em> sessions and regular nutrition check-ins',title:'We execute it, every day',
+ {n:'03',node:'o',short:'Daily care',mini:'We run <em>daily</em> sessions and regular nutrition check-ins, and own the outcome',title:'We execute it, every day',
   lead:'Once the plan is live we run it with you and track everything at the right rhythm.',
   cadence:[['Daily','d','Meal tracking'],['Weekly','w','Multiple physiotherapy &amp; physical-training sessions'],['Weekly','w','Follow-up call on the meals'],['Monthly','m','Doctor check-in &amp; plan update'],['Ongoing','o','Emotional wellbeing, tracked throughout']],
   callout:'We never let you or your family be left alone worrying. We execute, and we own every outcome.',
@@ -1564,7 +1612,7 @@ var CASE_STUDIES=[
   tags:['Knee pain','Ankle & foot pain','Strength training','Balance & gait','IBS','Home physiotherapy'],
   metric:['Improved','over 49 sessions']}
 ];
-var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, steady and independent.',blurb:'[PLACEHOLDER] When there is no one condition to name, start with free guided movement and a two-minute check.',to:'/exercises'};
+var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, steady and independent.',blurb:'[PLACEHOLDER] When there is no one condition to name, start with a two-minute check, and see how other families got there.',to:'/stories'};
 var condBy=function(s){for(var i=0;i<CONDITIONS.length;i++)if(CONDITIONS[i].slug===s)return CONDITIONS[i];return null};
 var pillarBy=function(s){for(var i=0;i<PILLARS.length;i++)if(PILLARS[i].slug===s)return PILLARS[i];return null};
 
@@ -1583,12 +1631,12 @@ var SOCIAL=[
  {name:'X',url:'#',icon:'<path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.01 4.13H5.04l12.04 15.64z"/>'},
  {name:'YouTube',url:'#',icon:'<path d="M23.5 7.2a3 3 0 0 0-2.1-2.12C19.5 4.55 12 4.55 12 4.55s-7.5 0-9.4.53A3 3 0 0 0 .5 7.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.12c1.9.53 9.4.53 9.4.53s7.5 0 9.4-.53a3 3 0 0 0 2.1-2.12A31 31 0 0 0 24 12a31 31 0 0 0-.5-4.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>'},
  {name:'LinkedIn',url:'#',icon:'<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>'}];
-function socialStrip(){return '<section class="sec"><span class="kick">Follow along</span><h2 class="h2">Find us where you already <span class="it">scroll</span></h2><p class="p muted">Quick clips and tips on strength, balance, nutrition and recovery, every week.</p>'+
+function socialStrip(){return '<section class="sec"><h2 class="h2">Find us on Instagram, <span class="it">YouTube</span> and more</h2><p class="p muted">Relatable clips and everyday tips on nutrition, exercise, balance and recovery, made for life at home.</p>'+
  '<div class="socrow">'+SOCIAL.map(function(s){return '<a class="soc" href="'+s.url+'" target="_blank" rel="noreferrer" aria-label="'+s.name+'"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+s.icon+'</svg></a>'}).join('')+'</div>'+
 '</section>'}
 var TEAM_INI=['P','S','N','M','D'];
-function testiCard2(t){return '<div class="card tcard2">'+
- '<div class="slot video '+t.lane+' t2-media"><span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+' &middot; '+t.label+'</div></div></div>'+
+function testiCard2(t,i){return '<div class="card tcard2">'+
+ '<div class="slot video '+t.lane+' t2-media" data-reel="'+i+'" role="button" tabindex="0" aria-label="Play '+t.name+'’s story">'+(t.poster?'<img class="t2-poster" src="'+t.poster+'?v=1" alt=""><span class="t2-scrim"></span>':'')+'<span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+' &middot; '+t.label+'</div></div></div>'+
  '<div class="t2-metric"><span class="t2-mk">'+t.metric.k+'</span><span class="t2-mv"><s>'+t.metric.before+'</s> &rarr; <b>'+t.metric.after+'</b></span><span class="t2-delta">'+t.metric.delta+'</span></div>'+
  '<div class="t2-body"><p class="t2-quote">'+t.quote+'</p>'+
  '<div class="t2-foot"><div class="avstack"><span class="av lead c'+(t.leadIdx+1)+'">'+TEAM_INI[t.leadIdx]+'</span></div><div class="t2-lead"><b>'+t.lead.name+'</b>'+t.lead.role+'<span class="t2-team">Backed by a team of 5</span></div></div>'+
@@ -1641,14 +1689,22 @@ function statStrip(){
             ['10,000','+','Sessions delivered','g'],
             ['1,000','+','Clients assessed','n']];
  return '<div class="statstrip">'+stats.map(function(s,i){return '<div class="stat '+s[3]+'" style="--i:'+i+'">'+
-  '<div class="stat-n">'+s[0]+'<span class="stat-u">'+s[1]+'</span></div><div class="stat-l">'+s[2]+'</div></div>'}).join('')+'</div>';
+  '<div class="stat-n">'+s[0]+'<span class="stat-u'+(s[1]==='+'?' plus':'')+'">'+s[1]+'</span></div><div class="stat-l">'+s[2]+'</div></div>'}).join('')+'</div>';
 }
 function reframe(eb,ttl,intro,reasons){return '<div class="reframe">'+(eb?'<span class="kick orange">'+eb+'</span>':'')+'<h2 class="h2">'+ttl+'</h2>'+(intro?'<p class="p">'+intro+'</p>':'')+(reasons?'<div class="r-list">'+reasons.map(function(r,i){return '<div class="r-row"><span class="n">0'+(i+1)+'</span><span>'+r+'</span></div>'}).join('')+'</div>':'')+'</div>'}
 function heroTall(){
- return '<section class="hero tall top scene">'+
-  '<div class="bgwrap"><div class="bgslide scenebg"></div></div>'+
-  '<img class="herocouple" src="couple.png?v=1" alt="">'+
+ return '<section class="hero tall top photo">'+
+  '<div class="bgwrap">'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-feel-wide.png?v=1"><img class="herophoto figFeel" src="hero-feel-fr.png?v=8" alt=""></picture>'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-move-wide.png?v=1"><img class="herophoto figMove" src="hero-move-fr.png?v=6" alt=""></picture>'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-eat-wide.png?v=1"><img class="herophoto figEat" src="hero-eat-fr.png?v=6" alt=""></picture>'+
+  '</div>'+
+  '<div class="scrim"></div>'+
   '<div class="grain"></div>'+
+  '<div class="herosky"></div>'+
+  '<div class="herolabel labFeel">How you feel</div>'+
+  '<div class="herolabel labMove">How you move</div>'+
+  '<div class="herolabel labEat">What you eat</div>'+
   '<h1>Care that comes to you<span class="it">and owns the outcome</span></h1>'+
   '<p class="sub">One team for you and your loved ones, caring for their health and lifestyle at home</p>'+
   '<div class="hcta col">'+
@@ -1719,12 +1775,12 @@ function wheelCard(w,idx){
   '<div class="wdeck">'+cards+'</div>'+
   '<div class="wdots">'+dots+'</div>'+
 '</div>'}
-function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Browse free exercises')+'</div></div>'}
+function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Watch member stories')+'</div></div>'}
 function footer(){
  return '<footer class="foot"><span class="brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Kinetic Age</span>'+
   '<p>[PLACEHOLDER] One line on what Kinetic Age does for older adults and the families who care for them.</p>'+
   '<button class="btn light" data-go="/quiz">Book a free trial</button>'+
-  '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/exercises">Exercises</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
+  '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/stories">Stories</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
   '<h5>Contact</h5><a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'">WhatsApp us</a><a href="#">[PLACEHOLDER] phone</a><a href="#">[PLACEHOLDER] email</a><a href="#">[PLACEHOLDER] city</a>'+
   '<div class="fbot"><span>&copy; Kinetic Age [PLACEHOLDER]</span><span>[PLACEHOLDER] Privacy &middot; Terms</span></div></footer>'}
@@ -1733,19 +1789,12 @@ function backedBy(){
  var row=function(n,rev){var items=Array.from({length:n},function(_,i){return '<div class="logo">Logo '+(i+1)+'</div>'}).join('');
    return '<div class="marquee"><div class="mtrack'+(rev?' rev':'')+'">'+items+items+'</div></div>'};
  return '<section class="sec"><div class="backed">'+
-  '<div class="bgroup"><span class="kick">Backed by</span>'+row(6,false)+'</div>'+
-  '<div class="bgroup"><span class="kick">Operators from</span>'+row(6,true)+'</div></div></section>';
+  '<div class="bgroup"><span class="kick">Backed by</span>'+row(6,false)+'</div></div></section>';
 }
 
 /* ===================== VIEWS ===================== */
 function vHome(){
  return heroTall()+
- '<div class="hero-proof"><div class="herobackers">'+
-   '<span class="bk-lead">Operators from</span>'+
-   '<div class="bk-marquee"><div class="bk-track">'+
-     (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
-   '</div></div>'+
- '</div></div>'+
  statStrip()+
  '<section class="sec"><h2 class="h2">What our <span class="it">members</span> say</h2>'+
    '<div class="swipe">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
@@ -1764,14 +1813,17 @@ function vHome(){
    '<h2 class="h2" style="max-width:16ch">How we make recovery <span class="it">smoother</span></h2>'+
    '<p class="p muted" style="max-width:40ch">Traditionally, a trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
    '<p class="p" style="max-width:40ch;color:var(--ink)">We put everything together, under one roof.</p>'+
-   pillarsStack()+'<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
+   pillarsStack()+
+   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">The team behind <span class="it">your plan</span></h2><p class="p muted">Each specialist is chosen for their experience with older adults, and they all work from the same plan.</p>'+
    '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"><span class="ptag">'+p.role+'</span></div><div class="pbody"><div class="pname">'+p.name+'</div>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'+
-   '<div class="secta"><a class="btn line" data-go="/about">Meet the team</a></div>'+
+   '<div class="herobackers team-backers"><span class="bk-lead">Operators from</span><div class="bk-marquee"><div class="bk-track">'+
+     (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
+   '</div></div></div>'+
  '</section>'+
- backedBy()+
  socialStrip()+
+ backedBy()+
  '<section class="sec"><h2 class="h2">The things families ask first</h2><div style="margin-top:22px">'+faqList(HOME_FAQS)+'</div></section>'+
  footer()}
 
@@ -1806,17 +1858,7 @@ function vService(slug){
  '<section class="sec cta-block"><h2 class="h2">Is '+lc(p.name)+' what you need? Find out.</h2><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
  footer()}
 
-function vHow(){
- return heroBand('g-blue','How we work','One assessment. One doctor.<span class="it">One plan that adapts.</span>','[PLACEHOLDER] A short statement of the operating idea: we look at the whole person, design around it, and keep the family in the loop.')+
- '<section class="sec"><span class="kick">The system</span><h2 class="h2">Five pillars, one connected plan.</h2><p class="p muted">[PLACEHOLDER] How the pillars feed each other instead of working in silos. Each name opens its page.</p>'+pillars()+'</section>'+
- '<section class="sec"><span class="kick">The first visit</span><h2 class="h2">A real assessment, then a report you can hold.</h2>'+slot('The family report')+'<p class="p muted">[PLACEHOLDER] What the first home visit covers, and the plain-language report you and your family receive afterward.</p><div style="margin-top:16px"><button class="btn" data-go="/quiz">Book a free trial</button></div></section>'+
- '<section class="sec"><span class="kick">Built for one person</span><h2 class="h2">Plans shaped around the person, not a template.</h2><p class="p muted">[PLACEHOLDER] How the plan is tailored to your specific condition and goals, whether it is for you or an ageing parent.</p>'+slot('Personalised plan')+'<div style="margin-top:16px">'+link('/conditions','Browse conditions we plan for')+'</div></section>'+
- '<section class="sec"><span class="kick">Getting started</span><h2 class="h2">From first hello to first session.</h2><p class="p muted">Four phases, one connected team behind every step, for you and your family.</p>'+journey()+'</section>'+
- '<section class="sec"><span class="kick">What you will see</span><h2 class="h2">Progress, week by week.</h2><p class="p muted">[PLACEHOLDER] How reporting keeps the family informed as the plan unfolds.</p><div class="steps tline">'+REPORT_TIMELINE.map(function(r){return '<div class="step"><span class="w">'+r.w+'</span><div><h4>'+r.t+'</h4><p>'+r.d+'</p></div></div>'}).join('')+'</div><div style="margin-top:18px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></div></section>'+
- '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">How the process actually runs.</h2><div style="margin-top:18px">'+faqList(HOW_FAQS)+'</div></section>'+
- footer()}
-
-/* how-we-work v2 — blank sandbox to iterate on. Old vHow() kept intact for side-by-side. */
+/* how-we-work */
 function jwBars(){
  var f=[['Pain',80,.30],['Mobility',52,.40],['Strength',64,.50]];
  return '<div class="vc-viz"><div class="vc-bars">'+f.map(function(b){return '<i style="--h:'+b[1]+'%;--d:'+b[2]+'s"></i>'}).join('')+
@@ -1891,7 +1933,7 @@ function jwWeek(mode){ // single-week view; full = D ribbon + N daily + E (Mon/W
      mk=(ex[i]!==undefined?'<span class="cal-e">E</span>':'')+'<span class="cal-n">N</span>';
    }
    return '<div class="wk-day'+(rest?' rest':' on')+'"><span class="wk-dn">'+d+'</span><span class="wk-dt">'+dates[i]+'</span><div class="wk-mk">'+mk+'</div></div>'}).join('');
- var doc=mode==='ex'?'':'<div class="wk-doc"><span class="lg lg-d">D</span><span><b>Doctor</b> oversees the whole week, every week.</span></div>';
+ var doc=mode==='ex'?'':'<div class="wk-doc"><span class="lg lg-d">D</span><span><b>Doctor</b> reviews your progress and updates the plan each month.</span></div>';
  return '<div class="jw-week'+(mode==='ex'?' wk-plain':'')+'">'+doc+'<div class="wk-row">'+row+'</div></div>'}
 function jwProviders(){ // five tappable provider cards -> service pages
  var ic={ph:'<path d="M3 12h4l2-6 4 13 2-7h6"/>',
@@ -1950,13 +1992,13 @@ function jwCalAnim(){
    '<li class="lgr lgr-n"><span class="lg lg-n">N</span><div><b>Nutrition</b> Tracks your daily meals and adjusts them, with a weekly follow-up call and nutrition report.</div></li>'+
    '</ul>';
  return '<div class="cal-panel"><div class="jw-calx" id="calAnim"><div class="cal-ttl">What we do</div><div class="jw-cal">'+head+weeks+'</div>'+leg+'</div></div>'}
-function vHow2(){
+function vHow(){
  return '<div class="jw">'+
    '<section class="jw-banner"><div class="bgslide g-blue"></div><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and own every outcome, for you and your family.</p></section>'+
    '<section class="sec jw-point">'+
-     '<div class="jw-step"><span class="n">01</span><h3>Assessment and Reporting</h3></div>'+
+     '<div class="jw-step"><span class="n">01</span><h3>Assessment and analysis</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>We provide a home service to analyse your condition, vitals, and routine in real depth, and turn it into a <span class="b">report specific to you</span>.</p>'+
+       '<p>It starts with a <span class="b">free home assessment</span>. We analyse your condition, vitals, and routine in real depth, and turn it into a <span class="b">report specific to you</span>.</p>'+
        '<div class="vcards" id="condSwipe">'+
          '<div class="vcard vc-green"><span class="vc-tag"><span class="dot"></span>Condition assessment</span>'+jwBars()+'</div>'+
          '<div class="vcard vc-blue"><span class="vc-tag"><span class="dot"></span>Vitals assessment</span>'+jwBP()+'</div>'+
@@ -1968,24 +2010,11 @@ function vHow2(){
    '</section>'+
    '<section class="sec jw-appsec">'+
      '<div class="jw-cta"><button class="btn block xl" data-go="/quiz">Book a free trial</button></div>'+
-     '<div class="appdl">'+
-       '<div class="appdl-body">'+
-         '<div class="appdl-eyebrow">Kinetic Age app</div>'+
-         '<div class="appdl-ttl">Download the app to track your trial and report.</div>'+
-         '<button class="appdl-btn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Tap to download</button>'+
-       '</div>'+
-       '<div class="appdl-shots">'+
-         '<div class="ph ph-b"><div class="ph-scr"><div class="ph-hd dim">This week</div><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div></div>'+
-         '<div class="ph ph-f"><div class="ph-scr"><div class="ph-hd">Today</div>'+
-           '<div class="ph-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#e7eef4" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#1f8c6a" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="82 100"/></svg><b>4/5</b></div>'+
-           '<div class="ph-li green"><i></i>Exercise</div><div class="ph-li amber"><i></i>Nutrition</div></div></div>'+
-       '</div>'+
-     '</div>'+
    '</section>'+
    '<section class="sec jw-point">'+
-     '<div class="jw-step"><span class="n">02</span><h3>Personalised plans and providers</h3></div>'+
+     '<div class="jw-step"><span class="n">02</span><h3>Your RM and your plan</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>Once onboarded, we shape a plan <span class="b">hyper-personalised</span> to the exact condition. Every provider connects directly and works on the case.</p>'+
+       '<p>Your report goes to a <span class="b">dedicated relationship manager</span>, who brings the right providers together and shapes a plan <span class="b">hyper-personalised</span> to your condition. A <span class="b">doctor consultation</span> screens for red flags from any other conditions that could affect it. Your RM owns the journey from here.</p>'+
        '<div class="jw-ringbox">'+jwRing()+'<p class="jw-cap">Your provider team stays connected with each other, working together on your personalised needs.</p></div>'+
        '<p style="margin-top:14px">Here is what each one does, <span class="b">tap any to learn more</span>:</p>'+
        jwProviders()+
@@ -1995,40 +2024,48 @@ function vHow2(){
    '<section class="sec jw-point">'+
      '<div class="jw-step"><span class="n">03</span><h3>Execution</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>Every day, all our different providers track and run your plan together, and <span class="b">every month we reassess everything</span>. It is care that helps you heal faster, smoother, and stress-free.</p>'+
-       '<div class="cal-swipe" id="calSwipe">'+
-         '<div class="cal-panel">'+
-           '<div class="cal-ttl">What we do</div>'+
-           jwWeek()+
-           '<ul class="cal-leg">'+
-             '<li><span class="lg lg-d">D</span><div><b>Doctor</b> Cares for you and oversees the whole team all month.</div></li>'+
-             '<li><span class="lg lg-n">N</span><div><b>Nutrition</b> Tracks your daily meals and adjusts them, with a weekly follow-up call and nutrition report.</div></li>'+
-             '<li><span class="lg lg-e">E</span><div><b>Exercise</b> Scheduled physio and physical training, three times every week.</div></li>'+
-           '</ul>'+
-         '</div>'+
-         '<div class="cal-panel">'+
-           '<div class="cal-ttl">What others do</div>'+
-           jwWeek('ex')+
-           '<ul class="cal-leg">'+
-             '<li><span class="lg lg-e">E</span><div><b>Exercise</b> A generic routine, the same sessions for everyone.</div></li>'+
-             '<li><span class="lg lg-none">&ndash;</span><div>No nutrition, wellbeing, or doctor in the loop.</div></li>'+
-             '<li><span class="lg lg-none">&ndash;</span><div>No monthly reassessment, so nothing adapts.</div></li>'+
-           '</ul>'+
-         '</div>'+
+       '<p>Your providers run the plan <span class="b">every day</span>. Your RM checks in <span class="b">weekly</span>, and each <span class="b">month</span> brings a full audit, a reassessment, and the doctor&rsquo;s progress report.</p>'+
+       '<div class="cal-panel">'+
+         '<div class="cal-ttl">What we do</div>'+
+         jwWeek()+
+         '<ul class="cal-leg">'+
+           '<li><span class="lg lg-e">E</span><div><b>Exercise</b> Scheduled physio and physical training, three times every week.</div></li>'+
+           '<li><span class="lg lg-n">N</span><div><b>Nutrition</b> Daily meal tracking and adjustments, with a weekly follow-up call and nutrition report.</div></li>'+
+           '<li><span class="lg lg-none">R</span><div><b>Relationship manager</b> A weekly feedback check and a monthly audit of the whole plan.</div></li>'+
+           '<li><span class="lg lg-d">D</span><div><b>Doctor</b> Reviews your progress and updates the plan each month.</div></li>'+
+         '</ul>'+
        '</div>'+
-       '<div class="swipe-dots" id="calDots"><i class="on"></i><i></i></div>'+
        '<p class="jw-close">We never leave you or your condition alone. We help you throughout, every day.</p>'+
      '</div>'+
    '</section>'+
    '<section class="sec jw-point">'+
-     '<div class="jw-step"><span class="n">04</span><h3>Reporting on WhatsApp</h3></div>'+
+     '<div class="jw-step"><span class="n">04</span><h3>Always connected</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>Every assessment, session, and provider note lands in one <span class="b">dedicated WhatsApp group</span> for the family, so the whole journey is visible as it happens.</p>'+
+       '<p>Your RM opens a <span class="b">shared WhatsApp group</span> with your family and your providers, so everyone stays connected, with daily updates and nothing hidden.</p>'+
+       '<p>The <span class="b">Kinetic Age app</span> holds your health anytime: meal plans, exercise plan and timing, trainer profile, weekly and monthly reports, and the doctor&rsquo;s progress report.</p>'+
        jwReports()+
+       '<div class="appdl">'+
+         '<div class="appdl-body">'+
+           '<div class="appdl-eyebrow">Kinetic Age app</div>'+
+           '<div class="appdl-ttl">Download the app to follow your plan and see every report.</div>'+
+           '<button class="appdl-btn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Tap to download</button>'+
+         '</div>'+
+         '<div class="appdl-shots">'+
+           '<div class="ph ph-b"><div class="ph-scr"><div class="ph-hd dim">This week</div><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div></div>'+
+           '<div class="ph ph-f"><div class="ph-scr"><div class="ph-hd">Today</div>'+
+             '<div class="ph-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#e7eef4" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#1f8c6a" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="82 100"/></svg><b>4/5</b></div>'+
+             '<div class="ph-li green"><i></i>Exercise</div><div class="ph-li amber"><i></i>Nutrition</div></div></div>'+
+         '</div>'+
+       '</div>'+
      '</div>'+
    '</section>'+
+ '</div>'}
+
+/* plans and pricing */
+function vPricing(){
+ return '<div class="jw">'+
+   '<section class="jw-banner"><div class="bgslide g-blue"></div><h1>Plans and <span class="it">pricing</span></h1><p>One plan, scoped by a doctor to the care you actually need, so you pay only for that.</p></section>'+
    '<section class="sec jw-pricing">'+
-     '<h2 class="h2">Plans and pricing</h2>'+
      '<div class="price-cards">'+
        '<div class="price-card">'+
          '<div class="pc-row"><span class="pc-term">3 months</span><span class="pc-range">&#8377;XX,XXX&ndash;XX,XXX<span>/mo</span></span></div>'+
@@ -2047,92 +2084,17 @@ function vHow2(){
        '<button class="btn block line" data-go="/quiz">Request a call back</button>'+
      '</div>'+
    '</section>'+
- '</div>'}
+ '</div>'+
+ footer()}
 
-function jw3nav(a){var d='';for(var i=0;i<4;i++)d+='<i class="'+(i===a?'on':'')+'"></i>';return '<div class="swipe-dots jw3nav">'+d+'</div>'}
-function vHow3(){
- return '<div class="jw jw3">'+
-   '<section class="jw3-panel jw3-cover"><div class="bgslide g-blue"></div>'+
-     '<h1>Journey <span class="it">with us</span></h1>'+
-     '<p>We provide the whole plan, run it, and own every outcome, for you and your family.</p>'+
-     '<div class="jw3-cue">Swipe to begin</div>'+
-   '</section>'+
-   '<section class="jw3-panel"><div class="jw3-body">'+
-     '<div class="jw-step"><span class="n">01</span><h3>We start with a deep assessment, not a quick look.</h3></div>'+
-     '<div class="jw-lead">'+
-       '<p>We come to your home to review your condition, vitals, and daily routine, then <span class="b">quantify all of it</span> to find what is really driving your health. It all becomes one report you can hold.</p>'+
-       '<div class="vcards" id="condSwipe">'+
-         '<div class="vcard vc-green"><span class="vc-tag"><span class="dot"></span>Condition analysis</span>'+jwBars()+'</div>'+
-         '<div class="vcard vc-blue"><span class="vc-tag"><span class="dot"></span>Vitals analysis</span>'+jwBP()+'</div>'+
-         '<div class="vcard vc-gold"><span class="vc-tag"><span class="dot"></span>Routine analysis</span>'+jwRoutine()+'</div>'+
-         '<div class="vcard vc-plum"><span class="vc-tag"><span class="dot"></span>Report</span>'+jwDoc()+'</div>'+
-       '</div>'+
-       '<div class="swipe-dots" id="condDots"><i class="on"></i><i></i><i></i><i></i></div>'+
-       '<div class="appdl">'+
-         '<div class="appdl-body">'+
-           '<div class="appdl-eyebrow">Kinetic Age app</div>'+
-           '<div class="appdl-ttl">Download the app to track your trial and report.</div>'+
-           '<button class="appdl-btn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Tap to download</button>'+
-         '</div>'+
-         '<div class="appdl-shots">'+
-           '<div class="ph ph-b"><div class="ph-scr"><div class="ph-hd dim">This week</div><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div></div>'+
-           '<div class="ph ph-f"><div class="ph-scr"><div class="ph-hd">Today</div>'+
-             '<div class="ph-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#e7eef4" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#1f8c6a" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="82 100"/></svg><b>4/5</b></div>'+
-             '<div class="ph-li green"><i></i>Exercise</div><div class="ph-li amber"><i></i>Nutrition</div></div></div>'+
-         '</div>'+
-       '</div>'+
-     '</div>'+
-   '</div>'+jw3nav(0)+'</section>'+
-   '<section class="jw3-panel"><div class="jw3-body">'+
-     '<div class="jw-step"><span class="n">02</span><h3>Then we build one plan, made only for you.</h3></div>'+
-     '<div class="jw-lead">'+
-       '<p>Once you are onboarded, we shape a plan <span class="b">hyper-personalised</span> to your exact condition. Every provider connects with you directly and works on your case, each writing their own part, and the doctor brings it all together into one plan.</p>'+
-       jwRow5()+
-       '<ul class="jw-plist">'+
-         '<li class="pl-nutri"><b>Nutrition.</b> Builds your meal plan around your exact condition and what your body needs.</li>'+
-         '<li class="pl-move"><b>Movement.</b> Your physio and trainer decide and set the exercises and timings to what your body can safely handle, and progress it as you do.</li>'+
-         '<li class="pl-mind"><b>Emotional wellbeing.</b> Tracks your mood and motivation week to week.</li>'+
-         '<li class="pl-docp"><b>Doctor.</b> Runs your assessment, reads every provider&rsquo;s report, and keeps all four working as one plan.</li>'+
-       '</ul>'+
-       '<div style="margin-top:16px">'+link('/conditions','See all conditions we treat')+'</div>'+
-       '<div class="jw-cta"><button class="btn" data-go="/quiz">Book a free trial</button></div>'+
-     '</div>'+
-   '</div>'+jw3nav(1)+'</section>'+
-   '<section class="jw3-panel"><div class="jw3-body">'+
-     '<div class="jw-step"><span class="n">03</span><h3>Then the whole team executes it, as one.</h3></div>'+
-     '<div class="jw-lead">'+
-       '<p>Every day, all our different providers track and run your plan together, and <span class="b">every month we reassess everything</span>. It is care that helps you heal faster, smoother, and stress-free.</p>'+
-       '<div class="cal-swipe" id="calSwipe">'+
-         jwCalAnim()+
-         '<div class="cal-panel">'+
-           '<div class="cal-ttl">What others do</div>'+
-           jwCal('ex')+
-         '</div>'+
-       '</div>'+
-       '<div class="swipe-dots" id="calDots"><i class="on"></i><i></i></div>'+
-       '<p class="jw-close">We never leave you or your condition alone. We help you throughout, every day.</p>'+
-     '</div>'+
-   '</div>'+jw3nav(2)+'</section>'+
-   '<section class="jw3-panel"><div class="jw3-body">'+
-     '<div class="jw-step"><span class="n">04</span><h3>And every report reaches you and your <span style="white-space:nowrap">family <svg viewBox="0 0 24 24" fill="#25d366" style="width:.82em;height:.82em;vertical-align:-.08em;margin-left:1px"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.73 1.2c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg></span></h3></div>'+
-     '<div class="jw-lead">'+
-       '<p>Assessment, exercise, progress, nutrition, and every note from the doctor or a provider lands in one place. It all goes to a <span class="b">dedicated WhatsApp group</span> for you and your family, so everyone sees the journey as it happens, with nothing hidden.</p>'+
-       jwReports()+
-     '</div>'+
-   '</div>'+jw3nav(3)+'</section>'+
- '</div>'}
-
-var EX_FILTERS=['All','Knee Pain','Post-Stroke Recovery','Balance and Falls'];
-var exFilter='All';
-function vExercises(){
- var cond=exFilter==='All'?'my condition':exFilter;
- return heroBand('g-field','Free exercise library','Guided movement,<span class="it">grouped by what you need.</span>','[PLACEHOLDER] A line on how the exercises are safe, simple, and easy to follow on your own or with help.')+
- '<section class="sec"><div class="chips" id="exchips">'+EX_FILTERS.map(function(f){return '<button class="chip'+(f===exFilter?' on':'')+'" data-exf="'+f+'">'+f+'</button>'}).join('')+'</div>'+
-   '<div class="grid">'+[1,2,3,4,5,6].map(function(n){return '<div class="card">'+slot((exFilter==='All'?'Exercise':exFilter)+' &middot; video','green')+'<div class="cardttl">[PLACEHOLDER] Exercise '+n+'</div><p class="p muted" style="margin-top:0">[PLACEHOLDER] Short instruction line.</p></div>'}).join('')+'</div></section>'+
- '<section class="sec"><div class="band"><span class="kick green">Free, on WhatsApp</span><div class="cardttl" style="margin-top:0">A full 7-day plan for '+cond+'.</div><p class="p muted">[PLACEHOLDER] What the plan includes and how it is paced.</p><div style="margin-top:16px">'+waBtn('Hi, please send me the 7-day exercise plan for '+cond,'Send me the 7-day plan','orange')+'</div></div></section>'+
- '<section class="sec"><span class="kick">From our feed</span><h2 class="h2">Short videos you can follow along.</h2><div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'+[1,2,3,4].map(function(){return slot('Social embed','video')}).join('')+'</div></section>'+
- '<section class="sec">'+reframe('One honest note','Exercises help. But the cause usually runs deeper.','[PLACEHOLDER] Knee pain in seniors usually has two to three contributing causes. Movement is one piece. Here is how the whole picture comes together.',null)+'<div style="margin-top:16px">'+link('/how-we-work','See how we work')+'</div></section>'+
- '<section class="sec cta-block"><h2 class="h2">Find what is actually holding them back.</h2><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
+function vStories(){
+ return heroBand('g-blue','Real stories','See the change,<span class="it">in their words.</span>','Short clips from members and families, plus the everyday videos we share online.')+
+ '<section class="sec"><h2 class="h2">What our <span class="it">members</span> say</h2><p class="p muted">Tap any card to watch the full story.</p>'+
+   '<div class="grid">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
+ '</section>'+
+ '<section class="sec"><span class="kick">From our feed</span><h2 class="h2">Short videos worth a <span class="it">minute</span>.</h2><p class="p muted">Relatable clips on nutrition, balance, recovery and everyday life at home.</p><div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'+[1,2,3,4,5,6].map(function(){return slot('Social video','video')}).join('')+'</div></section>'+
+ socialStrip()+
+ '<section class="sec cta-block"><h2 class="h2">Want a story like theirs?</h2><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
  footer()}
 
 var HISTORY=[{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] How it began'},{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] The pivot'},{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] Where we are now'}];
@@ -2157,7 +2119,7 @@ function svcOf(c){var s=c.stats[1][1].toLowerCase();return SVC.filter(function(x
 function svcChips(c){return '<div class="cs-svc">'+svcOf(c).map(function(x){return '<span class="'+x[1]+'">'+x[0]+'</span>'}).join('')+'</div>'}
 function csCard(c,i){
  return '<button class="card cscard" data-csopen="'+i+'">'+
-  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=1" alt="'+c.title+'" loading="lazy"></div>'+
+  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=2" alt="'+c.title+'" loading="lazy"></div>'+
   '<h3 class="cs-ttl">'+CS_HEAD[i]+'</h3>'+
   '<p class="cs-sub">'+CS_SUB[i]+'</p>'+
   '<span class="csbtn">Read case study</span>'+
@@ -2168,7 +2130,7 @@ function vCases(){
   var note=c.stats.slice(2).filter(function(s){return !/improv|^pain$/i.test(s[0])&&!/renew|referr/i.test(s[0]+s[1])}).map(function(s){return s[0]+': '+s[1]}).join(' · ');
   return '<section class="sec csread" style="padding-top:92px">'+
    '<button class="bk" data-csback aria-label="Back to all case studies">&larr;</button>'+
-   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=1" alt="'+c.title+'" loading="eager"></div>'+
+   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=2" alt="'+c.title+'" loading="eager"></div>'+
    '<h1 class="cs-h1">'+c.title+'</h1>'+
    '<figure class="cs-saying"><blockquote>'+c.quote+'</blockquote><figcaption>'+(c.attr||'In the client&rsquo;s own words')+'</figcaption></figure>'+
    '<div class="cs-introbox"><p class="p cs-lead">'+lead+'</p></div>'+
@@ -2233,27 +2195,25 @@ var app=document.getElementById('app'), scroller=document.getElementById('scroll
     drawer=document.getElementById('drawer');
 function path(){var h=location.hash.replace(/^#/,'');return h||'/';}
 function render(){
- var pth=path(), parts=pth.split('/').filter(Boolean), html, isQuiz=(parts[0]==='quiz'), exCta=(parts[0]==='exercises'), isHow=(parts[0]||'').indexOf('how-we-work')===0;
+ var pth=path(), parts=pth.split('/').filter(Boolean), html, isQuiz=(parts[0]==='quiz'), isHow=(parts[0]||'').indexOf('how-we-work')===0;
  if(parts[0]==='conditions'&&parts[1]) html=vCondition(parts[1]);
  else if(parts[0]==='conditions') html=vConditions();
  else if(parts[0]==='services'&&parts[1]) html=vService(parts[1]);
- else if(parts[0]==='how-we-work-3') html=vHow3();
- else if(parts[0]==='how-we-work-2') html=vHow2();
  else if(parts[0]==='how-we-work') html=vHow();
- else if(parts[0]==='exercises') html=vExercises();
+ else if(parts[0]==='pricing') html=vPricing();
+ else if(parts[0]==='stories') html=vStories();
  else if(parts[0]==='about') html=vAbout();
  else if(parts[0]==='case-studies') html=vCases();
  else if(isQuiz) html=vQuiz();
  else html=vHome();
  app.innerHTML=html;
  app.setAttribute('data-page', parts[0]||'home');
- scroller.classList.toggle('jw3snap', parts[0]==='how-we-work-3');
  // chrome visibility
  topbar.style.display=isQuiz?'none':'';
  var isHome=!parts.length;
  app.classList.toggle('tryfont', isHome);
  if(isQuiz||isHome||isHow){sticky.innerHTML='';}
- else if(exCta){sticky.innerHTML='<button class="btn blue block" data-go="/quiz">Take the 2-Minute Quiz</button>';}
+ 
  else {sticky.innerHTML='<button class="btn block" data-go="/quiz">Book a free trial</button>';}
  sticky.style.display=(isQuiz||isHome||isHow)?'none':'';
  forceSolid=(parts[0]==='case-studies');
@@ -2279,7 +2239,6 @@ function render(){
    },{passive:true});
  }
  syncDots('condSwipe','condDots');
- syncDots('calSwipe','calDots');
  var ca=document.getElementById('calAnim');
  if(ca){new IntersectionObserver(function(es,o){if(!es[0].isIntersecting)return;o.disconnect();
    setTimeout(function(){ca.classList.add('show-d')},300);
@@ -2297,8 +2256,9 @@ document.addEventListener('click',function(e){
  var ps=e.target.closest('[data-ps]'); if(ps){e.stopPropagation();var card=ps.closest('.pscard'),lifted=card.classList.contains('lift');
    card.parentElement.querySelectorAll('.pscard.lift').forEach(function(c){c.classList.remove('lift');});
    if(!lifted)card.classList.add('lift'); return;}
- var g=e.target.closest('[data-go]'); if(g){e.preventDefault(); closeDrawer(); go(g.getAttribute('data-go')); return;}
- var ex=e.target.closest('[data-exf]'); if(ex){exFilter=ex.getAttribute('data-exf'); render(); return;}
+ var rl=e.target.closest('[data-reel]'); if(rl){openReel(+rl.getAttribute('data-reel')); return;}
+ var g=e.target.closest('[data-go]'); if(g){e.preventDefault(); closeReel(); closeDrawer(); go(g.getAttribute('data-go')); return;}
+ 
  var ba=e.target.closest('[data-cssvc]'); if(ba){csSvc=ba.getAttribute('data-cssvc'); render(); return;}
  var bo=e.target.closest('[data-csopen]'); if(bo){csBackScroll=scroller.scrollTop; csOpen=+bo.getAttribute('data-csopen'); render(); return;}
  if(e.target.closest('[data-csback]')){csOpen=null; render(); scroller.scrollTop=csBackScroll; return;}
@@ -2314,6 +2274,59 @@ document.addEventListener('click',function(e){
 /* keep gate inputs in state so re-render does not wipe them */
 document.addEventListener('input',function(e){if(e.target.id==='qn')qName=e.target.value;if(e.target.id==='qp')qPhone=e.target.value;
   if(e.target.id==='qn'||e.target.id==='qp'){var b=document.getElementById('qsend');if(b){var ok=qName.trim()&&qPhone.trim();b.disabled=!ok;b.style.opacity=ok?'1':'.5';}}});
+
+/* reel player: full-screen vertical video sheet, opened from a testimonial card.
+   placeholder src is one clip for every story; swap data-src per testimonial for the real CDN. */
+var REEL_CUES=[[0.3,'I used to climb stairs sideways.'],[4.0,'Now I walk to the temple every morning'],[8.2,'before the sun is up.']];
+var reelEl=null, reelRAF=0;
+function reelIcon(n){return {
+ x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+ mute:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M16 9l5 5M21 9l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+ vol:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+ cc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M9.5 10.5a2 2 0 1 0 0 3M16 10.5a2 2 0 1 0 0 3" stroke-linecap="round"/></svg>'
+}[n];}
+function closeReel(){ if(!reelEl)return; cancelAnimationFrame(reelRAF); var v=reelEl.querySelector('video'); if(v){v.pause();v.src='';} reelEl.remove(); reelEl=null; document.documentElement.style.overflow=''; }
+function openReel(idx){
+ closeReel();
+ var t=TESTIMONIALS[idx];
+ var src=t.video||'reel-knee.mp4';
+ // captions are a JS overlay only for clips without baked-in text; real reels carry their own
+ var cues=t.cues||(t.video?null:REEL_CUES);
+ var el=document.createElement('div'); el.className='reel'+(t.bakedCC?' reel-baked':''); reelEl=el;
+ el.innerHTML=
+  '<div class="reel-stage">'+
+   '<div class="reel-prog"><i></i></div>'+
+   '<video class="reel-vid" playsinline preload="auto" src="'+src+'?v=1"></video>'+
+   '<div class="reel-top"></div><div class="reel-bot"></div>'+
+   '<button class="reel-btn reel-x" aria-label="Close">'+reelIcon('x')+'</button>'+
+   '<button class="reel-btn reel-mute" aria-label="Sound">'+reelIcon('vol')+'</button>'+
+   (cues?'<button class="reel-btn reel-cc on" aria-label="Captions">'+reelIcon('cc')+'</button>'+
+   '<div class="reel-cc-line"></div>':'')+
+   '<div class="reel-info"><div class="reel-name">'+t.name+'</div><div class="reel-sub">'+t.age+' &middot; '+t.label+'</div>'+
+     '<span class="reel-chip">'+t.metric.k+' <s>'+t.metric.before+'</s> &rarr; <b>'+t.metric.after+'</b> <em>'+t.metric.delta+'</em></span></div>'+
+   '<button class="reel-tap" aria-label="Play or pause"></button>'+
+   '<div class="reel-end"><span class="reel-end-k">'+t.metric.k+' '+t.metric.delta+'</span><h3>That is the kind of change we work toward.</h3>'+
+     '<button class="btn light xl block" data-go="/quiz">Book a free trial</button>'+
+     '<button class="btn ghost block" data-go="/how-we-work">See how we work</button>'+
+     '<button class="reel-replay">Replay story</button></div>'+
+  '</div>';
+ document.body.appendChild(el);
+ document.documentElement.style.overflow='hidden';
+ var v=el.querySelector('video'), prog=el.querySelector('.reel-prog i'),
+     cc=el.querySelector('.reel-cc-line'), end=el.querySelector('.reel-end'),
+     muteBtn=el.querySelector('.reel-mute'), ccBtn=el.querySelector('.reel-cc');
+ function tick(){ if(!reelEl)return; if(v.duration){prog.style.width=(v.currentTime/v.duration*100)+'%';}
+   if(cc&&ccBtn){var line='';for(var i=0;i<cues.length;i++){if(v.currentTime>=cues[i][0])line=cues[i][1];}
+     cc.textContent=ccBtn.classList.contains('on')?line:'';}
+   reelRAF=requestAnimationFrame(tick); }
+ v.play().catch(function(){}); tick();
+ v.addEventListener('ended',function(){end.classList.add('show');});
+ el.querySelector('.reel-x').addEventListener('click',closeReel);
+ muteBtn.addEventListener('click',function(){v.muted=!v.muted; muteBtn.innerHTML=reelIcon(v.muted?'mute':'vol');});
+ if(ccBtn)ccBtn.addEventListener('click',function(){ccBtn.classList.toggle('on');});
+ el.querySelector('.reel-tap').addEventListener('click',function(){ if(end.classList.contains('show'))return; if(v.paused)v.play();else v.pause(); });
+ el.querySelector('.reel-replay').addEventListener('click',function(){end.classList.remove('show'); v.currentTime=0; v.play();});
+}
 
 /* drawer */
 function closeDrawer(){drawer.classList.remove('open');}
