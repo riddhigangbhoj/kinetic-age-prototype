@@ -172,10 +172,15 @@ button{font:inherit;cursor:pointer}
 /* home hero: green-blue theme with a zoomed cut-out figure that morphs across the move/eat/feel pillars. scoped so other gradient heroes are untouched */
 .hero.scene{color:var(--ink)}
 .hero.scene .bgslide.scenebg{opacity:1;animation:none;background:
-  radial-gradient(125% 80% at 50% 102%,rgba(31,140,106,.32),rgba(31,140,106,0) 58%),
+  radial-gradient(118% 66% at 50% 92%,rgba(31,140,106,.34),rgba(31,140,106,0) 62%),
   radial-gradient(95% 60% at 82% 6%,rgba(33,63,153,.16),transparent 62%),
   linear-gradient(180deg,#f4f9f7 0%,#e9f4f1 44%,#d6ebe6 100%)}
-.hero.scene .herofig{position:absolute;left:50%;bottom:0;height:76%;width:auto;z-index:-2;pointer-events:none;transform:translateX(-50%);will-change:opacity,filter,transform;animation:heroMorph 15s infinite ease-in-out}
+/* single embedded photo: a senior couple, faces clear up top, lower bodies dissolved into the gradient */
+.hero.scene .herocouple{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);
+  width:108%;max-width:470px;height:auto;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 58%,transparent 99%);
+          mask-image:linear-gradient(to bottom,#000 0,#000 58%,transparent 99%)}
+.hero.scene .herofig{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%;z-index:-2;pointer-events:none;will-change:opacity,filter,transform;animation:heroMorph 15s infinite ease-in-out}
 .hero.scene .figB{animation-delay:-10s}
 .hero.scene .figC{animation-delay:-5s}
 .hero.scene .herolabel{position:absolute;left:50%;top:42%;z-index:1;transform:translateX(-50%);
@@ -191,9 +196,9 @@ button{font:inherit;cursor:pointer}
   4%,29%{opacity:1;transform:translateX(-50%) translateY(0)}
   34%,100%{opacity:0;transform:translateX(-50%) translateY(9px)}}
 @keyframes heroMorph{
-  0%{opacity:0;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(8px);transform:translateX(-50%) scale(1.05)}
-  4%,29%{opacity:1;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(0px);transform:translateX(-50%) scale(1)}
-  34%,100%{opacity:0;filter:drop-shadow(0 20px 32px rgba(16,58,52,.22)) blur(8px);transform:translateX(-50%) scale(1.05)}}
+  0%{opacity:0;filter:blur(8px);transform:scale(1.06)}
+  4%,29%{opacity:1;filter:blur(0px);transform:scale(1)}
+  34%,100%{opacity:0;filter:blur(8px);transform:scale(1.06)}}
 .hero.scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(214,235,230,0) 0%,rgba(214,235,230,.55) 55%,rgba(208,230,224,.95) 100%)}
 .hero.scene .scrim{display:none}
 .hero.scene h1{text-shadow:none;color:var(--ink)}
@@ -202,6 +207,8 @@ button{font:inherit;cursor:pointer}
 .hero.scene .sub em{color:var(--green)}
 /* "backed by" — single horizontal marquee line */
 .herobackers{display:flex;align-items:center;gap:11px;margin-top:18px;position:relative;z-index:1}
+.hero-proof{padding:16px 22px 6px;background:var(--bg)}
+.hero-proof .herobackers{margin-top:0}
 .bk-lead{flex:none;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
 .bk-marquee{position:relative;flex:1;min-width:0;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 86%,transparent)}
@@ -509,6 +516,7 @@ main{padding-bottom:96px}
 @keyframes wdot{0%,33.33%,100%{transform:scale(1);background:rgba(40,70,150,.16)}
   7%,28%{transform:scale(1.4);background:var(--don)}}
 .wcap{font-family:var(--satoshi);font-style:italic;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2);margin-top:18px;padding-top:15px;border-top:1px solid rgba(40,70,150,.1)}
+.wcap-out{margin:18px auto 0;max-width:36ch;text-align:center;font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);line-height:1.4;color:var(--ink2)}
 @media (prefers-reduced-motion:reduce){
   .wphoto{animation:none}
   .wdeck{height:auto}.wrc{position:relative;inset:auto;height:152px;opacity:1;animation:none;margin-bottom:12px;transform:none}
@@ -711,6 +719,11 @@ main{padding-bottom:96px}
   background:linear-gradient(150deg,var(--green) 0%,#2a6f8e 52%,var(--blue) 100%);
   box-shadow:0 0 0 5px var(--bg),0 12px 24px -10px rgba(20,32,80,.6),inset 0 1px 0 rgba(255,255,255,.35)}
 .jm2-h{font-family:var(--fb);font-weight:400;font-size:var(--fs-body);line-height:1.5;color:var(--ink2);text-wrap:balance}
+.jm2-dl{display:inline-flex;width:fit-content;align-items:center;gap:6px;margin-top:9px;font-size:var(--fs-cap);font-weight:600;
+  color:#fff;background:var(--blue);padding:7px 14px;border-radius:999px;cursor:pointer;
+  box-shadow:0 8px 18px -8px rgba(33,63,153,.6);transition:transform .15s var(--ease)}
+.jm2-dl svg{width:14px;height:14px;flex:none}
+.jm2-dl:active{transform:scale(.96)}
 .jm2-h em{font-family:var(--fd);font-style:italic;font-size:1.06em;color:var(--blue)}
 .jm2-h .wamini{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#25d366;color:#fff;vertical-align:-2.5px;margin-right:2px}
 .jm2-h .wamini svg{width:11px;height:11px}
@@ -814,6 +827,345 @@ main{padding-bottom:96px}
   .hero.scene .herolabel{animation:none}.hero.scene .labA{opacity:1}.hero.scene .labB,.hero.scene .labC{opacity:0}
   .scrollcue i{animation:none}.scroll{scroll-behavior:auto}
 }
+
+/* ===================== Journey with us (how-we-work v2 sandbox) ===================== */
+.jw-banner{position:relative;overflow:hidden;color:#fff;padding:88px 22px 30px;isolation:isolate}
+.jw-banner .bgslide{position:absolute;inset:0;z-index:-2}
+.jw-banner:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(12,18,42,.35))}
+.jw-banner h1{font-family:var(--fd);font-weight:430;font-size:var(--fs-h1);line-height:1.05;letter-spacing:-.012em;text-shadow:0 1px 24px rgba(0,0,0,.28)}
+.jw-banner h1 .it{font-style:italic;color:#f7a172}
+.jw-banner p{margin-top:11px;font-size:var(--fs-sm);line-height:1.5;color:rgba(255,255,255,.86);max-width:30ch}
+.jw-point{padding-top:18px}
+.jw-banner + .jw-point{padding-top:22px}
+/* the step heading sits on the page, above the block */
+.jw-step{display:flex;align-items:baseline;gap:11px}
+.jw-step .n{font-family:var(--fd);font-size:29px;line-height:1;font-weight:430;
+  color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(135deg,var(--green),var(--blue));flex:none}
+.jw-step h3{font-family:var(--fd);font-weight:460;font-size:var(--fs-h3);line-height:1.16;letter-spacing:-.012em;color:var(--ink)}
+/* the point's body — text and its visuals — grouped in one frosted panel */
+.jw-lead{margin-top:14px;border-radius:20px;padding:16px 14px 14px;
+  background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 22px 46px -30px rgba(20,32,107,.5)}
+.jw-lead>p{margin:0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2)}
+.jw-lead .b{color:var(--ink);font-weight:500;font-style:italic;font-family:var(--fd)}
+.jw-lead .vcards{margin:14px -14px 0;padding:2px 14px 8px;scroll-padding-left:14px}
+.jw-lead .vcard{flex:0 0 50%;background:#fff;border-color:#e6eef3}
+.jw-lead .swipe-dots{margin-top:4px}
+.jw-lead>.swipe-dots{margin-top:4px}
+
+/* compact, scroll-snapping visual cards — small on purpose, the visual is the point */
+.vcards{display:flex;gap:13px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:22px;
+  margin:24px -22px 0;padding:4px 22px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.vcards::-webkit-scrollbar{display:none}
+.vcard{scroll-snap-align:start;flex:0 0 52%;background:var(--glass);border:1px solid var(--glass-line);
+  border-radius:18px;padding:13px 13px 14px;box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);
+  display:flex;flex-direction:column;opacity:0;transform:translateY(10px);
+  animation:vcUp .6s var(--ease) forwards}
+.vcard:nth-child(1){animation-delay:.05s}
+.vcard:nth-child(2){animation-delay:.14s}
+.vcard:nth-child(3){animation-delay:.23s}
+.vcard:nth-child(4){animation-delay:.32s}
+@keyframes vcUp{to{opacity:1;transform:none}}
+.vc-tag{font-size:12px;letter-spacing:.005em;font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.vc-tag .dot{width:6px;height:6px;border-radius:50%;flex:none}
+.vc-green .vc-tag{color:var(--green)} .vc-green .dot{background:var(--green)}
+.vc-blue .vc-tag{color:var(--blue)} .vc-blue .dot{background:var(--blue)}
+.vc-gold .vc-tag{color:var(--orange-ink)} .vc-gold .dot{background:var(--orange)}
+.vc-plum .vc-tag{color:#7b54c4} .vc-plum .dot{background:#7b54c4}
+.vc-viz{margin:11px 0 2px;height:92px;position:relative}
+
+/* card 3 — routine donut */
+.vc-ring{position:absolute;inset:0;display:grid;place-items:center;
+  opacity:0;transform:scale(.72) rotate(-22deg);animation:ringIn .8s var(--ease) forwards .15s}
+.vc-ring svg{width:80px;height:80px;overflow:visible}
+.vc-ring .rg{transition:none}
+.vc-ring .rc{font-family:var(--fd);font-size:8.5px;font-weight:600;fill:var(--ink)}
+@keyframes ringIn{to{opacity:1;transform:none}}
+
+/* step 03 — providers on a rotating 3D ring, every card wired to every other from inside */
+.jw-ring{margin-top:18px;height:230px;perspective:820px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ring3d{position:relative;width:128px;height:92px;transform-style:preserve-3d;
+  transform:rotateX(-13deg);animation:ringSpin 24s linear infinite}
+.jw-ring:hover .ring3d{animation-play-state:paused}
+@keyframes ringSpin{to{transform:rotateX(-13deg) rotateY(360deg)}}
+.ring-card{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(var(--a)) translateZ(140px)}
+.rc-face{position:absolute;inset:0;border-radius:15px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid #e6eef3;background:#fff;box-shadow:0 16px 30px -18px rgba(20,32,107,.55)}
+.rc-front{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px}
+.rc-back{transform:rotateY(180deg);background:linear-gradient(160deg,#f4f8fb,#e6eef6);display:grid;place-items:center}
+.rc-back:after{content:'';width:22px;height:22px;border-radius:6px;background:linear-gradient(140deg,#27479e,#13265a);opacity:.18}
+.rc-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;box-shadow:0 7px 15px -5px rgba(20,32,107,.5)}
+.rc-ic svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.rc-pre{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:-3px}
+.rc-nm{font-family:var(--fd);font-weight:500;font-size:14px;line-height:1.1;letter-spacing:-.01em;color:var(--ink);text-align:center;max-width:108px}
+/* the interconnecting web: one flat bar per card-to-card link, threaded through the centre */
+.ring-edge{position:absolute;left:50%;top:50%;height:2.5px;width:var(--len);border-radius:3px;
+  transform:translate(-50%,-50%) rotateY(var(--b)) translateZ(var(--m));
+  background:linear-gradient(90deg,rgba(31,140,106,.55),rgba(33,63,153,.8),rgba(123,84,196,.55));
+  box-shadow:0 0 7px rgba(33,63,153,.45);opacity:0;animation:edgeIn .6s ease forwards .5s,edgePulse 3.4s ease-in-out infinite 1s}
+.ring-edge.diag{opacity:0;animation:edgeIn .6s ease forwards .7s,edgePulse 3.4s ease-in-out infinite 1.4s}
+@keyframes edgeIn{to{opacity:1}}
+@keyframes edgePulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+@media (prefers-reduced-motion:reduce){.ring3d{animation:none}.ring-edge{animation:edgeIn .6s ease forwards}}
+
+/* step 03 — the plan as a weekly calendar: yellow week rows, N on Saturday, green E thrice */
+.jw-cal{margin-top:16px;background:#e7effb;border:1px solid #d3e2f6;border-radius:16px;padding:12px 12px 13px;
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 20px 40px -30px rgba(20,32,107,.5)}
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:8px}
+.cal-head span{text-align:center;font-size:9px;letter-spacing:.05em;color:#8aa0c8;font-weight:600}
+.cal-week{position:relative;display:grid;grid-template-columns:repeat(7,1fr);padding:3px;border-radius:12px;
+  border:1px solid #efd684;background:#fdf3d1;margin-bottom:7px}
+.cal-week:last-child{margin-bottom:0}
+.cal-day{position:relative;min-height:34px;display:flex;align-items:center;justify-content:center}
+.cal-dt{font-style:normal;position:absolute;top:3px;left:6px;font-size:9px;font-weight:500;color:#c2b082}
+.cal-e{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
+  background:var(--green);color:#fff;font-size:9.5px;font-weight:700;box-shadow:0 3px 7px -2px rgba(31,140,106,.55)}
+.cal-n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(150deg,#f8d258,#f3bf2d);color:#6b4e00;font-size:12px;font-weight:700;
+  box-shadow:0 4px 9px -3px rgba(214,160,20,.65)}
+.cal-d{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
+  background:var(--blue);color:#fff;font-size:9.5px;font-weight:700;box-shadow:0 3px 7px -2px rgba(33,63,153,.55)}
+/* two calendars side by side: "what we do" vs "what others do" */
+.cal-swipe{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  margin-top:18px;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cal-swipe::-webkit-scrollbar{display:none}
+.cal-panel{scroll-snap-align:start;flex:0 0 88%;min-width:0}
+.cal-panel .jw-cal{margin-top:10px}
+/* "what others do" — neutral skin so only the green E circles carry colour */
+.jw-cal-plain{background:#f1f4f8;border-color:#e2e8f1}
+.jw-cal-plain .cal-week{background:#fff;border-color:#eaeff5}
+.cal-ttl{font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);letter-spacing:-.01em;color:var(--ink)}
+.cal-leg{margin-top:14px;display:flex;flex-direction:column;gap:9px;list-style:none;padding:0}
+.cal-leg li{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-sm);line-height:1.4;color:var(--ink2)}
+.cal-leg b{font-family:var(--fd);font-weight:560;color:var(--ink);margin-right:4px}
+.cal-leg .lg{flex:none;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;
+  font-size:10px;font-weight:700;color:#fff;margin-top:1px}
+.lg-d{background:var(--blue)} .lg-e{background:var(--green)}
+.lg-n{background:linear-gradient(150deg,#f8d258,#f3bf2d);color:#6b4e00}
+.lg-none{background:#dce3ee;color:#8aa0c8}
+.jw-close{margin-top:20px;font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);line-height:1.4;color:var(--ink)}
+
+/* single-week view (v2 calendar) */
+.jw-week{background:#e7effb;border:1px solid #d3e2f6;border-radius:16px;padding:12px;margin-top:10px}
+.wk-doc{display:flex;align-items:center;gap:9px;font-size:11px;line-height:1.3;color:var(--ink2);
+  background:#fff;border:1px solid #d8e4f4;border-radius:11px;padding:8px 10px;margin-bottom:10px}
+.wk-doc .lg{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff;background:var(--blue)}
+.wk-doc b{font-family:var(--fd);font-weight:560;color:var(--ink)}
+.wk-row{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.wk-day{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:92px;padding:8px 2px 9px;
+  border-radius:11px;background:#fff;border:1px solid #e3ecf6}
+.wk-day.rest{opacity:.5}
+.wk-dn{font-size:8.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#8aa0c8}
+.wk-dt{font-family:var(--fd);font-size:13px;font-weight:560;color:var(--ink);line-height:1}
+.wk-mk{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:3px}
+.wk-mk .cal-e,.wk-mk .cal-n{position:static}
+.wk-mk .cal-n{width:18px;height:18px;font-size:9.5px}
+.wk-lb{font-size:7.5px;font-weight:600;color:var(--ink2);line-height:1;text-align:center}
+.wk-rest{width:5px;height:5px;border-radius:50%;background:#cdd8e8}
+.wk-plain .wk-doc{display:none}
+
+/* page 3 — linear 5-card team row */
+.jw-row5{display:flex;gap:7px;margin-top:16px}
+.r5{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;background:#fff;
+  border:1px solid var(--line);border-radius:13px;padding:11px 3px 9px;
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 14px 26px -22px rgba(20,32,107,.5);
+  opacity:0;transform:translateY(10px);animation:vcUp .5s var(--ease) forwards;animation-delay:calc(var(--i)*.08s + .1s)}
+.r5-ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:0 5px 11px -4px rgba(20,32,107,.5)}
+.r5-ic svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.r5-nm{font-size:9px;font-weight:600;color:var(--ink);text-align:center;line-height:1.12}
+
+/* page 3 — calendar that fills in on scroll: D (blue frame) -> E (green) -> N (yellow frame) */
+.jw-calx .cal-week{border-color:#dbe5f2;background:#fff;
+  transition:border-color .55s var(--ease),background .55s var(--ease);transition-delay:var(--wd,0s)}
+.jw-calx.show-n .cal-week{border-color:#efd684;background:#fdf3d1}
+.jw-calx .cal-d,.jw-calx .cal-e,.jw-calx .cal-n{opacity:0;transform:scale(.2);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:var(--d,0s)}
+.jw-calx.show-d .cal-d{opacity:1;transform:none}
+.jw-calx.show-e .cal-e{opacity:1;transform:none}
+.jw-calx.show-n .cal-n{opacity:1;transform:none}
+.jw-calx .cal-d{background:#fff;color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 3px 8px -2px rgba(33,63,153,.5)}
+.jw-calx .lgr{opacity:.32;transform:translateX(-4px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.jw-calx.show-d .lgr-d,.jw-calx.show-e .lgr-e,.jw-calx.show-n .lgr-n{opacity:1;transform:none}
+
+/* slim app-download band (below point 2) */
+.appdl{position:relative;overflow:hidden;margin-top:16px;border-radius:18px;padding:14px 16px;
+  min-height:96px;display:flex;align-items:center;color:var(--ink);
+  background:linear-gradient(135deg,#eef4fd,#dde8fa 64%,#cfe0f7);border:1px solid #d6e2f4;
+  box-shadow:0 18px 36px -28px rgba(19,38,90,.5)}
+.appdl:before{content:'';position:absolute;right:-26px;top:-44px;width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle,rgba(33,63,153,.12),transparent 70%)}
+.appdl-body{position:relative;z-index:2;max-width:60%}
+.appdl-eyebrow{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.appdl-ttl{font-family:var(--fd);font-weight:500;font-size:15.5px;line-height:1.18;margin:5px 0 10px;letter-spacing:-.01em}
+.appdl-btn{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:600;
+  font-size:12.5px;padding:8px 15px;border-radius:999px;box-shadow:0 10px 20px -8px rgba(19,38,90,.55);transition:transform .2s var(--ease)}
+.appdl-btn:active{transform:scale(.96)}
+.appdl-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* peeking app screens */
+.appdl-shots{position:absolute;right:4px;top:0;bottom:0;width:150px;z-index:1}
+.ph{position:absolute;top:50%;width:74px;height:152px;border-radius:16px;background:#fff;overflow:hidden;
+  border:3px solid #0e1838;box-shadow:0 18px 34px -16px rgba(0,0,0,.55)}
+.ph-b{right:60px;transform:translateY(-50%) rotate(-12deg) scale(.9);opacity:.8}
+.ph-f{right:4px;transform:translateY(-50%) rotate(-5deg)}
+.ph-scr{position:absolute;inset:0;padding:9px 7px;display:flex;flex-direction:column;gap:5px}
+.ph-hd{font-family:var(--fd);font-weight:600;font-size:9px;color:#16204a}
+.ph-hd.dim{color:#9aa6c2}
+.ph-ring{position:relative;width:34px;height:34px;margin:3px auto 4px}
+.ph-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ph-ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:8px;font-weight:700;color:#16204a}
+.ph-li{display:flex;align-items:center;gap:4px;font-size:7.5px;font-weight:600;color:#16204a;background:#f3f7fa;border-radius:5px;padding:3px 5px}
+.ph-li i{width:7px;height:7px;border-radius:50%;flex:none}
+.ph-li.green i{background:var(--green)} .ph-li.amber i{background:#f3bf2d}
+.ph-bar{height:13px;border-radius:4px;background:#fdf3d1;border:1px solid #efd684}
+
+/* step 04 — reporting & transparency: a dedicated WhatsApp group for you + family */
+.jw-wa{margin-top:16px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 20px 40px -30px rgba(20,32,107,.5)}
+.wa-top{display:flex;align-items:center;gap:10px;padding:11px 13px;background:linear-gradient(100deg,#1f8c6a,#0f6b50);color:#fff}
+.wa-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.wa-av svg{width:19px;height:19px;fill:#fff}
+.wa-name{font-weight:600;font-size:13px}
+.wa-mem{font-size:9.5px;color:rgba(255,255,255,.82);margin-top:1px}
+.wa-body{padding:11px 11px 13px;background:#e9efe8;display:flex;flex-direction:column;gap:7px}
+.wa-sys{align-self:center;font-size:9px;color:#5d6b5f;background:#dbe8da;border-radius:7px;padding:3px 9px;text-align:center;margin-bottom:2px}
+.wa-msg{max-width:84%;padding:6px 9px 7px;border-radius:9px;font-size:11px;line-height:1.35;color:#16201a;box-shadow:0 1px 1px rgba(0,0,0,.07)}
+.wa-msg.them{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+.wa-msg.me{background:#d6fccb;align-self:flex-end;border-top-right-radius:2px}
+.wa-from{display:block;font-size:9.5px;font-weight:700;margin-bottom:3px}
+.wa-phys .wa-from{color:#1f8c6a}.wa-nut .wa-from{color:#cf7a1e}.wa-doc .wa-from{color:var(--blue)}
+.wa-att{display:flex;align-items:center;gap:7px;background:#f3f6f1;border-radius:7px;padding:6px 8px;font-weight:600;font-size:10.5px;color:#16201a}
+.wa-att-ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;color:#fff;flex:none}
+.wa-att-ic svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.wa-phys .wa-att-ic{background:#1f8c6a}.wa-nut .wa-att-ic{background:#e08a2e}
+
+/* card 1 — factor bar graph */
+.vc-bars{position:absolute;inset:0;display:flex;align-items:flex-end;gap:9px;padding-bottom:18px}
+.vc-bars i{flex:1;border-radius:5px 5px 2px 2px;height:var(--h);transform-origin:bottom;transform:scaleY(0);
+  background:linear-gradient(180deg,var(--green),#34b187);animation:barGrow .75s var(--ease) forwards;animation-delay:var(--d,.3s)}
+.vc-bars i:nth-child(even){background:linear-gradient(180deg,var(--blue),#4f6ed6)}
+@keyframes barGrow{to{transform:scaleY(1)}}
+.vc-axis{position:absolute;left:0;right:0;bottom:14px;height:1px;background:var(--line)}
+.vc-xlab{position:absolute;left:0;right:0;bottom:0;display:flex;gap:9px;font-size:10.5px;color:var(--faint);text-align:center}
+.vc-xlab span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* card 2 — blood-pressure trend */
+.vc-bp{position:absolute;inset:0}
+.vc-bp svg{width:100%;height:100%;overflow:visible}
+.vc-bp .grid{stroke:var(--line);stroke-width:1}
+.vc-bp .area{fill:url(#bpFill)}
+.vc-bp path.ln{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:260;stroke-dashoffset:260;animation:draw 1.1s var(--ease) forwards .3s}
+.vc-bp path.sys{stroke:var(--blue)} .vc-bp path.dia{stroke:var(--orange);animation-delay:.5s}
+.vc-bp circle{opacity:0;animation:dotIn .3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes dotIn{to{opacity:1}}
+.vc-bp .leg{position:absolute;top:0;right:0;display:flex;gap:9px;font-size:8.5px;font-weight:600}
+.vc-bp .leg b{display:flex;align-items:center;gap:3px;font-weight:600}
+.vc-bp .leg .s{width:9px;height:2.4px;border-radius:2px}
+
+/* card 3 — the report itself, looking sharp */
+.vc-doc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;perspective:600px}
+.vc-paper{width:118px;height:100%;background:#fff;border-radius:7px;padding:11px 11px 0;
+  box-shadow:0 16px 30px -16px rgba(19,38,90,.55),0 2px 0 rgba(19,38,90,.04);
+  border:1px solid #eef2f7;transform:rotateY(-13deg) rotateX(3deg);transform-origin:center;
+  position:relative;overflow:hidden;animation:docIn .8s var(--ease) forwards}
+.vc-paper:before,.vc-paper:after{content:'';position:absolute;top:6px;bottom:-4px;border-radius:7px;background:#fff;
+  box-shadow:0 12px 22px -16px rgba(19,38,90,.4);z-index:-1;border:1px solid #eef2f7}
+.vc-paper:before{left:5px;right:5px;transform:translateZ(-12px)}
+.vc-paper:after{left:9px;right:9px;top:11px;transform:translateZ(-22px);opacity:.6}
+@keyframes docIn{from{opacity:0;transform:rotateY(-30deg) translateY(8px)}to{opacity:1;transform:rotateY(-13deg) rotateX(3deg)}}
+.vc-doc .dh{display:flex;align-items:center;gap:5px;padding-bottom:8px;border-bottom:1px solid #eef2f7}
+.vc-doc .dh svg{width:13px;height:13px;color:var(--blue)}
+.vc-doc .dh .t{font-family:var(--fd);font-size:8px;font-weight:600;color:var(--ink);line-height:1.1}
+.vc-doc .dh .t i{display:block;font-style:normal;font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-family:var(--fb);font-weight:600}
+.vc-doc .ln{height:4px;border-radius:2px;background:#edf1f7;margin-top:7px}
+.vc-doc .spark{display:flex;align-items:flex-end;gap:3px;height:26px;margin-top:9px}
+.vc-doc .spark i{flex:1;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--green),#bfe3d6)}
+.vc-doc .seal{position:absolute;right:9px;bottom:9px;width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#34b187,var(--green));display:grid;place-items:center;
+  box-shadow:0 4px 10px -3px rgba(31,140,106,.7)}
+.vc-doc .seal svg{width:14px;height:14px;color:#fff}
+.jw-end{padding-top:10px}
+.jw-end .btn{margin-top:4px}
+
+/* step 02 — discipline hues, used by the point list under the provider ring */
+.pl-nutri{--c:var(--green)}
+.pl-move{--c:var(--blue)}
+.pl-train{--c:var(--orange-ink)}
+.pl-mind{--c:#7b54c4}
+.pl-docp{--c:#27479e}
+/* compact point list under the provider ring — the text lives here, not in the visual */
+.jw-plist{margin-top:20px;display:flex;flex-direction:column;gap:11px;list-style:none;padding:0}
+.jw-plist li{position:relative;padding-left:18px;padding-right:16px;font-size:var(--fs-sm);line-height:1.45;color:var(--ink2);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.jw-plist li:before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jw-plist li:after{content:'';position:absolute;right:3px;top:6px;width:6px;height:6px;
+  border-top:1.6px solid var(--faint);border-right:1.6px solid var(--faint);transform:rotate(45deg);transition:transform .15s,border-color .15s}
+.jw-plist li:active{opacity:.6}
+.jw-plist li:active:after{transform:translateX(2px) rotate(45deg);border-color:var(--c)}
+.jw-plist b{font-family:var(--fd);font-weight:560;color:var(--c)}
+/* provider cards (v2): each provider as a small tappable component */
+.jw-pcards{margin-top:18px;display:flex;flex-direction:column;gap:9px}
+.jw-pcards .pcard{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:14px;background:#fff;
+  border:1px solid var(--line);border-left:3px solid var(--c);cursor:pointer;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 14px 26px -24px rgba(20,32,107,.55);transition:transform .15s var(--ease)}
+.jw-pcards .pcard:active{transform:scale(.985)}
+.pcard-ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--c);box-shadow:0 5px 11px -4px var(--c)}
+.pcard-ic svg{width:18px;height:18px}
+.pcard-tx{flex:1;min-width:0;font-size:var(--fs-sm);line-height:1.4;color:var(--ink2)}
+.pcard-tx b{font-family:var(--fd);font-weight:560;color:var(--c)}
+.pcard-arr{flex:none;width:7px;height:7px;border-top:1.7px solid var(--faint);border-right:1.7px solid var(--faint);transform:rotate(45deg);transition:border-color .15s}
+.jw-pcards .pcard:active .pcard-arr{border-color:var(--c)}
+.jw-cap{margin:8px auto 0;max-width:30ch;text-align:center;font-size:var(--fs-cap);line-height:1.45;color:var(--muted)}
+/* the provider diagram as one contained component */
+.jw-ringbox{margin-top:16px;border-radius:18px;padding:4px 14px 15px;background:#fff;border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 18px 36px -28px rgba(20,32,107,.5)}
+.jw-ringbox .jw-ring{margin-top:0}
+.jw-ringbox .jw-cap{margin-top:2px;border-top:1px solid #eef2f7;padding-top:11px}
+.jw-cta{margin-top:20px}
+/* app section sits tight under point 1, no empty void */
+.jw-appsec{padding-top:0;margin-top:-14px}
+.jw-appsec .jw-cta{margin-top:0}
+/* closing pricing: two plans, range only */
+.price-cards{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.price-card{position:relative;border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;
+  box-shadow:0 1px 2px rgba(20,32,107,.04),0 18px 34px -28px rgba(20,32,107,.5)}
+.pc-best{border-color:#bcd0f3;box-shadow:0 1px 2px rgba(20,32,107,.06),0 22px 40px -26px rgba(33,63,153,.4)}
+.pc-tag{position:absolute;top:-10px;left:16px;background:var(--blue);color:#fff;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.pc-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.pc-term{font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);color:var(--ink)}
+.pc-range{font-family:var(--fd);font-weight:560;font-size:18px;color:var(--blue);letter-spacing:-.01em;white-space:nowrap}
+.pc-range span{font-size:11.5px;color:var(--muted);font-weight:500;font-family:var(--fb)}
+.pc-note{margin-top:8px;font-size:var(--fs-cap);line-height:1.4;color:var(--muted)}
+.pc-foot{margin-top:16px;font-size:var(--fs-sm);line-height:1.45;color:var(--ink2)}
+.jw-pricing .jw-cta{margin-top:18px}
+.jw-btns{display:flex;flex-direction:column;gap:10px}
+/* how-we-work v3 — each point is a full-screen swipe panel */
+.scroll.jw3snap{scroll-snap-type:y mandatory}
+#app[data-page="how-we-work-3"]{padding-bottom:0}
+.jw3-panel{min-height:100%;scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;padding:78px 22px 26px;position:relative}
+.jw3-body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+.jw3-body .jw-lead{margin-top:14px}
+.jw3nav{padding-top:18px}
+/* cover panel */
+.jw3-cover{justify-content:flex-end;color:#fff;overflow:hidden;isolation:isolate;padding-bottom:44px}
+.jw3-cover .bgslide{position:absolute;inset:0;z-index:-2}
+.jw3-cover:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(12,18,42,.2),rgba(12,18,42,.58))}
+.jw3-cover h1{font-family:var(--fd);font-weight:430;font-size:clamp(34px,9vw,46px);line-height:1.04;letter-spacing:-.012em;text-shadow:0 1px 24px rgba(0,0,0,.3)}
+.jw3-cover h1 .it{font-style:italic;color:#f7a172}
+.jw3-cover p{margin-top:12px;font-size:var(--fs-sm);line-height:1.5;color:rgba(255,255,255,.88);max-width:30ch}
+.jw3-cue{margin-top:22px;display:flex;align-items:center;gap:9px;font-size:var(--fs-lbl);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.jw3-cue:before{content:'';width:24px;height:1px;background:rgba(255,255,255,.6)}
+
+@media (prefers-reduced-motion:reduce){
+  .vcard,.vc-bars i,.vc-bp path.ln,.vc-bp circle,.vc-paper{animation:none;opacity:1;transform:none}
+  .vc-bars i{transform:scaleY(1)} .vc-bp path.ln{stroke-dashoffset:0} .vc-paper{transform:rotateY(-13deg) rotateX(3deg)}
+}
 </style>
 
 <style id="desktop">
@@ -871,7 +1223,7 @@ main{padding-bottom:96px}
   .hero.tall.top .hcta{margin-top:34px}
   /* home scene hero: text on the left, morphing figure on the right */
   .hero.scene{padding-right:48%}
-  .hero.scene .herofig{left:74%;height:86%}
+  .hero.scene .herofig{left:auto;width:52%;height:100%}
   .hero.scene .herolabel{left:74%;top:34%}
   .hero .hcta.col{flex-direction:row;width:auto;align-items:center;gap:16px}
   .hero .hcta.col .btn.block{width:auto}
@@ -961,11 +1313,13 @@ main{padding-bottom:96px}
     <nav class="dn-links">
       <a data-go="/conditions">Conditions</a>
       <a data-go="/how-we-work">How We Work</a>
+      <a data-go="/how-we-work-2">How We Work v2</a>
+      <a data-go="/how-we-work-3">How We Work v3</a>
       <a data-go="/exercises">Exercises</a>
       <a data-go="/about">About</a>
       <a data-go="/case-studies">Case studies</a>
     </nav>
-    <button class="btn dn-cta" data-go="/quiz">Book Trial</button>
+    <button class="btn dn-cta" data-go="/quiz">Book a free trial</button>
   </header>
 
   <div class="scroll" id="scroll">
@@ -990,6 +1344,8 @@ main{padding-bottom:96px}
       </div>
       <a data-go="/conditions">Conditions</a>
       <a data-go="/how-we-work">How We Work</a>
+      <a data-go="/how-we-work-2">How We Work v2</a>
+      <a data-go="/how-we-work-3">How We Work v3</a>
       <a data-go="/exercises">Exercises</a>
       <a data-go="/about">About</a>
       <a data-go="/case-studies">Case studies</a>
@@ -999,7 +1355,7 @@ main{padding-bottom:96px}
       <a class="svc" data-go="/services/nutrition">Nutrition</a>
       <a class="svc" data-go="/services/mental-wellness">Emotional Wellbeing</a>
       <a class="svc" data-go="/services/doctor-oversight">Doctor Oversight</a>
-      <div class="d-cta"><button class="btn block" data-go="/quiz">Book Trial</button></div>
+      <div class="d-cta"><button class="btn block" data-go="/quiz">Book a free trial</button></div>
     </div>
   </div>
 </div>
@@ -1090,7 +1446,7 @@ var JOURNEY=[
   cadence:[['Daily','d','Meal tracking'],['Weekly','w','Multiple physiotherapy &amp; physical-training sessions'],['Weekly','w','Follow-up call on the meals'],['Monthly','m','Doctor check-in &amp; plan update'],['Ongoing','o','Emotional wellbeing, tracked throughout']],
   callout:'We never let you or your family be left alone worrying. We execute, and we own every outcome.',
   resp:'Your family, our responsibility.'},
- {n:'04',node:'n',short:'Reports',mini:'Progress updates on WhatsApp, for <em>the whole family</em>',title:'Reports your whole family can see',
+ {n:'04',node:'n',short:'Reports',mini:'Progress updates on <em>WhatsApp and the app</em>',title:'Reports your whole family can see',
   lead:'Not just a monthly summary. We keep everyone in the loop, all the time.',
   reports:['Weekly nutrition improvement','Vitals check-in','Exercise progress','Full monthly report'],
   wa:'Shared with you and your family on WhatsApp, with a dedicated family group for full transparency and trust.'}
@@ -1241,7 +1597,9 @@ var WA_ICON='<span class="jwa-ic"><svg viewBox="0 0 24 24" fill="currentColor" a
 var CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 // single-hue iteration of the journey timeline (one blue family, calmer)
 function journeyMini2(){return '<div class="jm2">'+JOURNEY.map(function(p){
- return '<div class="jm2-step"><span class="jm2-node">'+p.n+'</span><div class="jm2-h">'+p.mini.replace('WhatsApp','<span style="white-space:nowrap">'+WA_ICON.replace('jwa-ic','wamini')+'WhatsApp</span>')+'</div></div>';
+ var h=p.mini.replace('WhatsApp','<span style="white-space:nowrap">'+WA_ICON.replace('jwa-ic','wamini')+'WhatsApp</span>');
+ if(p.n==='04') h+='<a class="jm2-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Download the app</a>';
+ return '<div class="jm2-step"><span class="jm2-node">'+p.n+'</span><div class="jm2-h">'+h+'</div></div>';
 }).join('')+'</div>'}
 function journey(){return '<div class="journey">'+JOURNEY.map(function(p){
  var b='<div class="jhead">'+p.title+'</div><p class="jlead">'+p.lead+'</p>';
@@ -1289,24 +1647,13 @@ function reframe(eb,ttl,intro,reasons){return '<div class="reframe">'+(eb?'<span
 function heroTall(){
  return '<section class="hero tall top scene">'+
   '<div class="bgwrap"><div class="bgslide scenebg"></div></div>'+
-  '<img class="herofig figA" src="hero-move.png?v=2" alt="">'+
-  '<img class="herofig figB" src="hero-eat.png?v=2" alt="">'+
-  '<img class="herofig figC" src="hero-feel.png?v=2" alt="">'+
-  '<span class="herolabel labA">by how they move</span>'+
-  '<span class="herolabel labC">by how they feel</span>'+
-  '<span class="herolabel labB">by how they eat</span>'+
+  '<img class="herocouple" src="couple.png?v=1" alt="">'+
   '<div class="grain"></div>'+
   '<h1>Care that comes to you<span class="it">and owns the outcome</span></h1>'+
-  '<p class="sub">One team for seniors and adults, caring for their health and lifestyle at home</p>'+
+  '<p class="sub">One team for you and your loved ones, caring for their health and lifestyle at home</p>'+
   '<div class="hcta col">'+
-    '<button class="btn light xl block" data-go="/quiz">Book a trial</button>'+
+    '<button class="btn light xl block" data-go="/quiz">Book a free trial</button>'+
     '<a class="hlink" data-go="/how-we-work">See how we work</a>'+
-  '</div>'+
-  '<div class="herobackers">'+
-    '<span class="bk-lead">Operators from</span>'+
-    '<div class="bk-marquee"><div class="bk-track">'+
-      (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
-    '</div></div>'+
   '</div>'+
  '</section>'}
 function heroBand(g,eyebrow,h1,sub,cta){
@@ -1366,20 +1713,17 @@ function wheelCard(w,idx){
    '</div>'}).join('');
  var dots=w.segs.map(function(s,i){return '<i class="'+s.lane+'" style="animation-delay:'+(i*4)+'s"></i>'}).join('');
  return '<div class="card wcard">'+
-  '<div class="weyebrow">Example condition</div>'+
   '<h3 class="wbig">'+w.hub+'</h3>'+
   '<p class="wsub">Not just <em>'+w.naive+'</em>, but something you might have felt too.</p>'+
   '<div class="wphoto">'+(w.photo?'<img src="'+w.photo+'" alt="'+w.hub+'" loading="lazy">':slot(w.hub+' &middot; photo',['green','warm','blue'][idx%3]))+'</div>'+
   '<div class="wdeck">'+cards+'</div>'+
   '<div class="wdots">'+dots+'</div>'+
-  '<p class="wm-head">Each root needs its own care</p>'+
-  '<p class="wcap">We treat each symptom at the root, to improve the whole condition.</p>'+
 '</div>'}
 function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Browse free exercises')+'</div></div>'}
 function footer(){
  return '<footer class="foot"><span class="brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Kinetic Age</span>'+
   '<p>[PLACEHOLDER] One line on what Kinetic Age does for older adults and the families who care for them.</p>'+
-  '<button class="btn light" data-go="/quiz">Book Trial</button>'+
+  '<button class="btn light" data-go="/quiz">Book a free trial</button>'+
   '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/exercises">Exercises</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
   '<h5>Contact</h5><a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'">WhatsApp us</a><a href="#">[PLACEHOLDER] phone</a><a href="#">[PLACEHOLDER] email</a><a href="#">[PLACEHOLDER] city</a>'+
@@ -1396,13 +1740,20 @@ function backedBy(){
 /* ===================== VIEWS ===================== */
 function vHome(){
  return heroTall()+
+ '<div class="hero-proof"><div class="herobackers">'+
+   '<span class="bk-lead">Operators from</span>'+
+   '<div class="bk-marquee"><div class="bk-track">'+
+     (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
+   '</div></div>'+
+ '</div></div>'+
  statStrip()+
  '<section class="sec"><h2 class="h2">What our <span class="it">members</span> say</h2>'+
    '<div class="swipe">'+TESTIMONIALS.map(testiCard2).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">See what all conditions we treat</a></div>'+
  '</section>'+
- '<section class="sec wsec"><h2 class="h2">Where you feel it isn&rsquo;t where it starts</h2><p class="p muted">The surface symptom is one slice. Each hidden root maps to the care that fixes it.</p>'+
+ '<section class="sec wsec"><h2 class="h2">Where you <span class="it">feel</span> it<br>isn&rsquo;t where it <span class="it">starts</span></h2><p class="p muted">The pain you feel is only part of it. We find each cause underneath and give it the right care.</p>'+
    '<div class="swipe">'+WHEELS.map(wheelCard).join('')+'</div>'+
+   '<p class="wcap-out">Every symptom needs its own care, so we treat each one of them.</p>'+
    '<div class="secta"><a class="btn line" data-go="/conditions">Understand your condition</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
@@ -1410,16 +1761,15 @@ function vHome(){
    '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
  '</section>'+
  '<section class="sec">'+
-   '<h2 class="h2" style="max-width:16ch">Why recovery feels long</h2>'+
-   '<p class="p muted" style="max-width:40ch">A trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
-   '<p class="p" style="max-width:40ch;color:var(--ink)">So we put everything under one roof</p>'+
+   '<h2 class="h2" style="max-width:16ch">How we make recovery <span class="it">smoother</span></h2>'+
+   '<p class="p muted" style="max-width:40ch">Traditionally, a trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
+   '<p class="p" style="max-width:40ch;color:var(--ink)">We put everything together, under one roof.</p>'+
    pillarsStack()+'<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">The team behind <span class="it">your plan</span></h2><p class="p muted">Each specialist is chosen for their experience with older adults, and they all work from the same plan.</p>'+
    '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"><span class="ptag">'+p.role+'</span></div><div class="pbody"><div class="pname">'+p.name+'</div>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'+
    '<div class="secta"><a class="btn line" data-go="/about">Meet the team</a></div>'+
  '</section>'+
- metricsRow3()+
  backedBy()+
  socialStrip()+
  '<section class="sec"><h2 class="h2">The things families ask first</h2><div style="margin-top:22px">'+faqList(HOME_FAQS)+'</div></section>'+
@@ -1459,12 +1809,318 @@ function vService(slug){
 function vHow(){
  return heroBand('g-blue','How we work','One assessment. One doctor.<span class="it">One plan that adapts.</span>','[PLACEHOLDER] A short statement of the operating idea: we look at the whole person, design around it, and keep the family in the loop.')+
  '<section class="sec"><span class="kick">The system</span><h2 class="h2">Five pillars, one connected plan.</h2><p class="p muted">[PLACEHOLDER] How the pillars feed each other instead of working in silos. Each name opens its page.</p>'+pillars()+'</section>'+
- '<section class="sec"><span class="kick">The first visit</span><h2 class="h2">A real assessment, then a report you can hold.</h2>'+slot('The family report')+'<p class="p muted">[PLACEHOLDER] What the first home visit covers, and the plain-language report you and your family receive afterward.</p><div style="margin-top:16px"><button class="btn" data-go="/quiz">Book Trial</button></div></section>'+
+ '<section class="sec"><span class="kick">The first visit</span><h2 class="h2">A real assessment, then a report you can hold.</h2>'+slot('The family report')+'<p class="p muted">[PLACEHOLDER] What the first home visit covers, and the plain-language report you and your family receive afterward.</p><div style="margin-top:16px"><button class="btn" data-go="/quiz">Book a free trial</button></div></section>'+
  '<section class="sec"><span class="kick">Built for one person</span><h2 class="h2">Plans shaped around the person, not a template.</h2><p class="p muted">[PLACEHOLDER] How the plan is tailored to your specific condition and goals, whether it is for you or an ageing parent.</p>'+slot('Personalised plan')+'<div style="margin-top:16px">'+link('/conditions','Browse conditions we plan for')+'</div></section>'+
  '<section class="sec"><span class="kick">Getting started</span><h2 class="h2">From first hello to first session.</h2><p class="p muted">Four phases, one connected team behind every step, for you and your family.</p>'+journey()+'</section>'+
  '<section class="sec"><span class="kick">What you will see</span><h2 class="h2">Progress, week by week.</h2><p class="p muted">[PLACEHOLDER] How reporting keeps the family informed as the plan unfolds.</p><div class="steps tline">'+REPORT_TIMELINE.map(function(r){return '<div class="step"><span class="w">'+r.w+'</span><div><h4>'+r.t+'</h4><p>'+r.d+'</p></div></div>'}).join('')+'</div><div style="margin-top:18px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></div></section>'+
  '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">How the process actually runs.</h2><div style="margin-top:18px">'+faqList(HOW_FAQS)+'</div></section>'+
  footer()}
+
+/* how-we-work v2 — blank sandbox to iterate on. Old vHow() kept intact for side-by-side. */
+function jwBars(){
+ var f=[['Pain',80,.30],['Mobility',52,.40],['Strength',64,.50]];
+ return '<div class="vc-viz"><div class="vc-bars">'+f.map(function(b){return '<i style="--h:'+b[1]+'%;--d:'+b[2]+'s"></i>'}).join('')+
+   '</div><div class="vc-axis"></div><div class="vc-xlab">'+f.map(function(b){return '<span>'+b[0]+'</span>'}).join('')+'</div></div>'}
+function jwRoutine(){
+ var seg=[['#1f8c6a',34],['#213f99',24],['#f5824f',16],['#9aa9cf',26]], off=0;
+ var arcs=seg.map(function(s){var a='<circle class="rg" pathLength="100" r="16" cx="21" cy="21" fill="none" stroke="'+s[0]+'" stroke-width="5" stroke-dasharray="'+(s[1]-1.5)+' '+(100-s[1]+1.5)+'" stroke-dashoffset="'+(-off)+'"/>'; off+=s[1]; return a;}).join('');
+ return '<div class="vc-viz"><div class="vc-ring"><svg viewBox="0 0 42 42">'+
+   '<circle pathLength="100" r="16" cx="21" cy="21" fill="none" stroke="#e7eef4" stroke-width="5"/>'+
+   '<g transform="rotate(-90 21 21)">'+arcs+'</g>'+
+   '<text x="21" y="21.4" text-anchor="middle" dominant-baseline="central" class="rc">24h</text>'+
+   '</svg></div></div>'}
+function jwBP(){
+ var sys=[[8,28],[44,36],[80,32],[116,46],[152,52],[188,62]], dia=[[8,74],[44,72],[80,78],[116,80],[152,86],[188,90]];
+ var pl=function(a){return a.map(function(p){return p[0]+','+p[1]}).join(' ')};
+ var dots=function(a,c){return a.map(function(p,i){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="2.6" fill="'+c+'" style="animation-delay:'+(.6+i*.1)+'s"/>'}).join('')};
+ return '<div class="vc-viz"><div class="vc-bp">'+
+   '<div class="leg"><b style="color:var(--blue)"><i class="s" style="background:var(--blue)"></i>SYS</b><b style="color:var(--orange-ink)"><i class="s" style="background:var(--orange)"></i>DIA</b></div>'+
+   '<svg viewBox="0 0 196 108" preserveAspectRatio="none">'+
+     '<defs><linearGradient id="bpFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#213f99" stop-opacity=".16"/><stop offset="1" stop-color="#213f99" stop-opacity="0"/></linearGradient></defs>'+
+     '<line class="grid" x1="0" y1="22" x2="196" y2="22"/><line class="grid" x1="0" y1="56" x2="196" y2="56"/><line class="grid" x1="0" y1="90" x2="196" y2="90"/>'+
+     '<path class="area" d="M'+pl(sys).replace(/ /g,' L')+' L188,108 L8,108 Z"/>'+
+     '<path class="ln sys" d="M'+pl(sys).replace(/ /g,' L')+'"/>'+
+     '<path class="ln dia" d="M'+pl(dia).replace(/ /g,' L')+'"/>'+
+     dots(sys,'#213f99')+dots(dia,'#f5824f')+
+   '</svg></div></div>'}
+function jwDoc(){
+ var spark=[40,62,52,78,70,90,84];
+ return '<div class="vc-viz"><div class="vc-doc"><div class="vc-paper">'+
+   '<div class="dh"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="t">Assessment<i>Kinetic Age</i></span></div>'+
+   '<div class="ln" style="width:88%"></div><div class="ln" style="width:64%"></div>'+
+   '<div class="spark">'+spark.map(function(h){return '<i style="height:'+h+'%"></i>'}).join('')+'</div>'+
+   '<div class="ln" style="width:74%"></div><div class="ln" style="width:50%"></div>'+
+   '<div class="seal"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+   '</div></div></div>'}
+function jwRing(){
+ var iEx='<path d="M3 12h4l2-6 4 13 2-7h6"/>',
+     iNu='<path d="M5 19c0-7 5-12 14-12 0 9-5 14-14 12Z"/><path d="M9 15c2-3 5-5 8-6"/>',
+     iWe='<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/>',
+     iDoc='<path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/>';
+ var P=[['Physio','#213f99',iEx],['Nutritionist','#1f8c6a',iNu],
+        ['Doctor','linear-gradient(140deg,#27479e,#13265a)',iDoc],['Wellness coach','#7b54c4',iWe]];
+ var R=140, pos=[0,1,2,3].map(function(k){var r=k*Math.PI/2;return [R*Math.sin(r),R*Math.cos(r)]});
+ var web=[[0,1],[1,2],[2,3],[3,0],[0,2],[1,3]].map(function(e,i){var a=pos[e[0]],b=pos[e[1]],
+     dx=b[0]-a[0],dz=b[1]-a[1],L=Math.sqrt(dx*dx+dz*dz),phi=Math.atan2(-dz,dx)*180/Math.PI,
+     mx=(a[0]+b[0])/2,mz=(a[1]+b[1])/2,m=Math.sqrt(mx*mx+mz*mz);
+   return '<i class="ring-edge'+(i>3?' diag':'')+'" style="--len:'+L.toFixed(1)+'px;--b:'+phi.toFixed(1)+'deg;--m:'+m.toFixed(1)+'px"></i>'}).join('');
+ var cards=P.map(function(p,i){
+   return '<div class="ring-card" style="--a:'+(i*90)+'deg">'+
+     '<div class="rc-face rc-front"><span class="rc-ic" style="background:'+p[1]+'"><svg viewBox="0 0 24 24">'+p[2]+'</svg></span>'+
+       '<span class="rc-pre">Your</span><div class="rc-nm">'+p[0]+'</div></div>'+
+     '<div class="rc-face rc-back"></div></div>'}).join('');
+ return '<div class="jw-ring"><div class="ring3d">'+web+cards+'</div></div>'}
+function jwCal(mode){ // 'ex' = exercise only (what others do); otherwise full (D + E + N)
+ var days=['S','M','T','W','T','F','S'], eDays=[1,3,5]; // green E on Mon/Wed/Fri, big yellow N on Sat
+ var head='<div class="cal-head">'+days.map(function(d){return '<span>'+d+'</span>'}).join('')+'</div>';
+ var weeks='';
+ for(var w=0;w<4;w++){var cells='';
+   for(var c=0;c<7;c++){var date=w*7+c+1, m=eDays.indexOf(c)>-1?'<span class="cal-e">E</span>':'';
+     if(mode!=='ex'){if(date===1) m='<span class="cal-d">D</span>'; else if(c===6) m='<span class="cal-n">N</span>';}
+     cells+='<span class="cal-day"><i class="cal-dt">'+date+'</i>'+m+'</span>'}
+   weeks+='<div class="cal-week">'+cells+'</div>'}
+ return '<div class="jw-cal'+(mode==='ex'?' jw-cal-plain':'')+'">'+head+weeks+'</div>'}
+function jwWeek(mode){ // single-week view; full = D ribbon + N daily + E (Mon/Wed/Fri), 'ex' = E only
+ var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], dates=[12,13,14,15,16,17,18];
+ var ex={0:'Physio',2:'Training',4:'Physio'}; // exercise days
+ var row=days.map(function(d,i){var mk,rest=false;
+   if(mode==='ex'){
+     if(ex[i]!==undefined) mk='<span class="cal-e">E</span><span class="wk-lb">Exercise</span>';
+     else {mk='<span class="wk-rest"></span>';rest=true;}
+   } else {
+     mk=(ex[i]!==undefined?'<span class="cal-e">E</span>':'')+'<span class="cal-n">N</span>';
+   }
+   return '<div class="wk-day'+(rest?' rest':' on')+'"><span class="wk-dn">'+d+'</span><span class="wk-dt">'+dates[i]+'</span><div class="wk-mk">'+mk+'</div></div>'}).join('');
+ var doc=mode==='ex'?'':'<div class="wk-doc"><span class="lg lg-d">D</span><span><b>Doctor</b> oversees the whole week, every week.</span></div>';
+ return '<div class="jw-week'+(mode==='ex'?' wk-plain':'')+'">'+doc+'<div class="wk-row">'+row+'</div></div>'}
+function jwProviders(){ // five tappable provider cards -> service pages
+ var ic={ph:'<path d="M3 12h4l2-6 4 13 2-7h6"/>',
+   tr:'<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"/>',
+   nu:'<path d="M5 19c0-7 5-12 14-12 0 9-5 14-14 12Z"/><path d="M9 15c2-3 5-5 8-6"/>',
+   we:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/>',
+   dr:'<path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/>'};
+ var P=[['#213f99','/services/physiotherapy',ic.ph,'Physio','sets the right movements and how often, safe for your body.'],
+   ['#e08a2e','/services/strength-training',ic.tr,'Physical training','rebuilds your strength step by step, with guided sessions paced to your body.'],
+   ['#1f8c6a','/services/nutrition',ic.nu,'Nutrition','shapes a meal plan to your condition and what your body needs.'],
+   ['#7b54c4','/services/mental-wellness',ic.we,'Emotional wellbeing','keeps your mood and motivation steady through the journey.'],
+   ['#27479e','/services/doctor-oversight',ic.dr,'The doctor','oversees the other four, reads every report, and keeps it one connected plan.']];
+ return '<div class="jw-pcards">'+P.map(function(p){
+   return '<a class="pcard" style="--c:'+p[0]+'" data-go="'+p[1]+'">'+
+     '<span class="pcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+p[2]+'</svg></span>'+
+     '<span class="pcard-tx"><b>'+p[3]+'</b> '+p[4]+'</span>'+
+     '<span class="pcard-arr"></span></a>'}).join('')+
+ '</div>'}
+function jwReports(){
+ var grp='<svg viewBox="0 0 24 24"><path d="M8.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM3 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5v.5H3V19Zm12.5-4.7c2.3.2 4.5 2 4.5 4.7v.5h-4v-.5c0-1.7-.6-3.3-1.6-4.5.4-.1.7-.2 1.1-.2Z"/></svg>';
+ var chart='<svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M22 20H2"/></svg>';
+ var doc='<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>';
+ return '<div class="jw-wa">'+
+   '<div class="wa-top"><span class="wa-av">'+grp+'</span><div><div class="wa-name">Your Kinetic Age group</div><div class="wa-mem">You, your family, the doctor &amp; every provider</div></div></div>'+
+   '<div class="wa-body">'+
+     '<div class="wa-sys">Every report is shared here with you and your family</div>'+
+     '<div class="wa-msg them wa-phys"><span class="wa-from">Physiotherapist</span><span class="wa-att"><span class="wa-att-ic">'+chart+'</span>Exercise &amp; progress report</span></div>'+
+     '<div class="wa-msg them wa-nut"><span class="wa-from">Nutritionist</span><span class="wa-att"><span class="wa-att-ic">'+doc+'</span>Nutrition report</span></div>'+
+     '<div class="wa-msg them wa-doc"><span class="wa-from">Doctor</span>Reviewed everything. The plan is on track.</div>'+
+     '<div class="wa-msg me">So clear, thank you. Means a lot to the family.</div>'+
+   '</div>'+
+ '</div>'}
+function jwRow5(){
+ var iDoc='<path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/>',
+     iPh='<path d="M3 12h4l2-6 4 13 2-7h6"/>',
+     iTr='<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"/>',
+     iNu='<path d="M5 19c0-7 5-12 14-12 0 9-5 14-14 12Z"/><path d="M9 15c2-3 5-5 8-6"/>',
+     iWe='<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/>';
+ var T=[['Doctor','#16204a',iDoc],['Physio','#213f99',iPh],['Training','#e08a2e',iTr],['Nutrition','#1f8c6a',iNu],['Wellbeing','#7b54c4',iWe]];
+ return '<div class="jw-row5">'+T.map(function(t,i){
+   return '<div class="r5" style="--i:'+i+'"><span class="r5-ic" style="background:'+t[1]+'"><svg viewBox="0 0 24 24">'+t[2]+'</svg></span><span class="r5-nm">'+t[0]+'</span></div>'}).join('')+
+ '</div>'}
+function jwCalAnim(){
+ var days=['S','M','T','W','T','F','S'], eDays=[1,3,5], ei=0, ni=0, weeks='';
+ for(var w=0;w<4;w++){var cells='';
+   for(var c=0;c<7;c++){var date=w*7+c+1, m='';
+     if(date===1) m='<span class="cal-d">D</span>';
+     else if(c===6){m='<span class="cal-n" style="--d:'+(ni*0.12).toFixed(2)+'s">N</span>';ni++;}
+     else if(eDays.indexOf(c)>-1){m='<span class="cal-e" style="--d:'+(ei*0.07).toFixed(2)+'s">E</span>';ei++;}
+     cells+='<span class="cal-day"><i class="cal-dt">'+date+'</i>'+m+'</span>'}
+   weeks+='<div class="cal-week" style="--wd:'+(w*0.1).toFixed(2)+'s">'+cells+'</div>'}
+ var head='<div class="cal-head">'+days.map(function(d){return '<span>'+d+'</span>'}).join('')+'</div>';
+ var leg='<ul class="cal-leg">'+
+   '<li class="lgr lgr-d"><span class="lg lg-d">D</span><div><b>Doctor</b> Cares for you and oversees the whole team all month.</div></li>'+
+   '<li class="lgr lgr-e"><span class="lg lg-e">E</span><div><b>Exercise</b> Scheduled physio and physical training, three times every week.</div></li>'+
+   '<li class="lgr lgr-n"><span class="lg lg-n">N</span><div><b>Nutrition</b> Tracks your daily meals and adjusts them, with a weekly follow-up call and nutrition report.</div></li>'+
+   '</ul>';
+ return '<div class="cal-panel"><div class="jw-calx" id="calAnim"><div class="cal-ttl">What we do</div><div class="jw-cal">'+head+weeks+'</div>'+leg+'</div></div>'}
+function vHow2(){
+ return '<div class="jw">'+
+   '<section class="jw-banner"><div class="bgslide g-blue"></div><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and own every outcome, for you and your family.</p></section>'+
+   '<section class="sec jw-point">'+
+     '<div class="jw-step"><span class="n">01</span><h3>Assessment and Reporting</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>We provide a home service to analyse your condition, vitals, and routine in real depth, and turn it into a <span class="b">report specific to you</span>.</p>'+
+       '<div class="vcards" id="condSwipe">'+
+         '<div class="vcard vc-green"><span class="vc-tag"><span class="dot"></span>Condition assessment</span>'+jwBars()+'</div>'+
+         '<div class="vcard vc-blue"><span class="vc-tag"><span class="dot"></span>Vitals assessment</span>'+jwBP()+'</div>'+
+         '<div class="vcard vc-gold"><span class="vc-tag"><span class="dot"></span>Routine assessment</span>'+jwRoutine()+'</div>'+
+         '<div class="vcard vc-plum"><span class="vc-tag"><span class="dot"></span>Report</span>'+jwDoc()+'</div>'+
+       '</div>'+
+       '<div class="swipe-dots" id="condDots"><i class="on"></i><i></i><i></i><i></i></div>'+
+     '</div>'+
+   '</section>'+
+   '<section class="sec jw-appsec">'+
+     '<div class="jw-cta"><button class="btn block xl" data-go="/quiz">Book a free trial</button></div>'+
+     '<div class="appdl">'+
+       '<div class="appdl-body">'+
+         '<div class="appdl-eyebrow">Kinetic Age app</div>'+
+         '<div class="appdl-ttl">Download the app to track your trial and report.</div>'+
+         '<button class="appdl-btn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Tap to download</button>'+
+       '</div>'+
+       '<div class="appdl-shots">'+
+         '<div class="ph ph-b"><div class="ph-scr"><div class="ph-hd dim">This week</div><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div></div>'+
+         '<div class="ph ph-f"><div class="ph-scr"><div class="ph-hd">Today</div>'+
+           '<div class="ph-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#e7eef4" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#1f8c6a" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="82 100"/></svg><b>4/5</b></div>'+
+           '<div class="ph-li green"><i></i>Exercise</div><div class="ph-li amber"><i></i>Nutrition</div></div></div>'+
+       '</div>'+
+     '</div>'+
+   '</section>'+
+   '<section class="sec jw-point">'+
+     '<div class="jw-step"><span class="n">02</span><h3>Personalised plans and providers</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Once onboarded, we shape a plan <span class="b">hyper-personalised</span> to the exact condition. Every provider connects directly and works on the case.</p>'+
+       '<div class="jw-ringbox">'+jwRing()+'<p class="jw-cap">Your provider team stays connected with each other, working together on your personalised needs.</p></div>'+
+       '<p style="margin-top:14px">Here is what each one does, <span class="b">tap any to learn more</span>:</p>'+
+       jwProviders()+
+       '<div style="margin-top:16px">'+link('/conditions','See all conditions we treat')+'</div>'+
+     '</div>'+
+   '</section>'+
+   '<section class="sec jw-point">'+
+     '<div class="jw-step"><span class="n">03</span><h3>Execution</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Every day, all our different providers track and run your plan together, and <span class="b">every month we reassess everything</span>. It is care that helps you heal faster, smoother, and stress-free.</p>'+
+       '<div class="cal-swipe" id="calSwipe">'+
+         '<div class="cal-panel">'+
+           '<div class="cal-ttl">What we do</div>'+
+           jwWeek()+
+           '<ul class="cal-leg">'+
+             '<li><span class="lg lg-d">D</span><div><b>Doctor</b> Cares for you and oversees the whole team all month.</div></li>'+
+             '<li><span class="lg lg-n">N</span><div><b>Nutrition</b> Tracks your daily meals and adjusts them, with a weekly follow-up call and nutrition report.</div></li>'+
+             '<li><span class="lg lg-e">E</span><div><b>Exercise</b> Scheduled physio and physical training, three times every week.</div></li>'+
+           '</ul>'+
+         '</div>'+
+         '<div class="cal-panel">'+
+           '<div class="cal-ttl">What others do</div>'+
+           jwWeek('ex')+
+           '<ul class="cal-leg">'+
+             '<li><span class="lg lg-e">E</span><div><b>Exercise</b> A generic routine, the same sessions for everyone.</div></li>'+
+             '<li><span class="lg lg-none">&ndash;</span><div>No nutrition, wellbeing, or doctor in the loop.</div></li>'+
+             '<li><span class="lg lg-none">&ndash;</span><div>No monthly reassessment, so nothing adapts.</div></li>'+
+           '</ul>'+
+         '</div>'+
+       '</div>'+
+       '<div class="swipe-dots" id="calDots"><i class="on"></i><i></i></div>'+
+       '<p class="jw-close">We never leave you or your condition alone. We help you throughout, every day.</p>'+
+     '</div>'+
+   '</section>'+
+   '<section class="sec jw-point">'+
+     '<div class="jw-step"><span class="n">04</span><h3>Reporting on WhatsApp</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Every assessment, session, and provider note lands in one <span class="b">dedicated WhatsApp group</span> for the family, so the whole journey is visible as it happens.</p>'+
+       jwReports()+
+     '</div>'+
+   '</section>'+
+   '<section class="sec jw-pricing">'+
+     '<h2 class="h2">Plans and pricing</h2>'+
+     '<div class="price-cards">'+
+       '<div class="price-card">'+
+         '<div class="pc-row"><span class="pc-term">3 months</span><span class="pc-range">&#8377;XX,XXX&ndash;XX,XXX<span>/mo</span></span></div>'+
+         '<p class="pc-note">A focused start to build momentum and see the first results.</p>'+
+       '</div>'+
+       '<div class="price-card pc-best">'+
+         '<span class="pc-tag">Best value</span>'+
+         '<div class="pc-row"><span class="pc-term">6 months</span><span class="pc-range">&#8377;XX,XXX&ndash;XX,XXX<span>/mo</span></span></div>'+
+         '<p class="pc-note">The full journey at the lowest monthly rate.</p>'+
+       '</div>'+
+     '</div>'+
+     '<p class="pc-foot">The doctor scopes the right intensity, so you only pay for the care you actually need.</p>'+
+     '<div class="jw-cta jw-btns">'+
+       '<button class="btn block xl" data-go="/quiz">Take the quiz to know your pricing</button>'+
+       '<button class="btn block line" data-go="/quiz">Book a free trial</button>'+
+       '<button class="btn block line" data-go="/quiz">Request a call back</button>'+
+     '</div>'+
+   '</section>'+
+ '</div>'}
+
+function jw3nav(a){var d='';for(var i=0;i<4;i++)d+='<i class="'+(i===a?'on':'')+'"></i>';return '<div class="swipe-dots jw3nav">'+d+'</div>'}
+function vHow3(){
+ return '<div class="jw jw3">'+
+   '<section class="jw3-panel jw3-cover"><div class="bgslide g-blue"></div>'+
+     '<h1>Journey <span class="it">with us</span></h1>'+
+     '<p>We provide the whole plan, run it, and own every outcome, for you and your family.</p>'+
+     '<div class="jw3-cue">Swipe to begin</div>'+
+   '</section>'+
+   '<section class="jw3-panel"><div class="jw3-body">'+
+     '<div class="jw-step"><span class="n">01</span><h3>We start with a deep assessment, not a quick look.</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>We come to your home to review your condition, vitals, and daily routine, then <span class="b">quantify all of it</span> to find what is really driving your health. It all becomes one report you can hold.</p>'+
+       '<div class="vcards" id="condSwipe">'+
+         '<div class="vcard vc-green"><span class="vc-tag"><span class="dot"></span>Condition analysis</span>'+jwBars()+'</div>'+
+         '<div class="vcard vc-blue"><span class="vc-tag"><span class="dot"></span>Vitals analysis</span>'+jwBP()+'</div>'+
+         '<div class="vcard vc-gold"><span class="vc-tag"><span class="dot"></span>Routine analysis</span>'+jwRoutine()+'</div>'+
+         '<div class="vcard vc-plum"><span class="vc-tag"><span class="dot"></span>Report</span>'+jwDoc()+'</div>'+
+       '</div>'+
+       '<div class="swipe-dots" id="condDots"><i class="on"></i><i></i><i></i><i></i></div>'+
+       '<div class="appdl">'+
+         '<div class="appdl-body">'+
+           '<div class="appdl-eyebrow">Kinetic Age app</div>'+
+           '<div class="appdl-ttl">Download the app to track your trial and report.</div>'+
+           '<button class="appdl-btn"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Tap to download</button>'+
+         '</div>'+
+         '<div class="appdl-shots">'+
+           '<div class="ph ph-b"><div class="ph-scr"><div class="ph-hd dim">This week</div><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div></div>'+
+           '<div class="ph ph-f"><div class="ph-scr"><div class="ph-hd">Today</div>'+
+             '<div class="ph-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#e7eef4" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#1f8c6a" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="82 100"/></svg><b>4/5</b></div>'+
+             '<div class="ph-li green"><i></i>Exercise</div><div class="ph-li amber"><i></i>Nutrition</div></div></div>'+
+         '</div>'+
+       '</div>'+
+     '</div>'+
+   '</div>'+jw3nav(0)+'</section>'+
+   '<section class="jw3-panel"><div class="jw3-body">'+
+     '<div class="jw-step"><span class="n">02</span><h3>Then we build one plan, made only for you.</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Once you are onboarded, we shape a plan <span class="b">hyper-personalised</span> to your exact condition. Every provider connects with you directly and works on your case, each writing their own part, and the doctor brings it all together into one plan.</p>'+
+       jwRow5()+
+       '<ul class="jw-plist">'+
+         '<li class="pl-nutri"><b>Nutrition.</b> Builds your meal plan around your exact condition and what your body needs.</li>'+
+         '<li class="pl-move"><b>Movement.</b> Your physio and trainer decide and set the exercises and timings to what your body can safely handle, and progress it as you do.</li>'+
+         '<li class="pl-mind"><b>Emotional wellbeing.</b> Tracks your mood and motivation week to week.</li>'+
+         '<li class="pl-docp"><b>Doctor.</b> Runs your assessment, reads every provider&rsquo;s report, and keeps all four working as one plan.</li>'+
+       '</ul>'+
+       '<div style="margin-top:16px">'+link('/conditions','See all conditions we treat')+'</div>'+
+       '<div class="jw-cta"><button class="btn" data-go="/quiz">Book a free trial</button></div>'+
+     '</div>'+
+   '</div>'+jw3nav(1)+'</section>'+
+   '<section class="jw3-panel"><div class="jw3-body">'+
+     '<div class="jw-step"><span class="n">03</span><h3>Then the whole team executes it, as one.</h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Every day, all our different providers track and run your plan together, and <span class="b">every month we reassess everything</span>. It is care that helps you heal faster, smoother, and stress-free.</p>'+
+       '<div class="cal-swipe" id="calSwipe">'+
+         jwCalAnim()+
+         '<div class="cal-panel">'+
+           '<div class="cal-ttl">What others do</div>'+
+           jwCal('ex')+
+         '</div>'+
+       '</div>'+
+       '<div class="swipe-dots" id="calDots"><i class="on"></i><i></i></div>'+
+       '<p class="jw-close">We never leave you or your condition alone. We help you throughout, every day.</p>'+
+     '</div>'+
+   '</div>'+jw3nav(2)+'</section>'+
+   '<section class="jw3-panel"><div class="jw3-body">'+
+     '<div class="jw-step"><span class="n">04</span><h3>And every report reaches you and your <span style="white-space:nowrap">family <svg viewBox="0 0 24 24" fill="#25d366" style="width:.82em;height:.82em;vertical-align:-.08em;margin-left:1px"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.73 1.2c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg></span></h3></div>'+
+     '<div class="jw-lead">'+
+       '<p>Assessment, exercise, progress, nutrition, and every note from the doctor or a provider lands in one place. It all goes to a <span class="b">dedicated WhatsApp group</span> for you and your family, so everyone sees the journey as it happens, with nothing hidden.</p>'+
+       jwReports()+
+     '</div>'+
+   '</div>'+jw3nav(3)+'</section>'+
+ '</div>'}
 
 var EX_FILTERS=['All','Knee Pain','Post-Stroke Recovery','Balance and Falls'];
 var exFilter='All';
@@ -1487,7 +2143,7 @@ function vAbout(){
  '<section class="sec">'+slot('Team group photo')+'</section>'+
  '<section class="sec"><span class="kick">From the founder</span><h2 class="h2">Why we keep it personal.</h2>'+slot('Founder&rsquo;s message','video')+'<p class="p muted">[PLACEHOLDER] A short framing of the founder’s message in the video.</p></section>'+
  backedBy()+
- '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">[PLACEHOLDER] One reassuring line before the trial ask.</p><button class="btn" data-go="/quiz">Book Trial</button></section>'+
+ '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">[PLACEHOLDER] One reassuring line before the trial ask.</p><button class="btn" data-go="/quiz">Book a free trial</button></section>'+
  footer()}
 
 var csSvc='all', csOpen=null, csBackScroll=0;
@@ -1566,7 +2222,7 @@ function vQuiz(){
   if(dur==='Over 6 months'&&hl) obs+='<div class="o hl">Pain lasting over 6 months alongside '+lc(hl)+' usually has more than one contributing factor.</div>';
   if(tried==='Home exercises'||tried==='Nothing yet') obs+='<div class="o">Home effort helps, but it works best when someone confirms what is actually causing the problem.</div>';
   obs+='<div class="o">You told us the main concern is '+lc(concern)+'. Your full report is on its way to WhatsApp.</div>';
-  body='<div class="quiz-hint">Your quick read</div><div class="quiz-q">Here is what stands out.</div><div class="obs">'+obs+'</div><button class="btn block" data-go="/quiz">Book Trial</button>';
+  body='<div class="quiz-hint">Your quick read</div><div class="quiz-q">Here is what stands out.</div><div class="obs">'+obs+'</div><button class="btn block" data-go="/quiz">Book a free trial</button>';
  }
  return '<div class="quiz">'+topbar+body+'</div>';
 }
@@ -1577,10 +2233,12 @@ var app=document.getElementById('app'), scroller=document.getElementById('scroll
     drawer=document.getElementById('drawer');
 function path(){var h=location.hash.replace(/^#/,'');return h||'/';}
 function render(){
- var pth=path(), parts=pth.split('/').filter(Boolean), html, isQuiz=(parts[0]==='quiz'), exCta=(parts[0]==='exercises');
+ var pth=path(), parts=pth.split('/').filter(Boolean), html, isQuiz=(parts[0]==='quiz'), exCta=(parts[0]==='exercises'), isHow=(parts[0]||'').indexOf('how-we-work')===0;
  if(parts[0]==='conditions'&&parts[1]) html=vCondition(parts[1]);
  else if(parts[0]==='conditions') html=vConditions();
  else if(parts[0]==='services'&&parts[1]) html=vService(parts[1]);
+ else if(parts[0]==='how-we-work-3') html=vHow3();
+ else if(parts[0]==='how-we-work-2') html=vHow2();
  else if(parts[0]==='how-we-work') html=vHow();
  else if(parts[0]==='exercises') html=vExercises();
  else if(parts[0]==='about') html=vAbout();
@@ -1589,14 +2247,15 @@ function render(){
  else html=vHome();
  app.innerHTML=html;
  app.setAttribute('data-page', parts[0]||'home');
+ scroller.classList.toggle('jw3snap', parts[0]==='how-we-work-3');
  // chrome visibility
  topbar.style.display=isQuiz?'none':'';
  var isHome=!parts.length;
  app.classList.toggle('tryfont', isHome);
- if(isQuiz||isHome){sticky.innerHTML='';}
+ if(isQuiz||isHome||isHow){sticky.innerHTML='';}
  else if(exCta){sticky.innerHTML='<button class="btn blue block" data-go="/quiz">Take the 2-Minute Quiz</button>';}
- else {sticky.innerHTML='<button class="btn block" data-go="/quiz">Book Trial</button>';}
- sticky.style.display=(isQuiz||isHome)?'none':'';
+ else {sticky.innerHTML='<button class="btn block" data-go="/quiz">Book a free trial</button>';}
+ sticky.style.display=(isQuiz||isHome||isHow)?'none':'';
  forceSolid=(parts[0]==='case-studies');
  scroller.scrollTop=0; onScroll();
  app.querySelectorAll('.metricsC').forEach(function(mx){
@@ -1611,13 +2270,22 @@ function render(){
      o.disconnect();
    },{threshold:.35}).observe(mx);
  });
- var cs=document.getElementById('condSwipe');
- if(cs){cs.addEventListener('scroll',function(){
-   var dots=document.querySelectorAll('#condDots i'); if(!dots.length||!cs.firstElementChild)return;
-   var cw=cs.firstElementChild.getBoundingClientRect().width+14;
-   var idx=Math.round(cs.scrollLeft/cw);
-   dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});
- },{passive:true});}
+ function syncDots(swipeId,dotsId){
+   var sw=document.getElementById(swipeId); if(!sw)return;
+   sw.addEventListener('scroll',function(){
+     var dots=document.querySelectorAll('#'+dotsId+' i'); if(!dots.length||!sw.firstElementChild)return;
+     var idx=Math.round(sw.scrollLeft/(sw.firstElementChild.getBoundingClientRect().width+13));
+     dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});
+   },{passive:true});
+ }
+ syncDots('condSwipe','condDots');
+ syncDots('calSwipe','calDots');
+ var ca=document.getElementById('calAnim');
+ if(ca){new IntersectionObserver(function(es,o){if(!es[0].isIntersecting)return;o.disconnect();
+   setTimeout(function(){ca.classList.add('show-d')},300);
+   setTimeout(function(){ca.classList.add('show-e')},1300);
+   setTimeout(function(){ca.classList.add('show-n')},2400);
+ },{threshold:.4}).observe(ca);}
 }
 var forceSolid=false;
 function onScroll(){topbar.classList.toggle('solid', forceSolid||scroller.scrollTop>60);}
