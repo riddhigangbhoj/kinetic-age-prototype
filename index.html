@@ -145,6 +145,9 @@ button{font:inherit;cursor:pointer}
 .hero .eyebrow{font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.76);margin-bottom:14px}
 .hero h1{font-family:var(--fd);font-weight:430;font-size:var(--fs-h1);line-height:1.05;letter-spacing:-.012em;text-shadow:0 1px 24px rgba(0,0,0,.3)}
 .hero h1 .it{font-style:italic;color:var(--orange);display:block}
+/* home photo hero: whole heading white + bold, no italic accent */
+.hero.photo h1{font-weight:700}
+.hero.photo h1 .it{font-style:normal;color:#fff;font-weight:700}
 .hero .sub{margin-top:16px;font-size:var(--fs-body);line-height:1.55;color:rgba(255,255,255,.88);max-width:34ch}
 .hero .sub em{font-family:var(--fd);font-style:italic;color:#f7a172;font-size:1.05em}
 .hero .hcta{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -175,13 +178,15 @@ button{font:inherit;cursor:pointer}
 .hero.photo .figMove{animation-delay:-14s}
 .hero.photo .figEat{animation-delay:-7s}
 .hero.photo .herolabel{position:absolute;left:50%;top:52%;z-index:1;transform:translateX(-50%);
-  font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);color:#fff;
+  font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);color:#f7a172;
   background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,.34);padding:8px 20px;border-radius:999px;white-space:nowrap;
   pointer-events:none;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.28);
   animation:heroLabelX 21s infinite ease-in-out}
-.hero.photo .labMove{animation-delay:-14s}
-.hero.photo .labEat{animation-delay:-7s}
+/* scatter the three floating pills: each crossfades in its own spot, a different direction */
+.hero.photo .labFeel{left:30%;top:39%}
+.hero.photo .labMove{animation-delay:-14s;left:72%;top:54%}
+.hero.photo .labEat{animation-delay:-7s;left:44%;top:69%}
 /* light sky tint behind the top heading + logo: a soft blue wash that keeps the sky reading light while holding just enough contrast for white text */
 .hero.photo .herosky{position:absolute;left:0;right:0;top:0;height:60%;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,rgba(70,104,168,.55) 0%,rgba(120,158,212,.36) 28%,rgba(165,196,235,.2) 50%,rgba(220,180,130,.12) 72%,transparent 100%)}
@@ -335,6 +340,7 @@ main{padding-bottom:96px}
 .av.c3{background:linear-gradient(150deg,#f5a86a,var(--orange-ink))}
 .av.c4{background:linear-gradient(150deg,var(--orange),#c0392b)}
 .av.c5{background:linear-gradient(150deg,#2a4aa0,#16264f)}
+.av-img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 15%}
 
 /* vetted team: equal-weight provider grid */
 /* team — specialty-coded provider cards */
@@ -367,6 +373,24 @@ main{padding-bottom:96px}
 .pcard.b .ptag::before{background:#86a6f2}
 .pcard.o .ptag::before{background:#f7a079}
 .pmeta{margin-top:10px;font-size:var(--fs-cap);color:var(--muted);line-height:1.45}
+/* about: head-of-type provider detail cards (name · type · education · experience · membership) */
+.prov-detail{padding:18px;position:relative;overflow:hidden;--ring:#9db0ee;--accent:#3f5da0;--tint:#eef1fb}
+.prov-detail.g{--ring:#5fd0aa;--accent:#1f8c6a;--tint:#e7f6f0}
+.prov-detail.b{--ring:#86a6f2;--accent:#2b54b0;--tint:#eaf0fd}
+.prov-detail.o{--ring:#f7a079;--accent:#cf5a34;--tint:#fdeee5}
+.prov-detail::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ring)}
+.prov-id{display:flex;gap:14px;align-items:center}
+.prov-ph{width:64px;height:64px;flex:none;border-radius:50%;overflow:hidden;background:var(--tint);box-shadow:0 0 0 2px #fff,0 0 0 4px var(--ring)}
+.prov-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block}
+.prov-idt{min-width:0;flex:1}
+.prov-name{font-family:var(--fd);font-weight:480;font-size:var(--fs-h4);color:var(--ink);line-height:1.1}
+.prov-type{margin-top:2px;font-size:var(--fs-cap);color:var(--accent);font-weight:600;letter-spacing:.01em}
+.prov-badge{display:inline-flex;align-items:center;gap:5px;margin-top:9px;padding:4px 11px 4px 8px;border-radius:999px;font-size:var(--fs-lbl);font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--tint);color:var(--accent);border:1px solid color-mix(in srgb,var(--ring) 55%,transparent)}
+.prov-badge svg{width:13px;height:13px;flex:none}
+.prov-facts{margin:16px 0 0;border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:11px}
+.prov-facts>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.prov-facts dt{flex:none;font-size:var(--fs-lbl);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.prov-facts dd{margin:0;font-size:var(--fs-sm);color:var(--ink);font-weight:500;text-align:right}
 
 /* testimonial — compact clipping: media is the header, metric floats across its edge */
 .tcard2{padding:0;overflow:hidden}
@@ -380,7 +404,7 @@ main{padding-bottom:96px}
 .t2-metric{position:relative;z-index:2;display:flex;align-items:center;gap:10px;width:fit-content;max-width:calc(100% - 26px);
   margin:-17px auto 0;padding:8px 9px 8px 15px;border-radius:var(--r-pill);background:#fff;border:1px solid #f6d2c4;
   box-shadow:0 6px 18px -10px rgba(70,25,5,.3)}
-.t2-mk{font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--orange-ink);font-weight:700;line-height:1.15;max-width:9ch}
+.t2-mk{font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--orange-ink);font-weight:700;line-height:1.15;white-space:nowrap}
 .t2-mv{font-size:var(--fs-ui);color:var(--muted);white-space:nowrap;display:flex;align-items:baseline;gap:5px}
 .t2-mv s{opacity:.7}
 .t2-mv b{font-family:var(--fd);font-weight:560;font-size:var(--fs-h3);color:var(--orange-ink);line-height:1}
@@ -664,6 +688,70 @@ main{padding-bottom:96px}
 /* band (tinted full-width block) */
 .band{margin:30px 0;padding:26px 22px;border-radius:var(--r-lg);background:linear-gradient(150deg,#eef2ff,#e9f4ef);border:1px solid var(--line)}
 .band.blue{background:linear-gradient(150deg,#eaf0ff,#e4ecff)}
+/* conditions: search + category chips + grouped directory */
+.cond-search{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);padding:13px 17px;box-shadow:0 8px 20px -14px rgba(20,32,80,.3)}
+.cond-search:focus-within{border-color:var(--green);box-shadow:0 10px 24px -12px rgba(31,140,106,.4)}
+.cond-search .cs-ico{width:19px;height:19px;flex:none;color:var(--muted)}
+.cond-search input{flex:1;min-width:0;border:none;outline:none;background:none;font:inherit;font-size:var(--fs-body);color:var(--ink);-webkit-appearance:none}
+.cond-search input::placeholder{color:var(--faint)}
+.cond-search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.cond-orquiz{margin-top:12px;font-size:var(--fs-sm);color:var(--muted);text-align:center}
+.cond-orquiz a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.cond-chips{margin-top:16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-22px;padding:2px 22px 4px}
+.cond-chips::-webkit-scrollbar{display:none}
+.cond-chips .chip{flex:0 0 auto;white-space:nowrap}
+.cdir{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.cdir-cat-grp{display:flex;flex-direction:column;gap:10px}
+.cdir-cat-grp+.cdir-cat-grp{margin-top:16px}
+.cdir-cat{font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);color:var(--ink);padding:2px 2px 0}
+.cdir-group{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
+.cdir-group[open]{box-shadow:0 16px 32px -24px rgba(20,32,80,.45)}
+.cdir-head{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;font-size:var(--fs-cap);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);-webkit-tap-highlight-color:transparent}
+.cdir-head::-webkit-details-marker{display:none}
+.cdir-label{flex:1;min-width:0}
+.cdir-count{flex:none;font-size:var(--fs-micro);font-weight:600;color:var(--muted);background:#eef3f8;padding:1px 9px;border-radius:999px}
+.cdir-chev{flex:none;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-2px) rotate(45deg);transition:transform .25s var(--ease)}
+.cdir-group[open] .cdir-chev{transform:translateY(1px) rotate(-135deg)}
+.cdir-rows{padding:0 18px 8px}
+.cdir-row{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);font-size:var(--fs-body);text-decoration:none;-webkit-tap-highlight-color:transparent}
+.cdir-row:active{color:var(--green)}
+.cdir-arr{flex:none;color:var(--faint);display:inline-flex}
+.cdir-arr svg{width:17px;height:17px}
+/* smart search results */
+.cres-wrap{display:none;margin-top:16px}
+@keyframes cresup{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.cres{border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;padding:18px;box-shadow:0 18px 40px -28px rgba(20,32,80,.5);animation:cresup .25s var(--ease)}
+.cres-head{margin-bottom:12px}
+.cres-badge{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-lbl);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);background:#e7f6f0;border:1px solid #cdece0;padding:4px 11px 4px 8px;border-radius:999px}
+.cres-badge svg{width:13px;height:13px}
+.cres-ttl{font-family:var(--fd);font-weight:500;font-size:var(--fs-h3);color:var(--ink);margin-top:12px;line-height:1.16}
+.cres-list{display:flex;flex-direction:column}
+.cres-row{display:flex;align-items:center;gap:12px;padding:13px 2px;border-top:1px solid var(--line);color:var(--ink);font-size:var(--fs-body);text-decoration:none;-webkit-tap-highlight-color:transparent}
+.cres-row:first-child{border-top:none}
+.cres-row:active{color:var(--green)}
+.cres-tick{flex:none;width:21px;height:21px;border-radius:50%;background:#e7f6f0;color:var(--green);display:grid;place-items:center}
+.cres-tick svg{width:12px;height:12px}
+.cres-name{flex:1;min-width:0}
+.cres-foot{margin-top:13px;font-size:var(--fs-sm);color:var(--muted)}
+.cres-soft,.cres-off{text-align:center;padding:28px 20px}
+.cres-ic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;background:#e7f6f0;color:var(--green)}
+.cres-ic svg{width:26px;height:26px}
+.cres-icx{background:#eef1f6;color:var(--muted)}
+.cres-soft .cres-ttl,.cres-off .cres-ttl{margin-top:0}
+.cres-p{font-size:var(--fs-sm);color:var(--ink2);line-height:1.55;margin-top:10px;max-width:42ch;margin-inline:auto}
+.cres-cta{display:flex;flex-direction:column;gap:10px;margin-top:18px;max-width:340px;margin-inline:auto}
+.cdir-empty{display:none;margin-top:4px;padding:18px;border-radius:var(--r);background:#f1f9f5;border:1px solid #dceee6;color:var(--ink2);font-size:var(--fs-sm);line-height:1.5}
+.cdir-empty a{color:var(--green);font-weight:600;white-space:nowrap}
+/* compact condition tiles: just the name, 2-up grid */
+.ctiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ctile{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;min-height:96px;padding:15px 16px;border-radius:var(--r);text-decoration:none;color:var(--ink);font-family:var(--fd);font-weight:480;font-size:var(--fs-h4);line-height:1.16;letter-spacing:-.01em;transition:transform .15s var(--ease),box-shadow .2s var(--ease)}
+.ctile:active{transform:scale(.985)}
+.ctile-arr{flex:none;display:inline-flex;margin-bottom:2px}
+.ctile-arr svg{width:18px;height:18px}
+.ctile.g{background:linear-gradient(150deg,#eaf6f0,#dbeee5);border:1px solid #d2ebdf}.ctile.g .ctile-arr{color:var(--green)}
+.ctile.b{background:linear-gradient(150deg,#eaf0fd,#dce7fb);border:1px solid #d3e0fb}.ctile.b .ctile-arr{color:var(--blue)}
+.ctile.o{background:linear-gradient(150deg,#fdefe6,#fbe0d0);border:1px solid #f6dbc7}.ctile.o .ctile-arr{color:var(--orange-ink)}
+.ctile.n{background:linear-gradient(150deg,#eef1fb,#e1e7f7);border:1px solid #dce2f6}.ctile.n .ctile-arr{color:#3f5da0}
 .cta-block{text-align:center;padding:46px 22px}
 .cta-block .h2{margin-bottom:20px}
 
@@ -1212,6 +1300,11 @@ main{padding-bottom:96px}
    No mobile rule above is modified.
    ============================================================ */
 @media (min-width:1024px){
+  /* stats: all four in a single row */
+  .statstrip{grid-template-columns:repeat(4,1fr);max-width:1120px;margin-inline:auto;padding:12px 24px}
+  .statstrip .stat::after,.statstrip .stat::before{display:none!important}
+  .statstrip .stat+.stat{border-left:1px solid var(--line)}
+  .statstrip .stat{padding:18px 20px}
   /* release the device shell into a real page */
   body{display:block;min-height:0;background:#e7f0f3;background-image:none}
   .phone{position:static;width:100%;max-width:none;height:auto;
@@ -1267,7 +1360,7 @@ main{padding-bottom:96px}
   .hero.photo .figEat{object-position:50% 50%}
   .hero.photo .scrim{left:0;right:0;width:100%;z-index:-1;
     -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
-    background:linear-gradient(90deg,rgba(11,22,50,.94) 0%,rgba(11,22,50,.66) 26%,rgba(11,22,50,0) 50%);
+    background:linear-gradient(90deg,rgba(11,42,30,.94) 0%,rgba(11,42,30,.66) 26%,rgba(11,42,30,0) 50%);
     -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 52%);
             mask-image:linear-gradient(90deg,#000 0%,#000 28%,transparent 52%)}
   .hero.photo .herosky,.hero.photo .grain{display:none}
@@ -1415,11 +1508,11 @@ var wa=function(t){return WA+encodeURIComponent(t)};
 var lc=function(s){return s.charAt(0).toLowerCase()+s.slice(1)};
 
 var PILLARS=[
- {slug:'physiotherapy',name:'Physiotherapy',photo:'physio-warm.png',blurb:'We guide and care for you through your condition, at home, until you are ready for physical training.',who:'[PLACEHOLDER] For older adults with joint pain, stiffness, or recovery needs.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']},
- {slug:'strength-training',name:'Physical Training',photo:'training-warm.png',blurb:'We help you rebuild the strength and confidence you had before.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain']},
- {slug:'nutrition',name:'Nutrition',photo:'nutrition-img.png?v=4',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste, with daily tracking.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
- {slug:'mental-wellness',name:'Emotional Wellbeing',photo:'emotional-wellbeing.png',blurb:'Someone to listen in the hard moments and walk with you, so the journey keeps moving.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls']},
- {slug:'doctor-oversight',name:'Doctor Oversight',photo:'doctor-oversight.png?v=2',blurb:'One personal doctor watching every part, adjusting your plan as you progress.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']}
+ {slug:'physiotherapy',name:'Physiotherapy',photo:'physio-scene.png',blurb:'We guide and care for you through your condition, at home, until you are ready for physical training.',who:'[PLACEHOLDER] For older adults with joint pain, stiffness, or recovery needs.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']},
+ {slug:'strength-training',name:'Physical Training',photo:'training-scene.png',blurb:'We help you rebuild the strength and confidence you had before.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain']},
+ {slug:'nutrition',name:'Nutrition',photo:'nutrition-scene.png',blurb:'We help you reach your goal faster with personalised nutrition that suits your taste, with daily tracking.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery']},
+ {slug:'mental-wellness',name:'Emotional Wellbeing',photo:'emotional-scene.png',blurb:'Someone to listen in the hard moments and walk with you, so the journey keeps moving.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls']},
+ {slug:'doctor-oversight',name:'Doctor Oversight',photo:'doctor-scene.png',blurb:'One personal doctor watching every part, adjusting your plan as you progress.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls']}
 ];
 var CONDITIONS=[
  {slug:'knee-pain',name:'Knee Pain',symptom:'Knee pain that cuts the walk short',intro:'[PLACEHOLDER] When the knees hurt, the whole day shrinks. Here is what is usually going on, and what helps.',
@@ -1452,15 +1545,154 @@ var BREAKDOWN={
    {t:'A hidden medical layer',pill:'Doctor Oversight',lane:'blue',line:'A doctor reviews medication and vision risks.'}
  ]}
 };
-var OTHER_CONDITIONS=['Arthritis','Diabetes care','Parkinson’s support','Hip replacement recovery','Back pain','Shoulder pain','Osteoporosis','General weakness','Post-surgery recovery','Low energy and fatigue'].map(function(s){return '[PLACEHOLDER] '+s});
+var CONDITION_CATS=[
+ {k:'ortho',label:'Orthopaedic & musculoskeletal'},
+ {k:'neuro',label:'Neurological'},
+ {k:'cardio',label:'Cardiopulmonary'},
+ {k:'general',label:'General medical'},
+ {k:'womens',label:'Women’s health'},
+ {k:'geriatric',label:'Geriatric'}
+];
+// directory of everything we treat; c = category key, sub = region/system group. Every item gets its own /conditions/<slug> page.
+var COND_DIR=[
+ {c:'ortho',sub:'Spine',n:'Cervical spondylosis'},
+ {c:'ortho',sub:'Spine',n:'Cervical radiculopathy'},
+ {c:'ortho',sub:'Spine',n:'Cervical strain/sprain'},
+ {c:'ortho',sub:'Spine',n:'Mechanical neck pain'},
+ {c:'ortho',sub:'Spine',n:'Thoracic pain'},
+ {c:'ortho',sub:'Spine',n:'Low back pain'},
+ {c:'ortho',sub:'Spine',n:'Lumbar spondylosis'},
+ {c:'ortho',sub:'Spine',n:'Lumbar radiculopathy (sciatica)'},
+ {c:'ortho',sub:'Spine',n:'Intervertebral Disc Prolapse (IVDP)'},
+ {c:'ortho',sub:'Spine',n:'Spinal stenosis'},
+ {c:'ortho',sub:'Spine',n:'Sacroiliac joint dysfunction'},
+ {c:'ortho',sub:'Spine',n:'Spondylolisthesis'},
+ {c:'ortho',sub:'Spine',n:'Postural dysfunction'},
+ {c:'ortho',sub:'Shoulder',n:'Frozen shoulder (Adhesive Capsulitis)'},
+ {c:'ortho',sub:'Shoulder',n:'Rotator cuff tendinopathy/tear'},
+ {c:'ortho',sub:'Shoulder',n:'Shoulder impingement syndrome'},
+ {c:'ortho',sub:'Shoulder',n:'Shoulder instability/dislocation'},
+ {c:'ortho',sub:'Shoulder',n:'Bicipital tendinitis'},
+ {c:'ortho',sub:'Shoulder',n:'AC joint injuries'},
+ {c:'ortho',sub:'Shoulder',n:'Post-fracture shoulder stiffness'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Tennis elbow (Lateral Epicondylitis)'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Golfer’s elbow (Medial Epicondylitis)'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Cubital tunnel syndrome'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Carpal tunnel syndrome'},
+ {c:'ortho',sub:'Elbow & wrist',n:'De Quervain’s tenosynovitis'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Wrist sprains'},
+ {c:'ortho',sub:'Elbow & wrist',n:'Post-fracture rehabilitation (wrist)'},
+ {c:'ortho',sub:'Hip',n:'Osteoarthritis of hip'},
+ {c:'ortho',sub:'Hip',n:'Hip replacement rehabilitation'},
+ {c:'ortho',sub:'Hip',n:'Trochanteric bursitis'},
+ {c:'ortho',sub:'Hip',n:'Hip labral injuries'},
+ {c:'ortho',sub:'Hip',n:'Femoral neck fracture rehabilitation'},
+ {c:'ortho',sub:'Knee',n:'Osteoarthritis knee'},
+ {c:'ortho',sub:'Knee',n:'Patellofemoral pain syndrome'},
+ {c:'ortho',sub:'Knee',n:'Ligament injuries (ACL, PCL, MCL, LCL)'},
+ {c:'ortho',sub:'Knee',n:'Meniscal injuries'},
+ {c:'ortho',sub:'Knee',n:'Total knee replacement rehabilitation'},
+ {c:'ortho',sub:'Knee',n:'Patellar tendinopathy'},
+ {c:'ortho',sub:'Knee',n:'Post-operative knee rehabilitation'},
+ {c:'ortho',sub:'Ankle & foot',n:'Ankle sprain'},
+ {c:'ortho',sub:'Ankle & foot',n:'Achilles tendinopathy'},
+ {c:'ortho',sub:'Ankle & foot',n:'Plantar fasciitis'},
+ {c:'ortho',sub:'Ankle & foot',n:'Flat feet'},
+ {c:'ortho',sub:'Ankle & foot',n:'Heel pain'},
+ {c:'ortho',sub:'Ankle & foot',n:'Post-fracture rehabilitation (foot)'},
+ {c:'ortho',sub:'Ankle & foot',n:'Diabetic foot rehabilitation'},
+ {c:'ortho',sub:'Sports injuries',n:'Muscle strains'},
+ {c:'ortho',sub:'Sports injuries',n:'Ligament sprains'},
+ {c:'ortho',sub:'Sports injuries',n:'Tendon injuries'},
+ {c:'ortho',sub:'Sports injuries',n:'Running injuries'},
+ {c:'ortho',sub:'Sports injuries',n:'Overuse injuries'},
+ {c:'ortho',sub:'Sports injuries',n:'Return-to-sport rehabilitation'},
+ {c:'ortho',sub:'Trauma & post-surgical',n:'Fracture rehabilitation'},
+ {c:'ortho',sub:'Trauma & post-surgical',n:'Joint replacement rehabilitation'},
+ {c:'ortho',sub:'Trauma & post-surgical',n:'Arthroscopy rehabilitation'},
+ {c:'ortho',sub:'Trauma & post-surgical',n:'Tendon repair rehabilitation'},
+ {c:'ortho',sub:'Trauma & post-surgical',n:'Amputation rehabilitation'},
+ {c:'neuro',sub:'Stroke & brain',n:'Stroke (CVA)'},
+ {c:'neuro',sub:'Stroke & brain',n:'Transient Ischemic Attack (TIA) rehabilitation'},
+ {c:'neuro',sub:'Stroke & brain',n:'Traumatic Brain Injury (TBI)'},
+ {c:'neuro',sub:'Stroke & brain',n:'Brain tumours (post-surgical rehabilitation)'},
+ {c:'neuro',sub:'Stroke & brain',n:'Cerebral palsy'},
+ {c:'neuro',sub:'Stroke & brain',n:'Developmental delay'},
+ {c:'neuro',sub:'Spinal cord',n:'Spinal cord injury'},
+ {c:'neuro',sub:'Spinal cord',n:'Paraplegia'},
+ {c:'neuro',sub:'Spinal cord',n:'Quadriplegia/Tetraplegia'},
+ {c:'neuro',sub:'Spinal cord',n:'Myelopathy'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Parkinson’s disease'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Multiple sclerosis'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Motor neuron disease (ALS)'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Huntington’s disease'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Progressive supranuclear palsy'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Bell’s palsy'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Guillain-Barré Syndrome (GBS)'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Peripheral neuropathy'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Diabetic neuropathy'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Nerve injuries'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Brachial plexus injuries'},
+ {c:'neuro',sub:'Neuromuscular',n:'Muscular dystrophy'},
+ {c:'neuro',sub:'Neuromuscular',n:'Myasthenia gravis'},
+ {c:'neuro',sub:'Neuromuscular',n:'Myopathies'},
+ {c:'neuro',sub:'Vestibular & balance',n:'Vertigo'},
+ {c:'neuro',sub:'Vestibular & balance',n:'Vestibular dysfunction'},
+ {c:'neuro',sub:'Vestibular & balance',n:'Balance disorders'},
+ {c:'neuro',sub:'Vestibular & balance',n:'Falls prevention'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Cerebral palsy (paediatric)'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Developmental delay (paediatric)'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Autism spectrum disorders (motor dysfunction)'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Spina bifida'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Down syndrome'},
+ {c:'neuro',sub:'Paediatric neuro',n:'Hypotonia'},
+ {c:'cardio',sub:'Cardiac',n:'Post-CABG (Coronary Artery Bypass Grafting)'},
+ {c:'cardio',sub:'Cardiac',n:'Post-angioplasty rehabilitation'},
+ {c:'cardio',sub:'Cardiac',n:'Myocardial infarction (Heart attack)'},
+ {c:'cardio',sub:'Cardiac',n:'Heart failure'},
+ {c:'cardio',sub:'Cardiac',n:'Coronary artery disease'},
+ {c:'cardio',sub:'Cardiac',n:'Cardiac transplantation rehabilitation'},
+ {c:'cardio',sub:'Cardiac',n:'Valvular heart disease rehabilitation'},
+ {c:'cardio',sub:'Respiratory',n:'Chronic Obstructive Pulmonary Disease (COPD)'},
+ {c:'cardio',sub:'Respiratory',n:'Asthma'},
+ {c:'cardio',sub:'Respiratory',n:'Bronchiectasis'},
+ {c:'cardio',sub:'Respiratory',n:'Pneumonia'},
+ {c:'cardio',sub:'Respiratory',n:'Pulmonary fibrosis'},
+ {c:'cardio',sub:'Respiratory',n:'Tuberculosis (post-treatment rehabilitation)'},
+ {c:'cardio',sub:'Respiratory',n:'Interstitial lung disease'},
+ {c:'cardio',sub:'Critical care',n:'ICU-acquired weakness'},
+ {c:'cardio',sub:'Critical care',n:'Ventilator-dependent patients'},
+ {c:'cardio',sub:'Critical care',n:'Prolonged bed rest'},
+ {c:'cardio',sub:'Critical care',n:'Post-COVID rehabilitation'},
+ {c:'cardio',sub:'Critical care',n:'Sepsis-related deconditioning'},
+ {c:'general',n:'Obesity management'},
+ {c:'general',n:'Diabetes-related functional limitations'},
+ {c:'general',n:'Chronic fatigue syndrome'},
+ {c:'general',n:'Cancer rehabilitation'},
+ {c:'general',n:'Lymphedema management'},
+ {c:'general',n:'Geriatric deconditioning'},
+ {c:'womens',n:'Pregnancy-related back pain'},
+ {c:'womens',n:'Antenatal exercise programs'},
+ {c:'womens',n:'Postnatal rehabilitation'},
+ {c:'womens',n:'Diastasis recti'},
+ {c:'womens',n:'Pelvic floor dysfunction'},
+ {c:'womens',n:'Urinary incontinence'},
+ {c:'womens',n:'Pelvic organ prolapse'},
+ {c:'geriatric',n:'Age-related weakness'},
+ {c:'geriatric',n:'Balance impairments'},
+ {c:'geriatric',n:'Falls prevention (geriatric)'},
+ {c:'geriatric',n:'Osteoporosis'},
+ {c:'geriatric',n:'Frailty syndrome'},
+ {c:'geriatric',n:'Mobility limitations'}
+];
 var HOME_FAQS=[{q:'[PLACEHOLDER] How does the first visit work?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who are the providers?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you come to our home?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What does it cost?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if my parent is reluctant?',a:'[PLACEHOLDER]'}];
 var CONDITIONS_FAQS=[{q:'[PLACEHOLDER] My parent’s condition is not listed. Can you help?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you treat more than one condition at once?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How do you decide what to focus on?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Is a diagnosis required to start?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can the plan change over time?',a:'[PLACEHOLDER]'}];
 var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
 var TESTIMONIALS=[
-{slug:'knee-pain',name:'Mrs. Sharma',age:68,her:'her',label:'Knee pain',storyLen:'0:58',lane:'green',video:'sharma-testimonial.mp4',bakedCC:true,poster:'sharma-poster.jpg',
- metric:{k:'Knee flexion',before:'95&deg;',after:'132&deg;',delta:'+37&deg;'},
- quote:'I used to climb stairs sideways. Now I walk to the temple every morning before the sun is up.',
- lead:{name:'Vikram Shetty',role:'Senior Physiotherapist'},leadIdx:0,
+{slug:'knee-pain',name:'Vishalakshi',age:68,her:'her',label:'',storyLen:'0:58',lane:'green',video:'sharma-testimonial.mp4',bakedCC:true,poster:'sharma-poster.jpg',
+ metric:{k:'Steps at a time',before:'1',after:'20',delta:'20&times;'},
+ quote:'At first I could manage one step before I had to stop. Now I walk to the temple every morning, twenty steps at a time.',
+ lead:{name:'Khushi Kinkhabwala',role:'Physiotherapist &amp; Geriatric Exercise Specialist'},leadIdx:0,leadPhoto:'khushi.jpeg',
  team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']},
 {slug:'post-stroke-recovery',name:'Mr. Iyer',age:71,her:'his',label:'Post-stroke',storyLen:'0:18',lane:'',
  metric:{k:'Walk distance',before:'50m',after:'400m',delta:'8&times;'},
@@ -1475,7 +1707,7 @@ var TESTIMONIALS=[
 ];
 var PROVIDERS=[
  {name:'Taseena Banu',role:'Medical oversight',lane:'n',photo:'taseena-real.png?v=1'},
- {name:'Vighnesh R',role:'Physiotherapist',edu:'MPT, Neuro-rehab',lane:'g',photo:'vighnesh-cut.png?v=1'},
+ {name:'Vighnesh R',role:'Physiotherapist',edu:'BPT, MBA Healthcare Management',exp:'7+ years',assoc:'MIAP',lane:'g',photo:'vighnesh-cut.png?v=1'},
  {name:'Vighnesh G',role:'Senior physical trainer',lane:'b',photo:'trainer2-cut.png?v=2'},
  {name:'Sneha Reddy',role:'Nutritionist',lane:'o',photo:'provider4-cut.png?v=3'},
  {name:'Ashfaqullah',role:'Senior physiotherapist',lane:'g',photo:'ashfaqullah-dr.png?v=1'}
@@ -1614,6 +1846,9 @@ var CASE_STUDIES=[
 ];
 var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, steady and independent.',blurb:'[PLACEHOLDER] When there is no one condition to name, start with a two-minute check, and see how other families got there.',to:'/stories'};
 var condBy=function(s){for(var i=0;i<CONDITIONS.length;i++)if(CONDITIONS[i].slug===s)return CONDITIONS[i];return null};
+var condSlugify=function(s){return s.toLowerCase().replace(/[’'()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')};
+var condSlugOf=function(d){return d.slug||condSlugify(d.n)};
+var dirBy=function(s){for(var i=0;i<COND_DIR.length;i++)if(condSlugOf(COND_DIR[i])===s)return COND_DIR[i];return null};
 var pillarBy=function(s){for(var i=0;i<PILLARS.length;i++)if(PILLARS[i].slug===s)return PILLARS[i];return null};
 
 /* ===================== fragments ===================== */
@@ -1636,10 +1871,10 @@ function socialStrip(){return '<section class="sec"><h2 class="h2">Find us on In
 '</section>'}
 var TEAM_INI=['P','S','N','M','D'];
 function testiCard2(t,i){return '<div class="card tcard2">'+
- '<div class="slot video '+t.lane+' t2-media" data-reel="'+i+'" role="button" tabindex="0" aria-label="Play '+t.name+'’s story">'+(t.poster?'<img class="t2-poster" src="'+t.poster+'?v=1" alt=""><span class="t2-scrim"></span>':'')+'<span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+' &middot; '+t.label+'</div></div></div>'+
+ '<div class="slot video '+t.lane+' t2-media" data-reel="'+i+'" role="button" tabindex="0" aria-label="Play '+t.name+'’s story">'+(t.poster?'<img class="t2-poster" src="'+t.poster+'?v=1" alt=""><span class="t2-scrim"></span>':'')+'<span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+(t.label?' &middot; '+t.label:'')+'</div></div></div>'+
  '<div class="t2-metric"><span class="t2-mk">'+t.metric.k+'</span><span class="t2-mv"><s>'+t.metric.before+'</s> &rarr; <b>'+t.metric.after+'</b></span><span class="t2-delta">'+t.metric.delta+'</span></div>'+
  '<div class="t2-body"><p class="t2-quote">'+t.quote+'</p>'+
- '<div class="t2-foot"><div class="avstack"><span class="av lead c'+(t.leadIdx+1)+'">'+TEAM_INI[t.leadIdx]+'</span></div><div class="t2-lead"><b>'+t.lead.name+'</b>'+t.lead.role+'<span class="t2-team">Backed by a team of 5</span></div></div>'+
+ '<div class="t2-foot"><div class="avstack"><span class="av lead c'+(t.leadIdx+1)+'">'+(t.leadPhoto?'<img class="av-img" src="'+t.leadPhoto+'" alt="'+t.lead.name+'">':TEAM_INI[t.leadIdx])+'</span></div><div class="t2-lead"><b>'+t.lead.name+'</b>'+t.lead.role+'<span class="t2-team">Backed by a team of 5</span></div></div>'+
  '</div></div>'}
 var WA_ICON='<span class="jwa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5l-.3.5-.5.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 .9.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>';
 var CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -1687,7 +1922,7 @@ function statStrip(){
  var stats=[['95','%','Customer satisfaction','b'],
             ['80','%','See results within 45 days','o'],
             ['10,000','+','Sessions delivered','g'],
-            ['1,000','+','Clients assessed','n']];
+            ['1 in 3','','Recommend us to others','n']];
  return '<div class="statstrip">'+stats.map(function(s,i){return '<div class="stat '+s[3]+'" style="--i:'+i+'">'+
   '<div class="stat-n">'+s[0]+'<span class="stat-u'+(s[1]==='+'?' plus':'')+'">'+s[1]+'</span></div><div class="stat-l">'+s[2]+'</div></div>'}).join('')+'</div>';
 }
@@ -1706,7 +1941,7 @@ function heroTall(){
   '<div class="herolabel labMove">How you move</div>'+
   '<div class="herolabel labEat">What you eat</div>'+
   '<h1>Care that comes to you<span class="it">and owns the outcome</span></h1>'+
-  '<p class="sub">One team for you and your loved ones, caring for their health and lifestyle at home</p>'+
+  '<p class="sub">One team for you and your loved ones, caring for their health and lifestyle at home, across every part of their day, <em>from</em></p>'+
   '<div class="hcta col">'+
     '<button class="btn light xl block" data-go="/quiz">Book a free trial</button>'+
     '<a class="hlink" data-go="/how-we-work">See how we work</a>'+
@@ -1718,6 +1953,10 @@ function heroBand(g,eyebrow,h1,sub,cta){
   (eyebrow?'<p class="eyebrow">'+eyebrow+'</p>':'')+'<h1>'+h1+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+(cta?'<div class="hcta">'+cta+'</div>':'')+
  '</section>'}
 function condCard(c,lane){return '<div class="card">'+slot(c.name+' &middot; photo',lane)+'<span class="tag '+lane+'" style="margin-top:14px">'+c.name+'</span><div class="cardttl">'+c.symptom+'</div><p class="p muted" style="margin-top:4px;font-size:var(--fs-sm)">'+c.intro+'</p><div class="cardcta">'+arguments[2]+'</div></div>'}
+function condDirRow(d){
+ return '<a class="cdir-row" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condSlugOf(d)+'">'+d.n+'<span class="cdir-arr">'+ARR()+'</span></a>';
+}
+function condTile(c,i){var L=['g','b','o','n'][i%4];return '<a class="ctile '+L+'" data-go="/conditions/'+c.slug+'"><span class="ctile-name">'+c.name+'</span><span class="ctile-arr">'+ARR()+'</span></a>'}
 function breakdownCard(c){var b=BREAKDOWN[c.slug];return '<div class="card bcard">'+
  '<span class="kick green">The condition</span>'+
  '<div class="bname">'+c.name+'</div>'+
@@ -1828,15 +2067,27 @@ function vHome(){
  footer()}
 
 function vConditions(){
- return heroBand('g-field','Conditions we work with','Find what is going on,<span class="it">in plain words.</span>','[PLACEHOLDER] A line on how to use this page: start with a common one, or ask about anything not listed.')+
- '<section class="sec"><div class="grid">'+CONDITIONS.map(function(c){return condCard(c,'green',link('/conditions/'+c.slug,'Read about '+lc(c.name)))}).join('')+'</div>'+wellnessBand()+'</section>'+
- '<section class="sec"><div class="card"><span class="kick green">More we help with</span><div class="cardttl" style="margin-top:0">Not seeing it? It is probably still us.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin:16px 0;font-size:var(--fs-sm);color:var(--ink2)">'+OTHER_CONDITIONS.map(function(o){return '<div>'+o+'</div>'}).join('')+'</div>'+waBtn('Hi, I want to ask about a condition not listed on your site','Ask about a condition not listed','orange')+'</div></section>'+
- '<section class="sec cta-block"><h2 class="h2">Not sure which fits? Let the quiz point you.</h2><p class="p muted" style="margin-bottom:20px">[PLACEHOLDER] Two minutes, tap to answer, a report on WhatsApp.</p><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
+ return heroBand('g-field','Conditions we work with','Find what is going on,<span class="it">in plain words.</span>','Search the condition or symptom you are dealing with, or let the quiz point you.')+
+ '<section class="sec" style="padding-top:18px">'+
+   '<div class="cond-search"><svg class="cs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg>'+
+     '<input id="condSearch" type="search" autocomplete="off" placeholder="Search a condition or symptom">'+
+   '</div>'+
+   '<p class="cond-orquiz">Not sure what it is called? <a data-go="/quiz">Take the 2-minute quiz</a></p>'+
+   '<div class="cres-wrap" id="condResults"></div>'+
+ '</section>'+
+ '<div id="condBrowse">'+
+ '<section class="sec" style="padding-top:4px"><span class="kick green">Most families come to us for</span><div class="ctiles">'+CONDITIONS.map(condTile).join('')+'</div></section>'+
+ '<section class="sec cdir-sec"><span class="kick">Everything we treat</span><h2 class="h2" style="margin-bottom:6px">Find your condition</h2><p class="p muted" style="margin-bottom:2px">Open a group to see everything in it, or search above.</p>'+
+   '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g,gi){var rows=COND_DIR.filter(function(d){return d.c===g.k});var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});var hasSubs=!(subs.length===1&&subs[0]==='');var head=hasSubs?'<div class="cdir-cat">'+g.label+'</div>':'';var groups=subs.map(function(s,si){var sr=rows.filter(function(d){return (d.sub||'')===s;});var label=s||g.label;return '<details class="cdir-group"'+(gi===0&&si===0?' open':'')+'><summary class="cdir-head"><span class="cdir-label">'+label+'</span><span class="cdir-count">'+sr.length+'</span><span class="cdir-chev"></span></summary><div class="cdir-rows">'+sr.map(condDirRow).join('')+'</div></details>';}).join('');return '<div class="cdir-cat-grp">'+head+groups+'</div>';}).join('')+
+   '</div>'+
+ '</section>'+
+ '</div>'+
+ '<section class="sec cta-block"><h2 class="h2">Still not sure? Let the quiz point you.</h2><p class="p muted" style="margin-bottom:20px">Two minutes, tap to answer, a report on WhatsApp.</p><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
  '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">Before you pick a condition.</h2><div style="margin-top:18px">'+faqList(CONDITIONS_FAQS)+'</div></section>'+
  footer()}
 
 function vCondition(slug){
- var c=condBy(slug); if(!c) return '<section class="hero" style="min-height:60svh"><div class="bgwrap"><div class="bgslide g-field"></div></div><div class="scrim"></div><h1>[PLACEHOLDER] Condition not found</h1><div class="hcta">'+link('/conditions','Back to all conditions',true)+'</div></section>';
+ var c=condBy(slug); if(!c){var d=dirBy(slug); return d?condStub(d):'<section class="hero" style="min-height:60svh"><div class="bgwrap"><div class="bgslide g-field"></div></div><div class="scrim"></div><h1>[PLACEHOLDER] Condition not found</h1><div class="hcta">'+link('/conditions','Back to all conditions',true)+'</div></section>';}
  return heroBand('g-field','Conditions &middot; '+c.name,c.symptom,c.intro,waBtn('Hi, please send me the 7-day plan for '+c.name,'Get the free 7-day plan','light'))+
  '<section class="sec">'+reframe('Why this usually happens in seniors','It is rarely just one thing.','[PLACEHOLDER] Two or three contributing causes that tend to stack up for this condition.',c.reasons)+'</section>'+
  '<section class="sec"><span class="kick">Start today, free</span><h2 class="h2">Three exercises that usually help.</h2><div class="grid">'+[1,2,3].map(function(n){return '<div class="card">'+slot('Exercise '+n,'green')+'<div class="cardttl">[PLACEHOLDER] Exercise '+n+' name</div><p class="p muted" style="margin-top:0">[PLACEHOLDER] One line on what it does.</p></div>'}).join('')+'</div></section>'+
@@ -1845,6 +2096,16 @@ function vCondition(slug){
  '<section class="sec"><div class="card"><span class="tag green">'+c.name+'</span><p class="p" style="font-family:var(--fd);font-size:var(--fs-h4);color:var(--ink);margin-top:14px">&ldquo;'+c.testimonial+'&rdquo;</p><div style="display:flex;align-items:center;gap:10px;margin-top:12px">'+slot('','round')+'<span class="p muted" style="margin:0;font-size:var(--fs-cap)">[PLACEHOLDER] Name, relation</span></div></div></section>'+
  '<section class="sec cta-block"><h2 class="h2">See what is likely driving it for you.</h2><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
  '<section class="sec"><span class="kick">'+c.name+' questions</span><h2 class="h2">What families ask about '+lc(c.name)+'.</h2><div style="margin-top:18px">'+faqList(c.faqs)+'</div></section>'+
+ footer()}
+
+// light template page for directory conditions that do not have a full write-up yet
+function condStub(d){
+ var cat=(CONDITION_CATS.filter(function(g){return g.k===d.c})[0]||{}).label||'Conditions';
+ return heroBand('g-field','Conditions &middot; '+cat,d.n,'We help older adults manage '+lc(d.n)+' at home, with one connected plan across physiotherapy, training, nutrition, doctor oversight and emotional wellbeing.',waBtn('Hi, please send me a 7-day plan for '+d.n,'Get the free 7-day plan','light'))+
+ '<section class="sec"><span class="kick green">Our approach</span><h2 class="h2">How we help with '+lc(d.n)+'.</h2><p class="p muted">[PLACEHOLDER] A short, specific block on how the connected pillars address '+lc(d.n)+', under doctor oversight.</p>'+slot('Treatment approach')+'<div style="margin-top:18px">'+link('/how-we-work','See how we work')+'</div></section>'+
+ '<section class="sec"><div class="band"><span class="kick green">Free, on WhatsApp</span><div class="cardttl" style="margin-top:0">Want a free 7-day plan for '+lc(d.n)+'?</div><p class="p muted">Tell us about the person and we will send a starter plan.</p><div style="margin-top:16px">'+waBtn('Hi, please send me a 7-day plan for '+d.n,'Send me the plan','orange')+'</div></div></section>'+
+ '<section class="sec cta-block"><h2 class="h2">Not sure where to start?</h2><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
+ '<section class="sec"><div>'+link('/conditions','Back to all conditions')+'</div></section>'+
  footer()}
 
 function vService(slug){
@@ -2100,7 +2361,7 @@ function vStories(){
 var HISTORY=[{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] How it began'},{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] The pivot'},{y:'[PLACEHOLDER] Year',t:'[PLACEHOLDER] Where we are now'}];
 function vAbout(){
  return heroBand('g-gold','About us','Built because good care for older adults was too <span class="it">fragmented.</span>','[PLACEHOLDER] Who we are and why we are different: one accountable medical view, care at home, the whole person in focus, whether you came for yourself or for a parent.')+
- '<section class="sec"><span class="kick">The team</span><h2 class="h2">Providers, in detail.</h2><div class="grid">'+PROVIDERS.map(function(p){return '<div class="card"><div style="display:flex;gap:14px;align-items:center">'+'<div style="width:64px;flex:none">'+slot('','round')+'</div><div><h4 style="font-family:var(--fd);font-weight:450;font-size:var(--fs-h4)">'+p.name+'</h4><div class="p muted" style="margin:2px 0 0;font-size:var(--fs-cap)">'+p.role+'</div></div></div><p class="p muted" style="margin-top:12px;font-size:var(--fs-sm)">[PLACEHOLDER] Credentials and a line of background.</p></div>'}).join('')+'</div></section>'+
+ '<section class="sec"><span class="kick">The team</span><h2 class="h2">The head of each care type.</h2><p class="p muted">We run a team of 45+ providers, so here we introduce the head of each type.</p><div class="grid" style="margin-top:18px">'+PROVIDERS.map(function(p){return '<div class="card prov-detail '+(p.lane||'n')+'"><div class="prov-id"><div class="prov-ph">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" loading="lazy">':'')+'</div><div class="prov-idt"><h4 class="prov-name">'+p.name+'</h4><div class="prov-type">'+p.role+'</div>'+(p.assoc?'<span class="prov-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'+p.assoc+' member</span>':'')+'</div></div><dl class="prov-facts"><div><dt>Education</dt><dd>'+(p.edu||'[PLACEHOLDER]')+'</dd></div><div><dt>Experience</dt><dd>'+(p.exp||'[PLACEHOLDER]')+'</dd></div></dl></div>'}).join('')+'</div></section>'+
  '<section class="sec"><span class="kick">Our journey</span><h2 class="h2">A short history.</h2><div class="steps tline">'+HISTORY.map(function(j){return '<div class="step"><span class="w">'+j.y+'</span><div><h4>'+j.t+'</h4></div></div>'}).join('')+'</div></section>'+
  '<section class="sec">'+slot('Team group photo')+'</section>'+
  '<section class="sec"><span class="kick">From the founder</span><h2 class="h2">Why we keep it personal.</h2>'+slot('Founder&rsquo;s message','video')+'<p class="p muted">[PLACEHOLDER] A short framing of the founder’s message in the video.</p></section>'+
@@ -2109,6 +2370,32 @@ function vAbout(){
  footer()}
 
 var csSvc='all', csOpen=null, csBackScroll=0;
+// body parts / systems / symptom words we treat — used to tell a real (unlisted) condition from an off-topic query
+var HEALTH_TERMS='knee hip back neck shoulder elbow wrist hand finger ankle foot feet heel toe leg arm spine spinal disc joint joints bone bones muscle muscular nerve nerves tendon ligament posture postural pain ache aches sore sprain strain fracture broken injury injuries surgery surgical operation rehab rehabilitation recovery stroke brain head cognitive memory dementia alzheimer heart cardiac chest lung lungs breath breathing respiratory copd asthma bronch pneumonia balance fall falls dizzy dizziness vertigo giddy weak weakness paralysis palsy numb tingling arthritis osteo osteoporosis diabetes diabetic sugar thyroid hypertension pressure cholesterol parkinson sclerosis neuropathy sciatica spondylosis bursitis tendinitis tendinopathy frozen mobility walk walking gait stiff stiffness swelling cancer obesity weight pregnancy antenatal postnatal pelvic incontinence prolapse vestibular cerebral palsy fatigue frailty amputation icu ventilator bedridden bed wheelchair'.split(' ');
+function condIsHealth(q){
+ var words=q.split(/[^a-z]+/).filter(function(w){return w.length>2;});
+ for(var i=0;i<words.length;i++){var w=words[i];for(var j=0;j<HEALTH_TERMS.length;j++){var t=HEALTH_TERMS[j];if(w.indexOf(t)>-1||t.indexOf(w)>-1)return true;}}
+ return false;
+}
+function condRows(list){return list.map(function(d){return '<a class="cres-row" data-name="'+d.n.toLowerCase()+'" data-go="/conditions/'+condSlugOf(d)+'"><span class="cres-tick">'+CHECK()+'</span><span class="cres-name">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';}).join('')}
+function condSearchUpdate(){
+ var input=document.getElementById('condSearch'); if(!input)return;
+ var browse=document.getElementById('condBrowse'), res=document.getElementById('condResults'); if(!res)return;
+ var q=input.value.trim().toLowerCase();
+ if(!q){browse.style.display='';res.style.display='none';res.innerHTML='';return;}
+ browse.style.display='none'; res.style.display='block';
+ var hits=COND_DIR.filter(function(d){return d.n.toLowerCase().indexOf(q)>-1;});
+ if(hits.length){
+   var cap=hits.slice(0,40), more=hits.length-cap.length;
+   res.innerHTML='<div class="cres cres-yes"><div class="cres-head"><span class="cres-badge">'+CHECK()+'Yes, we treat this</span><h3 class="cres-ttl">'+hits.length+' match'+(hits.length>1?'es':'')+' for &ldquo;'+input.value.trim()+'&rdquo;</h3></div><div class="cres-list">'+condRows(cap)+'</div>'+(more>0?'<p class="cres-foot">+'+more+' more. Refine your search to narrow it down.</p>':'')+'</div>';
+ } else if(condIsHealth(q)){
+   res.innerHTML='<div class="cres cres-soft"><div class="cres-ic">'+CHECK()+'</div><h3 class="cres-ttl">We very likely help with this.</h3><p class="cres-p">&ldquo;'+input.value.trim()+'&rdquo; is not in our list by that exact name, but we treat a wide range of conditions for older adults at home. Tell us a little and we will confirm.</p><div class="cres-cta"><button class="btn blue block" data-go="/quiz">Take the 2-minute quiz</button><a class="btn line block" target="_blank" rel="noreferrer" href="'+wa('Hi, I want to know if you treat '+input.value.trim()+' for an older adult at home')+'">Ask us on WhatsApp</a></div></div>';
+ } else {
+   res.innerHTML='<div class="cres cres-off"><div class="cres-ic cres-icx">'+SEARCHX()+'</div><h3 class="cres-ttl">That is not something we treat.</h3><p class="cres-p">Kinetic Age focuses on physiotherapy, rehabilitation, and chronic-condition care for older adults at home. Try a body part or condition, like &ldquo;knee&rdquo;, &ldquo;stroke&rdquo; or &ldquo;diabetes&rdquo;.</p><div class="cres-cta"><button class="btn line block" id="condClear">Browse everything we treat</button></div></div>';
+ }
+}
+function CHECK(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'}
+function SEARCHX(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/><path d="M9 9l4 4M13 9l-4 4"/></svg>'}
 var SVC=[['Physiotherapy','s-physio','physio'],['Nutrition','s-nutrition','nutrition'],['Strength','s-strength','strength'],['Fitness','s-fitness','fitness']];
 /* one white-background photo per case, matched to the condition */
 var CS_IMG=['cs-01.png','cs-02.png','cs-03.png','cs-04.png','cs-05.png','cs-06.png','cs-07.png','cs-08.png','cs-09.png','cs-10.png','cs-11.png'];
@@ -2257,6 +2544,7 @@ document.addEventListener('click',function(e){
    card.parentElement.querySelectorAll('.pscard.lift').forEach(function(c){c.classList.remove('lift');});
    if(!lifted)card.classList.add('lift'); return;}
  var rl=e.target.closest('[data-reel]'); if(rl){openReel(+rl.getAttribute('data-reel')); return;}
+ if(e.target.closest('#condClear')){var ci=document.getElementById('condSearch'); if(ci){ci.value=''; ci.focus(); condSearchUpdate();} return;}
  var g=e.target.closest('[data-go]'); if(g){e.preventDefault(); closeReel(); closeDrawer(); go(g.getAttribute('data-go')); return;}
  
  var ba=e.target.closest('[data-cssvc]'); if(ba){csSvc=ba.getAttribute('data-cssvc'); render(); return;}
@@ -2272,7 +2560,7 @@ document.addEventListener('click',function(e){
 });
 
 /* keep gate inputs in state so re-render does not wipe them */
-document.addEventListener('input',function(e){if(e.target.id==='qn')qName=e.target.value;if(e.target.id==='qp')qPhone=e.target.value;
+document.addEventListener('input',function(e){if(e.target.id==='condSearch')condSearchUpdate();if(e.target.id==='qn')qName=e.target.value;if(e.target.id==='qp')qPhone=e.target.value;
   if(e.target.id==='qn'||e.target.id==='qp'){var b=document.getElementById('qsend');if(b){var ok=qName.trim()&&qPhone.trim();b.disabled=!ok;b.style.opacity=ok?'1':'.5';}}});
 
 /* reel player: full-screen vertical video sheet, opened from a testimonial card.
@@ -2302,7 +2590,7 @@ function openReel(idx){
    '<button class="reel-btn reel-mute" aria-label="Sound">'+reelIcon('vol')+'</button>'+
    (cues?'<button class="reel-btn reel-cc on" aria-label="Captions">'+reelIcon('cc')+'</button>'+
    '<div class="reel-cc-line"></div>':'')+
-   '<div class="reel-info"><div class="reel-name">'+t.name+'</div><div class="reel-sub">'+t.age+' &middot; '+t.label+'</div>'+
+   '<div class="reel-info"><div class="reel-name">'+t.name+'</div><div class="reel-sub">'+t.age+(t.label?' &middot; '+t.label:'')+'</div>'+
      '<span class="reel-chip">'+t.metric.k+' <s>'+t.metric.before+'</s> &rarr; <b>'+t.metric.after+'</b> <em>'+t.metric.delta+'</em></span></div>'+
    '<button class="reel-tap" aria-label="Play or pause"></button>'+
    '<div class="reel-end"><span class="reel-end-k">'+t.metric.k+' '+t.metric.delta+'</span><h3>That is the kind of change we work toward.</h3>'+
