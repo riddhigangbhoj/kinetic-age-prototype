@@ -2183,7 +2183,7 @@ function wheelCard(w,idx){
 function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Watch member stories')+'</div></div>'}
 function footer(){
  return '<footer class="foot"><span class="brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Kinetic Age</span>'+
-  '<p>[PLACEHOLDER] One line on what Kinetic Age does for older adults and the families who care for them.</p>'+
+  '<p>Complete care for older adults, brought home, looking after how you move, eat, and live, as one.</p>'+
   '<button class="btn light" data-lead>Book a free trial</button>'+
   '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/stories">Stories</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
@@ -2567,17 +2567,24 @@ var ABOUT_JOURNEY=[
  'As we trained them, we saw that strength alone was not enough. Some needed real rehabilitation, so we brought in physiotherapy.',
  'Then we met conditions like diabetes that movement could not touch. So we added nutrition and a doctor, to see the whole person.',
  'Each step taught us the same thing: health is connected, and no single discipline covers it.',
- 'So we became one team, not one treatment, movement, strength, nutrition, and a doctor, working together at home.'
+ 'So we became one team, not one treatment, because the body does not heal in parts.'
+];
+var ABOUT_FAQS=[
+ {q:'How do I get started?',a:'You book a free first visit. We come to you, assess your health, and explain the plan. There is no commitment to continue.'},
+ {q:'Can my family see the reports?',a:'Yes. We share your reports in one WhatsApp group with your family, and in the app, so everyone stays informed.'},
+ {q:'Are your providers qualified and background-checked?',a:'Yes. Every provider is qualified, trained, and verified before they enter your home.'},
+ {q:'What does the free trial include?',a:'A full assessment at home, where we understand your health and what you need. It is free, with no commitment.'}
 ];
 function vAbout(){
- return heroBand('g-blue','','Everything your health needs,<span class="it">brought to your home.</span>','We believe real care is everything working together, how you move, eat, and live, watched over as one. We own every outcome.')+
+ return heroBand('g-blue','','Everything your health needs,<span class="it">brought to your home.</span>','We believe real care is everything working together, the way you move, eat, and live, cared for as one. We own every outcome.')+
  '<section class="sec"><h2 class="h2">The Kinetic Age journey</h2>'+
    '<ol class="kjourney">'+ABOUT_JOURNEY.map(function(t,i){var lane=['g','b','o','p','n'][i];return '<li class="kj '+lane+(i===ABOUT_JOURNEY.length-1?' last':'')+'" style="--i:'+i+'"><span class="kj-node"><i>'+(i+1)+'</i></span><p class="kj-tx">'+t+'</p></li>'}).join('')+'</ol>'+
    '<div style="margin-top:26px">'+slot('Founder&rsquo;s message','video')+'</div></section>'+
- '<section class="sec"><h2 class="h2">The people who lead our care team</h2><p class="p muted">Meet some of our senior providers, part of a trained team of 45 and growing. Every one is qualified and verified, because letting someone into your home takes trust.</p>'+teamScroll()+'</section>'+
+ '<section class="sec"><h2 class="h2">Our senior providers</h2><p class="p muted">Meet some of our senior providers, part of a trained team of 45 and growing. Every one is qualified and verified, because letting someone into your home takes trust.</p>'+teamScroll()+'</section>'+
  '<section class="sec"><h2 class="h2">The record so far.</h2><div style="margin-top:14px">'+statStrip()+'</div><div style="margin-top:16px">'+link('/conditions','See the conditions we treat')+'</div></section>'+
  '<section class="sec"><h2 class="h2">At home, across all of <span class="it">Bangalore.</span></h2><p class="p muted">We serve the whole of Bangalore, with care delivered to your door.</p>'+bangaloreMap()+'</section>'+
- '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a trial.</h2><p class="p muted" style="margin-bottom:18px">It starts with one free visit, we come to you and listen.</p><button class="btn" data-lead>Book a free trial</button><div class="cta-second">'+link('/how-we-work','See how we work')+'</div></section>'+
+ '<section class="sec"><h2 class="h2">Questions families ask.</h2><div style="margin-top:18px">'+faqList(ABOUT_FAQS)+'</div></section>'+
+ '<section class="sec cta-block"><h2 class="h2">If this sounds like the care you want, start with a free trial.</h2><p class="p muted" style="margin-bottom:18px">It starts with one free visit. We come to you and listen.</p><button class="btn" data-lead>Book a free trial</button><div class="cta-second">'+link('/how-we-work','See how we work')+'</div></section>'+
  footer()}
 
 var csSvc='all';
@@ -2794,10 +2801,7 @@ function render(){
  topbar.style.display=isQuiz?'none':'';
  var isHome=!parts.length;
  app.classList.toggle('tryfont', isHome);
- if(isQuiz||isHome||isHow){sticky.innerHTML='';}
- 
- else {sticky.innerHTML='<button class="btn block" data-lead>Book a free trial</button>';}
- sticky.style.display=(isQuiz||isHome||isHow)?'none':'';
+ sticky.innerHTML=''; sticky.style.display='none';
  forceSolid=(parts[0]==='case-studies');
  scroller.scrollTop=0; onScroll(); maybeAutoLead();
  app.querySelectorAll('.metricsC').forEach(function(mx){
