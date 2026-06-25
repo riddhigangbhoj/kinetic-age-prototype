@@ -715,6 +715,9 @@ main{padding-bottom:96px}
 .cdir-chev{flex:none;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-2px) rotate(45deg);transition:transform .25s var(--ease)}
 .cdir-group[open] .cdir-chev{transform:translateY(1px) rotate(-135deg)}
 .cdir-rows{padding:0 18px 8px}
+.cdir-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cdir-grid .cdir-group[open]{grid-column:1/-1}
+.cdir-grid .cdir-head{padding:13px 14px;gap:8px}
 .cdir-row{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);font-size:var(--fs-body);text-decoration:none;-webkit-tap-highlight-color:transparent}
 .cdir-row:active{color:var(--green)}
 .cdir-arr{flex:none;color:var(--faint);display:inline-flex}
@@ -1581,6 +1584,18 @@ main{padding-bottom:96px}
 .kj.g{--ln:#1f8c6a}.kj.b{--ln:#213f99}.kj.o{--ln:#cf5a34}.kj.p{--ln:#7b54c4}.kj.n{--ln:#13265a}
 .kj.last .kj-tx{color:var(--ink);font-weight:500;font-size:calc(var(--fs-body) + .5px)}
 @keyframes kjUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+/* Conditions hub — popular condition cards (2-up) */
+.popgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.popc{position:relative;display:flex;flex-direction:column;gap:6px;padding:16px 15px 50px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 26px -20px rgba(20,32,80,.55);overflow:hidden;transition:transform .18s var(--ease),box-shadow .18s var(--ease);animation:kjUp .5s var(--ease) both;animation-delay:calc(var(--i)*55ms)}
+.popc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ln)}
+.popc::after{content:'';position:absolute;right:-30px;top:-30px;width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--ln) 9%,transparent)}
+.popc-nm{position:relative;font-family:var(--fd);font-weight:480;font-size:17px;line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
+.popc-ln{position:relative;font-size:var(--fs-cap);line-height:1.42;color:var(--muted)}
+.popc-arr{position:absolute;right:13px;bottom:13px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--ln) 13%,#fff);color:var(--ln);transition:background .18s,transform .18s,color .18s}
+.popc-arr svg{width:15px;height:15px}
+.popc:active{transform:scale(.975)}
+@media(hover:hover){.popc:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px rgba(20,32,80,.6)}.popc:hover .popc-arr{background:var(--ln);color:#fff;transform:translateX(2px)}}
+.popc.g{--ln:#1f8c6a}.popc.b{--ln:#213f99}.popc.o{--ln:#cf5a34}.popc.p{--ln:#7b54c4}.popc.n{--ln:#13265a}
 /* About — Bangalore coverage map */
 .bmap{position:relative;margin-top:16px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,#eef5fb,#e2edf6);padding:12px}
 .bmap svg{width:100%;height:auto;display:block}
@@ -1689,15 +1704,26 @@ var BREAKDOWN={
  ]}
 };
 var CONDITION_CATS=[
+ {k:'geriatric',label:'Geriatric'},
  {k:'ortho',label:'Orthopaedic & musculoskeletal'},
  {k:'neuro',label:'Neurological'},
  {k:'cardio',label:'Cardiopulmonary'},
+ {k:'metabolic',label:'Metabolic & endocrine'},
+ {k:'postsurg',label:'Post-surgical rehabilitation'},
+ {k:'chronicpain',label:'Chronic pain management'},
+ {k:'cardiohealth',label:'Hypertension & cardiovascular health'},
  {k:'general',label:'General medical'},
- {k:'womens',label:'Women’s health'},
- {k:'geriatric',label:'Geriatric'}
+ {k:'womens',label:'Women’s health'}
 ];
 // directory of everything we treat; c = category key, sub = region/system group. Every item gets its own /conditions/<slug> page.
 var COND_DIR=[
+ {c:'geriatric',n:'Age-related weakness'},
+ {c:'geriatric',n:'Balance impairments'},
+ {c:'geriatric',n:'Falls prevention (geriatric)'},
+ {c:'geriatric',n:'Osteoporosis'},
+ {c:'geriatric',n:'Frailty syndrome'},
+ {c:'geriatric',n:'Mobility limitations'},
+ {c:'geriatric',n:'Urinary incontinence'},
  {c:'ortho',sub:'Spine',n:'Cervical spondylosis'},
  {c:'ortho',sub:'Spine',n:'Cervical radiculopathy'},
  {c:'ortho',sub:'Spine',n:'Cervical strain/sprain'},
@@ -1711,125 +1737,83 @@ var COND_DIR=[
  {c:'ortho',sub:'Spine',n:'Sacroiliac joint dysfunction'},
  {c:'ortho',sub:'Spine',n:'Spondylolisthesis'},
  {c:'ortho',sub:'Spine',n:'Postural dysfunction'},
+ {c:'ortho',sub:'Shoulder',n:'Shoulder pain'},
  {c:'ortho',sub:'Shoulder',n:'Frozen shoulder (Adhesive Capsulitis)'},
  {c:'ortho',sub:'Shoulder',n:'Rotator cuff tendinopathy/tear'},
  {c:'ortho',sub:'Shoulder',n:'Shoulder impingement syndrome'},
- {c:'ortho',sub:'Shoulder',n:'Shoulder instability/dislocation'},
- {c:'ortho',sub:'Shoulder',n:'Bicipital tendinitis'},
  {c:'ortho',sub:'Shoulder',n:'AC joint injuries'},
- {c:'ortho',sub:'Shoulder',n:'Post-fracture shoulder stiffness'},
- {c:'ortho',sub:'Elbow & wrist',n:'Tennis elbow (Lateral Epicondylitis)'},
- {c:'ortho',sub:'Elbow & wrist',n:'Golfer’s elbow (Medial Epicondylitis)'},
- {c:'ortho',sub:'Elbow & wrist',n:'Cubital tunnel syndrome'},
- {c:'ortho',sub:'Elbow & wrist',n:'Carpal tunnel syndrome'},
- {c:'ortho',sub:'Elbow & wrist',n:'De Quervain’s tenosynovitis'},
  {c:'ortho',sub:'Elbow & wrist',n:'Wrist sprains'},
  {c:'ortho',sub:'Elbow & wrist',n:'Post-fracture rehabilitation (wrist)'},
  {c:'ortho',sub:'Hip',n:'Osteoarthritis of hip'},
  {c:'ortho',sub:'Hip',n:'Hip replacement rehabilitation'},
- {c:'ortho',sub:'Hip',n:'Trochanteric bursitis'},
- {c:'ortho',sub:'Hip',n:'Hip labral injuries'},
  {c:'ortho',sub:'Hip',n:'Femoral neck fracture rehabilitation'},
  {c:'ortho',sub:'Knee',n:'Osteoarthritis knee'},
- {c:'ortho',sub:'Knee',n:'Patellofemoral pain syndrome'},
+ {c:'ortho',sub:'Knee',n:'Total knee replacement rehabilitation'},
+ {c:'ortho',sub:'Knee',n:'Post-operative knee rehabilitation'},
  {c:'ortho',sub:'Knee',n:'Ligament injuries (ACL, PCL, MCL, LCL)'},
  {c:'ortho',sub:'Knee',n:'Meniscal injuries'},
- {c:'ortho',sub:'Knee',n:'Total knee replacement rehabilitation'},
- {c:'ortho',sub:'Knee',n:'Patellar tendinopathy'},
- {c:'ortho',sub:'Knee',n:'Post-operative knee rehabilitation'},
- {c:'ortho',sub:'Ankle & foot',n:'Ankle sprain'},
- {c:'ortho',sub:'Ankle & foot',n:'Achilles tendinopathy'},
  {c:'ortho',sub:'Ankle & foot',n:'Plantar fasciitis'},
  {c:'ortho',sub:'Ankle & foot',n:'Flat feet'},
- {c:'ortho',sub:'Ankle & foot',n:'Heel pain'},
- {c:'ortho',sub:'Ankle & foot',n:'Post-fracture rehabilitation (foot)'},
  {c:'ortho',sub:'Ankle & foot',n:'Diabetic foot rehabilitation'},
- {c:'ortho',sub:'Sports injuries',n:'Muscle strains'},
- {c:'ortho',sub:'Sports injuries',n:'Ligament sprains'},
- {c:'ortho',sub:'Sports injuries',n:'Tendon injuries'},
- {c:'ortho',sub:'Sports injuries',n:'Running injuries'},
- {c:'ortho',sub:'Sports injuries',n:'Overuse injuries'},
- {c:'ortho',sub:'Sports injuries',n:'Return-to-sport rehabilitation'},
+ {c:'ortho',sub:'Ankle & foot',n:'Heel pain'},
  {c:'ortho',sub:'Trauma & post-surgical',n:'Fracture rehabilitation'},
  {c:'ortho',sub:'Trauma & post-surgical',n:'Joint replacement rehabilitation'},
- {c:'ortho',sub:'Trauma & post-surgical',n:'Arthroscopy rehabilitation'},
  {c:'ortho',sub:'Trauma & post-surgical',n:'Tendon repair rehabilitation'},
- {c:'ortho',sub:'Trauma & post-surgical',n:'Amputation rehabilitation'},
  {c:'neuro',sub:'Stroke & brain',n:'Stroke (CVA)'},
  {c:'neuro',sub:'Stroke & brain',n:'Transient Ischemic Attack (TIA) rehabilitation'},
- {c:'neuro',sub:'Stroke & brain',n:'Traumatic Brain Injury (TBI)'},
- {c:'neuro',sub:'Stroke & brain',n:'Brain tumours (post-surgical rehabilitation)'},
- {c:'neuro',sub:'Stroke & brain',n:'Cerebral palsy'},
- {c:'neuro',sub:'Stroke & brain',n:'Developmental delay'},
- {c:'neuro',sub:'Spinal cord',n:'Spinal cord injury'},
- {c:'neuro',sub:'Spinal cord',n:'Paraplegia'},
- {c:'neuro',sub:'Spinal cord',n:'Quadriplegia/Tetraplegia'},
  {c:'neuro',sub:'Spinal cord',n:'Myelopathy'},
  {c:'neuro',sub:'Neurodegenerative',n:'Parkinson’s disease'},
  {c:'neuro',sub:'Neurodegenerative',n:'Multiple sclerosis'},
- {c:'neuro',sub:'Neurodegenerative',n:'Motor neuron disease (ALS)'},
- {c:'neuro',sub:'Neurodegenerative',n:'Huntington’s disease'},
- {c:'neuro',sub:'Neurodegenerative',n:'Progressive supranuclear palsy'},
- {c:'neuro',sub:'Peripheral nerve',n:'Bell’s palsy'},
- {c:'neuro',sub:'Peripheral nerve',n:'Guillain-Barré Syndrome (GBS)'},
- {c:'neuro',sub:'Peripheral nerve',n:'Peripheral neuropathy'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Bell’s palsy'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Guillain-Barré Syndrome (GBS)'},
+ {c:'neuro',sub:'Neurodegenerative',n:'Nerve injuries'},
  {c:'neuro',sub:'Peripheral nerve',n:'Diabetic neuropathy'},
- {c:'neuro',sub:'Peripheral nerve',n:'Nerve injuries'},
- {c:'neuro',sub:'Peripheral nerve',n:'Brachial plexus injuries'},
- {c:'neuro',sub:'Neuromuscular',n:'Muscular dystrophy'},
- {c:'neuro',sub:'Neuromuscular',n:'Myasthenia gravis'},
- {c:'neuro',sub:'Neuromuscular',n:'Myopathies'},
+ {c:'neuro',sub:'Peripheral nerve',n:'Peripheral neuropathy'},
  {c:'neuro',sub:'Vestibular & balance',n:'Vertigo'},
  {c:'neuro',sub:'Vestibular & balance',n:'Vestibular dysfunction'},
  {c:'neuro',sub:'Vestibular & balance',n:'Balance disorders'},
  {c:'neuro',sub:'Vestibular & balance',n:'Falls prevention'},
- {c:'neuro',sub:'Paediatric neuro',n:'Cerebral palsy (paediatric)'},
- {c:'neuro',sub:'Paediatric neuro',n:'Developmental delay (paediatric)'},
- {c:'neuro',sub:'Paediatric neuro',n:'Autism spectrum disorders (motor dysfunction)'},
- {c:'neuro',sub:'Paediatric neuro',n:'Spina bifida'},
- {c:'neuro',sub:'Paediatric neuro',n:'Down syndrome'},
- {c:'neuro',sub:'Paediatric neuro',n:'Hypotonia'},
+ {c:'neuro',sub:'Vestibular & balance',n:'Cerebellar ataxia'},
  {c:'cardio',sub:'Cardiac',n:'Post-CABG (Coronary Artery Bypass Grafting)'},
  {c:'cardio',sub:'Cardiac',n:'Post-angioplasty rehabilitation'},
  {c:'cardio',sub:'Cardiac',n:'Myocardial infarction (Heart attack)'},
  {c:'cardio',sub:'Cardiac',n:'Heart failure'},
  {c:'cardio',sub:'Cardiac',n:'Coronary artery disease'},
- {c:'cardio',sub:'Cardiac',n:'Cardiac transplantation rehabilitation'},
  {c:'cardio',sub:'Cardiac',n:'Valvular heart disease rehabilitation'},
  {c:'cardio',sub:'Respiratory',n:'Chronic Obstructive Pulmonary Disease (COPD)'},
  {c:'cardio',sub:'Respiratory',n:'Asthma'},
- {c:'cardio',sub:'Respiratory',n:'Bronchiectasis'},
- {c:'cardio',sub:'Respiratory',n:'Pneumonia'},
- {c:'cardio',sub:'Respiratory',n:'Pulmonary fibrosis'},
  {c:'cardio',sub:'Respiratory',n:'Tuberculosis (post-treatment rehabilitation)'},
  {c:'cardio',sub:'Respiratory',n:'Interstitial lung disease'},
- {c:'cardio',sub:'Critical care',n:'ICU-acquired weakness'},
- {c:'cardio',sub:'Critical care',n:'Ventilator-dependent patients'},
- {c:'cardio',sub:'Critical care',n:'Prolonged bed rest'},
- {c:'cardio',sub:'Critical care',n:'Post-COVID rehabilitation'},
- {c:'cardio',sub:'Critical care',n:'Sepsis-related deconditioning'},
- {c:'general',n:'Obesity management'},
+ {c:'metabolic',n:'Diabetes'},
+ {c:'metabolic',n:'Diabetes-related mobility issues'},
+ {c:'metabolic',n:'Diabetic neuropathy'},
+ {c:'metabolic',n:'Obesity-related joint pain'},
+ {c:'metabolic',n:'Thyroid-related fatigue and weakness'},
+ {c:'postsurg',n:'Post-operative care and rehabilitation'},
+ {c:'postsurg',n:'Hip replacement rehabilitation'},
+ {c:'postsurg',n:'Knee replacement rehabilitation'},
+ {c:'postsurg',n:'Spinal surgery rehabilitation'},
+ {c:'postsurg',n:'Cardiac surgery rehabilitation'},
+ {c:'postsurg',n:'General post-operative deconditioning'},
+ {c:'chronicpain',n:'Chronic musculoskeletal pain'},
+ {c:'chronicpain',n:'Multi-joint pain management'},
+ {c:'chronicpain',n:'Pain related to aging and deconditioning'},
+ {c:'cardiohealth',n:'Hypertension management through exercise'},
+ {c:'cardiohealth',n:'Cardiovascular deconditioning'},
+ {c:'cardiohealth',n:'Cardiac rehab for seniors'},
  {c:'general',n:'Diabetes-related functional limitations'},
- {c:'general',n:'Chronic fatigue syndrome'},
- {c:'general',n:'Cancer rehabilitation'},
- {c:'general',n:'Lymphedema management'},
  {c:'general',n:'Geriatric deconditioning'},
+ {c:'general',n:'Obesity management'},
+ {c:'general',n:'Chronic fatigue syndrome'},
  {c:'womens',n:'Pregnancy-related back pain'},
  {c:'womens',n:'Antenatal exercise programs'},
  {c:'womens',n:'Postnatal rehabilitation'},
  {c:'womens',n:'Diastasis recti'},
  {c:'womens',n:'Pelvic floor dysfunction'},
- {c:'womens',n:'Urinary incontinence'},
- {c:'womens',n:'Pelvic organ prolapse'},
- {c:'geriatric',n:'Age-related weakness'},
- {c:'geriatric',n:'Balance impairments'},
- {c:'geriatric',n:'Falls prevention (geriatric)'},
- {c:'geriatric',n:'Osteoporosis'},
- {c:'geriatric',n:'Frailty syndrome'},
- {c:'geriatric',n:'Mobility limitations'}
+ {c:'womens',n:'Pelvic organ prolapse'}
 ];
 var HOME_FAQS=[{q:'[PLACEHOLDER] How does the first visit work?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who are the providers?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you come to our home?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What does it cost?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if my parent is reluctant?',a:'[PLACEHOLDER]'}];
-var CONDITIONS_FAQS=[{q:'[PLACEHOLDER] My parent’s condition is not listed. Can you help?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you treat more than one condition at once?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How do you decide what to focus on?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Is a diagnosis required to start?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can the plan change over time?',a:'[PLACEHOLDER]'}];
+var CONDITIONS_FAQS=[{q:'Which conditions do you treat?',a:'[PLACEHOLDER]'},{q:'Do you provide care at home?',a:'[PLACEHOLDER]'},{q:'Which areas in Bangalore do you serve?',a:'[PLACEHOLDER]'},{q:'How do I start, and what is the free trial?',a:'[PLACEHOLDER]'}];
 var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
 var TESTIMONIALS=[
 {slug:'knee-pain',name:'Vishalakshi',age:68,her:'her',label:'',storyLen:'0:58',lane:'green',video:'sharma-testimonial.mp4',bakedCC:true,poster:'sharma-poster.jpg',
@@ -2234,36 +2218,34 @@ function vHome(){
  footer()}
 
 // 6-7 most-searched conditions surfaced as quick tiles; full 3 route to rich pages, the rest to stubs
+// 6-7 most-treated/most-searched conditions; short lines are placeholder copy for review
 var COND_POPULAR=[
- {name:'Knee pain',slug:'knee-pain'},
- {name:'Balance and falls',slug:'balance-and-falls'},
- {name:'Post-stroke recovery',slug:'post-stroke-recovery'},
- {name:'Osteoarthritis knee',slug:condSlugify('Osteoarthritis knee')},
- {name:'Frozen shoulder',slug:condSlugify('Frozen shoulder (Adhesive Capsulitis)')},
- {name:'Parkinson’s disease',slug:condSlugify('Parkinson’s disease')},
- {name:'Low back pain',slug:condSlugify('Low back pain')}
+ {name:'Knee pain',slug:'knee-pain',line:'Pain that cuts the walk short, and what sits underneath it.'},
+ {name:'Balance and falls',slug:'balance-and-falls',line:'When standing up feels risky, and how to steady it.'},
+ {name:'Post-stroke recovery',slug:'post-stroke-recovery',line:'Rebuilding strength and movement, step by step.'},
+ {name:'Post-operative care and rehabilitation',slug:condSlugify('Post-operative care and rehabilitation'),line:'Getting back on your feet safely after surgery.'},
+ {name:'Shoulder pain',slug:condSlugify('Shoulder pain'),line:'A stiff or painful shoulder, eased and freed gradually.'},
+ {name:'Diabetes',slug:condSlugify('Diabetes'),line:'Movement and nutrition that help manage blood sugar.'},
+ {name:'Parkinson’s disease',slug:condSlugify('Parkinson’s disease'),line:'Steadier movement and daily confidence, supported.'}
 ];
-// the condition the live ad currently runs on; swap to match the campaign
-var COND_OF_DAY={name:'Knee Pain',slug:'knee-pain',line:'[PLACEHOLDER] The condition our current campaign is running on. Swap this card to match the live ad.'};
 function vConditions(){
- return heroBand('g-field','Conditions we work with','Find what is going on,<span class="it">in plain words.</span>','Search the condition or symptom you are dealing with, or let the quiz point you.')+
+ return heroBand('g-field','','Your condition is where we start.<span class="it">We treat the whole of it.</span>','We treat every symptom, and how they connect, so nothing about your health is handled on its own.')+
  '<section class="sec" style="padding-top:18px">'+
+   '<p class="cond-orquiz" style="margin-top:0;margin-bottom:12px">Search your condition, or browse below.</p>'+
    '<div class="cond-search"><svg class="cs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg>'+
-     '<input id="condSearch" type="search" autocomplete="off" placeholder="Search a condition or symptom">'+
+     '<input id="condSearch" type="search" autocomplete="off" placeholder="Search a condition, for example knee pain">'+
    '</div>'+
-   '<p class="cond-orquiz">Not sure what it is called? <a data-go="/quiz">Take the 2-minute quiz</a></p>'+
    '<div class="cres-wrap" id="condResults"></div>'+
  '</section>'+
  '<div id="condBrowse">'+
- '<section class="sec" style="padding-top:2px"><div class="band"><span class="kick">Free, at home</span><div class="cardttl" style="margin-top:0">Not sure which condition fits? Start with a free assessment.</div><p class="p muted">A specialist visits, assesses in person, and tells you what is actually going on, no payment needed.</p><div style="margin-top:16px"><button class="btn" data-lead>Book a free trial</button></div></div></section>'+
- '<section class="sec" style="padding-top:4px"><span class="kick orange">Today’s focus</span><a class="card cod" data-go="/conditions/'+COND_OF_DAY.slug+'"><span class="tag green" style="margin-top:0">'+COND_OF_DAY.name+'</span><div class="cardttl">How we treat '+lc(COND_OF_DAY.name)+'</div><p class="p muted" style="margin-top:4px">'+COND_OF_DAY.line+'</p><span class="csbtn">Open this condition</span></a></section>'+
- '<section class="sec" style="padding-top:4px"><span class="kick green">Most families come to us for</span><div class="ctiles">'+COND_POPULAR.map(condTile).join('')+'</div></section>'+
- '<section class="sec cdir-sec"><span class="kick">Everything we treat</span><h2 class="h2" style="margin-bottom:6px">Find your condition</h2><p class="p muted" style="margin-bottom:2px">Open a group to see everything in it, or search above.</p>'+
-   '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g,gi){var rows=COND_DIR.filter(function(d){return d.c===g.k});var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});var hasSubs=!(subs.length===1&&subs[0]==='');var head=hasSubs?'<div class="cdir-cat">'+g.label+'</div>':'';var groups=subs.map(function(s,si){var sr=rows.filter(function(d){return (d.sub||'')===s;});var label=s||g.label;return '<details class="cdir-group"'+(gi===0&&si===0?' open':'')+'><summary class="cdir-head"><span class="cdir-label">'+label+'</span><span class="cdir-count">'+sr.length+'</span><span class="cdir-chev"></span></summary><div class="cdir-rows">'+sr.map(condDirRow).join('')+'</div></details>';}).join('');return '<div class="cdir-cat-grp">'+head+groups+'</div>';}).join('')+
+ '<section class="sec" style="padding-top:6px"><button class="btn block xl" data-lead>Book a free trial</button></section>'+
+ '<section class="sec" style="padding-top:8px"><h2 class="h2">Most people come to us for</h2><div class="popgrid">'+COND_POPULAR.map(function(c,i){var L=['g','b','o','p','n'][i%5];return '<a class="popc '+L+'" style="--i:'+i+'" data-go="/conditions/'+c.slug+'"><div class="popc-nm">'+c.name+'</div><p class="popc-ln">'+c.line+'</p><span class="popc-arr">'+ARR()+'</span></a>'}).join('')+'</div></section>'+
+ '<section class="sec cdir-sec"><h2 class="h2" style="margin-bottom:6px">Find your condition</h2><p class="p muted" style="margin-bottom:2px">Some of the other conditions we treat. Open a group, or search above.</p>'+
+   '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g,gi){var rows=COND_DIR.filter(function(d){return d.c===g.k});var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});var hasSubs=!(subs.length===1&&subs[0]==='');var head=hasSubs?'<div class="cdir-cat">'+g.label+'</div>':'';var groups=subs.map(function(s,si){var sr=rows.filter(function(d){return (d.sub||'')===s;});var label=s||g.label;return '<details class="cdir-group"'+''+'><summary class="cdir-head"><span class="cdir-label">'+label+'</span><span class="cdir-count">'+sr.length+'</span><span class="cdir-chev"></span></summary><div class="cdir-rows">'+sr.map(condDirRow).join('')+'</div></details>';}).join('');return '<div class="cdir-cat-grp">'+head+(hasSubs?'<div class="cdir-grid">'+groups+'</div>':groups)+'</div>';}).join('')+
    '</div>'+
  '</section>'+
  '</div>'+
- '<section class="sec cta-block"><h2 class="h2">Still not sure? Let the quiz point you.</h2><p class="p muted" style="margin-bottom:20px">Two minutes, tap to answer, a report on WhatsApp.</p><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button></section>'+
+ '<section class="sec cta-block"><h2 class="h2">Not sure what you are dealing with?</h2><p class="p muted" style="margin-bottom:20px">Take a 2-minute quiz to understand your situation.</p><button class="btn line" data-go="/quiz">Take a 2-minute quiz</button></section>'+
  '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">Before you pick a condition.</h2><div style="margin-top:18px">'+faqList(CONDITIONS_FAQS)+'</div></section>'+
  footer()}
 
@@ -2603,13 +2585,14 @@ function condSearchUpdate(){
  if(!q){browse.style.display='';res.style.display='none';res.innerHTML='';return;}
  browse.style.display='none'; res.style.display='block';
  var hits=COND_DIR.filter(function(d){return d.n.toLowerCase().indexOf(q)>-1;});
+ var seen={}; hits=hits.filter(function(d){var k=condSlugOf(d);if(seen[k])return false;seen[k]=1;return true;});
  if(hits.length){
    var cap=hits.slice(0,40), more=hits.length-cap.length;
    res.innerHTML='<div class="cres cres-yes"><div class="cres-head"><span class="cres-badge">'+CHECK()+'Yes, we treat this</span><h3 class="cres-ttl">'+hits.length+' match'+(hits.length>1?'es':'')+' for &ldquo;'+input.value.trim()+'&rdquo;</h3></div><div class="cres-list">'+condRows(cap)+'</div>'+(more>0?'<p class="cres-foot">+'+more+' more. Refine your search to narrow it down.</p>':'')+'</div>';
  } else if(condIsHealth(q)){
-   res.innerHTML='<div class="cres cres-soft"><div class="cres-ic">'+CHECK()+'</div><h3 class="cres-ttl">We very likely help with this.</h3><p class="cres-p">&ldquo;'+input.value.trim()+'&rdquo; is not in our list by that exact name, but we treat a wide range of conditions for older adults at home. Tell us a little and we will confirm.</p><div class="cres-cta"><button class="btn blue block" data-go="/quiz">Take the 2-minute quiz</button><a class="btn line block" target="_blank" rel="noreferrer" href="'+wa('Hi, I want to know if you treat '+input.value.trim()+' for an older adult at home')+'">Ask us on WhatsApp</a></div></div>';
+   res.innerHTML='<div class="cres cres-soft"><div class="cres-ic">'+CHECK()+'</div><h3 class="cres-ttl">Yes, we treat this.</h3><p class="cres-p">&ldquo;'+input.value.trim()+'&rdquo; is not in our list by that exact name, but we treat it for older adults at home. Message us to know more.</p><div class="cres-cta"><a class="btn block" target="_blank" rel="noreferrer" href="'+wa('Hi, I want to know more about '+input.value.trim()+' for an older adult at home')+'">Message us on WhatsApp</a></div></div>';
  } else {
-   res.innerHTML='<div class="cres cres-off"><div class="cres-ic cres-icx">'+SEARCHX()+'</div><h3 class="cres-ttl">That is not something we treat.</h3><p class="cres-p">Kinetic Age focuses on physiotherapy, rehabilitation, and chronic-condition care for older adults at home. Try a body part or condition, like &ldquo;knee&rdquo;, &ldquo;stroke&rdquo; or &ldquo;diabetes&rdquo;.</p><div class="cres-cta"><button class="btn line block" id="condClear">Browse everything we treat</button></div></div>';
+   res.innerHTML='<div class="cres cres-off"><div class="cres-ic cres-icx">'+SEARCHX()+'</div><h3 class="cres-ttl">We may still be able to help.</h3><p class="cres-p">&ldquo;'+input.value.trim()+'&rdquo; is not in our list, but we care for a wide range of conditions for older adults at home. Message us and we will tell you.</p><div class="cres-cta"><a class="btn block" target="_blank" rel="noreferrer" href="'+wa('Hi, I am looking for help with '+input.value.trim()+' for an older adult at home')+'">Message us on WhatsApp</a></div></div>';
  }
 }
 function CHECK(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'}
