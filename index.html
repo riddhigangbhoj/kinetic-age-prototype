@@ -2672,7 +2672,7 @@ function vCase(slug){
 }
 function vCases(){
  var list=CASE_STUDIES.map(function(c,i){return {c:c,i:i}}).filter(function(o){return csSvc==='all'||svcOf(o.c).some(function(x){return x[0]===csSvc})});
- return heroBand('g-home','','Real recoveries,<span class="it">in their own words.</span>','Eleven clients, from twenty years of knee pain to post-stroke rehab, who rebuilt strength, balance and confidence with care delivered at home.')+
+ return heroBand('g-home','','Real recoveries,<span class="it">in their own words.</span>','Twelve clients, from twenty years of knee pain to post-stroke rehab, who rebuilt strength, balance and confidence with care delivered at home.')+
   '<section class="sec" style="padding-top:22px"><div class="chips">'+['All'].concat(SVC.map(function(x){return x[0]})).map(function(f){var k=(f==='All'?'all':f);return '<button class="chip'+(k===csSvc?' on':'')+'" data-cssvc="'+k+'">'+f+'</button>'}).join('')+'</div>'+
    '<div class="csgrid">'+list.map(function(o){return csCard(o.c,o.i)}).join('')+'</div></section>'+
  '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">Before you read on.</h2><div style="margin-top:18px">'+faqList(CASE_FAQS)+'</div></section>'+
