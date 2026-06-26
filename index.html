@@ -435,6 +435,21 @@ main{padding-bottom:96px}
 .t2-team{display:flex;width:fit-content;align-items:center;gap:5px;margin-top:7px;font-size:var(--fs-micro);font-weight:700;
   letter-spacing:.03em;color:var(--green);background:#e6f4ee;border:1px solid #cfe9de;border-radius:var(--r-pill);padding:3px 9px}
 .t2-team::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+/* member reviews (carried from the old site): star-rated quote cards in a swipe */
+.rvw-swipe>.card{flex:0 0 80%;display:flex;flex-direction:column;margin-top:0}
+.rvw-card{gap:12px;background:#fff;border:1px solid var(--line);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 14px 30px -24px rgba(20,32,80,.5)}
+.rvw-stars{display:flex;gap:3px;color:#e8a33d}
+.rvw-stars svg{width:16px;height:16px}
+.rvw-tx{font-size:var(--fs-sm);line-height:1.6;color:var(--ink2)}
+.rvw-foot{display:flex;align-items:center;gap:11px;margin-top:auto;padding-top:6px}
+.rvw-av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--fd);font-size:15px;font-weight:500;color:#fff;box-shadow:0 4px 10px rgba(20,32,80,.18)}
+.rvw-av.c1{background:linear-gradient(150deg,#5b73d6,var(--blue))}
+.rvw-av.c2{background:linear-gradient(150deg,var(--blue),var(--green))}
+.rvw-av.c3{background:linear-gradient(150deg,#f5a86a,var(--orange-ink))}
+.rvw-av.c4{background:linear-gradient(150deg,var(--green),#2aa178)}
+.rvw-av.c5{background:linear-gradient(150deg,#2a4aa0,#16264f)}
+.rvw-id{font-size:var(--fs-cap);color:var(--muted);line-height:1.32}
+.rvw-id b{display:block;font-size:var(--fs-ui);font-weight:600;color:var(--ink)}
 /* conditions teaser link under the carousel */
 .btn.line{background:rgba(255,255,255,.55);border:1.5px solid rgba(19,38,90,.28);color:var(--ink);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
@@ -715,9 +730,32 @@ main{padding-bottom:96px}
 .cond-chips::-webkit-scrollbar{display:none}
 .cond-chips .chip{flex:0 0 auto;white-space:nowrap}
 .cdir{margin-top:20px;display:flex;flex-direction:column;gap:10px}
-.cdir-cat-grp{display:flex;flex-direction:column;gap:10px}
-.cdir-cat-grp+.cdir-cat-grp{margin-top:16px}
-.cdir-cat{font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);color:var(--ink);padding:2px 2px 0}
+/* each category = one collapsible card: photo + name + count in the header, everything else in the dropdown */
+.catcard{border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;overflow:hidden;box-shadow:0 14px 30px -24px rgba(20,32,80,.5)}
+.catcard[open]{box-shadow:0 22px 46px -26px rgba(20,32,80,.55)}
+.catcard-head{list-style:none;display:flex;align-items:center;gap:13px;padding:11px 16px 11px 11px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.catcard-head::-webkit-details-marker{display:none}
+.cdir-cat-photo{flex:none;width:50px;height:50px;border-radius:14px;overflow:hidden;background:#e8eef4;
+  box-shadow:0 8px 18px -10px rgba(20,32,80,.5),inset 0 0 0 1px rgba(255,255,255,.65)}
+.cdir-cat-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;display:block}
+.cdir-cat{flex:1;min-width:0;font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.cdir-cat-n{flex:none;font-size:var(--fs-micro);font-weight:700;color:var(--muted);background:#eef3f8;padding:2px 9px;border-radius:999px}
+.catcard-chev{flex:none;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-2px) rotate(45deg);transition:transform .25s var(--ease)}
+.catcard[open] .catcard-chev{transform:translateY(2px) rotate(-135deg)}
+.catcard-body{padding:2px 14px 15px}
+/* lighten the nested sub-group accordions so it does not read as card-in-card */
+.catcard-body .cdir-group{box-shadow:none;background:#fbfcfe}
+.catcard-body .cdir-group[open]{box-shadow:0 12px 24px -20px rgba(20,32,80,.4)}
+/* flat categories: each condition shown directly as a leaf pill */
+.cdir-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.cdir-pill{display:flex;align-items:center;gap:8px;min-height:48px;padding:11px 13px;border:1px solid var(--line);border-radius:var(--r);
+  background:#fff;text-decoration:none;box-shadow:0 12px 26px -22px rgba(20,32,80,.5);-webkit-tap-highlight-color:transparent;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s}
+.cdir-pill .cdp-nm{flex:1;min-width:0;font-size:var(--fs-cap);font-weight:600;line-height:1.22;color:var(--ink2)}
+.cdir-pill .cdir-arr svg{width:14px;height:14px}
+.cdir-pill:active{transform:scale(.975)}
+.cdir-pill:active .cdp-nm{color:var(--green)}
+@media(hover:hover){.cdir-pill:hover{border-color:var(--green);box-shadow:0 16px 30px -20px rgba(31,140,106,.5)}}
 .cdir-group{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
 .cdir-group[open]{box-shadow:0 16px 32px -24px rgba(20,32,80,.45)}
 .cdir-head{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;font-size:var(--fs-cap);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);-webkit-tap-highlight-color:transparent}
@@ -1184,25 +1222,25 @@ main{padding-bottom:96px}
 .jw-calx.show-d .lgr-d,.jw-calx.show-e .lgr-e,.jw-calx.show-n .lgr-n{opacity:1;transform:none}
 
 /* slim app-download band (below point 2) */
-.appdl{position:relative;overflow:hidden;margin-top:16px;border-radius:18px;padding:14px 16px;
-  min-height:96px;display:flex;align-items:center;color:var(--ink);
+.appdl{position:relative;overflow:hidden;margin-top:16px;border-radius:18px;padding:18px 18px;
+  min-height:188px;display:flex;align-items:center;color:var(--ink);
   background:linear-gradient(135deg,#eef4fd,#dde8fa 64%,#cfe0f7);border:1px solid #d6e2f4;
   box-shadow:0 18px 36px -28px rgba(19,38,90,.5)}
 .appdl:before{content:'';position:absolute;right:-26px;top:-44px;width:150px;height:150px;border-radius:50%;
   background:radial-gradient(circle,rgba(33,63,153,.12),transparent 70%)}
-.appdl-body{position:relative;z-index:2;max-width:60%}
-.appdl-eyebrow{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:700}
-.appdl-ttl{font-family:var(--fd);font-weight:500;font-size:15.5px;line-height:1.18;margin:5px 0 10px;letter-spacing:-.01em}
+.appdl-body{position:relative;z-index:2;max-width:55%}
+.appdl-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.appdl-ttl{font-family:var(--fd);font-weight:500;font-size:17px;line-height:1.18;margin:6px 0 12px;letter-spacing:-.01em}
 .appdl-btn{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:600;
   font-size:12.5px;padding:8px 15px;border-radius:999px;box-shadow:0 10px 20px -8px rgba(19,38,90,.55);transition:transform .2s var(--ease)}
 .appdl-btn:active{transform:scale(.96)}
 .appdl-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 /* peeking app screens */
-.appdl-shots{position:absolute;right:4px;top:0;bottom:0;width:150px;z-index:1}
-.ph{position:absolute;top:50%;width:74px;height:152px;border-radius:16px;background:#fff;overflow:hidden;
+.appdl-shots{position:absolute;right:6px;top:0;bottom:0;width:188px;z-index:1}
+.ph{position:absolute;top:50%;width:92px;height:188px;border-radius:18px;background:#fff;overflow:hidden;
   border:3px solid #0e1838;box-shadow:0 18px 34px -16px rgba(0,0,0,.55)}
-.ph-b{right:60px;transform:translateY(-50%) rotate(-12deg) scale(.9);opacity:.8}
-.ph-f{right:4px;transform:translateY(-50%) rotate(-5deg)}
+.ph-b{right:78px;transform:translateY(-50%) rotate(-12deg) scale(.9);opacity:.8}
+.ph-f{right:6px;transform:translateY(-50%) rotate(-5deg)}
 .ph-scr{position:absolute;inset:0;padding:9px 7px;display:flex;flex-direction:column;gap:5px}
 .ph-hd{font-family:var(--fd);font-weight:600;font-size:9px;color:#16204a}
 .ph-hd.dim{color:#9aa6c2}
@@ -1215,23 +1253,23 @@ main{padding-bottom:96px}
 .ph-bar{height:13px;border-radius:4px;background:#fdf3d1;border:1px solid #efd684}
 
 /* step 04 — reporting & transparency: a dedicated WhatsApp group for you + family */
-.jw-wa{margin-top:16px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);
+.jw-wa{max-width:320px;margin:16px auto 0;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);
   box-shadow:0 1px 2px rgba(20,32,107,.04),0 20px 40px -30px rgba(20,32,107,.5)}
-.wa-top{display:flex;align-items:center;gap:10px;padding:11px 13px;background:linear-gradient(100deg,#1f8c6a,#0f6b50);color:#fff}
-.wa-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.wa-top{display:flex;align-items:center;gap:9px;padding:9px 12px;background:linear-gradient(100deg,#1f8c6a,#0f6b50);color:#fff}
+.wa-av{width:31px;height:31px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
 .wa-av svg{width:19px;height:19px;fill:#fff}
 .wa-name{font-weight:600;font-size:13px}
 .wa-mem{font-size:9.5px;color:rgba(255,255,255,.82);margin-top:1px}
-.wa-body{padding:11px 11px 13px;background:#e9efe8;display:flex;flex-direction:column;gap:7px}
-.wa-sys{align-self:center;font-size:9px;color:#5d6b5f;background:#dbe8da;border-radius:7px;padding:3px 9px;text-align:center;margin-bottom:2px}
-.wa-msg{max-width:84%;padding:6px 9px 7px;border-radius:9px;font-size:11px;line-height:1.35;color:#16201a;box-shadow:0 1px 1px rgba(0,0,0,.07)}
+.wa-body{padding:9px 10px 11px;background:#e9efe8;display:flex;flex-direction:column;gap:6px}
+.wa-sys{align-self:center;font-size:8.5px;color:#5d6b5f;background:#dbe8da;border-radius:7px;padding:2px 8px;text-align:center;margin-bottom:1px}
+.wa-msg{max-width:84%;padding:5px 8px 6px;border-radius:9px;font-size:10.5px;line-height:1.32;color:#16201a;box-shadow:0 1px 1px rgba(0,0,0,.07)}
 .wa-msg.them{background:#fff;align-self:flex-start;border-top-left-radius:2px}
 .wa-msg.me{background:#d6fccb;align-self:flex-end;border-top-right-radius:2px}
 .wa-from{display:block;font-size:9.5px;font-weight:700;margin-bottom:3px}
 .wa-phys .wa-from{color:#1f8c6a}.wa-nut .wa-from{color:#cf7a1e}.wa-doc .wa-from{color:var(--blue)}
-.wa-att{display:flex;align-items:center;gap:7px;background:#f3f6f1;border-radius:7px;padding:6px 8px;font-weight:600;font-size:10.5px;color:#16201a}
-.wa-att-ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;color:#fff;flex:none}
-.wa-att-ic svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.wa-att{display:flex;align-items:center;gap:6px;background:#f3f6f1;border-radius:7px;padding:5px 7px;font-weight:600;font-size:10px;color:#16201a}
+.wa-att-ic{width:21px;height:21px;border-radius:6px;display:grid;place-items:center;color:#fff;flex:none}
+.wa-att-ic svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .wa-phys .wa-att-ic{background:#1f8c6a}.wa-nut .wa-att-ic{background:#e08a2e}
 
 /* card 1 — factor bar graph */
@@ -1599,12 +1637,15 @@ main{padding-bottom:96px}
 @keyframes kjUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 /* Conditions hub — popular condition cards (2-up) */
 .popgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.popc{position:relative;display:flex;flex-direction:column;gap:6px;padding:16px 15px 50px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 26px -20px rgba(20,32,80,.55);overflow:hidden;transition:transform .18s var(--ease),box-shadow .18s var(--ease);animation:kjUp .5s var(--ease) both;animation-delay:calc(var(--i)*55ms)}
-.popc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ln)}
-.popc::after{content:'';position:absolute;right:-30px;top:-30px;width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--ln) 9%,transparent)}
-.popc-nm{position:relative;font-family:var(--fd);font-weight:480;font-size:17px;line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
+.popc{position:relative;display:flex;flex-direction:column;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 16px 32px -20px rgba(20,32,80,.6);overflow:hidden;transition:transform .18s var(--ease),box-shadow .18s var(--ease);animation:kjUp .5s var(--ease) both;animation-delay:calc(var(--i)*55ms)}
+.popc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;z-index:2;background:var(--ln)}
+.popc-ph{position:relative;height:124px;overflow:hidden;background:#e8eef4}
+.popc-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 36%;display:block}
+.popc-ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,38,.06),transparent 38%)}
+.popc-body{position:relative;padding:12px 13px 42px}
+.popc-nm{position:relative;font-family:var(--fd);font-weight:480;font-size:16px;line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
 .popc-ln{position:relative;font-size:var(--fs-cap);line-height:1.42;color:var(--muted)}
-.popc-arr{position:absolute;right:13px;bottom:13px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--ln) 13%,#fff);color:var(--ln);transition:background .18s,transform .18s,color .18s}
+.popc-arr{position:absolute;right:11px;bottom:11px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--ln) 13%,#fff);color:var(--ln);transition:background .18s,transform .18s,color .18s}
 .popc-arr svg{width:15px;height:15px}
 .popc:active{transform:scale(.975)}
 @media(hover:hover){.popc:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px rgba(20,32,80,.6)}.popc:hover .popc-arr{background:var(--ln);color:#fff;transform:translateX(2px)}}
@@ -1736,7 +1777,11 @@ var CONDITIONS=[
  {slug:'balance-and-falls',name:'Balance and falls',symptom:'When standing up feels risky',intro:'[PLACEHOLDER] A fall is rarely just bad luck. Balance can be trained, and the risk can come down.',
   reasons:['[PLACEHOLDER] Weak legs and core make small stumbles hard to recover from.','[PLACEHOLDER] Confidence drops after a near-fall, so they move less and weaken more.','[PLACEHOLDER] Medication or vision issues add a hidden layer of risk.'],
   testimonial:'[PLACEHOLDER] Quote from a family worried about falls.',
-  faqs:[{q:'[PLACEHOLDER] Can balance really be improved at this age?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What makes falls more likely?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How do you keep sessions safe?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if they have already fallen?',a:'[PLACEHOLDER]'}]}
+  faqs:[{q:'[PLACEHOLDER] Can balance really be improved at this age?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What makes falls more likely?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How do you keep sessions safe?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if they have already fallen?',a:'[PLACEHOLDER]'}]},
+ {slug:'arthritis',name:'Arthritis',symptom:'Stiff, aching joints that limit the day',intro:'[PLACEHOLDER] Arthritis makes the simplest movements hurt. Here is what is usually going on, and how the right care eases it.',
+  reasons:['[PLACEHOLDER] The cartilage cushioning the joint has worn down, so movement turns painful.','[PLACEHOLDER] Muscles around the joint weaken from using it less, leaving it less supported.','[PLACEHOLDER] Inflammation flares with activity and weather, making stiff mornings worse.'],
+  testimonial:'[PLACEHOLDER] Quote from a family managing a parent’s arthritis.',
+  faqs:[{q:'[PLACEHOLDER] Can exercise help arthritis or make it worse?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Will the stiffness ever fully go?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Does nutrition affect arthritis?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can this be managed at home?',a:'[PLACEHOLDER]'}]}
 ];
 var BREAKDOWN={
  'knee-pain':{feel:'Knee pain that cuts the walk short',problems:[
@@ -1756,16 +1801,16 @@ var BREAKDOWN={
  ]}
 };
 var CONDITION_CATS=[
- {k:'geriatric',label:'Geriatric'},
- {k:'ortho',label:'Orthopaedic & musculoskeletal'},
- {k:'neuro',label:'Neurological'},
- {k:'cardio',label:'Cardiopulmonary'},
- {k:'metabolic',label:'Metabolic & endocrine'},
- {k:'postsurg',label:'Post-surgical rehabilitation'},
- {k:'chronicpain',label:'Chronic pain management'},
- {k:'cardiohealth',label:'Hypertension & cardiovascular health'},
- {k:'general',label:'General medical'},
- {k:'womens',label:'Women’s health'}
+ {k:'geriatric',label:'Geriatric',img:'cat-geriatric.png'},
+ {k:'ortho',label:'Orthopaedic & musculoskeletal',img:'cat-ortho.png'},
+ {k:'neuro',label:'Neurological',img:'cat-neuro.png'},
+ {k:'cardio',label:'Cardiopulmonary',img:'cat-cardio.png'},
+ {k:'metabolic',label:'Metabolic & endocrine',img:'cat-metabolic.png'},
+ {k:'postsurg',label:'Post-surgical rehabilitation',img:'cat-postsurg.png'},
+ {k:'chronicpain',label:'Chronic pain management',img:'cat-chronicpain.png'},
+ {k:'cardiohealth',label:'Hypertension & cardiovascular health',img:'cat-cardiohealth.png'},
+ {k:'general',label:'General medical',img:'cat-general.png'},
+ {k:'womens',label:'Women’s health',img:'cat-womens.png'}
 ];
 // directory of everything we treat; c = category key, sub = region/system group. Every item gets its own /conditions/<slug> page.
 var COND_DIR=[
@@ -1866,7 +1911,7 @@ var COND_DIR=[
 ];
 var HOME_FAQS=[{q:'[PLACEHOLDER] How does the first visit work?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who are the providers?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you come to our home?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What does it cost?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if my parent is reluctant?',a:'[PLACEHOLDER]'}];
 var CONDITIONS_FAQS=[{q:'Which conditions do you treat?',a:'[PLACEHOLDER]'},{q:'Do you provide care at home?',a:'[PLACEHOLDER]'},{q:'Which areas in Bangalore do you serve?',a:'[PLACEHOLDER]'},{q:'How do I start, and what is the free trial?',a:'[PLACEHOLDER]'}];
-var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
+var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'How quickly can I start?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
 var TESTIMONIALS=[
 {slug:'knee-pain',name:'Vishalakshi',age:68,her:'her',label:'',storyLen:'0:58',lane:'green',video:'sharma-testimonial.mp4',bakedCC:true,poster:'sharma-poster.jpg',
  metric:{k:'Steps at a time',before:'1',after:'20',delta:'20&times;'},
@@ -1886,6 +1931,19 @@ var TESTIMONIALS=[
  pull:'I stopped being afraid of my own bathroom.',
  lead:{name:'Rohan Mehta',role:'Strength &amp; Balance Coach'},leadIdx:1,
  team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']}
+];
+// member reviews carried over from the previous site (real Google-style reviews, verbatim, lightly cleaned)
+var REVIEWS=[
+ {n:'Annette Venkat',a:'64',t:'I had a very good experience with Naveen. He came to do an assessment, was very helpful and answered all my queries, very gentle and thorough. Thank you.'},
+ {n:'Lakshmi Narayanan',a:'56',t:'A physiotherapist came and checked the strength of each part of the body. This service is really useful for people above 50 to get rid of pain and stay agile in old age.'},
+ {n:'Sarika Sahai',a:'65',t:'I really do feel the difference in my walk. The wobbliness has reduced quite a bit and I am more confident with my walk.'},
+ {n:'Rajeev Mehta',a:'65',t:'Very good experience, worth trying for everyone, especially with the convenience of at-home sessions for those who cannot visit a physiotherapy clinic on their own.'},
+ {n:'Anna',a:'25',t:'My mother and I joined their program for our pain and balance issues. The customised sessions and guidance helped us improve a lot. A very good experience, highly recommended.'},
+ {n:'Ajay Sharma',a:'32',t:'Excellent home physiotherapy service from Kinetic Age. I arranged sessions for my parents at home in Whitefield, and the improvement has been remarkable.'},
+ {n:'Renu',a:'54',t:'What I love about Kinetic Age is the comfort and support their program offers. It is perfectly tailored for seniors, making fitness easy and enjoyable.'},
+ {n:'Vijay Niar',a:'62',t:'Saw their ad and booked a free trial. They responded quickly. The physiotherapist arrived on time, understood the issue, and suggested helpful solutions.'},
+ {n:'Abha Saxena',a:'70',t:'Insightful session with a good root-cause analysis of the problem.'},
+ {n:'Jyoti Iyer',a:'54',t:'Naveen was really good at explaining the root cause and what must be done going forward.'}
 ];
 var PROVIDERS=[
  {name:'Taseena Banu',role:'Medical oversight',edu:'MBBS, MD (Medicine)',exp:'5 years',specList:['Internal Medicine','Geriatric Care','Chronic Disease Management','Preventive Health'],lane:'n',photo:'taseena-real.png?v=1'},
@@ -2074,6 +2132,13 @@ function storyCard(t,i){return '<div class="card tcard2">'+
  '<div class="slot video '+t.lane+' t2-media" data-reel="'+i+'" role="button" tabindex="0" aria-label="Play '+t.name+'’s story">'+(t.poster?'<img class="t2-poster" src="'+t.poster+'?v=1" alt=""><span class="t2-scrim"></span>':'')+'<span class="t2-len">'+t.storyLen+'</span><span class="play"></span><div class="t2-id"><div class="t2-name">'+t.name+'</div><div class="t2-meta">'+t.age+'</div></div></div>'+
  '<div class="t2-body"><p class="t2-quote">&ldquo;'+(t.pull||t.quote)+'&rdquo;</p></div>'+
 '</div>'}
+var RV_STAR='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.95 6.3 6.55.78-4.85 4.6 1.27 6.52L12 17.6 6.08 20.8l1.27-6.52L2.5 9.08l6.55-.78z"/></svg>';
+function reviewCard(r,i){
+ var ini=r.n.split(' ').map(function(w){return w.charAt(0)}).slice(0,2).join('').toUpperCase();
+ return '<div class="card rvw-card"><div class="rvw-stars" aria-label="5 out of 5">'+RV_STAR+RV_STAR+RV_STAR+RV_STAR+RV_STAR+'</div>'+
+   '<p class="rvw-tx">'+r.t+'</p>'+
+   '<div class="rvw-foot"><span class="rvw-av c'+((i%5)+1)+'">'+ini+'</span><span class="rvw-id"><b>'+r.n+'</b>'+r.a+' years old</span></div></div>';
+}
 var WA_ICON='<span class="jwa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5l-.3.5-.5.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 .9.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>';
 var CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 // single-hue iteration of the journey timeline (one blue family, calmer)
@@ -2183,6 +2248,9 @@ function heroBand(g,eyebrow,h1,sub,cta){
 function condCard(c,lane){return '<div class="card">'+slot(c.name+' &middot; photo',lane)+'<span class="tag '+lane+'" style="margin-top:14px">'+c.name+'</span><div class="cardttl">'+c.symptom+'</div><p class="p muted" style="margin-top:4px;font-size:var(--fs-sm)">'+c.intro+'</p><div class="cardcta">'+arguments[2]+'</div></div>'}
 function condDirRow(d){
  return '<a class="cdir-row" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condSlugOf(d)+'">'+d.n+'<span class="cdir-arr">'+ARR()+'</span></a>';
+}
+function condDirPill(d){
+ return '<a class="cdir-pill" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condSlugOf(d)+'"><span class="cdp-nm">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';
 }
 function condTile(c,i){var L=['g','b','o','n'][i%4];return '<a class="ctile '+L+'" data-go="/conditions/'+c.slug+'"><span class="ctile-name">'+c.name+'</span><span class="ctile-arr">'+ARR()+'</span></a>'}
 function breakdownCard(c){var b=BREAKDOWN[c.slug];return '<div class="card bcard">'+
@@ -2298,13 +2366,14 @@ function vHome(){
 // 6-7 most-searched conditions surfaced as quick tiles; full 3 route to rich pages, the rest to stubs
 // 6-7 most-treated/most-searched conditions; short lines are placeholder copy for review
 var COND_POPULAR=[
- {name:'Knee pain',slug:'knee-pain',line:'Pain that cuts the walk short, and what sits underneath it.'},
- {name:'Balance and falls',slug:'balance-and-falls',line:'When standing up feels risky, and how to steady it.'},
- {name:'Post-stroke recovery',slug:'post-stroke-recovery',line:'Rebuilding strength and movement, step by step.'},
- {name:'Post-operative care and rehabilitation',slug:condSlugify('Post-operative care and rehabilitation'),line:'Getting back on your feet safely after surgery.'},
- {name:'Shoulder pain',slug:condSlugify('Shoulder pain'),line:'A stiff or painful shoulder, eased and freed gradually.'},
- {name:'Diabetes',slug:condSlugify('Diabetes'),line:'Movement and nutrition that help manage blood sugar.'},
- {name:'Parkinson’s disease',slug:condSlugify('Parkinson’s disease'),line:'Steadier movement and daily confidence, supported.'}
+ {name:'Knee pain',slug:'knee-pain',line:'Pain that cuts the walk short, and what sits underneath it.',photo:'pc-knee-pain.png'},
+ {name:'Balance and falls',slug:'balance-and-falls',line:'When standing up feels risky, and how to steady it.',photo:'pc-balance-and-falls.png'},
+ {name:'Post-stroke recovery',slug:'post-stroke-recovery',line:'Rebuilding strength and movement, step by step.',photo:'pc-post-stroke-recovery.png'},
+ {name:'Post-operative care and rehabilitation',slug:condSlugify('Post-operative care and rehabilitation'),line:'Getting back on your feet safely after surgery.',photo:'pc-post-operative-care-and-rehabilitation.png'},
+ {name:'Shoulder pain',slug:condSlugify('Shoulder pain'),line:'A stiff or painful shoulder, eased and freed gradually.',photo:'pc-shoulder-pain.png'},
+ {name:'Diabetes',slug:condSlugify('Diabetes'),line:'Movement and nutrition that help manage blood sugar.',photo:'pc-diabetes.png'},
+ {name:'Parkinson’s disease',slug:condSlugify('Parkinson’s disease'),line:'Steadier movement and daily confidence, supported.',photo:'pc-parkinsons-disease.png'},
+ {name:'Arthritis',slug:'arthritis',line:'Stiff, aching joints eased through movement and care.',photo:'pc-arthritis.png'}
 ];
 function vConditions(){
  return heroBand('g-field','','Your condition is where we start.<span class="it">We treat the whole of it.</span>','We treat every symptom, and how they connect, so nothing about your health is handled on its own.')+
@@ -2317,9 +2386,19 @@ function vConditions(){
  '</section>'+
  '<div id="condBrowse">'+
  '<section class="sec" style="padding-top:6px"><button class="btn block xl" data-lead>Book a free trial</button></section>'+
- '<section class="sec" style="padding-top:8px"><h2 class="h2">Most people come to us for</h2><div class="popgrid">'+COND_POPULAR.map(function(c,i){var L=['g','b','o','p','n'][i%5];return '<a class="popc '+L+'" style="--i:'+i+'" data-go="/conditions/'+c.slug+'"><div class="popc-nm">'+c.name+'</div><span class="popc-arr">'+ARR()+'</span></a>'}).join('')+'</div></section>'+
+ '<section class="sec" style="padding-top:8px"><h2 class="h2">Most people come to us for</h2><div class="popgrid">'+COND_POPULAR.map(function(c,i){var L=['g','b','o','p','n'][i%5];return '<a class="popc '+L+'" style="--i:'+i+'" data-go="/conditions/'+c.slug+'"><div class="popc-ph"><img src="'+c.photo+'?v=2" alt="'+c.name+'" loading="lazy"></div><div class="popc-body"><div class="popc-nm">'+c.name+'</div><span class="popc-arr">'+ARR()+'</span></div></a>'}).join('')+'</div></section>'+
  '<section class="sec cdir-sec"><h2 class="h2" style="margin-bottom:6px">Find your condition</h2><p class="p muted" style="margin-bottom:2px">Some of the other conditions we treat. Open a group, or search above.</p>'+
-   '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g,gi){var rows=COND_DIR.filter(function(d){return d.c===g.k});var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});var hasSubs=!(subs.length===1&&subs[0]==='');var head=hasSubs?'<div class="cdir-cat">'+g.label+'</div>':'';var groups=subs.map(function(s,si){var sr=rows.filter(function(d){return (d.sub||'')===s;});var label=s||g.label;return '<details class="cdir-group"'+''+'><summary class="cdir-head"><span class="cdir-label">'+label+'</span><span class="cdir-count">'+sr.length+'</span><span class="cdir-chev"></span></summary><div class="cdir-rows">'+sr.map(condDirRow).join('')+'</div></details>';}).join('');return '<div class="cdir-cat-grp">'+head+(hasSubs?'<div class="cdir-grid">'+groups+'</div>':groups)+'</div>';}).join('')+
+   '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g){
+     var rows=COND_DIR.filter(function(d){return d.c===g.k;});
+     if(!rows.length) return '';
+     var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});
+     var hasSubs=!(subs.length===1&&subs[0]==='');
+     var inner=hasSubs
+       ? '<div class="cdir-grid">'+subs.map(function(s){var sr=rows.filter(function(d){return (d.sub||'')===s;});var label=s||g.label;
+           return '<details class="cdir-group"><summary class="cdir-head"><span class="cdir-label">'+label+'</span><span class="cdir-count">'+sr.length+'</span><span class="cdir-chev"></span></summary><div class="cdir-rows">'+sr.map(condDirRow).join('')+'</div></details>';}).join('')+'</div>'
+       : '<div class="cdir-pills">'+rows.map(condDirPill).join('')+'</div>';
+     return '<details class="catcard"><summary class="catcard-head"><span class="cdir-cat-photo"><img src="'+g.img+'?v=1" alt="" loading="lazy"></span><span class="cdir-cat">'+g.label+'</span><span class="cdir-cat-n">'+rows.length+'</span><span class="catcard-chev"></span></summary><div class="catcard-body">'+inner+'</div></details>';
+   }).join('')+
    '</div>'+
  '</section>'+
  '</div>'+
@@ -2411,18 +2490,22 @@ function jwDoc(){
    '</div></div></div>'}
 function jwRing(){
  var iEx='<path d="M3 12h4l2-6 4 13 2-7h6"/>',
+     iTr='<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"/>',
      iNu='<path d="M5 19c0-7 5-12 14-12 0 9-5 14-14 12Z"/><path d="M9 15c2-3 5-5 8-6"/>',
      iWe='<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/>',
      iDoc='<path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/>';
- var P=[['Physio','#213f99',iEx],['Nutritionist','#1f8c6a',iNu],
+ var P=[['Physio','#213f99',iEx],['Physical training','#e08a2e',iTr],['Nutritionist','#1f8c6a',iNu],
         ['Doctor','linear-gradient(140deg,#27479e,#13265a)',iDoc],['Wellness coach','#7b54c4',iWe]];
- var R=140, pos=[0,1,2,3].map(function(k){var r=k*Math.PI/2;return [R*Math.sin(r),R*Math.cos(r)]});
- var web=[[0,1],[1,2],[2,3],[3,0],[0,2],[1,3]].map(function(e,i){var a=pos[e[0]],b=pos[e[1]],
+ var N=P.length, R=140, step=2*Math.PI/N, deg=360/N;
+ var pos=P.map(function(_,k){var r=k*step;return [R*Math.sin(r),R*Math.cos(r)]});
+ var pairs=[]; for(var x=0;x<N;x++)for(var y=x+1;y<N;y++)pairs.push([x,y]);
+ var web=pairs.map(function(e){var a=pos[e[0]],b=pos[e[1]],
      dx=b[0]-a[0],dz=b[1]-a[1],L=Math.sqrt(dx*dx+dz*dz),phi=Math.atan2(-dz,dx)*180/Math.PI,
-     mx=(a[0]+b[0])/2,mz=(a[1]+b[1])/2,m=Math.sqrt(mx*mx+mz*mz);
-   return '<i class="ring-edge'+(i>3?' diag':'')+'" style="--len:'+L.toFixed(1)+'px;--b:'+phi.toFixed(1)+'deg;--m:'+m.toFixed(1)+'px"></i>'}).join('');
+     mx=(a[0]+b[0])/2,mz=(a[1]+b[1])/2,m=Math.sqrt(mx*mx+mz*mz),
+     adj=(e[1]-e[0]===1)||(e[0]===0&&e[1]===N-1);
+   return '<i class="ring-edge'+(adj?'':' diag')+'" style="--len:'+L.toFixed(1)+'px;--b:'+phi.toFixed(1)+'deg;--m:'+m.toFixed(1)+'px"></i>'}).join('');
  var cards=P.map(function(p,i){
-   return '<div class="ring-card" style="--a:'+(i*90)+'deg">'+
+   return '<div class="ring-card" style="--a:'+(i*deg)+'deg">'+
      '<div class="rc-face rc-front"><span class="rc-ic" style="background:'+p[1]+'"><svg viewBox="0 0 24 24">'+p[2]+'</svg></span>'+
        '<span class="rc-pre">Your</span><div class="rc-nm">'+p[0]+'</div></div>'+
      '<div class="rc-face rc-back"></div></div>'}).join('');
@@ -2445,7 +2528,7 @@ function jwWeek(mode){ // single-week view; full = D ribbon + N daily + E (Mon/W
      if(ex[i]!==undefined) mk='<span class="cal-e">E</span><span class="wk-lb">Exercise</span>';
      else {mk='<span class="wk-rest"></span>';rest=true;}
    } else {
-     mk=(ex[i]!==undefined?'<span class="cal-e">E</span>':'')+'<span class="cal-n">N</span>';
+     mk='<span class="cal-e">E</span><span class="cal-n">N</span>';
    }
    return '<div class="wk-day'+(rest?' rest':' on')+'"><span class="wk-dn">'+d+'</span><span class="wk-dt">'+dates[i]+'</span><div class="wk-mk">'+mk+'</div></div>'}).join('');
  var doc=mode==='ex'?'':'<div class="wk-doc"><span class="lg lg-d">D</span><span><b>Doctor</b> reviews your progress and updates the plan each month.</span></div>';
@@ -2509,7 +2592,7 @@ function jwCalAnim(){
  return '<div class="cal-panel"><div class="jw-calx" id="calAnim"><div class="cal-ttl">What we do</div><div class="jw-cal">'+head+weeks+'</div>'+leg+'</div></div>'}
 function vHow(){
  return '<div class="jw">'+
-   '<section class="jw-banner"><div class="bgslide g-blue"></div><p class="eyebrow">'+pageLabel()+'</p><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and own every outcome, for you and your family.</p></section>'+
+   '<section class="jw-banner"><div class="bgslide g-blue"></div><p class="eyebrow">'+pageLabel()+'</p><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and ensure the outcome, for you and your family.</p></section>'+
    '<section class="sec jw-point">'+
      '<div class="jw-step"><span class="n">01</span><h3>Assessment and analysis</h3></div>'+
      '<div class="jw-lead">'+
@@ -2527,9 +2610,9 @@ function vHow(){
      '<div class="jw-cta"><button class="btn block xl" data-lead>Book a free trial</button></div>'+
    '</section>'+
    '<section class="sec jw-point">'+
-     '<div class="jw-step"><span class="n">02</span><h3>Your RM and your plan</h3></div>'+
+     '<div class="jw-step"><span class="n">02</span><h3>Your plan, by your health consultant</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>Your report goes to a <span class="b">dedicated relationship manager</span>, who brings the right providers together and shapes a plan <span class="b">hyper-personalised</span> to your condition. A <span class="b">doctor consultation</span> screens for red flags from any other conditions that could affect it. Your RM owns the journey from here.</p>'+
+       '<p>Your report goes to a <span class="b">dedicated health consultant</span>, who brings the right providers together and shapes a plan <span class="b">hyper-personalised</span> to your condition. A <span class="b">doctor consultation</span> screens for red flags from any other conditions that could affect it. Your health consultant ensures the outcome from here.</p>'+
        '<div class="jw-split">'+
          '<div class="jw-ringbox">'+jwRing()+'<p class="jw-cap">Your provider team stays connected with each other, working together on your personalised needs.</p></div>'+
          '<div class="jw-splitR">'+
@@ -2543,18 +2626,17 @@ function vHow(){
    '<section class="sec jw-point">'+
      '<div class="jw-step"><span class="n">03</span><h3>Execution</h3></div>'+
      '<div class="jw-lead">'+
-       '<p>Your providers run the plan <span class="b">every day</span>. Your RM checks in <span class="b">weekly</span>, and each <span class="b">month</span> brings a full audit, a reassessment, and the doctor&rsquo;s progress report.</p>'+
+       '<p>Your providers run the plan <span class="b">every day</span>. Your health consultant checks in <span class="b">weekly</span>, and each <span class="b">month</span> brings a full audit, a reassessment, and the doctor&rsquo;s progress report.</p>'+
        '<div class="cal-panel">'+
-         '<div class="cal-ttl">What we do</div>'+
          jwWeek()+
          '<ul class="cal-leg">'+
-           '<li><span class="lg lg-e">E</span><div><b>Exercise</b> Scheduled physio and physical training, three times every week.</div></li>'+
+           '<li><span class="lg lg-e">E</span><div><b>Exercise</b> Physio and physical training, with the exercises and their number decided by what your condition needs.</div></li>'+
            '<li><span class="lg lg-n">N</span><div><b>Nutrition</b> Daily meal tracking and adjustments, with a weekly follow-up call and nutrition report.</div></li>'+
-           '<li><span class="lg lg-none">R</span><div><b>Relationship manager</b> A weekly feedback check and a monthly audit of the whole plan.</div></li>'+
+           '<li><span class="lg lg-none">H</span><div><b>Health consultant</b> A weekly feedback check and a monthly audit of the whole plan.</div></li>'+
            '<li><span class="lg lg-d">D</span><div><b>Doctor</b> Reviews your progress and updates the plan each month.</div></li>'+
          '</ul>'+
        '</div>'+
-       '<p class="jw-close">We never leave you or your condition alone. We help you throughout, every day.</p>'+
+       '<p class="jw-close">We help you throughout, every day.</p>'+
      '</div>'+
    '</section>'+
    '<section class="sec jw-point">'+
@@ -2562,8 +2644,8 @@ function vHow(){
      '<div class="jw-lead">'+
        '<div class="jw-split">'+
          '<div class="jw-splitR">'+
-           '<p>Your RM opens a <span class="b">shared WhatsApp group</span> with your family and your providers, so everyone stays connected, with daily updates and nothing hidden.</p>'+
-           '<p>The <span class="b">Kinetic Age app</span> holds your health anytime: meal plans, exercise plan and timing, trainer profile, weekly and monthly reports, and the doctor&rsquo;s progress report.</p>'+
+           '<p>Your <span class="b">health consultant</span> creates your plan and opens a <span class="b">shared WhatsApp group</span> with your family and your providers, so everyone stays connected, with daily updates and full visibility.</p>'+
+           '<p>The <span class="b">Kinetic Age app</span> holds every report anytime: meal plans, exercise plan and timing, trainer profile, weekly and monthly reports, and the doctor&rsquo;s progress report.</p>'+
          '</div>'+
          jwReports()+
        '</div>'+
@@ -2618,6 +2700,7 @@ function vStories(){
  '<section class="sec"><h2 class="h2">Hear it from <span class="it">them.</span></h2>'+
    '<div class="grid">'+TESTIMONIALS.map(storyCard).join('')+'</div>'+
  '</section>'+
+ '<section class="sec"><h2 class="h2">What members <span class="it">say.</span></h2><p class="p muted">Real reviews from the families we care for.</p><div class="swipe rvw-swipe">'+REVIEWS.map(reviewCard).join('')+'</div></section>'+
  '<section class="sec cta-block"><h2 class="h2">Want a change like theirs? Start at home, for free.</h2><p class="p muted" style="margin-bottom:18px">It begins with one free visit. We come to you and listen.</p><button class="btn" data-lead>Book a free trial</button></section>'+
  '<section class="sec"><h2 class="h2">More moments, in under a <span class="it">minute.</span></h2><p class="p muted">Short stories from our families, on Instagram, YouTube, and more.</p><div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'+[['Instagram','#'],['YouTube','#'],['Facebook','#'],['Shorts','#'],['Reels','#']].map(function(v){return '<a class="slot video" href="'+v[1]+'" target="_blank" rel="noreferrer"><span class="play"></span><span class="lbl">'+v[0]+'</span></a>'}).join('')+'</div></section>'+
  '<section class="sec"><div class="band"><div class="cardttl" style="margin-top:0">Want a story like theirs?</div><p class="p muted">Tell us about the person and we will help.</p><div style="margin-top:16px">'+waBtn('I would like the same kind of help for my parent','Message us on WhatsApp','orange')+'</div><div style="margin-top:14px">'+link('/case-studies','Read the full stories, start to finish')+'</div></div></section>'+
@@ -2705,7 +2788,7 @@ var SVC_PILLAR={'Physiotherapy':'physiotherapy','Nutrition':'nutrition','Strengt
 var CASE_FAQS=[{q:'[PLACEHOLDER] Are these real clients?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How long do results usually take?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can you help with a situation like my parent’s?',a:'[PLACEHOLDER]'}];
 function csCard(c,i){
  return '<a class="card cscard" data-go="/case-studies/'+caseSlug(i)+'">'+
-  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=2" alt="'+c.title+'" loading="lazy"></div>'+
+  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=3" alt="'+c.title+'" loading="lazy"></div>'+
   '<h3 class="cs-ttl">'+CS_HEAD[i]+'</h3>'+
   '<p class="cs-sub">'+CS_SUB[i]+'</p>'+
   '<span class="csbtn">Read case study</span>'+
@@ -2718,7 +2801,7 @@ function vCase(slug){
  var svcLinks=svcOf(c).map(function(x){return SVC_PILLAR[x[0]]}).filter(function(v,i,a){return v&&a.indexOf(v)===i});
  return '<section class="sec csread" style="padding-top:92px">'+
    '<button class="bk" data-go="/case-studies" aria-label="Back to all case studies">&larr;</button>'+
-   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=2" alt="'+c.title+'" loading="eager"></div>'+
+   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=3" alt="'+c.title+'" loading="eager"></div>'+
    '<h1 class="cs-h1">'+c.title+'</h1>'+
    '<figure class="cs-saying"><blockquote>'+c.quote+'</blockquote><figcaption>'+(c.attr||'In the client&rsquo;s own words')+'</figcaption></figure>'+
    '<div class="cs-introbox"><p class="p cs-lead">'+lead+'</p></div>'+
