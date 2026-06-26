@@ -348,7 +348,7 @@ main{padding-bottom:96px}
 /* providers: one horizontal scroll row, snap + hidden scrollbar, full-bleed so
    the next card peeks past the screen edge and invites the swipe */
 .team{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
-  align-items:stretch;margin:24px -22px 0;padding:4px 22px 12px;scroll-padding-left:22px;
+  align-items:flex-start;margin:24px -22px 0;padding:4px 22px 12px;scroll-padding-left:22px;
   -webkit-overflow-scrolling:touch;scrollbar-width:none}
 .team::-webkit-scrollbar{display:none}
 .team>.pcard{flex:0 0 62%;scroll-snap-align:start}
@@ -362,6 +362,7 @@ main{padding-bottom:96px}
 .pcard.g .pphoto{background:linear-gradient(157deg,#e7f5ef,#d2ebdf)}
 .pcard.b .pphoto{background:linear-gradient(157deg,#eaeffb,#d8e3fb)}
 .pcard.o .pphoto{background:linear-gradient(157deg,#fef0e6,#fbdfce)}
+.pcard.p .pphoto{background:linear-gradient(157deg,#f1eafb,#e2d5f6)}
 .pbody{padding:13px 14px 16px}
 .pname{font-family:var(--fd);font-weight:480;font-size:var(--fs-h4);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
 /* role label: white caption over the bottom of the photo, lane-coloured dot, no pill */
@@ -373,7 +374,17 @@ main{padding-bottom:96px}
 .pcard.g .ptag::before{background:#5fd0aa}
 .pcard.b .ptag::before{background:#86a6f2}
 .pcard.o .ptag::before{background:#f7a079}
+.pcard.p .ptag::before{background:#b79be8}
 .pmeta{margin-top:10px;font-size:var(--fs-cap);color:var(--muted);line-height:1.45}
+.pcard.n{--ln:#13265a}.pcard.g{--ln:#1f8c6a}.pcard.b{--ln:#213f99}.pcard.o{--ln:#cf5a34}.pcard.p{--ln:#7b54c4}
+/* provider card: "Specializes in" block — short line, or lane-tinted chips for a list of areas */
+.pspec{margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+.pspec-lbl{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ln);margin-bottom:9px}
+.pspec-lbl::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ln);flex:none}
+.pspec-chips{display:flex;flex-wrap:wrap;gap:6px}
+.pchip{font-size:11px;font-weight:600;line-height:1.18;padding:5px 9px;border-radius:9px;
+  background:color-mix(in srgb,var(--ln) 9%,#fff);color:var(--ln);border:1px solid color-mix(in srgb,var(--ln) 22%,transparent)}
 /* about: head-of-type provider detail cards (name · type · education · experience · membership) */
 .prov-detail{padding:18px;position:relative;overflow:hidden;--ring:#9db0ee;--accent:#3f5da0;--tint:#eef1fb}
 .prov-detail.g{--ring:#5fd0aa;--accent:#1f8c6a;--tint:#e7f6f0}
@@ -1013,6 +1024,7 @@ main{padding-bottom:96px}
 .jw-banner{position:relative;overflow:hidden;color:#fff;padding:88px 22px 30px;isolation:isolate}
 .jw-banner .bgslide{position:absolute;inset:0;z-index:-2}
 .jw-banner:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(12,18,42,.35))}
+.jw-banner .eyebrow{font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:12px}
 .jw-banner h1{font-family:var(--fd);font-weight:430;font-size:var(--fs-h1);line-height:1.05;letter-spacing:-.012em;text-shadow:0 1px 24px rgba(0,0,0,.28)}
 .jw-banner h1 .it{font-style:italic;color:#f7a172}
 .jw-banner p{margin-top:11px;font-size:var(--fs-sm);line-height:1.5;color:rgba(255,255,255,.86);max-width:30ch}
@@ -1612,6 +1624,37 @@ main{padding-bottom:96px}
 @keyframes bmPulse{0%,100%{opacity:.10;transform:scale(.85)}50%{opacity:.24;transform:scale(1.3)}}
 .bmap-cap{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:var(--fs-cap);color:var(--ink);box-shadow:0 6px 18px -10px rgba(19,38,90,.4)}
 .bmap-cap svg{width:13px;height:13px;color:var(--green)}
+/* About — "What we stand for": Mission / Vision creed cards */
+.creed{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.creed-card{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:26px 24px 28px;
+  background:linear-gradient(155deg,color-mix(in srgb,var(--ln) 9%,#fff),color-mix(in srgb,var(--ln) 2.5%,#fff));
+  border:1px solid color-mix(in srgb,var(--ln) 20%,var(--line));
+  box-shadow:0 20px 44px -30px color-mix(in srgb,var(--ln) 70%,transparent);
+  animation:kjUp .6s var(--ease) both;animation-delay:calc(var(--i)*120ms)}
+.creed-card::before{content:'';position:absolute;left:0;top:24px;bottom:24px;width:3px;border-radius:0 3px 3px 0;background:var(--ln)}
+.creed-glyph{position:absolute;right:-26px;top:-30px;width:132px;height:132px;color:var(--ln);opacity:.08;pointer-events:none}
+.creed-lbl{position:relative;display:inline-flex;align-items:center;gap:9px;font-size:var(--fs-lbl);
+  letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--ln);margin-bottom:15px}
+.creed-mark{width:15px;height:15px;flex:none}
+.creed-tx{position:relative;font-family:var(--fd);font-weight:400;font-size:clamp(16.5px,4.2vw,18px);
+  line-height:1.5;letter-spacing:-.005em;color:var(--ink)}
+.creed-tx .it{font-style:italic;color:var(--ln)}
+.creed-card.g{--ln:#1f8c6a}.creed-card.b{--ln:#213f99}
+/* About — "Why people choose us": three principle cards */
+.why{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.why-card{position:relative;overflow:hidden;display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;
+  padding:20px 20px 22px;border-radius:var(--r);background:#fff;border:1px solid var(--line);
+  box-shadow:0 14px 30px -24px rgba(20,32,80,.5);
+  animation:kjUp .55s var(--ease) both;animation-delay:calc(var(--i)*90ms)}
+.why-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ln)}
+.why-card::after{content:attr(data-no);position:absolute;right:-14px;bottom:-30px;font-family:var(--fd);
+  font-weight:500;font-size:120px;line-height:1;color:var(--ln);opacity:.06;pointer-events:none}
+.why-no{font-family:var(--fd);font-weight:480;font-size:24px;line-height:1;color:var(--ln);
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--ln) 12%,#fff)}
+.why-tx{position:relative;font-size:calc(var(--fs-body) + .5px);line-height:1.54;color:var(--ink2);padding-top:9px;font-weight:450}
+.why-tx b{color:var(--ink);font-weight:600}
+.why-card.g{--ln:#1f8c6a}.why-card.b{--ln:#213f99}.why-card.o{--ln:#cf5a34}
 </style>
 </head>
 <body>
@@ -1845,11 +1888,12 @@ var TESTIMONIALS=[
  team:['Physiotherapy','Strength','Nutrition','Emotional wellbeing','Doctor oversight']}
 ];
 var PROVIDERS=[
- {name:'Taseena Banu',role:'Medical oversight',lane:'n',photo:'taseena-real.png?v=1'},
- {name:'Vighnesh R',role:'Physiotherapist',edu:'BPT, MBA Healthcare Management',exp:'7+ years',assoc:'MIAP',lane:'g',photo:'vighnesh-cut.png?v=1'},
- {name:'Vighnesh G',role:'Senior physical trainer',lane:'b',photo:'trainer2-cut.png?v=2'},
- {name:'Sneha Reddy',role:'Nutritionist',lane:'o',photo:'provider4-cut.png?v=3'},
- {name:'Ashfaqullah',role:'Senior physiotherapist',lane:'g',photo:'ashfaqullah-dr.png?v=1'}
+ {name:'Taseena Banu',role:'Medical oversight',edu:'MBBS, MD (Medicine)',exp:'5 years',specList:['Internal Medicine','Geriatric Care','Chronic Disease Management','Preventive Health'],lane:'n',photo:'taseena-real.png?v=1'},
+ {name:'Vighnesh R',role:'Physiotherapist',edu:'BPT, MBA Healthcare Management',exp:'7+ years',assoc:'MIAP',specList:['Post-Operative Rehabilitation','Neurological Rehabilitation',"Parkinson's Rehabilitation",'Paediatric Rehabilitation','Geriatric Rehabilitation'],lane:'g',photo:'vighnesh-cut.png?v=4'},
+ {name:'Vighnesh G',role:'Senior fitness trainer',exp:'9 years',specList:['Personal Training','Strength & Conditioning','Sports Nutrition','Special Population Training','Senior Training'],lane:'b',photo:'trainer2-cut.png?v=2'},
+ {name:'Sneha Reddy',role:'Nutritionist',edu:'BSc (Nutrition)',exp:'5 years',specList:['Clinical & Therapeutic Nutrition','Diabetes & Metabolic Nutrition','Weight Management','Taste-based Meal Planning','Macro & Micro Balancing'],lane:'o',photo:'provider4-cut.png?v=3'},
+ {name:'Dr. K. Md. Ashfaqullah',role:'Senior physiotherapist / Rehab specialist',exp:'14 years',specList:['Orthopaedic Rehabilitation','Neurological Rehabilitation','Geriatric Fitness & Rehabilitation','Pre- & Post-Operative Rehabilitation'],lane:'g',photo:'ashfaqullah-dr.png?v=1'},
+ {name:'Seema',role:'Emotional wellbeing',edu:'MSc Psychology',exp:'8 years',specList:['Geriatric Mental Health','Anxiety & Depression Support','Cognitive Wellness','Caregiver Counselling'],lane:'p',photo:'seema-dr.png?v=2'}
 ];
 var ONBOARDING=[{t:'[PLACEHOLDER] Tell us what is going on',d:'[PLACEHOLDER] A short call or quiz to understand your situation, for you or a parent.'},{t:'[PLACEHOLDER] Home assessment',d:'[PLACEHOLDER] A provider visits and assesses in person.'},{t:'[PLACEHOLDER] You get a plan',d:'[PLACEHOLDER] A doctor-reviewed plan and a report for you and your family.'},{t:'[PLACEHOLDER] Ongoing sessions',d:'[PLACEHOLDER] Regular visits with progress you can see.'}];
 var JOURNEY=[
@@ -2053,7 +2097,10 @@ function pillars(){return '<div class="pillars">'+PILLARS.map(function(p){return
 var PS_ICONS=['<path d="M9.5 4h5v5h5v5h-5v5h-5v-5h-5V9h5z"></path>','<path d="M6.5 7v10M17.5 7v10M4 9.5v5M20 9.5v5M6.5 12h11"></path>','<path d="M5 19c-1-7 4-13 14-14 1 9-5 14-11 14"></path><path d="M6 18 13 11"></path>','<path d="M12 20c-4-2.4-7-5.4-7-9a3.6 3.6 0 0 1 7-1.4A3.6 3.6 0 0 1 19 11c0 3.6-3 6.6-7 9z"></path>','<path d="M6 3v4a4 4 0 0 0 8 0V3"></path><path d="M10 15a5 5 0 0 0 9 0v-3"></path><circle cx="19" cy="9" r="2"></circle>'];
 function pillarsStack(){return '<div class="pstack">'+PILLARS.map(function(p,i){return '<div class="pscard" data-go="/services/'+p.slug+'"><div class="ps-head"><span class="ps-ico c'+(i+1)+'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+PS_ICONS[i]+'</svg></span><div class="ps-body"><div class="ps-name">'+p.name+'</div><p class="ps-desc">'+p.blurb+'</p></div><button class="ps-chevbtn" data-ps="'+i+'" aria-label="Reopen '+p.name+'"><span class="ps-chev"></span></button></div><div class="ps-visual">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" loading="lazy">':'<span>Visual</span>')+'</div></div>'}).join('')+'</div>'}
 // compact, horizontally-scrolling team carousel (the 5 heads of care); shared by Home and About
-function teamScroll(){return '<div class="team">'+PROVIDERS.map(function(p){var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"><span class="ptag">'+p.role+'</span></div><div class="pbody"><div class="pname">'+p.name+'</div>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+'</div></div>'}).join('')+'</div>'}
+function teamScroll(){return '<div class="team">'+PROVIDERS.map(function(p){
+ var meta=[p.edu,p.exp].filter(Boolean).join(' &middot; ');
+ var spec=p.specList?'<div class="pspec"><span class="pspec-lbl">Specializes in</span><div class="pspec-chips">'+p.specList.map(function(s){return '<span class="pchip">'+s+'</span>'}).join('')+'</div></div>':'';
+ return '<div class="pcard '+(p.lane||'n')+'"><div class="pphoto"><img src="'+p.photo+'" alt="'+p.role+'" loading="lazy"><span class="ptag">'+p.role+'</span></div><div class="pbody"><div class="pname">'+p.name+'</div>'+(meta?'<div class="pmeta">'+meta+'</div>':'')+spec+'</div></div>'}).join('')+'</div>'}
 function metricsRow3(){
  var R=52,C=2*Math.PI*R;
  var rings=[{lane:'b',pct:95,num:'<span class="m-num" data-count="95">0</span>',u:'%',l:'Customer satisfaction'},
@@ -2124,10 +2171,14 @@ function heroTall(){
     '<a class="hlink" data-go="/how-we-work">See how we work</a>'+
   '</div>'+
  '</section>'}
+// small page label that mirrors the nav, so the hero title can stay evocative
+// while you always know which destination you landed on
+function pageLabel(){return {conditions:'Conditions','how-we-work':'How we work',services:'Services',stories:'Stories',about:'About','case-studies':'Case studies',pricing:'Pricing'}[path().split('/').filter(Boolean)[0]]||''}
 function heroBand(g,eyebrow,h1,sub,cta){
+ var eb=eyebrow||pageLabel();
  return '<section class="hero" style="padding-bottom:38px">'+
   '<div class="bgwrap"><div class="bgslide '+g+'"></div></div><div class="grain"></div><div class="scrim"></div>'+
-  (eyebrow?'<p class="eyebrow">'+eyebrow+'</p>':'')+'<h1>'+h1+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+(cta?'<div class="hcta">'+cta+'</div>':'')+
+  (eb?'<p class="eyebrow">'+eb+'</p>':'')+'<h1>'+h1+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+(cta?'<div class="hcta">'+cta+'</div>':'')+
  '</section>'}
 function condCard(c,lane){return '<div class="card">'+slot(c.name+' &middot; photo',lane)+'<span class="tag '+lane+'" style="margin-top:14px">'+c.name+'</span><div class="cardttl">'+c.symptom+'</div><p class="p muted" style="margin-top:4px;font-size:var(--fs-sm)">'+c.intro+'</p><div class="cardcta">'+arguments[2]+'</div></div>'}
 function condDirRow(d){
@@ -2458,7 +2509,7 @@ function jwCalAnim(){
  return '<div class="cal-panel"><div class="jw-calx" id="calAnim"><div class="cal-ttl">What we do</div><div class="jw-cal">'+head+weeks+'</div>'+leg+'</div></div>'}
 function vHow(){
  return '<div class="jw">'+
-   '<section class="jw-banner"><div class="bgslide g-blue"></div><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and own every outcome, for you and your family.</p></section>'+
+   '<section class="jw-banner"><div class="bgslide g-blue"></div><p class="eyebrow">'+pageLabel()+'</p><h1>Journey <span class="it">with us</span></h1><p>We provide the whole plan, run it, and own every outcome, for you and your family.</p></section>'+
    '<section class="sec jw-point">'+
      '<div class="jw-step"><span class="n">01</span><h3>Assessment and analysis</h3></div>'+
      '<div class="jw-lead">'+
@@ -2539,7 +2590,7 @@ function vHow(){
 /* plans and pricing */
 function vPricing(){
  return '<div class="jw">'+
-   '<section class="jw-banner"><div class="bgslide g-blue"></div><h1>Plans and <span class="it">pricing</span></h1><p>One plan, scoped by a doctor to the care you actually need, so you pay only for that.</p></section>'+
+   '<section class="jw-banner"><div class="bgslide g-blue"></div><p class="eyebrow">'+pageLabel()+'</p><h1>Plans and <span class="it">pricing</span></h1><p>One plan, scoped by a doctor to the care you actually need, so you pay only for that.</p></section>'+
    '<section class="sec jw-pricing">'+
      '<div class="price-cards">'+
        '<div class="price-card">'+
@@ -2586,11 +2637,24 @@ var ABOUT_FAQS=[
  {q:'What does the free trial include?',a:'A full assessment at home, where we understand your health and what you need. It is free, with no commitment.'}
 ];
 function vAbout(){
+ var KA='<svg class="creed-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+ var KAG='<svg class="creed-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>';
  return heroBand('g-blue','','Everything your health needs,<span class="it">brought to your home.</span>','We believe real care is everything working together, the way you move, eat, and live, cared for as one. We own every outcome.')+
  '<section class="sec"><h2 class="h2">The Kinetic Age journey</h2>'+
    '<ol class="kjourney">'+ABOUT_JOURNEY.map(function(t,i){var lane=['g','b','o','p','n'][i];return '<li class="kj '+lane+(i===ABOUT_JOURNEY.length-1?' last':'')+'" style="--i:'+i+'"><span class="kj-node"><i>'+(i+1)+'</i></span><p class="kj-tx">'+t+'</p></li>'}).join('')+'</ol>'+
    '<div style="margin-top:26px">'+slot('Founder&rsquo;s message','video')+'</div></section>'+
+ '<section class="sec"><h2 class="h2">What we <span class="it">stand for.</span></h2>'+
+   '<div class="creed">'+
+     '<div class="creed-card g" style="--i:0">'+KAG+'<span class="creed-lbl">'+KA+'Our Mission</span><p class="creed-tx">To bring <span class="it">complete health care</span> into the comfort of your home, looking after every part of your wellbeing, and to stay close each day, so support is <span class="it">always within reach.</span></p></div>'+
+     '<div class="creed-card b" style="--i:1">'+KAG+'<span class="creed-lbl">'+KA+'Our Vision</span><p class="creed-tx">Our vision is to make a future where <span class="it">growing older at home means living well,</span> with care that keeps you stronger, steadier, and supported for the long run.</p></div>'+
+   '</div></section>'+
  '<section class="sec"><h2 class="h2">Our senior providers</h2><p class="p muted">Meet some of our senior providers, part of a trained team of 45 and growing. Every one is qualified and verified, because letting someone into your home takes trust.</p>'+teamScroll()+'</section>'+
+ '<section class="sec"><h2 class="h2">Why people <span class="it">choose us.</span></h2>'+
+   '<div class="why">'+
+     '<div class="why-card g" data-no="1" style="--i:0"><span class="why-no">1</span><p class="why-tx">We bring together physiotherapy, training, nutrition, mental wellness, and a doctor, <b>all working as one team for you.</b></p></div>'+
+     '<div class="why-card b" data-no="2" style="--i:1"><span class="why-no">2</span><p class="why-tx">We follow your progress and update your plan as you change, so your care <b>keeps pace with you.</b></p></div>'+
+     '<div class="why-card o" data-no="3" style="--i:2"><span class="why-no">3</span><p class="why-tx">Your own health consultant, ready for any worry or need, <b>any time of day.</b></p></div>'+
+   '</div></section>'+
  '<section class="sec"><h2 class="h2">The record so far.</h2><div style="margin-top:14px">'+statStrip()+'</div><div style="margin-top:16px">'+link('/conditions','See the conditions we treat')+'</div></section>'+
  '<section class="sec"><h2 class="h2">At home, across all of <span class="it">Bangalore.</span></h2><p class="p muted">We serve the whole of Bangalore, with care delivered to your door.</p>'+bangaloreMap()+'</section>'+
  '<section class="sec"><h2 class="h2">Questions families ask.</h2><div style="margin-top:18px">'+faqList(ABOUT_FAQS)+'</div></section>'+
