@@ -133,9 +133,9 @@ button{font:inherit;cursor:pointer}
 @keyframes cf{0%{opacity:0}3%{opacity:1}22%{opacity:1}26%{opacity:0}100%{opacity:0}}
 .g-sun{background:radial-gradient(95% 62% at 72% 92%,rgba(245,150,70,.92),rgba(245,150,70,0) 60%),linear-gradient(177deg,#16323f,#1d3b46 30%,#3c4a48 50%,#8a5f39 76%,#cb763a 100%)}
 .g-dusk{background:radial-gradient(82% 58% at 28% 14%,rgba(126,134,224,.5),transparent 60%),linear-gradient(177deg,#171c47,#3a2f5e 44%,#7a4a6a 72%,#c46a72 100%)}
-.g-field{background:radial-gradient(90% 56% at 50% 100%,rgba(232,178,92,.8),transparent 62%),linear-gradient(177deg,#102a3a,#14403f 40%,#2f6a55 62%,#9c7a3a 86%,#b88a3a 100%)}
+.g-field{background:radial-gradient(90% 56% at 50% 100%,rgba(205,205,140,.72),transparent 62%),linear-gradient(177deg,#0f2a22,#15433a 40%,#2f7a5e 64%,#7ea15a 88%,#aac480 100%)}
 .g-gold{background:radial-gradient(100% 58% at 50% 100%,rgba(245,180,90,.85),transparent 62%),linear-gradient(177deg,#16263f,#284258 44%,#7a6048 78%,#d99a52 100%)}
-.g-blue{background:radial-gradient(80% 60% at 78% 8%,rgba(120,150,235,.45),transparent 60%),linear-gradient(170deg,#16204a,#23306e 46%,#33489c 100%)}
+.g-blue{background:radial-gradient(80% 60% at 78% 8%,rgba(120,205,160,.4),transparent 60%),linear-gradient(170deg,#0f2a22,#1b5142 48%,#2f7d63 100%)}
 .g-gb{background:radial-gradient(100% 58% at 50% 100%,rgba(42,170,128,.82),transparent 62%),linear-gradient(177deg,#13234a,#1c3a72 42%,#1f7060 76%,#2aa178 100%)}
 .g-home{background:radial-gradient(125% 80% at 50% 102%,rgba(31,140,106,.32),rgba(31,140,106,0) 58%),radial-gradient(95% 60% at 82% 6%,rgba(33,63,153,.16),transparent 62%),linear-gradient(180deg,#f4f9f7 0%,#e9f4f1 44%,#d6ebe6 100%)}
 .hero .scrim{position:absolute;inset:0;z-index:-1;
@@ -188,11 +188,11 @@ button{font:inherit;cursor:pointer}
 .hero.photo .labFeel{left:30%;top:39%}
 .hero.photo .labMove{animation-delay:-14s;left:72%;top:54%}
 .hero.photo .labEat{animation-delay:-7s;left:44%;top:69%}
-/* light sky tint behind the top heading + logo: a soft blue wash that keeps the sky reading light while holding just enough contrast for white text */
+/* top wash behind the heading + logo: a soft greenery wash (teal to sage to warm green) so the top reads green, not sky */
 .hero.photo .herosky{position:absolute;left:0;right:0;top:0;height:60%;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(70,104,168,.55) 0%,rgba(120,158,212,.36) 28%,rgba(165,196,235,.2) 50%,rgba(220,180,130,.12) 72%,transparent 100%)}
-/* lighter scrim top for the photo hero so the sky shows through; keep the bottom dark for the CTAs */
-.hero.photo .scrim{background:linear-gradient(180deg,rgba(10,16,30,.4),rgba(10,16,30,.12) 26%,rgba(10,10,16,.12) 55%,rgba(8,6,4,.72) 100%)}
+  background:linear-gradient(180deg,rgba(28,95,78,.55) 0%,rgba(90,161,122,.36) 28%,rgba(150,190,140,.2) 50%,rgba(210,205,150,.12) 72%,transparent 100%)}
+/* heavy dark-green scrim so the white text stays clear top and bottom, greenery still reads through the middle */
+.hero.photo .scrim{background:linear-gradient(180deg,rgba(4,22,15,.9) 0%,rgba(5,24,16,.62) 16%,rgba(6,26,18,.18) 33%,transparent 46%,transparent 82%,rgba(4,18,12,.5) 100%)}
 @keyframes heroXfade{0%{opacity:1}25%{opacity:1}33.33%{opacity:0}91.66%{opacity:0}100%{opacity:1}}
 @keyframes heroLabelX{
   0%{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -618,6 +618,11 @@ main{padding-bottom:96px}
   7%,28%{transform:scale(1.4);background:var(--don)}}
 .wcap{font-family:var(--satoshi);font-style:italic;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2);margin-top:18px;padding-top:15px;border-top:1px solid rgba(40,70,150,.1)}
 .wcap-out{margin:18px auto 0;max-width:36ch;text-align:center;font-family:var(--fd);font-style:italic;font-size:var(--fs-h4);line-height:1.4;color:var(--ink2)}
+/* symptom section closing CTA, grouped into one calm panel */
+.wclose{margin-top:26px;text-align:center;padding:30px 24px;border-radius:26px;background:linear-gradient(158deg,#eef6f1,#e6eefb);border:1px solid #dce6f4;box-shadow:0 26px 50px -34px rgba(20,32,80,.5)}
+.wclose-lead{font-family:var(--fd);font-style:italic;font-weight:450;font-size:var(--fs-h4);line-height:1.42;color:var(--ink);max-width:30ch;margin:0 auto}
+.wclose-sub{margin-top:12px;font-size:var(--fs-sm);line-height:1.5;color:var(--ink2);max-width:34ch;margin-left:auto;margin-right:auto}
+.wclose .btn{margin-top:18px}
 /* full-screen vertical reel player */
 .t2-media{cursor:pointer}
 .t2-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;z-index:0}
@@ -925,6 +930,10 @@ main{padding-bottom:96px}
 .cs-num{display:grid;place-items:center;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--fd);font-weight:500;font-size:15px;line-height:1;flex:none}
 .cs-htext{min-width:0}
 .cs-ttl{font-family:var(--fd);font-weight:500;font-size:var(--fs-h3);line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.cs-cardmeta{font-size:var(--fs-lbl);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--green);margin-bottom:8px}
+.cscard .cs-ttl{margin-bottom:2px}
+.cs-cardtags{margin-top:12px}
+.cs-scoreline{margin-top:14px;display:inline-flex;flex-wrap:wrap;gap:4px 10px;font-size:var(--fs-cap);font-weight:600;color:var(--green);background:color-mix(in srgb,var(--green) 9%,#fff);border:1px solid color-mix(in srgb,var(--green) 20%,transparent);border-radius:var(--r-pill);padding:9px 15px}
 .cs-sub{margin-top:8px;font-size:var(--fs-sm);line-height:1.5;color:var(--muted)}
 .cs-age{display:block;margin-top:6px;font-size:var(--fs-cap);color:var(--muted);letter-spacing:.02em}
 /* improvement: a calm coloured sub-component, highlighted by colour not size */
@@ -1086,6 +1095,9 @@ main{padding-bottom:96px}
 .foot .fsoc{display:flex;gap:12px;margin-top:22px}
 .foot .fsoc a{display:grid;place-items:center;width:38px;height:38px;padding:0;border-radius:50%;background:rgba(19,38,90,.07);color:var(--ink)}
 .foot .fsoc svg{width:17px;height:17px}
+.foot .fcontact a,.foot .fcontact .fcrow{display:flex;align-items:flex-start;gap:11px;color:rgba(19,38,90,.82);font-size:var(--fs-sm);padding:8px 0;line-height:1.5}
+.foot .fcontact svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--green)}
+@media(hover:hover){.foot .fcontact a:hover{color:var(--blue)}}
 .foot .fbot{margin-top:26px;border-top:1px solid rgba(19,38,90,.15);padding-top:18px;font-size:var(--fs-cap);color:rgba(19,38,90,.55);display:flex;flex-direction:column;gap:6px}
 
 /* sticky cta */
@@ -1523,6 +1535,17 @@ main{padding-bottom:96px}
     padding:7px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
   .dn-links a:hover{color:var(--blue);border-color:var(--blue)}
   .dn-cta{margin-left:auto;min-height:46px;padding:0 24px;background:var(--ink);color:#fff}
+  /* desktop services dropdown */
+  .dn-drop{position:relative;display:flex;align-items:center}
+  .dn-droptrig{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink2);background:none;border:none;cursor:pointer;padding:7px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  .dn-droptrig::after{content:'';width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-1px) rotate(45deg);transition:transform .2s}
+  .dn-drop:hover .dn-droptrig,.dn-drop:focus-within .dn-droptrig{color:var(--blue);border-color:var(--blue)}
+  .dn-drop:hover .dn-droptrig::after,.dn-drop:focus-within .dn-droptrig::after{transform:translateY(2px) rotate(-135deg)}
+  .dn-menu{position:absolute;top:calc(100% + 10px);left:50%;min-width:236px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 26px 52px -26px rgba(20,32,80,.45);padding:8px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateX(-50%) translateY(6px);transition:opacity .18s var(--ease),transform .18s var(--ease);z-index:60}
+  .dn-menu::before{content:'';position:absolute;top:-12px;left:0;right:0;height:12px}
+  .dn-drop:hover .dn-menu,.dn-drop:focus-within .dn-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .dn-menu a{display:block;padding:11px 13px;border-radius:10px;font-size:15px;font-weight:500;color:var(--ink);text-decoration:none;border:none;transition:background .15s,color .15s}
+  .dn-menu a:hover{background:#eef4fb;color:var(--blue)}
 
   /* ---- section rhythm: center each block in a reading column ---- */
   .sec{max-width:1200px;margin-inline:auto;padding:76px 40px}
@@ -1807,6 +1830,16 @@ main{padding-bottom:96px}
     </a>
     <nav class="dn-links">
       <a data-go="/conditions">Conditions</a>
+      <div class="dn-drop">
+        <button class="dn-droptrig" type="button" aria-haspopup="true">Services</button>
+        <div class="dn-menu">
+          <a data-go="/services/physiotherapy">Physiotherapy</a>
+          <a data-go="/services/strength-training">Physical training</a>
+          <a data-go="/services/nutrition">Nutrition</a>
+          <a data-go="/services/mental-wellness">Emotional wellbeing</a>
+          <a data-go="/services/doctor-oversight">Doctor oversight</a>
+        </div>
+      </div>
       <a data-go="/how-we-work">How We Work</a>
       <a data-go="/stories">Stories</a>
       <a data-go="/about">About</a>
@@ -1845,7 +1878,7 @@ main{padding-bottom:96px}
       <a class="svc" data-go="/services/strength-training">Physical training</a>
       <a class="svc" data-go="/services/nutrition">Nutrition</a>
       <a class="svc" data-go="/services/mental-wellness">Emotional wellbeing</a>
-      <a class="svc" data-go="/services/doctor-oversight">Doctor Oversight</a>
+      <a class="svc" data-go="/services/doctor-oversight">Doctor oversight</a>
       <div class="d-cta"><button class="btn block" data-lead>Book a free trial</button></div>
     </div>
   </div>
@@ -1884,51 +1917,72 @@ var PILLARS=[
    {q:'Do I need a doctor’s referral to start?',a:'No referral needed. You can start with a free trial, and our own doctor reviews your health to decide what would help, including what you do not need.'},
    {q:'How many sessions will I need?',a:'It depends on your condition and how you respond. After the first visit, your physiotherapist gives you a realistic picture, and your plan is updated as you improve rather than fixed in advance.'}
   ]},
- {slug:'strength-training',name:'Physical training',photo:'training-scene.png',blurb:'Gentle strength work at home that keeps you steady, strong, and able to do more on your own.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain'],
-  about:{
-   what:'Physical training is guided exercise that builds your strength, balance, and stamina. A trainer works with your body and your pace, with safe movements that make daily tasks easier, like standing up, climbing stairs, and walking without tiring.',
-   when:'People come to physical training for many reasons. It helps you stay steady on your feet, recover the strength an illness or rest has taken, build muscle that protects your joints, and keep the energy your day needs. For older people, regular training is one of the strongest ways to stay independent and lower the risk of a fall.',
-   home:'With Kinetic Age, your trainer comes to your home and works with what you have. No gym, no heavy machines. The exercises fit your body, your space, and what you can do that day.'},
+ {slug:'strength-training',name:'Physical training',photo:'training-scene.png',imgAlt:'A Kinetic Age trainer guiding a senior through exercise at home in Bangalore.',blurb:'We build your strength at home with gentle work that keeps you steady, strong, and able to do more on your own.',who:'[PLACEHOLDER] For older adults who feel weak, tire quickly, or fear falling.',conditions:['balance-and-falls','knee-pain'],
+  provide:{intro:'We bring training to your home and match it to what your body can do.',points:[
+   'We check your strength, balance, and movement first',
+   'We build a plan that fits your body and your pace',
+   'We guide every exercise at home, so you train safely',
+   'We raise the level as you grow stronger']},
+  need:{intro:'Strength keeps you independent. You may need training if you are:',points:[
+   'Feeling weaker or tiring quickly',
+   'Unsteady on your feet or worried about falling',
+   'Rebuilding strength after an illness or rest',
+   'Keeping your muscles and joints strong with age'],
+   close:'Strong muscles keep you steady, active, and doing more on your own.'},
   treats:[['Balance and falls','balance-and-falls'],['Muscle weakness','muscle-weakness'],['Post-stroke recovery','post-stroke-recovery'],['Joint and knee pain','knee-pain'],['Low energy and weakness','low-energy-and-weakness']],
-  synergy:{intro:'Training builds the strength that holds you steady. To make that strength safe and lasting, it works best with the rest of your care.',items:[
+  synergy:{intro:'Training builds the strength that holds you steady. The rest of your care keeps that strength safe and lasting.',items:[
     {lane:'g',label:'Physiotherapy',text:'Physiotherapy heals the injury first, and training builds on it once you are ready to move.',to:'/services/physiotherapy',link:'Physiotherapy'},
     {lane:'o',label:'Nutrition',text:'Muscle needs the right fuel to grow, so good food makes your training work harder.',to:'/services/nutrition',link:'Nutrition'},
-    {lane:'p',label:'Mental wellness',text:'Staying consistent takes motivation, and a steady mind keeps you going week after week.',to:'/services/mental-wellness',link:'Mental wellness'},
-    {lane:'b',label:'Doctor oversight',text:'A doctor clears you for the right level of training, so you build strength without risk.',to:'/services/doctor-oversight',link:'Doctor oversight'}]},
+    {lane:'p',label:'Emotional wellbeing',text:'Staying consistent takes motivation, and a steady mind keeps you going week after week.',to:'/services/mental-wellness',link:'Emotional wellbeing'},
+    {lane:'b',label:'Doctor oversight',text:'A doctor clears you for the right level of training, so you build strength safely.',to:'/services/doctor-oversight',link:'Doctor oversight'}]},
   wa:{line:'See how we build your strength safely, what your plan would include, and how our care works together. We will send it on WhatsApp.',msg:'Hi, can you send me the full training plan?'},
   faqs:[
    {q:'Is strength training safe at my age?',a:'Yes. Training is built around what your body can handle and runs at your pace, guided by a trained professional. For most older adults, regular strength work makes daily life easier and falls less likely.'},
    {q:'Who guides my training, and are they qualified?',a:'A qualified trainer, part of a trained team of 45 and growing. Every provider is verified, because your safety is in their hands.'},
-   {q:'Do I need any equipment or a gym?',a:'No. Your trainer works with your body and your space at home, so you need no gym and no heavy machines.'},
-   {q:'Do I need a doctor’s referral to start?',a:'No referral needed. You can start with a free trial, and the doctor reviews your health to decide the right level of training.'}
+   {q:'Do I need any equipment or a gym?',a:'Your trainer works with your body and your space at home, so everything you need is already there.'},
+   {q:'Do I need a doctor’s referral to start?',a:'You can start straight away with a free trial, and the doctor reviews your health to decide the right level of training.'}
   ]},
- {slug:'nutrition',name:'Nutrition',photo:'nutrition-scene.png',svcImg:'svc-nutrition.png',blurb:'We build a food plan around your body and your conditions, made and managed at home.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery'],
-  about:{
-   what:'Nutrition is care that uses food to manage and improve your health. A nutritionist studies your body, your conditions, and what you eat, then builds a plan that works for you, meal by meal.',
-   when:'People come to nutrition for many reasons. It helps you manage diabetes, lower blood pressure and cholesterol, reach a healthier weight, and get the energy your day needs. For older people, the right food also keeps your bones, muscles, and strength steady as the years go on.',
-   home:'With Kinetic Age, your nutritionist works with your kitchen and your routine, not a fixed diet chart. You eat food you know, cooked the way you like, adjusted to do your body good.'},
+ {slug:'nutrition',name:'Nutrition',photo:'nutrition-scene.png',svcImg:'svc-nutrition.png',imgAlt:'A Kinetic Age nutritionist planning meals with a senior in Bangalore.',blurb:'We build your food plan around your body and your conditions, and guide it as you go.',who:'[PLACEHOLDER] For older adults managing diabetes, weight, or low appetite.',conditions:['knee-pain','post-stroke-recovery'],
+  provide:{intro:'We build your nutrition care around how you live.',points:[
+   'We study your body, your conditions, and what you eat',
+   'We build a food plan that fits your routine and your taste',
+   'We guide you through meals and adjust as your reports change',
+   'We plan around the food you already cook, so you eat what you know']},
+  need:{intro:'Food shapes your health more than most people realise. You may need nutrition if you are:',points:[
+   'Managing diabetes, blood pressure, or cholesterol',
+   'Working toward a healthier weight',
+   'Feeling low on energy through the day',
+   'Keeping your strength and bones steady with age'],
+   close:'The right plan turns your daily food into care that works for you.'},
   treats:[['Diabetes','diabetes'],['High blood pressure','high-blood-pressure'],['High cholesterol','high-cholesterol'],['Weight management','weight-management'],['Low energy and weakness','low-energy-and-weakness']],
-  synergy:{intro:'Nutrition manages what is happening inside your body. To turn that into real strength and lasting health, it works best with the rest of your care.',items:[
+  synergy:{intro:'Nutrition manages what happens inside your body. The rest of your care turns that into real strength.',items:[
     {lane:'b',label:'Physiotherapy',text:'Food eases the strain on your joints, and physiotherapy restores the movement that food alone cannot.',to:'/services/physiotherapy',link:'Physiotherapy'},
-    {lane:'o',label:'Training',text:'Good food fuels your muscles, and training builds the strength that keeps you steady.',to:'/services/strength-training',link:'Training'},
-    {lane:'p',label:'Mental wellness',text:'Eating well takes consistency, and a calm, motivated mind helps you stay with your plan.',to:'/services/mental-wellness',link:'Mental wellness'},
+    {lane:'o',label:'Physical training',text:'Good food fuels your muscles, and training builds the strength that keeps you steady.',to:'/services/strength-training',link:'Physical training'},
+    {lane:'p',label:'Emotional wellbeing',text:'Eating well takes consistency, and a calm, motivated mind helps you stay with your plan.',to:'/services/mental-wellness',link:'Emotional wellbeing'},
     {lane:'n',label:'Doctor oversight',text:'A doctor reads your reports and adjusts your plan as your condition changes.',to:'/services/doctor-oversight',link:'Doctor oversight'}]},
   wa:{line:'See how we treat your condition with food, what your plan would include, and how our care works together. We will send it on WhatsApp.',msg:'Hi, can you send me the full nutrition plan?'},
   faqs:[
    {q:'Can the right food really improve my condition?',a:'Yes. For conditions like diabetes, blood pressure, and cholesterol, food is one of the strongest tools you have, and many people see real change with the right plan. Results depend on your full health picture.'},
    {q:'Who makes my plan, and are they qualified?',a:'A qualified nutritionist, part of a trained team of 45 and growing. Every provider is verified, because your health is in their hands.'},
-   {q:'Do I need a doctor&rsquo;s referral to start?',a:'No referral needed. You can start with a free trial, and our own doctor reviews your health to decide what would help.'},
-   {q:'Will I have to give up the foods I love?',a:'The plan is built around your taste and your kitchen, so you keep eating food you know, adjusted to do your body good.'}]},
- {slug:'mental-wellness',name:'Emotional wellbeing',photo:'emotional-scene.png',svcImg:'svc-emotional.png',blurb:'Someone to talk to and support that steadies your mind, so it feels as cared for as your body.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls'],
-  about:{
-   what:'Emotional wellbeing is care for your mind and mood, given by someone trained to listen and help. A counsellor works with how you feel day to day, the worry, the low moods, the loneliness, and helps you find steadier ground.',
-   when:'People come to emotional wellbeing for many reasons. It helps with the stress of a long illness, the loneliness of spending days alone, the low feelings that come after a loss, and the worry that keeps sleep away. For older people, having someone to talk to brings comfort and keeps the mind as active as the body.',
-   home:'With Kinetic Age, your counsellor comes to your home, where you feel safe to open up. Each conversation moves at your pace, with no judgement and no rush.'},
+   {q:'Do I need a doctor’s referral to start?',a:'You can start straight away with a free trial, and our own doctor reviews your health to decide what would help.'},
+   {q:'Will I have to give up the foods I love?',a:'We build the plan around your taste and the food you already cook, so you keep eating what you know, adjusted to do your body good.'}]},
+ {slug:'mental-wellness',name:'Emotional wellbeing',photo:'emotional-scene.png',svcImg:'svc-emotional.png',imgAlt:'A Kinetic Age counsellor talking with a senior in Bangalore.',blurb:'We give you someone to talk to and steady support, so your mind feels as cared for as your body.',who:'[PLACEHOLDER] For older adults feeling low, anxious, or withdrawn, and the families who notice it.',conditions:['post-stroke-recovery','balance-and-falls'],
+  provide:{intro:'We give you steady support and a safe space to open up.',points:[
+   'We listen to how you feel, at your own pace',
+   'We help you work through worry, low moods, and loneliness',
+   'We check in regularly, so you always have someone to talk to',
+   'We support your mood alongside the rest of your care']},
+  need:{intro:'Your mind carries as much as your body. You may need support if you are:',points:[
+   'Feeling lonely or spending most days alone',
+   'Carrying stress from a long illness',
+   'Feeling low after a loss or a big change',
+   'Finding it hard to sleep or settle your thoughts'],
+   close:'Talking to someone who listens makes daily life feel lighter.'},
   treatsHeading:'Where emotional wellbeing helps.',
   treats:[['Loneliness and isolation','loneliness'],['Stress and anxiety','stress-and-anxiety'],['Low mood','low-mood'],['Sleep trouble','sleep-trouble'],['Coping with a long illness','coping-with-illness']],
   synergy:{intro:'A steady mind carries everything else. When you feel better in yourself, the rest of your care works better too.',items:[
     {lane:'g',label:'Physiotherapy',text:'A calmer mind helps you stay with your exercises, so your body heals as it should.',to:'/services/physiotherapy',link:'Physiotherapy'},
-    {lane:'b',label:'Training',text:'Motivation keeps you moving, and feeling well makes it easier to keep going.',to:'/services/strength-training',link:'Training'},
+    {lane:'b',label:'Physical training',text:'Motivation keeps you moving, and feeling well makes it easier to keep going.',to:'/services/strength-training',link:'Physical training'},
     {lane:'o',label:'Nutrition',text:'Mood shapes how you eat, so feeling steady helps you stay with your food plan.',to:'/services/nutrition',link:'Nutrition'},
     {lane:'p',label:'Doctor oversight',text:'A doctor sees how your mind and body affect each other, and cares for both together.',to:'/services/doctor-oversight',link:'Doctor oversight'}]},
   wa:{line:'See how we support your mind, what your plan would include, and how our care works together. We will send it on WhatsApp.',msg:'Hi, can you send me the full wellbeing plan?'},
@@ -1936,26 +1990,33 @@ var PILLARS=[
    {q:'How can talking really help?',a:'Talking to a trained counsellor helps you make sense of what you feel, ease the weight of it, and find steadier ground. For many people, having someone to listen makes a real difference to daily life.'},
    {q:'Who will I be talking to, and are they qualified?',a:'A qualified counsellor, part of a trained team of 45 and growing. Every provider is verified, because what you share stays in trusted hands.'},
    {q:'Will what I share stay private?',a:'Yes. What you share with your counsellor is kept private, so you can speak freely and at your own pace.'},
-   {q:'Do I need a doctor’s referral to start?',a:'No referral needed. You can start with a free trial, and the doctor reviews your health to decide what would help.'}
+   {q:'Do I need a doctor’s referral to start?',a:'You can start straight away with a free trial, and the doctor reviews your health to decide what would help.'}
   ]},
- {slug:'doctor-oversight',name:'Doctor Oversight',photo:'doctor-scene.png',blurb:'A doctor reviews your whole health and guides your care, so every part of your plan fits together.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls'],
-  about:{
-   what:'Doctor oversight means a qualified doctor reads your full health picture and guides your care from start to finish. They look at your conditions, your reports, and your daily plan together, and decide what would help you, including what you do not need.',
-   when:'People value doctor oversight for many reasons. It helps when you live with more than one condition, when your medicines need watching, or when different problems affect each other and need one person to see the whole. For older people, having a doctor who knows your full history brings calm to care that can otherwise feel scattered.',
-   home:'With Kinetic Age, the doctor works alongside your physiotherapist, trainer, and nutritionist, so your care moves as one plan and not as separate visits that never meet.'},
+ {slug:'doctor-oversight',name:'Doctor oversight',photo:'doctor-scene.png',imgAlt:'A Kinetic Age doctor reviewing a senior’s care plan in Bangalore.',blurb:'We put a doctor across your whole health to guide your care, so every part of your plan fits together.',who:'[PLACEHOLDER] For anyone who wants one accountable medical view of their care.',conditions:['knee-pain','post-stroke-recovery','balance-and-falls'],
+  provide:{intro:'We put a doctor at the centre of your care, guiding every part of it.',points:[
+   'We review your full health, your reports, and your daily plan',
+   'We decide what genuinely helps you, so your plan stays focused on what works',
+   'We guide your physiotherapist, trainer, and nutritionist as one team',
+   'We adjust your care as your health changes']},
+  need:{intro:'Some health needs one person to see the whole picture. You may value it if you are:',points:[
+   'Living with more than one condition',
+   'Managing medicines that need watching',
+   'Recovering from a serious illness or surgery',
+   'Wanting one doctor who knows your full history'],
+   close:'One doctor guiding everything keeps your care clear and connected.'},
   treatsHeading:'Where doctor oversight helps most.',
-  treats:[['Diabetes','diabetes'],['High blood pressure','high-blood-pressure'],['Post-stroke recovery','post-stroke-recovery'],['Multiple or long-term conditions','chronic-conditions'],['Medication management','medication-management']],
-  synergy:{intro:'A doctor decides what your body needs. That decision only works when the people delivering the care move with it.',items:[
+  treats:[['Diabetes','diabetes'],['High blood pressure','high-blood-pressure'],['Post-stroke recovery','post-stroke-recovery'],['Diabetic neuropathy','diabetic-neuropathy'],['Osteoporosis','osteoporosis']],
+  synergy:{intro:'A doctor decides what your body needs. The team around them turns that decision into daily care.',items:[
     {lane:'b',label:'Physiotherapy',text:'The doctor sets the goal, and your physiotherapist works to it, adjusting as you recover.',to:'/services/physiotherapy',link:'Physiotherapy'},
-    {lane:'o',label:'Training',text:'Once you are ready, the doctor clears you for strength work, and your trainer builds it safely.',to:'/services/strength-training',link:'Training'},
+    {lane:'o',label:'Physical training',text:'Once you are ready, the doctor clears you for strength work, and your trainer builds it safely.',to:'/services/strength-training',link:'Physical training'},
     {lane:'g',label:'Nutrition',text:'The doctor reads your reports, and your nutritionist turns that into the food that manages your condition.',to:'/services/nutrition',link:'Nutrition'},
-    {lane:'p',label:'Mental wellness',text:'The doctor sees the whole person, so the stress and worry behind your health is cared for too.',to:'/services/mental-wellness',link:'Mental wellness'}]},
+    {lane:'p',label:'Emotional wellbeing',text:'The doctor sees the whole person, so the stress and worry behind your health is cared for too.',to:'/services/mental-wellness',link:'Emotional wellbeing'}]},
   wa:{line:'See how a doctor would guide your care, what your plan would include, and how our team works together. We will send it on WhatsApp.',msg:'Hi, can you send me the full care plan?'},
   faqs:[
-   {q:'What does the doctor actually do?',a:'The doctor reviews your health, sets the direction for your care, and decides what would help, including what you do not need. They guide the team and adjust your plan as your health changes.'},
-   {q:'Is this a replacement for my regular doctor?',a:'No. Our doctor guides the care we deliver at home and works with your existing treatment, rather than replacing the doctor you already see.'},
+   {q:'What does the doctor actually do?',a:'The doctor reviews your health, sets the direction for your care, and decides what genuinely helps you, including what you can skip. They guide the team and adjust your plan as your health changes.'},
+   {q:'Is this a replacement for my regular doctor?',a:'Our doctor guides your care and works alongside your existing treatment, so you keep the doctor you already see.'},
    {q:'Are your doctors qualified?',a:'Yes. Care is guided by qualified doctors, part of a trained team of 45 and growing. Every provider is verified, because your health is in their hands.'},
-   {q:'Do I need a referral to start?',a:'No referral needed. You can start with a free trial, and the doctor reviews your health to decide what would help.'}]}
+   {q:'Do I need a referral to start?',a:'You can start straight away with a free trial, and the doctor reviews your health to decide what would help.'}]}
 ];
 var CONDITIONS=[
  {slug:'knee-pain',name:'Knee pain',symptom:'Knee pain that cuts the walk short',intro:'[PLACEHOLDER] When the knees hurt, the whole day shrinks. Here is what is usually going on, and what helps.',
@@ -2101,9 +2162,15 @@ var COND_DIR=[
 ];
 var HOME_FAQS=[{q:'[PLACEHOLDER] How does the first visit work?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who are the providers?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Do you come to our home?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What does it cost?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What if my parent is reluctant?',a:'[PLACEHOLDER]'}];
 var CONDITIONS_FAQS=[{q:'Which conditions do you treat?',a:'[PLACEHOLDER]'},{q:'Do you provide care at home?',a:'[PLACEHOLDER]'},{q:'Which areas in Bangalore do you serve?',a:'[PLACEHOLDER]'},{q:'How do I start, and what is the free trial?',a:'[PLACEHOLDER]'}];
+var HOME_FAQS=[
+ {q:'How do I get started?',a:'You start with a free trial. A specialist visits your home, sees what you need, and tells you what would help. You decide where to go from there.'},
+ {q:'What areas in Bangalore do you serve?',a:'We serve homes across all of Bangalore, with every visit at home. Share your area when you book and we will confirm.'},
+ {q:'Are your providers qualified and verified?',a:'Yes. Every provider is qualified and verified, part of a trained team of 45 and growing, because letting someone into your home takes trust.'},
+ {q:'Do I have to take all five services?',a:'You take only what helps you. A doctor reviews your health and decides what genuinely fits, including what you can skip.'},
+ {q:'Can my family stay updated on the care?',a:'Yes. You get progress updates on WhatsApp and the app, so the whole family can follow along, even from another city.'}];
 var HOW_FAQS=[{q:'[PLACEHOLDER] What happens in the assessment?',a:'[PLACEHOLDER]'},{q:'How quickly can I start?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] What is in the family report?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How often will we hear from you?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can we change the plan later?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Who do we contact between sessions?',a:'[PLACEHOLDER]'}];
 var TESTIMONIALS=[
-{slug:'strength-training',name:'Sandeep Lakhwara',age:70,her:'his',label:'Strength training',storyLen:'0:37',lane:'green',video:'ka-testimonial-2.mp4',bakedCC:true,poster:'sandeep-poster.jpg',
+{slug:'strength-training',name:'Sandeep Lakhwara',age:70,her:'his',label:'Strength training',storyLen:'0:37',lane:'green',video:'ka-testimonial-2.mp4',bakedCC:true,poster:'sandeep-poster2.png',
  metric:{k:'Sit-to-stands',before:'5',after:'15',delta:'3&times;'},
  quote:'I am happy with how I am recovering. I feel stronger now, and each week I can do a little more on my own.',
  pull:'I feel stronger, and each week I can do a little more on my own.',
@@ -2174,7 +2241,7 @@ var JOURNEY=[
   lead:'Our experts weigh every parameter and build the one plan most suited to you and your condition.',
   chips:[['Nutrition meal plan','warm'],['Exercise plan','green'],['Doctor consultation','']],
   list:['Every parameter considered, never a template','One connected plan, built around the condition']},
- {n:'03',node:'o',short:'Daily care',mini:'We run <em>daily</em> sessions and regular nutrition check-ins, and own the outcome',title:'We execute it, every day',
+ {n:'03',node:'o',short:'Daily care',mini:'<em>Daily</em> sessions and regular nutrition check-ins',title:'We execute it, every day',
   lead:'Once the plan is live we run it with you and track everything at the right rhythm.',
   cadence:[['Daily','d','Meal tracking'],['Weekly','w','Multiple physiotherapy &amp; physical-training sessions'],['Weekly','w','Follow-up call on the meals'],['Monthly','m','Doctor check-in &amp; plan update'],['Ongoing','o','Emotional wellbeing, tracked throughout']],
   callout:'We never let you or your family be left alone worrying. We execute, and we own every outcome.',
@@ -2185,116 +2252,128 @@ var JOURNEY=[
   wa:'Shared with you and your family on WhatsApp, with a dedicated family group for full transparency and trust.'}
 ];
 var REPORT_TIMELINE=[{w:'Week 1',t:'[PLACEHOLDER] Baseline and first plan',d:'[PLACEHOLDER] What we found and where we are starting.'},{w:'Week 2',t:'[PLACEHOLDER] First check-in',d:'[PLACEHOLDER] Early adjustments and what to expect.'},{w:'Week 4',t:'[PLACEHOLDER] Progress review',d:'[PLACEHOLDER] Measured changes shared with the family.'},{w:'Week 8',t:'[PLACEHOLDER] Plan update',d:'[PLACEHOLDER] What is working, what changes next.'}];
+var PHYSIO=['Physiotherapy','/services/physiotherapy'],NUTR=['Nutrition','/services/nutrition'],PTRAIN=['Physical training','/services/strength-training'];
 var CASE_STUDIES=[
- {n:'01',title:'Lived with knee pain for 20 years. It took seven months to feel different.',
-  intro:'A woman in her early 60s from North Bangalore came to Kinetic Age with bilateral knee pain she had lived with for two decades, alongside left shoulder pain and a thyroid condition.',
-  stats:[['Age group','60–65'],['Service','Physio + nutrition']],
-  challenge:['Bilateral knee pain for 20 years','Left shoulder pain','Thyroid condition, hypertension, and high cholesterol','Postural imbalance with increased lumbar lordosis and bow-leg posture','Weakness across quadriceps, glutes, core, and shoulder muscle groups'],
-  worked:['Mobility and flexibility training','Strength and balance training','Pain management and rehab for knees and shoulder','Personalised nutrition plan targeting thyroid, hypertension, and cholesterol, followed consistently throughout'],
-  quote:'I’ve been with Kinetic Age for seven months now and I’m happy with the service. My physio is excellent and sessions are always on time. My knee pain is still there, but I can feel some improvement and I’m sticking with it.',attr:'Rajul Garg, summarised from CSAT call',
-  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
-  tags:['Bilateral knee pain','Shoulder rehab','Thyroid','Hypertension','Personalised nutrition','Home physiotherapy'],
-  metric:['7 months','to feel a difference after 20 years']},
- {n:'02',title:'A hip replacement at 85, and walking again from the comfort of home.',
-  intro:'A man in his late 80s came to Kinetic Age following a hip replacement, with multi-joint pain across knees, shoulders, and lower back, and a cardiac history that required careful, low-impact rehabilitation. A four-pillar plan combining mobility, strength, pain management, and nutrition restored confidence and function.',
-  stats:[['Age group','85+'],['Service','Physio + nutrition']],
-  challenge:['Post-hip-replacement rehabilitation needed','Multi-joint pain across knees, shoulders, and lower back','Cardiac history requiring cardiac-safe pacing in every session','Significant risk of deconditioning given age and surgical recovery'],
-  worked:['Mobility and flexibility training to restore range','Gentle strength and balance work to rebuild stability','Pain management and rehab tailored to surgical recovery','Nutrition plan supporting healing and cardiac health','Entire programme delivered safely at home'],
+ {slug:'twenty-years-knee-pain',img:'cs-01.png',age:'60–65',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Knee pain','/conditions/knee-pain'],['Shoulder pain','/conditions/shoulder-pain']],
+  headline:'Twenty years of knee pain, and seven months that changed how she moves',
+  summary:'A woman in her early 60s from North Bangalore had lived with knee pain in both knees for two decades, alongside shoulder pain and a thyroid condition.',
+  situation:['Pain in both knees, lived with for 20 years','Left shoulder pain','Thyroid condition, high blood pressure, and high cholesterol','Postural imbalance and weakness across the quads, glutes, core, and shoulder'],
+  did:['Mobility and flexibility training to free up the knees and shoulder','Strength and balance training to support the joints','Pain management and rehab for the knees and shoulder','A personalised nutrition plan for thyroid, blood pressure, and cholesterol, followed throughout'],
+  outcome:'After seven months she feels a steady difference and is continuing the programme. Her physiotherapy and service ratings were full marks.',
+  scores:'Physio 5/5 &middot; Customer service 5/5 &middot; Overall 5/5',
+  quote:'I&rsquo;ve been with Kinetic Age for seven months now and I&rsquo;m happy with the service. My physio is excellent and sessions are always on time. My knee pain is still there, but I can feel some improvement and I&rsquo;m sticking with it.',attr:'Client, summarised from CSAT call',
+  tags:['Knee pain','Shoulder rehab','Thyroid','Hypertension','Home physiotherapy']},
+ {slug:'hip-replacement-at-85',img:'cs-02.png',age:'85+',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Post-operative care','/conditions/post-operative-care-and-rehabilitation'],['Knee pain','/conditions/knee-pain']],
+  headline:'A hip replacement at 85, and walking again at home',
+  summary:'A man in his late 80s came to Kinetic Age after a hip replacement, with multi-joint pain and a cardiac history that needed careful, low-impact rehab.',
+  situation:['Recovery needed after a hip replacement','Multi-joint pain across knees, shoulders, and lower back','A cardiac history that required gentle pacing every session','High risk of losing strength given his age and surgery'],
+  did:['Mobility and flexibility training to restore range','Gentle strength and balance work to rebuild stability','Pain management and rehab matched to surgical recovery','A nutrition plan supporting healing and heart health','The whole programme delivered safely at home'],
+  outcome:'He regained confidence and function, with sessions running their full duration and the team in regular touch.',
+  scores:'Physio 5/5 &middot; Nutrition 4/5 &middot; Overall 4/5',
   quote:'Sessions ran the full duration and the team stayed in regular touch. Overall the care has been very good.',attr:'Client, summarised from CSAT review',
-  scores:[['5/5','Physiotherapist'],['4/5','Nutritionist'],['4/5','Overall quality']],
-  tags:['Post-hip replacement','Multi-joint pain','Mobility & flexibility','Cardiac-safe rehab','Seniors 85+','Home physiotherapy'],
-  metric:['85+','walking again after hip surgery']},
- {n:'03',title:'Cerebellar ataxia had taken his balance. Home physiotherapy started giving it back.',
-  intro:'A 74-year-old man living with cerebellar ataxia came to Kinetic Age with severely compromised balance, an unsteady gait, and limited coordination. Through a targeted home physiotherapy programme, he made meaningful progress and reported feeling happy with both the care and his improvement.',
-  stats:[['Age group','70–75'],['Service','Physiotherapy']],
-  challenge:['Cerebellar ataxia causing loss of balance and coordination','Walking unsafe due to instability','Increased walking cadence with shortened step length and prolonged stance time','Single-leg balance not achievable at baseline','No prior physiotherapy undertaken for the condition'],
-  worked:['Specialised neuro-rehabilitation','Mobility and flexibility training','Strength and balance work focused on gait retraining and fall prevention','Pain management techniques tailored to neurological recovery'],
-  quote:'Everything is going good. I am happy with the physiotherapy and the progression.',attr:'Client, from CSAT call',
-  scores:[['5/5','Physiotherapist'],['5/5','Customer service'],['5/5','Overall quality']],
-  tags:['Cerebellar ataxia','Neurological rehab','Gait training','Balance & coordination','Fall prevention','Seniors 70–75'],
-  metric:['8 months','rebuilding balance with ataxia']},
- {n:'04',title:'From a sedentary life back on her feet, managing diabetes and knee pain.',
-  intro:'A woman in her late 50s came to Kinetic Age with knee pain, upper back pain, and a largely sedentary lifestyle driven by type 2 diabetes. A combined physiotherapy and personalised nutrition programme helped her rebuild strength and manage her condition more effectively.',
-  stats:[['Age group','55–60'],['Service','Physio + nutrition']],
-  challenge:['Type 2 diabetes','Upper back pain','Quadriceps weakness','Largely sedentary lifestyle','Muscle imbalance across key groups'],
-  worked:['Strength training for back and lower body','Mobility work for back and lower body','Personalised nutrition plan designed to support diabetes management'],
-  quote:'Since starting with Kinetic Age, my knee pain has reduced significantly, I can feel the difference. The sessions are always on time, and the physio and trainer have been excellent. I have already recommended Kinetic Age to people I know.',attr:'Client, summarised from audit feedback and CSAT review',
-  scores:[['5/5','Physiotherapist'],['4/5','Overall quality']],
-  tags:['Type 2 diabetes','Back pain','Knee pain','Diabetes nutrition plan','Sedentary to active','Physio + nutrition'],
-  metric:['Active again','from a sedentary life']},
- {n:'05',title:'Knee, back and shoulder pain were not separate problems. Treating them together changed everything.',
-  intro:'A 61-year-old woman came to Kinetic Age with grade 3 osteoarthritis in the knee, persistent back pain from spinal stenosis, and shoulder pain that limited her daily life. She made enough progress through a combined physiotherapy and nutrition programme to renew her plan.',
-  stats:[['Age group','60–65'],['Service','Physio + nutrition']],
-  challenge:['Grade 3 knee osteoarthritis','Spinal stenosis causing persistent back pain','Shoulder pain','Hypertension and diabetes'],
-  worked:['Mobility and flexibility training','Strength and balance training','Pain management for knee, back, and shoulder','Nutrition plan aligned to her diabetes and hypertension','Four-pillar approach delivered entirely at home'],
-  quote:'I don’t have any suggestions, I’m satisfied with everything and very happy with the overall service. I’ve renewed and will be continuing because the care has worked for me.',attr:'Kalaivani, summarised from CSAT review',
-  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
-  tags:['OA knee grade 3','Spinal stenosis','Shoulder pain','Diabetes','Hypertension','Renewed'],
-  metric:['Renewed','after combined care worked']},
- {n:'06',title:'Standing strong again: an 84-year-old’s balance transformation.',
-  intro:'An 84-year-old woman managing diabetes and hypertension came to Kinetic Age unable to balance on either leg, with a limping gait, stooped posture, and significant lower limb weakness. She reported meaningful improvement and expressed strong intent to renew.',
-  stats:[['Age group','80+'],['Service','Physiotherapy']],
-  challenge:['Bilateral knee pain','Zero single-leg balance at baseline','Limping gait','Stooped posture','Lower limb weakness, alongside diabetes and hypertension'],
-  worked:['Progressive balance and fall prevention training','Lower limb strengthening','Gait retraining','Mobility work, with sessions calibrated to her age and multi-condition profile'],
-  quote:'I’m happy with my sessions and I’m planning to continue. The physiotherapist has been very good and I can feel myself getting better little by little.',attr:'Ramamani Dodderi, summarised from CSAT call',
-  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
-  tags:['Knee pain','Balance training','Fall prevention','Diabetes','Hypertension','Seniors 80+'],
-  metric:['0 → steady','balance rebuilt at 84']},
- {n:'07',title:'Knee OA, a cardiac condition and varicose veins, managed with one plan, entirely online at 81.',
-  intro:'An 81-year-old woman managing bilateral knee OA, varicose veins, hypertension, and a cardiac condition enrolled for online physiotherapy. She rated every category 5/5 and referred a neighbour to Kinetic Age.',
-  stats:[['Age group','80+'],['Service','Online physio']],
-  challenge:['Severe left knee pain, peaking in evenings and at night','Moderate right knee pain','Varicose veins','Recent cardiac issue and hypertension, on blood thinners and antihypertensives','Reduced knee flexion and lower limb muscle imbalance'],
-  worked:['Targeted lower limb strengthening','Balance training for fall prevention','Pain management','Delivered online, carefully accounting for her cardiac profile throughout'],
+  tags:['Post-hip replacement','Multi-joint pain','Cardiac-safe rehab','Seniors 85+','Home physiotherapy']},
+ {slug:'cerebellar-ataxia-balance',img:'cs-03.png',age:'74',service:'Physiotherapy',pillars:[PHYSIO],
+  conds:[['Balance and falls','/conditions/balance-and-falls'],['Post-stroke recovery','/conditions/post-stroke-recovery']],
+  headline:'Cerebellar ataxia took her balance. Home physiotherapy began giving it back.',
+  summary:'A 74-year-old woman living with cerebellar ataxia came to Kinetic Age with severely affected balance, an unsteady walk, and limited coordination.',
+  situation:['Cerebellar ataxia affecting balance and coordination','Walking felt unsafe due to instability','A short, quick step pattern with long time spent steadying','Single-leg balance not possible at the start','No prior physiotherapy for the condition'],
+  did:['Specialised neuro-rehabilitation','Mobility and flexibility training','Strength and balance work focused on gait and fall prevention','Pain management matched to neurological recovery'],
+  outcome:'Over eight months she made meaningful progress and is happy with both the care and her improvement.',
+  scores:'Physio 5/5 &middot; Customer service 5/5 &middot; Overall 5/5',
+  quote:'Everything is going good. I am happy with the physiotherapy and the progression.',attr:'Client, summarised from CSAT review',
+  tags:['Cerebellar ataxia','Neuro rehab','Gait training','Balance','Fall prevention']},
+ {slug:'diabetes-knee-pain-active-again',img:'cs-04.png',age:'55–60',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Diabetes','/conditions/diabetes'],['Knee pain','/conditions/knee-pain'],['Low back pain','/conditions/low-back-pain']],
+  headline:'From a sedentary life back onto her feet, managing diabetes and knee pain',
+  summary:'A woman in her late 50s came to Kinetic Age with knee pain, upper back pain, and a largely sedentary life driven by type 2 diabetes.',
+  situation:['Type 2 diabetes','Upper back pain','Quadriceps weakness','A largely sedentary routine','Muscle imbalance across key groups'],
+  did:['Strength training for the back and lower body','Mobility work for the back and lower body','A personalised nutrition plan to support diabetes management'],
+  outcome:'Her knee pain reduced noticeably, sessions ran on time, and she has already recommended Kinetic Age to others.',
+  scores:'Physio 5/5 &middot; Overall 4/5',
+  quote:'Since starting with Kinetic Age, my knee pain has reduced significantly, I can feel the difference. The sessions are always on time, and the physio and trainer have been excellent. I have already recommended Kinetic Age to people I know.',attr:'Client, summarised from CSAT review',
+  tags:['Type 2 diabetes','Back pain','Knee pain','Sedentary to active','Physio + nutrition']},
+ {slug:'knee-back-shoulder-together',img:'cs-05.png',age:'61',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Knee pain','/conditions/knee-pain'],['Low back pain','/conditions/low-back-pain'],['Shoulder pain','/conditions/shoulder-pain'],['Diabetes','/conditions/diabetes']],
+  headline:'Knee, back, and shoulder pain, treated together at home',
+  summary:'A 61-year-old woman came to Kinetic Age with grade 3 knee osteoarthritis, back pain from spinal stenosis, and shoulder pain that limited daily life.',
+  situation:['Grade 3 knee osteoarthritis','Spinal stenosis causing ongoing back pain','Shoulder pain','High blood pressure and diabetes'],
+  did:['Mobility and flexibility training','Strength and balance training','Pain management for knee, back, and shoulder','A nutrition plan aligned to her diabetes and blood pressure','A four-pillar approach delivered entirely at home'],
+  outcome:'She made enough progress to renew her plan and is continuing the care.',
+  scores:'Physio 5/5 &middot; Overall 5/5',
+  quote:'I&rsquo;m satisfied with everything and very happy with the overall service. I&rsquo;ve renewed and will be continuing because the care has worked for me.',attr:'Client, summarised from CSAT review',
+  tags:['OA knee grade 3','Spinal stenosis','Shoulder pain','Diabetes','Renewed']},
+ {slug:'standing-strong-at-84',img:'cs-06.png',age:'84',service:'Physiotherapy',pillars:[PHYSIO],
+  conds:[['Balance and falls','/conditions/balance-and-falls'],['Knee pain','/conditions/knee-pain'],['Diabetes','/conditions/diabetes']],
+  headline:'From no balance to standing strong again at 84',
+  summary:'An 84-year-old woman managing diabetes and high blood pressure came to Kinetic Age unable to balance on either leg, with a limping walk and lower limb weakness.',
+  situation:['Pain in both knees','No single-leg balance at the start','A limping walk and stooped posture','Lower limb weakness, alongside diabetes and high blood pressure'],
+  did:['Progressive balance and fall prevention training','Lower limb strengthening','Gait retraining','Mobility work, calibrated to her age and conditions'],
+  outcome:'She feels herself improving little by little and plans to continue.',
+  scores:'Physio 5/5 &middot; Customer service 5/5 &middot; Overall 5/5',
+  quote:'I&rsquo;m happy with my sessions and I&rsquo;m planning to continue. The physiotherapist has been very good and I can feel myself getting better little by little.',attr:'Client, summarised from CSAT call',
+  tags:['Knee pain','Balance training','Fall prevention','Diabetes','Seniors 80+']},
+ {slug:'online-physio-at-81',img:'cs-07.png',age:'81',service:'Physiotherapy (online)',pillars:[PHYSIO],
+  conds:[['Knee pain','/conditions/knee-pain'],['Balance and falls','/conditions/balance-and-falls']],
+  headline:'Bilateral knee OA and a cardiac condition, managed online at 81',
+  summary:'An 81-year-old woman managing knee OA in both knees, varicose veins, high blood pressure, and a cardiac condition enrolled for online physiotherapy.',
+  situation:['Severe left knee pain, worse in the evenings and at night','Moderate right knee pain','Varicose veins','A recent cardiac issue and high blood pressure, on blood thinners','Reduced knee bend and lower limb muscle imbalance'],
+  did:['Targeted lower limb strengthening','Balance training for fall prevention','Pain management','Delivered online, with her cardiac profile accounted for throughout'],
+  outcome:'She rated every category full marks and referred a neighbour to Kinetic Age.',
+  scores:'On time 5/5 &middot; Session duration 5/5 &middot; Physio knowledge 5/5 &middot; Customer service 5/5',
   quote:'I am really happy with the progress and with my physio. She explains each exercise clearly and her behaviour has been excellent throughout.',attr:'Client, summarised from CSAT review',
-  scores:[['5/5','Physio on time'],['5/5','Session duration'],['5/5','Physio knowledge'],['5/5','Customer service']],
-  tags:['Bilateral knee OA','Varicose veins','Hypertension','Cardiovascular','Online physiotherapy','Seniors 80+'],
-  metric:['5/5','every category, online at 81']},
- {n:'08',title:'Chronic knee pain and a lateral imbalance, fixed with one combined programme.',
-  intro:'A 61-year-old man with chronic knee pain, mild scoliosis, and left-side weakness progressed through a physiotherapy and nutrition programme, and is already seeing the difference.',
-  stats:[['Age group','60–65'],['Service','Physio + nutrition']],
-  challenge:['Chronic knee pain','Notable left-right asymmetry (8 sec vs 13 sec single-leg balance at baseline)','Mild scoliosis','Left-side weakness limiting daily mobility'],
-  worked:['Strength and balance training, focused on correcting the bilateral asymmetry','Pain management for knee and back','Progressive fitness work to improve overall endurance and function','Nutrition support alongside'],
-  quote:'My experience with Kinetic Age has been nice. I’ve seen improvement since starting the sessions and everything is going properly. No complaints at all.',attr:'K. Bharath, summarised from CSAT call',
-  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
-  tags:['Knee pain','Scoliosis','Left-side weakness','Balance training','Renewing'],
-  metric:['Improving','lateral imbalance corrected']},
- {n:'09',title:'Rebuilding movement after a stroke, by adapting the plan to deliver real progress.',
-  intro:'A 66-year-old man left unable to move his right hand and leg following a stroke came to Kinetic Age for neurorehabilitation physiotherapy and strength training. Although the initial programme did not deliver the pain improvement hoped for, the team realigned the plan to his needs and after that, he saw real progress.',
-  stats:[['Age group','65–70'],['Service','Physio + strength']],
-  challenge:['Post-stroke right-sided hemiplegia','Unable to use the right hand or leg for daily activities','Required specialist neurorehabilitation delivered safely at home','Managing alongside standard stroke medications'],
-  worked:['Neurorehabilitation techniques for motor function recovery','Strength training adapted for hemiplegia','Balance and gait retraining','Progressive functional mobility work','Plan realigned around his specific response and pace after the first phase'],
-  outcomes:['49 sessions completed with continued engagement','Measurable motor function progress','All sessions delivered on time'],
-  quote:'Initially the plan didn’t really improve the pain much, but the team realigned it based on my needs. After that I started seeing real progress.',attr:'Client, summarised from CSAT feedback',
-  scores:[['5/5','Physiotherapist'],['5/5','Customer service'],['5/5','Overall quality']],
-  tags:['Post-stroke rehab','Hemiplegia','Neurorehabilitation','Gait retraining','Adaptive care','Home physiotherapy'],
-  metric:['49 sessions','real progress after stroke']},
- {n:'10',title:'Knee pain, swelling and breathlessness, all turned around in ten sessions.',
-  intro:'A 56-year-old woman came to Kinetic Age with severe bilateral knee pain, back pain, loss of balance, ankle swelling, and breathlessness limiting her ability to walk, climb stairs, or perform basic daily activities. Within 10 sessions, she reported a significant improvement and received a full personalised nutrition plan.',
-  stats:[['Age group','50–60'],['Service','Physio + nutrition']],
-  challenge:['Bilateral knee pain, right side more severe','Lower back pain','Intermittent loss of balance','Bilateral ankle swelling','Breathlessness for two months, restricting daily walking and stair use'],
-  worked:['Pain management and rehab for the knees and back','Balance and strength work to restore safe walking','Full personalised nutrition plan addressing her overall health'],
-  quote:'My physio is very perfect in her job, she comes on time, is very polite and supportive. I’m really happy with the overall service and the care she has shown.',attr:'Sabiha Begam, summarised from CSAT call',
-  scores:[['5/5','Physiotherapist'],['5/5','Overall quality']],
-  tags:['Bilateral knee pain','Back pain','Balance loss','Ankle swelling','Breathlessness','Physio + nutrition'],
-  metric:['10 sessions','knee, swelling and breath eased']},
- {n:'11',title:'A long history of physical complaints, worked through one by one over 49 sessions.',
-  intro:'A 49-year-old woman managing chronic knee and foot pain, postural issues, and an old wrist fracture enrolled for home physiotherapy and strength training. After 49 sessions she reported pain improvement, scored the service 5/5 overall, and was already recommending Kinetic Age to family and friends.',
-  stats:[['Age group','45–55'],['Service','Physio + fitness']],
-  challenge:['Knee pain','Ankle and foot pain','IBS','History of wrist fracture','Flat feet, genu varum, and a waddling gait','Forward head with rounded shoulders'],
-  worked:['Lower limb and upper body strength training','Balance and core strengthening to address gait and reduce fall risk','Pain management for knee, ankle, and foot','Nutrition enrolled alongside her existing gastroenterologist-guided diet'],
-  quote:'Very happy with the services and very happy with the physio, happy with everything overall.',attr:'Client, summarised from CSAT call',
-  scores:[['5/5','Physio experience'],['5/5','Customer service'],['5/5','Overall quality']],
-  tags:['Knee pain','Ankle & foot pain','Strength training','Balance & gait','IBS','Home physiotherapy'],
-  metric:['49 sessions','complaints worked through one by one']},
- {n:'12',title:'Five conditions and a slow decline, evened out over 26 sessions.',
-  intro:'A 65-year-old man managing diabetes, blood pressure, and a heart condition, on top of an old pancreatic surgery, had started struggling with stairs and balance but brushed it off. Twenty-six sessions in, his walk has visibly evened out, and the difference in how he moves is something the whole family has noticed.',
-  stats:[['Age group','65–70'],['Service','Physiotherapy']],
-  challenge:['Difficulty climbing stairs and occasional loss of balance','Diabetes, hypertension, and a cardiovascular condition, alongside chronic pancreatitis','A sedentary routine that had crept in slowly, with left-side weakness','An old burn injury to the right foot still limiting ankle movement','A slow, unsteady walk the family had quietly started adjusting their pace for'],
-  worked:['Balance and gait training, focused on the left side where the weakness showed','Lower limb strengthening to rebuild what years of sitting more than moving had worn down'],
-  quote:'He’s happy with how things are going, and he likes how the physio talks to him and explains things, that matters more to him than we expected. He’s noticed real improvement, and so have we.',attr:'In the family’s words, from CSAT and audit feedback',
-  scores:[['5/5','Physio on time'],['5/5','Physio behaviour'],['4/5','Overall quality']],
-  tags:['Balance & gait training','Diabetes','Hypertension','Cardiovascular','Family-observed recovery','Home physiotherapy'],
-  metric:['26 sessions','the family sees the difference']}
+  tags:['Bilateral knee OA','Varicose veins','Hypertension','Online physiotherapy','Seniors 80+']},
+ {slug:'chronic-knee-pain-imbalance',img:'cs-08.png',age:'61',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Knee pain','/conditions/knee-pain'],['Low back pain','/conditions/low-back-pain']],
+  headline:'Chronic knee pain and a side-to-side imbalance, corrected together',
+  summary:'A 61-year-old man with chronic knee pain, mild scoliosis, and left-side weakness worked through a physiotherapy and nutrition programme and is already seeing the difference.',
+  situation:['Chronic knee pain','A clear left-right imbalance (8 seconds versus 13 seconds single-leg balance at the start)','Mild scoliosis','Left-side weakness limiting daily movement'],
+  did:['Strength and balance training to correct the imbalance','Pain management for knee and back','Progressive fitness work for endurance and function','Nutrition support alongside'],
+  outcome:'He has seen steady improvement since starting and is renewing.',
+  scores:'Physio 5/5 &middot; Overall 5/5',
+  quote:'My experience with Kinetic Age has been nice. I&rsquo;ve seen improvement since starting the sessions and everything is going properly.',attr:'Client, summarised from CSAT call',
+  tags:['Knee pain','Scoliosis','Left-side weakness','Balance training','Renewing']},
+ {slug:'movement-after-stroke',img:'cs-09.png',age:'66',service:'Physio + strength',pillars:[PHYSIO,PTRAIN],
+  conds:[['Post-stroke recovery','/conditions/post-stroke-recovery'],['Balance and falls','/conditions/balance-and-falls']],
+  headline:'Rebuilding movement after a stroke, with a plan that adapted to him',
+  summary:'A 66-year-old man left unable to move his right hand and leg after a stroke came to Kinetic Age for neuro-rehabilitation and strength training.',
+  situation:['Right-sided weakness after a stroke','Unable to use the right hand or leg for daily activities','Needed specialist neuro-rehabilitation, delivered safely at home','Managing alongside standard stroke medication'],
+  did:['Neuro-rehabilitation for motor function recovery','Strength training adapted for one-sided weakness','Balance and gait retraining','Progressive functional mobility work','The plan realigned around his response and pace after the first phase'],
+  outcome:'After the plan was realigned to his needs, he saw real progress, completing 49 sessions with measurable motor gains, all delivered on time.',
+  scores:'Physio 5/5 &middot; Customer service 5/5 &middot; Overall 5/5',
+  quote:'Initially the plan didn&rsquo;t really improve the pain much, but the team realigned it based on my needs. After that I started seeing real progress.',attr:'Client, summarised from CSAT review',
+  tags:['Post-stroke rehab','Neuro rehab','Gait retraining','Adaptive care','Home physiotherapy']},
+ {slug:'knee-pain-breathlessness-ten-sessions',img:'cs-10.png',age:'56',service:'Physio + nutrition',pillars:[PHYSIO,NUTR],
+  conds:[['Knee pain','/conditions/knee-pain'],['Low back pain','/conditions/low-back-pain'],['Balance and falls','/conditions/balance-and-falls']],
+  headline:'She could barely walk or climb stairs, ten sessions changed that',
+  summary:'A 56-year-old woman came to Kinetic Age with severe knee pain in both knees, back pain, balance loss, ankle swelling, and breathlessness that limited daily life.',
+  situation:['Knee pain in both knees, worse on the right','Lower back pain','Balance that came and went','Swelling in both ankles','Breathlessness for two months, limiting walking and stairs'],
+  did:['Pain management and rehab for the knees and back','Balance and strength work to restore safe walking','A full personalised nutrition plan for her overall health'],
+  outcome:'Within ten sessions she reported a significant improvement and received a full nutrition plan.',
+  scores:'Physio 5/5 &middot; Overall 5/5',
+  quote:'My physio is very perfect in her job, she comes on time, is very polite and supportive. I&rsquo;m really happy with the overall service and the care she has shown.',attr:'Client, summarised from CSAT call',
+  tags:['Bilateral knee pain','Back pain','Balance loss','Breathlessness','Physio + nutrition']},
+ {slug:'long-history-49-sessions',img:'cs-11.png',age:'49',service:'Physio + strength + nutrition',pillars:[PHYSIO,PTRAIN,NUTR],
+  conds:[['Knee pain','/conditions/knee-pain'],['Balance and falls','/conditions/balance-and-falls']],
+  headline:'A long history of pain, worked through over forty-nine sessions',
+  summary:'A 49-year-old woman managing chronic knee and foot pain, postural issues, and an old wrist fracture enrolled for home physiotherapy and strength training.',
+  situation:['Knee pain','Ankle and foot pain','IBS','A history of wrist fracture','Flat feet and a waddling walk','Forward head and rounded shoulders'],
+  did:['Lower limb and upper body strength training','Balance and core work to address the walk and reduce fall risk','Pain management for knee, ankle, and foot','Nutrition alongside her existing specialist-guided diet'],
+  outcome:'After 49 sessions she reported real pain improvement, rated the service full marks, and is recommending Kinetic Age to family and friends.',
+  scores:'Physio 5/5 &middot; Customer service 5/5 &middot; Overall 5/5',
+  quote:'Very happy with the services and very happy with the physio. Happy with everything overall.',attr:'Client, summarised from CSAT review',
+  tags:['Knee pain','Ankle and foot pain','Strength training','Balance and gait','Home physiotherapy']},
+ {slug:'five-conditions-measured-recovery',img:'cs-02.png',age:'65',service:'Physiotherapy',pillars:[PHYSIO],
+  conds:[['Balance and falls','/conditions/balance-and-falls'],['Diabetes','/conditions/diabetes']],
+  headline:'I watched my father go from unsteady to walking strong again',
+  summary:'My father is 65, managing diabetes, blood pressure, and a heart condition, on top of an old surgery. He had started struggling with stairs and losing his balance, but he brushed it off. Twenty-six sessions in, the way he moves has changed, and the whole family has noticed.',
+  situation:['Trouble climbing stairs and occasional unsteadiness','Diabetes, high blood pressure, and a heart condition, alongside chronic pancreatitis','A sedentary routine that had crept in, with left-side weakness','An old foot injury limiting ankle movement','A slow, unsteady walk the family had quietly started adjusting to'],
+  did:['Balance and gait training, focused on the weaker left side','Lower limb strengthening to rebuild what years of sitting had worn down'],
+  outcome:'Twenty-six sessions in, his walk has visibly evened out, and the whole family has noticed the difference in how he moves.',
+  scores:'On time 5/5 &middot; Physio behaviour 5/5 &middot; Overall 4/5',
+  quote:'He&rsquo;s happy with how things are going and he likes how the physio talks to him and explains things, that matters more to him than we expected. He&rsquo;s noticed real improvement, and so have we.',attr:'Daughter, summarised from CSAT feedback',
+  tags:['Balance and gait training','Diabetes','Hypertension','Family-observed recovery','Home physiotherapy']}
  ];
 var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, steady and independent.',blurb:'[PLACEHOLDER] When there is no one condition to name, start with a two-minute check, and see how other families got there.',to:'/stories'};
 var condBy=function(s){for(var i=0;i<CONDITIONS.length;i++)if(CONDITIONS[i].slug===s)return CONDITIONS[i];return null};
@@ -2321,7 +2400,7 @@ var SOCIAL=[
  {name:'X',url:'#',icon:'<path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.01 4.13H5.04l12.04 15.64z"/>'},
  {name:'YouTube',url:'#',icon:'<path d="M23.5 7.2a3 3 0 0 0-2.1-2.12C19.5 4.55 12 4.55 12 4.55s-7.5 0-9.4.53A3 3 0 0 0 .5 7.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.12c1.9.53 9.4.53 9.4.53s7.5 0 9.4-.53a3 3 0 0 0 2.1-2.12A31 31 0 0 0 24 12a31 31 0 0 0-.5-4.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>'},
  {name:'LinkedIn',url:'#',icon:'<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>'}];
-function socialStrip(){return '<section class="sec"><h2 class="h2">Find us on Instagram, <span class="it">YouTube</span> and more</h2><p class="p muted">Relatable clips and everyday tips on nutrition, exercise, balance and recovery, made for life at home.</p>'+
+function socialStrip(){return '<section class="sec"><h2 class="h2">Find us on Instagram, <span class="it">YouTube</span> and more</h2><p class="p muted">Everyday, relatable tips on nutrition, exercise, balance, and recovery, made for life at home.</p>'+
  '<div class="socrow">'+SOCIAL.map(function(s){return '<a class="soc" href="'+s.url+'" target="_blank" rel="noreferrer" aria-label="'+s.name+'"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+s.icon+'</svg></a>'}).join('')+'</div>'+
 '</section>'}
 var TEAM_INI=['P','S','N','M','D'];
@@ -2440,9 +2519,9 @@ function reframe(eb,ttl,intro,reasons){return '<div class="reframe">'+(eb?'<span
 function heroTall(){
  return '<section class="hero tall top photo">'+
   '<div class="bgwrap">'+
-    '<picture><source media="(min-width:1024px)" srcset="hero-feel-wide.png?v=1"><img class="herophoto figFeel" src="hero-feel-fr.png?v=8" alt=""></picture>'+
-    '<picture><source media="(min-width:1024px)" srcset="hero-move-wide.png?v=1"><img class="herophoto figMove" src="hero-move-fr.png?v=6" alt=""></picture>'+
-    '<picture><source media="(min-width:1024px)" srcset="hero-eat-wide.png?v=1"><img class="herophoto figEat" src="hero-eat-fr.png?v=6" alt=""></picture>'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-feel-wide.png?v=1"><img class="herophoto figFeel" src="hero-feel-fr.png?v=9" alt=""></picture>'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-move-wide.png?v=1"><img class="herophoto figMove" src="hero-move-fr.png?v=7" alt=""></picture>'+
+    '<picture><source media="(min-width:1024px)" srcset="hero-eat-wide.png?v=1"><img class="herophoto figEat" src="hero-eat-fr.png?v=7" alt=""></picture>'+
   '</div>'+
   '<div class="scrim"></div>'+
   '<div class="grain"></div>'+
@@ -2538,9 +2617,14 @@ function footer(hideBook){
   (hideBook?'':'<button class="btn light" data-lead>Book a free trial</button>')+
   '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/stories">Stories</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
-  '<h5>Contact</h5><a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'">WhatsApp us</a><a href="#">[PLACEHOLDER] phone</a><a href="#">[PLACEHOLDER] email</a><a href="#">Bangalore</a>'+
+  '<h5>Contact Us</h5><div class="fcontact">'+
+   '<a href="tel:+917994817300"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 4h3.1l1.5 4-2 1.4a11.5 11.5 0 0 0 5.2 5.2l1.4-2 4 1.5v3.1a1 1 0 0 1-1.1 1A15.5 15.5 0 0 1 4.7 5.1 1 1 0 0 1 5.8 4Z"/></svg>+91 7994817300</a>'+
+   '<div class="fcrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.3"/></svg><span>2nd Floor, Sri Venkateshwar Building, Whitefield, Bengaluru 560066</span></div>'+
+   '<a href="mailto:support@kineticage.in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>support@kineticage.in</a>'+
+   '<a target="_blank" rel="noreferrer" href="'+wa('Hi, I have a question about Kinetic Age')+'"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5l-.3.5-.5.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 .9.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>WhatsApp us</a>'+
+  '</div>'+
   '<div class="fsoc">'+SOCIAL.map(function(s){return '<a href="'+s.url+'" target="_blank" rel="noreferrer" aria-label="'+s.name+'"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+s.icon+'</svg></a>'}).join('')+'</div>'+
-  '<div class="fbot"><span>&copy; Kinetic Age [PLACEHOLDER]</span><span>[PLACEHOLDER] Privacy &middot; Terms</span></div></footer>'}
+  '<div class="fbot"><span>&copy;2026 KineticAge Health Training Private Limited. All rights reserved.</span><span>Privacy &middot; Terms</span></div></footer>'}
 
 function backedBy(){
  var row=function(n,rev){var items=Array.from({length:n},function(_,i){return '<div class="logo">Logo '+(i+1)+'</div>'}).join('');
@@ -2559,20 +2643,24 @@ function vHome(){
  '</section>'+
  '<section class="sec wsec"><h2 class="h2">Where you <span class="it">feel</span> it<br>isn&rsquo;t where it <span class="it">starts</span></h2><p class="p muted">The pain you feel is only part of it. We find each cause underneath and give it the right care.</p>'+
    '<div class="swipe">'+WHEELS.map(wheelCard).join('')+'</div>'+
-   '<p class="wcap-out">Every symptom needs its own care, so we treat each one of them.</p>'+
-   '<div class="secta"><a class="btn line" data-go="/quiz">Understand your condition</a></div>'+
+   '<div class="wclose"><p class="wclose-lead">Every symptom needs its own care, so we treat each one of them.</p><p class="wclose-sub">Find out what is behind your symptoms in a two-minute check.</p><a class="btn blue" data-go="/quiz">Take the 2-minute quiz</a></div>'+
  '</section>'+
  '<section class="sec"><h2 class="h2">What happens when you <span class="it">reach out</span></h2><p class="p muted">Four steps, one connected team behind each of them.</p>'+
    '<div class="jvgrid">'+journeyMini2()+videoBlock()+'</div>'+
-   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how each phase works</a></div>'+
+   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how we work, start to finish.</a></div>'+
  '</section>'+
  '<section class="sec">'+
    '<h2 class="h2" style="max-width:16ch">How we make recovery <span class="it">smoother</span></h2>'+
-   '<p class="p muted" style="max-width:40ch">Traditionally, a trainer for exercises, a nutritionist for food, a doctor who only sees reports. Each one works alone, so nobody sees the whole picture.</p>'+
-   '<p class="p" style="max-width:40ch;color:var(--ink)">We put everything together, under one roof.</p>'+
+   '<p class="p muted" style="max-width:42ch">Traditionally, care is split across specialists. A trainer for exercises, a nutritionist for food, a doctor who reads the reports, each working on their own part.</p>'+
+   '<p class="p" style="max-width:42ch;color:var(--ink)">Here, everything works together, under one roof.</p>'+
    pillarsStack()+
-   '<div class="secta"><a class="btn line" data-go="/how-we-work">See how they connect</a></div>'+
  '</section>'+
+ '<section class="sec"><h2 class="h2">Why people <span class="it">choose us.</span></h2>'+
+   '<div class="why">'+
+     '<div class="why-card g" data-no="1" style="--i:0"><span class="why-no">1</span><p class="why-tx">We bring together physiotherapy, training, nutrition, mental wellness, and a doctor, <b>all working as one team for you.</b></p></div>'+
+     '<div class="why-card b" data-no="2" style="--i:1"><span class="why-no">2</span><p class="why-tx">We follow your progress and update your plan as the condition improves, so your care <b>keeps pace with you.</b></p></div>'+
+     '<div class="why-card o" data-no="3" style="--i:2"><span class="why-no">3</span><p class="why-tx">Your own health consultant, ready for any worry or need, <b>any time of day.</b></p></div>'+
+   '</div></section>'+
  '<section class="sec"><h2 class="h2">The team behind <span class="it">your plan</span></h2><p class="p muted">Each specialist is chosen for their experience with older adults, and they all work from the same plan.</p>'+
    teamScroll()+
    '<div class="herobackers team-backers"><span class="bk-lead">Operators from</span><div class="bk-marquee"><div class="bk-track">'+
@@ -2580,6 +2668,7 @@ function vHome(){
    '</div></div></div>'+
  '</section>'+
  socialStrip()+
+ '<section class="sec"><h2 class="h2">Questions families ask</h2><div style="margin-top:18px">'+faqList(HOME_FAQS)+'</div></section>'+
  backedBy()+
  footer()}
 
@@ -2756,7 +2845,7 @@ function condPage(o){
  var waCard='<div class="band"><p class="p" style="margin:0">See how we treat your condition, what your plan would include, and how our care works together. We will send it to you on WhatsApp.</p><div style="margin-top:14px">'+waBtn('Can you send me the full plan for '+o.name+'?','Send me the full plan on WhatsApp','orange')+'</div></div>';
  return heroBand('g-field','<a data-go="/conditions" class="hero-back">&larr; All conditions</a>',o.name,o.symptom||'','<button class="btn light" data-lead>Book a free trial</button>')+
  // About the condition
- '<section class="sec"><span class="kick green">About the condition</span><h2 class="h2">What '+n+' <span class="it">is.</span></h2>'+(intro?'<p class="cond-lead">'+intro+'</p>':'<p class="p muted">[PLACEHOLDER] What '+n+' is, and the signs to watch for in older adults.</p>')+(causes.length?'<div class="cond-causes">'+causes.map(function(c){return '<div class="cond-cause"><div class="cc-h">'+c.h+'</div><p class="cc-p">'+c.p+'</p></div>'}).join('')+'</div>':'')+(signs.length?'<span class="signs-lbl">'+SIGN_ICO+'Signs you may notice</span><div class="signs">'+signs.map(function(r,i){return '<div class="sign" style="--i:'+i+'"><span class="sign-n">'+(i+1)+'</span><span class="sign-t">'+r+'</span></div>'}).join('')+'</div>':'')+'</section>'+
+ '<section class="sec"><span class="kick green">About the condition</span><h2 class="h2">What <span class="it">happens</span> in '+n+'.</h2>'+(intro?'<p class="cond-lead">'+intro+'</p>':'<p class="p muted">[PLACEHOLDER] What '+n+' is, and the signs to watch for in older adults.</p>')+(causes.length?'<div class="cond-causes">'+causes.map(function(c){return '<div class="cond-cause"><div class="cc-h">'+c.h+'</div><p class="cc-p">'+c.p+'</p></div>'}).join('')+'</div>':'')+(signs.length?'<span class="signs-lbl">'+SIGN_ICO+'Signs you may notice</span><div class="signs">'+signs.map(function(r,i){return '<div class="sign" style="--i:'+i+'"><span class="sign-n">'+(i+1)+'</span><span class="sign-t">'+r+'</span></div>'}).join('')+'</div>':'')+'</section>'+
  (o.photo?'<section class="sec" style="padding-top:4px"><div class="svc-img"><img src="'+o.photo+'?v=3" alt="'+o.name+'" loading="lazy"></div></section>':'')+
  // Top 3 exercises (space reserved, GIFs to come) + the shift
  '<section class="sec"><h2 class="h2">Three exercises that usually help.</h2><p class="p muted" style="margin-top:6px">Short guided demos for '+n+', coming soon.</p><div class="swipe" style="margin-top:18px">'+[1,2,3].map(function(k){return '<div class="card exg"><div class="exg-slot"><span class="exg-ic">'+PLAY_ICO+'</span><span class="exg-cap">Exercise '+k+'</span></div></div>'}).join('')+'</div><p class="shift" style="margin-top:18px">These help, but lasting change needs more than exercises alone.</p></section>'+
@@ -2805,7 +2894,7 @@ function vService(slug){
      '</section>'
    : '<section class="sec"><h2 class="h2">What '+n+' is.</h2><p class="p muted">[PLACEHOLDER] What '+n+' covers, who it helps, and what it looks like delivered at home. Specific, with clinical sign-off.</p></section>'+photo)+
  '<section class="sec"><h2 class="h2">'+(p.treatsHeading||('Conditions '+n+' helps.'))+'</h2><div class="pillar-links">'+(p.treats||p.conditions.map(function(s){var cc=condBy(s);return [cc?cc.name:s,s];})).map(function(x){return link('/conditions/'+x[1],x[0])}).join('')+'</div></section>'+
- '<section class="sec"><h2 class="h2">Good '+n+' leans on the care around it.</h2>'+(p.synergy
+ '<section class="sec"><h2 class="h2">'+p.name+' goes further when your whole health is cared for.</h2>'+(p.synergy
    ? '<p class="p">'+p.synergy.intro+'</p><div class="syn">'+p.synergy.items.map(function(it){return '<div class="syn-item '+it.lane+'"><div class="syn-lbl">'+it.label+'</div><p class="syn-tx">'+it.text+'</p>'+link(it.to,it.link)+'</div>';}).join('')+'</div>'
    : '<p class="p muted">[PLACEHOLDER] How '+n+' combines with the other pillars for real results, in plain words, with clinical sign-off.</p><div class="pillar-links">'+PILLARS.filter(function(x){return x.slug!==p.slug}).map(function(x){return link('/services/'+x.slug,x.name)}).join('')+'</div>')+'</section>'+
  '<section class="sec"><div class="band"><p class="p" style="margin:0">'+((p.wa&&p.wa.line)||'See how we treat your condition, what your plan would include, and how our care works together. We will send it to you on WhatsApp.')+'</p><div style="margin-top:14px">'+waBtn((p.wa&&p.wa.msg)||('Can you send me the full '+p.name+' plan?'),'Send me the full plan on WhatsApp','orange')+'</div></div></section>'+
@@ -2817,7 +2906,7 @@ function vService(slug){
      (ts?'<div style="margin-top:18px">'+testiCard2(ts,TESTIMONIALS.indexOf(ts))+'</div>':'')+
      (ci>=0?'<div style="margin-top:14px">'+csCard(CASE_STUDIES[ci],ci)+'</div>':'')+
      '<div style="margin-top:16px">'+link('/case-studies','See all case studies')+'</div></section>';})()+
- '<section class="sec cta-block"><h2 class="h2">Start with a free at-home assessment.</h2><p class="p muted" style="margin-bottom:18px">A specialist sees what you need in person, and the doctor decides what would help, including what you do not need. No payment needed.</p><button class="btn" data-lead>Book a free trial</button></section>'+
+ '<section class="sec cta-block"><h2 class="h2">Start with a free at-home assessment.</h2><p class="p muted" style="margin-bottom:18px">A specialist sees what you need in person, and the doctor decides what genuinely helps you, including what you can skip. The visit is free.</p><button class="btn" data-lead>Book a free trial</button></section>'+
  '<section class="sec"><h2 class="h2">People also ask</h2><div style="margin-top:18px">'+faqList(p.faqs||serviceFaqs(p.name))+'</div></section>'+
  footer()}
 
@@ -3118,12 +3207,6 @@ function vAbout(){
      '<div class="creed-card b" style="--i:1">'+KAG+'<span class="creed-lbl">'+KA+'Our Vision</span><p class="creed-tx">Our vision is to make a future where <span class="it">growing older at home means living well,</span> with care that keeps you stronger, steadier, and supported for the long run.</p></div>'+
    '</div></section>'+
  '<section class="sec"><h2 class="h2">Our senior providers</h2><p class="p muted">Meet some of our senior providers, part of a trained team of 45 and growing. Every one is qualified and verified, because letting someone into your home takes trust.</p>'+teamScroll()+'</section>'+
- '<section class="sec"><h2 class="h2">Why people <span class="it">choose us.</span></h2>'+
-   '<div class="why">'+
-     '<div class="why-card g" data-no="1" style="--i:0"><span class="why-no">1</span><p class="why-tx">We bring together physiotherapy, training, nutrition, mental wellness, and a doctor, <b>all working as one team for you.</b></p></div>'+
-     '<div class="why-card b" data-no="2" style="--i:1"><span class="why-no">2</span><p class="why-tx">We follow your progress and update your plan as you change, so your care <b>keeps pace with you.</b></p></div>'+
-     '<div class="why-card o" data-no="3" style="--i:2"><span class="why-no">3</span><p class="why-tx">Your own health consultant, ready for any worry or need, <b>any time of day.</b></p></div>'+
-   '</div></section>'+
  '<section class="sec"><h2 class="h2">The record so far.</h2><div style="margin-top:14px">'+statStrip()+'</div><div style="margin-top:16px">'+link('/conditions','See the conditions we treat')+'</div></section>'+
  '<section class="sec"><h2 class="h2">At home, across all of <span class="it">Bangalore.</span></h2><p class="p muted">We serve the whole of Bangalore, with care delivered to your door.</p>'+bangaloreMap()+'</section>'+
  '<section class="sec"><h2 class="h2">Questions families ask.</h2><div style="margin-top:18px">'+faqList(ABOUT_FAQS)+'</div></section>'+
@@ -3159,59 +3242,50 @@ function condSearchUpdate(){
 function CHECK(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'}
 function SEARCHX(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/><path d="M9 9l4 4M13 9l-4 4"/></svg>'}
 var SVC=[['Physiotherapy','s-physio','physio'],['Nutrition','s-nutrition','nutrition'],['Strength','s-strength','strength'],['Fitness','s-fitness','fitness']];
-/* one white-background photo per case, matched to the condition */
-var CS_IMG=['cs-01.png','cs-02.png','cs-03.png','cs-04.png','cs-05.png','cs-06.png','cs-07.png','cs-08.png','cs-09.png','cs-10.png','cs-11.png','cs-02.png'];
-/* short heading (max 3 words) + one-line statement per case */
-var CS_HEAD=['Twenty years of knee pain','Walking again after hip surgery','Balance, after cerebellar ataxia','Sedentary to active, with diabetes','Knee, back and shoulder together','Balance rebuilt at 84','Knee OA, managed online at 81','Chronic knee pain and imbalance','Movement after a stroke','Turned around in ten sessions','Years of complaints, worked through','Five conditions, evened out'];
-var CS_SUB=['Two decades of bilateral knee pain, meaningfully eased in seven months, in her early 60s.','Multi-joint pain rehabilitated safely after a hip replacement, walking again at 85-plus.','Balance and coordination rebuilt while living with cerebellar ataxia, at 74.','Strength rebuilt and knee pain reduced for a client managing type-2 diabetes, in her late 50s.','Grade-3 knee OA with back and shoulder pain, treated together and renewed, at 61.','From zero seconds of balance to walking confidently again, at 84.','Bilateral knee OA and a cardiac history, managed entirely online, at 81.','Chronic knee pain and a left-right imbalance, corrected with a combined plan, at 61.','Right-sided movement rebuilt after a stroke once the plan was realigned, at 66.','Knee pain, swelling and breathlessness turned around within ten sessions, at 56.','Strength and mobility restored after years of knee, ankle and foot pain, at 49.','Balance, gait and strength rebuilt for a 65-year-old managing five conditions, family-noticed.'];
-function svcOf(c){var s=c.stats[1][1].toLowerCase();return SVC.filter(function(x){return s.indexOf(x[2])>-1})}
-function svcChips(c){return '<div class="cs-svc">'+svcOf(c).map(function(x){return '<span class="'+x[1]+'">'+x[0]+'</span>'}).join('')+'</div>'}
-// each case study gets its own slugged route, derived from its short head
-// stable URL slugs, kept fixed so headings can change without breaking links
-var CS_SLUG=['twenty-year-knee-pain','recovery-after-surgery','regaining-balance','knee-pain-diabetes','knee-osteoarthritis','balance-management','relief-at-81','knee-and-scoliosis','movement-after-stroke','multi-symptom-recovery','strength-rebuilt','steadier-at-65'];
-function caseSlug(i){return CS_SLUG[i]}
-function caseIdxBySlug(s){for(var i=0;i<CASE_STUDIES.length;i++)if(caseSlug(i)===s)return i;return -1}
+/* slug, photo and service live on each case object */
+function svcOf(c){var s=(c.service||'').toLowerCase();return SVC.filter(function(x){return s.indexOf(x[2])>-1})}
+function caseSlug(i){return CASE_STUDIES[i].slug}
+function caseIdxBySlug(s){for(var i=0;i<CASE_STUDIES.length;i++)if(CASE_STUDIES[i].slug===s)return i;return -1}
 // the SVC filter names map to the real service (pillar) pages
 var SVC_PILLAR={'Physiotherapy':'physiotherapy','Nutrition':'nutrition','Strength':'strength-training','Fitness':'strength-training'};
 // per-service proof: one member testimonial (video) + one case study (read), matched to the pillar
 var SVC_TESTI={physiotherapy:'knee-pain','strength-training':'balance-and-falls',nutrition:'knee-pain','mental-wellness':'post-stroke-recovery','doctor-oversight':'post-stroke-recovery'};
-var SVC_CASE={physiotherapy:'twenty-year-knee-pain','strength-training':'strength-rebuilt',nutrition:'knee-pain-diabetes','mental-wellness':'multi-symptom-recovery','doctor-oversight':'steadier-at-65'};
+var SVC_CASE={physiotherapy:'twenty-years-knee-pain','strength-training':'long-history-49-sessions',nutrition:'diabetes-knee-pain-active-again','mental-wellness':'knee-pain-breathlessness-ten-sessions','doctor-oversight':'five-conditions-measured-recovery'};
 function caseForPillar(p){if(p.caseSlug){var ix=caseIdxBySlug(p.caseSlug);if(ix>=0)return ix;}for(var i=0;i<CASE_STUDIES.length;i++){if(svcOf(CASE_STUDIES[i]).map(function(x){return SVC_PILLAR[x[0]]}).indexOf(p.slug)>-1)return i;}return -1;}
-var CASE_FAQS=[{q:'[PLACEHOLDER] Are these real clients?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] How long do results usually take?',a:'[PLACEHOLDER]'},{q:'[PLACEHOLDER] Can you help with a situation like my parent’s?',a:'[PLACEHOLDER]'}];
-function csCard(c,i){
- return '<a class="card cscard" data-go="/case-studies/'+caseSlug(i)+'">'+
-  '<div class="cs-cardimg"><img src="'+CS_IMG[i]+'?v=3" alt="'+c.title+'" loading="lazy"></div>'+
-  '<h3 class="cs-ttl">'+CS_HEAD[i]+'</h3>'+
-  '<p class="cs-sub">'+CS_SUB[i]+'</p>'+
-  '<span class="csbtn">Read case study</span>'+
+var CASE_FAQS=[
+ {q:'Are these real clients?',a:'Yes. Every story comes from a real Kinetic Age client, shared with their consent and summarised from their own feedback.'},
+ {q:'How long do results take?',a:'It varies by condition and by person. Some feel a difference within a few weeks, others over a few months. Each story shows the real timeline.'},
+ {q:'Can you help with a situation like my parent&rsquo;s?',a:'Most likely yes. Start with a free assessment, and a specialist will tell you what would help.'}];
+function csCard(c){
+ return '<a class="card cscard" data-go="/case-studies/'+c.slug+'">'+
+  '<div class="cs-cardimg"><img src="'+c.img+'?v=3" alt="'+c.headline+'" loading="lazy"></div>'+
+  '<h3 class="cs-ttl">'+c.headline+'</h3>'+
  '</a>'}
 function vCase(slug){
- var csOpen=caseIdxBySlug(slug); if(csOpen<0) return heroBand('g-home','Case studies','[PLACEHOLDER] Case study not found','')+'<section class="sec"><div>'+link('/case-studies','Back to all case studies')+'</div></section>'+footer();
- var c=CASE_STUDIES[csOpen];
- var svcLinks=svcOf(c).map(function(x){return SVC_PILLAR[x[0]]}).filter(function(v,i,a){return v&&a.indexOf(v)===i});
- var li=function(x){return '<li>'+x+'</li>'};
+ var i=caseIdxBySlug(slug); if(i<0) return heroBand('g-home','Case studies','Case study not found','')+'<section class="sec"><div>'+link('/case-studies','Back to all case studies')+'</div></section>'+footer();
+ var c=CASE_STUDIES[i], li=function(x){return '<li>'+x+'</li>'}, chip=function(a){return '<a class="chip cond" data-go="'+a[1]+'">'+a[0]+'</a>'};
+ var others=[1,2,3].map(function(k){return CASE_STUDIES[(i+k)%CASE_STUDIES.length]});
  return '<section class="sec csread" style="padding-top:92px">'+
    '<button class="bk" data-go="/case-studies" aria-label="Back to all case studies">&larr;</button>'+
-   '<div class="cs-cardimg" style="margin-top:14px"><img src="'+CS_IMG[csOpen]+'?v=3" alt="'+c.title+'" loading="eager"></div>'+
-   '<div class="cs-eyebrow">Case study '+c.n+' / 12</div>'+
-   '<h1 class="cs-h1">'+c.title+'</h1>'+
-   '<div class="cs-introbox"><p class="p cs-lead">'+c.intro+'</p></div>'+
-   '<div class="cs-statgrid">'+c.stats.slice(0,2).map(function(s){return '<div class="cs-stat"><span class="k">'+s[0]+'</span><span class="v">'+s[1]+'</span></div>'}).join('')+'</div>'+
-   '<figure class="cs-saying"><blockquote>'+c.quote+'</blockquote><figcaption>'+(c.attr||'In the client&rsquo;s own words')+'</figcaption></figure>'+
-   '<div class="cs-comp"><span class="kick orange">The challenge</span><ul class="cs-bul warm">'+c.challenge.map(li).join('')+'</ul></div>'+
-   '<div class="cs-comp"><span class="kick">What we worked on</span><ul class="cs-bul teal">'+c.worked.map(li).join('')+'</ul></div>'+
-   (c.outcomes?'<div class="cs-comp"><span class="kick green">Outcomes</span><ul class="cs-out">'+c.outcomes.map(li).join('')+'</ul></div>':'')+
-   '<div class="cs-comp"><span class="kick green">Satisfaction scores</span><div class="cs-scores">'+c.scores.map(function(s){return '<div class="cs-score"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join('')+'</div></div>'+
-   '<div class="cs-comp"><span class="kick">Areas of care</span><div class="chips" style="margin-top:6px">'+svcLinks.map(function(sl){return '<a class="chip cond" data-go="/services/'+sl+'">'+pillarBy(sl).name+'</a>'}).join('')+'</div><div class="cs-tags" style="margin-top:12px">'+c.tags.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div>'+
-   '<div class="cta-block" style="margin-top:28px;padding:34px 0"><h2 class="h2">Could this be your story too?</h2><p class="p muted" style="margin-bottom:18px">Start with a free at-home assessment, no payment needed.</p><button class="btn" data-lead>Book a free trial</button><div class="cta-second"><button class="btn line" data-go="/quiz">Or take the 2-minute quiz</button>'+link('/case-studies','See more case studies')+'</div></div>'+
+   '<div class="cs-eyebrow">Case study '+('0'+(i+1)).slice(-2)+' / 12</div>'+
+   '<h1 class="cs-h1">'+c.headline+'</h1>'+
+   '<p class="p cs-lead">'+c.summary+'</p>'+
+   '<div class="cs-cardimg" style="margin-top:16px"><img src="'+c.img+'?v=3" alt="'+c.headline+'" loading="eager"></div>'+
+   '<div class="cs-cardmeta" style="margin-top:14px">Age '+c.age+' &middot; '+c.service+'</div>'+
+   '<div class="cs-comp"><span class="kick orange">The situation</span><ul class="cs-bul warm">'+c.situation.map(li).join('')+'</ul></div>'+
+   '<div class="cs-comp"><span class="kick">What we did</span><ul class="cs-bul teal">'+c.did.map(li).join('')+'</ul><div class="chips" style="margin-top:12px">'+c.pillars.map(chip).join('')+'</div></div>'+
+   '<div class="cs-comp"><span class="kick green">The outcome</span><p class="p">'+c.outcome+'</p><div class="cs-scoreline">'+c.scores+'</div><figure class="cs-saying"><blockquote>'+c.quote+'</blockquote><figcaption>'+c.attr+'</figcaption></figure></div>'+
+   (c.conds&&c.conds.length?'<div class="cs-comp"><span class="kick">Related conditions</span><div class="chips" style="margin-top:6px">'+c.conds.map(chip).join('')+'</div></div>':'')+
+   '<div class="cta-block" style="margin-top:28px;padding:34px 0"><h2 class="h2">Could this be your story too?</h2><p class="p muted" style="margin-bottom:18px">It starts with an assessment at your home, and a specialist sees what would help.</p><button class="btn" data-lead>Book a Free Trial</button><div class="cta-second">'+link('/case-studies','See more case studies')+'</div></div>'+
+   '<div class="cs-comp"><span class="kick">More stories</span><div class="pillar-links" style="margin-top:10px">'+others.map(function(o){return link('/case-studies/'+o.slug,o.headline)}).join('')+'</div></div>'+
+   '<div class="cs-comp"><span class="kick">Good questions</span><div style="margin-top:12px">'+faqList(CASE_FAQS)+'</div></div>'+
   '</section>'+footer();
 }
 function vCases(){
- var list=CASE_STUDIES.map(function(c,i){return {c:c,i:i}}).filter(function(o){return csSvc==='all'||svcOf(o.c).some(function(x){return x[0]===csSvc})});
- return heroBand('g-home','','Real recoveries,<span class="it">in their own words.</span>','Twelve clients, from twenty years of knee pain to post-stroke rehab, who rebuilt strength, balance and confidence with care delivered at home.')+
-  '<section class="sec" style="padding-top:22px"><div class="chips">'+['All'].concat(SVC.map(function(x){return x[0]})).map(function(f){var k=(f==='All'?'all':f);return '<button class="chip'+(k===csSvc?' on':'')+'" data-cssvc="'+k+'">'+f+'</button>'}).join('')+'</div>'+
-   '<div class="csgrid">'+list.map(function(o){return csCard(o.c,o.i)}).join('')+'</div></section>'+
- '<section class="sec"><span class="kick">Good questions</span><h2 class="h2">Before you read on.</h2><div style="margin-top:18px">'+faqList(CASE_FAQS)+'</div></section>'+
+ return heroBand('g-home','','Real recoveries, <span class="it">real families.</span>','Stories from the people we care for, at home, across Bangalore.')+
+  '<section class="sec" style="padding-top:22px"><div class="csgrid">'+CASE_STUDIES.map(csCard).join('')+'</div></section>'+
+  '<section class="sec cta-block"><h2 class="h2">Want a recovery like this for you and your family?</h2><p class="p muted" style="margin-bottom:18px">A specialist sees you at home and tells you what would help.</p><button class="btn" data-lead>Book a Free Trial</button></section>'+
+  '<section class="sec"><h2 class="h2">Good questions</h2><div style="margin-top:18px">'+faqList(CASE_FAQS)+'</div></section>'+
  footer()}
 
 /* ---- quiz ---- */
