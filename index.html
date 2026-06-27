@@ -774,9 +774,29 @@ main{padding-bottom:96px}
 /* service page: supporting image below the "what is" section */
 .svc-img{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#e8eef4;box-shadow:0 22px 46px -28px rgba(20,32,80,.5)}
 .svc-img img{width:100%;height:100%;object-fit:cover;display:block}
-/* condition page: reserved exercise placeholders (GIFs to come) */
+/* condition page: lead paragraph */
+.cond-lead{margin-top:14px;font-size:calc(var(--fs-body) + 1.5px);line-height:1.62;color:var(--ink);letter-spacing:-.003em}
+/* condition page: "signs you may notice" checklist */
+.signs-lbl{display:inline-flex;align-items:center;gap:8px;margin:24px 0 13px;font-size:var(--fs-lbl);letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--green)}
+.signs-lbl svg{width:15px;height:15px}
+.signs{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 16px 36px -26px rgba(20,32,80,.5)}
+.sign{position:relative;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:center;padding:15px 18px;border-top:1px solid var(--line);animation:kjUp .5s var(--ease) both;animation-delay:calc(var(--i)*60ms)}
+.sign:first-child{border-top:none}
+.sign-n{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-family:var(--fd);font-weight:520;font-size:15px;color:var(--green);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--green) 17%,#fff),color-mix(in srgb,var(--green) 6%,#fff));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 20%,transparent)}
+.sign-t{font-size:var(--fs-body);line-height:1.5;color:var(--ink2)}
+/* condition page: reserved exercise placeholders (guided demos to come) */
 .exg{padding:0;background:none;border:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-.exg-slot{min-height:170px;border-radius:18px;width:100%}
+.exg-slot{position:relative;min-height:184px;border-radius:18px;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(155deg,#e9f5ef,#e1edf8);border:1px dashed color-mix(in srgb,var(--green) 38%,var(--line))}
+.exg-ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--green);box-shadow:0 10px 22px -10px rgba(31,140,106,.5)}
+.exg-ic svg{width:20px;height:20px;margin-left:2px}
+.exg-cap{font-size:var(--fs-cap);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700}
+/* condition page: common-causes sub-blocks (e.g. shoulder) */
+.cond-causes{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.cond-cause{padding-left:14px;border-left:3px solid var(--green)}
+.cond-cause .cc-h{font-family:var(--fd);font-weight:500;font-size:var(--fs-h4);letter-spacing:-.01em;color:var(--ink);margin-bottom:3px}
+.cond-cause .cc-p{margin:0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink2)}
 /* conditions: search + category chips + grouped directory */
 .cond-search{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);padding:13px 17px;box-shadow:0 8px 20px -14px rgba(20,32,80,.3)}
 .cond-search:focus-within{border-color:var(--green);box-shadow:0 10px 24px -12px rgba(31,140,106,.4)}
@@ -1987,7 +2007,6 @@ var COND_DIR=[
  {c:'ortho',sub:'Elbow & wrist',n:'Wrist sprains'},
  {c:'ortho',sub:'Elbow & wrist',n:'Post-fracture rehabilitation (wrist)'},
  {c:'ortho',sub:'Hip',n:'Osteoarthritis of hip'},
- {c:'ortho',sub:'Hip',n:'Hip replacement rehabilitation'},
  {c:'ortho',sub:'Hip',n:'Femoral neck fracture rehabilitation'},
  {c:'ortho',sub:'Knee',n:'Osteoarthritis knee'},
  {c:'ortho',sub:'Knee',n:'Total knee replacement rehabilitation'},
@@ -2009,7 +2028,6 @@ var COND_DIR=[
  {c:'neuro',sub:'Neurodegenerative',n:'Bell’s palsy'},
  {c:'neuro',sub:'Neurodegenerative',n:'Guillain-Barré Syndrome (GBS)'},
  {c:'neuro',sub:'Neurodegenerative',n:'Nerve injuries'},
- {c:'neuro',sub:'Peripheral nerve',n:'Diabetic neuropathy'},
  {c:'neuro',sub:'Peripheral nerve',n:'Peripheral neuropathy'},
  {c:'neuro',sub:'Vestibular & balance',n:'Vertigo'},
  {c:'neuro',sub:'Vestibular & balance',n:'Vestibular dysfunction'},
@@ -2266,6 +2284,9 @@ var WELLNESS={eyebrow:'No single problem?',title:'You just want them strong, ste
 var condBy=function(s){for(var i=0;i<CONDITIONS.length;i++)if(CONDITIONS[i].slug===s)return CONDITIONS[i];return null};
 var condSlugify=function(s){return s.toLowerCase().replace(/[’'()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')};
 var condSlugOf=function(d){return d.slug||condSlugify(d.n)};
+// clinical-name directory entries fold into one canonical condition page (link target only; data and search keep their own slug)
+var CANON_SLUG={'osteoarthritis-knee':'knee-pain','total-knee-replacement-rehabilitation':'knee-pain','post-operative-knee-rehabilitation':'knee-pain','knee-replacement-rehabilitation':'knee-pain','stroke-cva':'post-stroke-recovery','frozen-shoulder-adhesive-capsulitis':'shoulder-pain','rotator-cuff-tendinopathy-tear':'shoulder-pain','shoulder-impingement-syndrome':'shoulder-pain','balance-impairments':'balance-and-falls','falls-prevention-geriatric':'balance-and-falls','balance-disorders':'balance-and-falls','falls-prevention':'balance-and-falls','diabetes-related-mobility-issues':'diabetes','diabetes-related-functional-limitations':'diabetes','diabetic-foot-rehabilitation':'diabetic-neuropathy'};
+function condTarget(d){var s=condSlugOf(d);return CANON_SLUG[s]||s;}
 var dirBy=function(s){for(var i=0;i<COND_DIR.length;i++)if(condSlugOf(COND_DIR[i])===s)return COND_DIR[i];return null};
 var pillarBy=function(s){for(var i=0;i<PILLARS.length;i++)if(PILLARS[i].slug===s)return PILLARS[i];return null};
 
@@ -2431,10 +2452,10 @@ function heroBand(g,eyebrow,h1,sub,cta){
  '</section>'}
 function condCard(c,lane){return '<div class="card">'+slot(c.name+' &middot; photo',lane)+'<span class="tag '+lane+'" style="margin-top:14px">'+c.name+'</span><div class="cardttl">'+c.symptom+'</div><p class="p muted" style="margin-top:4px;font-size:var(--fs-sm)">'+c.intro+'</p><div class="cardcta">'+arguments[2]+'</div></div>'}
 function condDirRow(d){
- return '<a class="cdir-row" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condSlugOf(d)+'">'+d.n+'<span class="cdir-arr">'+ARR()+'</span></a>';
+ return '<a class="cdir-row" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condTarget(d)+'">'+d.n+'<span class="cdir-arr">'+ARR()+'</span></a>';
 }
 function condDirPill(d){
- return '<a class="cdir-pill" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condSlugOf(d)+'"><span class="cdp-nm">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';
+ return '<a class="cdir-pill" data-name="'+d.n.toLowerCase()+'" data-cat="'+d.c+'" data-go="/conditions/'+condTarget(d)+'"><span class="cdp-nm">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';
 }
 function condTile(c,i){var L=['g','b','o','n'][i%4];return '<a class="ctile '+L+'" data-go="/conditions/'+c.slug+'"><span class="ctile-name">'+c.name+'</span><span class="ctile-arr">'+ARR()+'</span></a>'}
 function breakdownCard(c){var b=BREAKDOWN[c.slug];return '<div class="card bcard">'+
@@ -2497,7 +2518,7 @@ function wheelCard(w,idx){
 function wellnessBand(){return '<div class="band"><span class="kick green">'+WELLNESS.eyebrow+'</span><div class="cardttl" style="margin-top:0">'+WELLNESS.title+'</div><p class="p muted">'+WELLNESS.blurb+'</p><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px"><button class="btn blue" data-go="/quiz">Take the 2-Minute Quiz</button>'+link(WELLNESS.to,'Watch member stories')+'</div></div>'}
 function footer(hideBook){
  return '<footer class="foot"><span class="brand"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Kinetic Age</span>'+
-  '<p>Complete care for older adults, brought home, looking after how you move, eat, and live, as one.</p>'+
+  '<p>Complete care for you and your family, brought home, looking after how you move, eat, and live, as one.</p>'+
   (hideBook?'':'<button class="btn light" data-lead>Book a free trial</button>')+
   '<h5>Explore</h5><a data-go="/conditions">Conditions</a><a data-go="/how-we-work">How We Work</a><a data-go="/stories">Stories</a><a data-go="/about">About</a><a data-go="/case-studies">Case studies</a>'+
   '<h5>Services</h5>'+PILLARS.map(function(p){return '<a data-go="/services/'+p.slug+'">'+p.name+'</a>'}).join('')+
@@ -2541,7 +2562,6 @@ function vHome(){
    '<div class="herobackers team-backers"><span class="bk-lead">Operators from</span><div class="bk-marquee"><div class="bk-track">'+
      (function(){var p=['IIT','IIM','BITS','AIIMS','Manipal Hospitals','Apollo'].map(function(n){return '<span class="bpill">'+n+'</span>'}).join('');return p+p})()+
    '</div></div></div>'+
-   '<div class="secta"><a class="btn line" data-go="/about">Meet the people behind Kinetic Age</a></div>'+
  '</section>'+
  socialStrip()+
  backedBy()+
@@ -2573,7 +2593,7 @@ function vConditions(){
  '<section class="sec" style="padding-top:8px"><h2 class="h2">Most people come to us for</h2><div class="popgrid">'+COND_POPULAR.map(function(c,i){var L=['g','b','o','p','n'][i%5];return '<a class="popc '+L+'" style="--i:'+i+'" data-go="/conditions/'+c.slug+'"><div class="popc-ph"><img src="'+c.photo+'?v=3" alt="'+c.name+'" loading="lazy"></div><div class="popc-body"><div class="popc-nm">'+c.name+'</div><span class="popc-arr">'+ARR()+'</span></div></a>'}).join('')+'</div></section>'+
  '<section class="sec cdir-sec"><h2 class="h2" style="margin-bottom:6px">Find your condition</h2><p class="p muted" style="margin-bottom:2px">Some of the other conditions we treat. Open a group, or search above.</p>'+
    '<div class="cdir" id="cdir">'+CONDITION_CATS.map(function(g){
-     var rows=COND_DIR.filter(function(d){return d.c===g.k;});
+     var rows=COND_DIR.filter(function(d){return d.c===g.k&&!COND_POPULAR.some(function(p){return p.slug===condSlugOf(d);});});
      if(!rows.length) return '';
      var subs=[];rows.forEach(function(d){var s=d.sub||'';if(subs.indexOf(s)<0)subs.push(s);});
      var hasSubs=!(subs.length===1&&subs[0]==='');
@@ -2591,39 +2611,30 @@ function vConditions(){
  footer()}
 
 function condFaqs(name){var n=lc(name);return [
- {q:'Can '+n+' improve without surgery or medication?',a:'[PLACEHOLDER]'},
+ {q:'Can '+n+' improve through therapy and daily care?',a:'[PLACEHOLDER]'},
  {q:'What causes '+n+' in older adults?',a:'[PLACEHOLDER]'},
  {q:'Can exercises alone fix it?',a:'[PLACEHOLDER]'},
  {q:'Is a doctor involved?',a:'[PLACEHOLDER]'}
 ];}
 // per-condition page copy (from the conditions + how-we-treat source docs); calm, plain, no em dashes
 var COND_CONTENT={
- 'knee-osteoarthritis':{name:'Knee osteoarthritis',
-  intro:'Knee osteoarthritis is the gradual wearing of the cushioning cartilage inside the knee joint. As that cushion thins, the bones move with more friction, which brings pain, stiffness, and swelling. It is one of the most common reasons older adults find walking and stairs harder over time.',
-  signs:['Pain that grows worse with movement and eases with rest','Stiffness in the morning or after sitting','Swelling around the joint','A grinding feeling when you bend the knee','A slow loss of confidence on stairs or uneven ground'],
-  treat:'We work on the knee and on everything that affects it. Physiotherapy eases the pain and restores movement, training builds the muscle around the knee so the joint carries less load, and nutrition helps manage weight and inflammation that add strain to the joint. A doctor reviews the full picture and guides the plan as you improve. Treated together, the knee gets relief that holds, rather than relief that fades.',
+ 'arthritis':{name:'Arthritis',
+  intro:'Arthritis is pain, stiffness, and swelling in the joints. The most common kind in older adults is osteoarthritis, where the cushioning inside a joint wears down over the years, so the joint moves with more friction. It can affect the knees, hips, hands, shoulders, and spine, and it tends to build slowly until daily movement starts to feel harder.',
+  signs:['Joint pain that grows with use and eases with rest','Stiffness in the morning or after sitting','Swelling or warmth around a joint','A grinding feeling when you move it','A slow drop in how far or how comfortably you can move'],
+  treat:'We treat the joints and everything that adds load to them. Physiotherapy eases the pain and keeps the joints moving, training builds the muscle around each joint so it carries less strain, and nutrition helps manage weight and inflammation that make arthritis worse. A doctor reviews the full picture and guides the plan as you improve. Treated together, your joints get relief that holds through daily life, rather than relief that fades after a session.',
   faqs:[
-   {q:'Can knee osteoarthritis improve through therapy and daily care?',a:'Yes. Many people see real improvement in pain and movement with the right mix of therapy, strength work, and weight care. Results depend on your full health picture.'},
-   {q:'What causes knee osteoarthritis in older adults?',a:'It builds over years from natural wear, past injuries, extra weight on the joint, and weak muscles around the knee. Several of these usually add up together.'},
+   {q:'Can arthritis improve through therapy and daily care?',a:'Yes. Many people see real improvement in pain and movement with the right mix of therapy, strength work, and weight care. Results depend on your full health picture.'},
+   {q:'What causes arthritis in older adults?',a:'It builds over years from natural joint wear, past injuries, extra weight on the joints, and weak supporting muscles. Several of these usually add up together.'},
    {q:'Can exercises alone fix it?',a:'Exercises help a great deal, and they work best alongside strength, weight care, and a guided plan, so the relief lasts.'},
    {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
  'low-back-pain':{name:'Low back pain',
   intro:'Low back pain is discomfort in the lower spine that can come from the muscles, discs, joints, or nerves of the back. It ranges from a dull ache to a sharp catch, and in older adults it often links to posture, weak core muscles, and age-related changes in the spine.',
   signs:['A steady ache or stiffness in the lower back','Pain that grows after sitting or standing for long','Trouble bending or lifting','At times pain that travels into the hip or leg'],
-  treat:'We treat the back and the habits around it. Physiotherapy releases the tight, painful areas and restores movement, training strengthens the core and back muscles that hold your spine steady, and a calm posture routine keeps the strain low through your day. A doctor guides the plan and watches for any sign that needs closer care. The aim is a back that feels stronger in daily life, not only on the treatment day.',
+  treat:'We treat the back and the habits around it. Physiotherapy releases the tight, painful areas and restores movement, training strengthens the core and back muscles that hold your spine steady, and a calm posture routine keeps the strain low through your day. A doctor guides the plan and watches for any sign that needs closer care. The aim is a back that feels stronger in daily life, beyond the treatment day.',
   faqs:[
    {q:'Can low back pain improve through therapy and daily care?',a:'Yes. Most low back pain eases well with therapy, the right exercises, and better daily habits. Results depend on the cause and your full health picture.'},
    {q:'What causes low back pain in older adults?',a:'It often comes from weak core muscles, poor posture, age-related changes in the spine, and strain from daily movement. These usually combine.'},
    {q:'Can exercises alone fix it?',a:'Exercises help a great deal, and they hold best when paired with posture care and a guided plan.'},
-   {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
- 'frozen-shoulder':{name:'Frozen shoulder',
-  intro:'Frozen shoulder is a stiffening of the shoulder joint, where the tissue around it tightens and thickens. The shoulder grows painful and hard to move, often over several months, and daily tasks like dressing or reaching overhead become difficult.',
-  signs:['A deep ache in the shoulder','Stiffness that grows worse over weeks','Trouble raising the arm or reaching behind your back','Pain that disturbs sleep when you lie on that side'],
-  treat:'We work to restore the shoulder gently and steadily. Physiotherapy uses guided movement and hands-on therapy to ease the stiffness and bring the range back, training keeps the surrounding muscles strong so the shoulder stays supported, and a doctor watches the pace so recovery stays safe and comfortable. Frozen shoulder recovers slowly, so a steady, guided plan matters more than a quick push.',
-  faqs:[
-   {q:'Can frozen shoulder improve through therapy and daily care?',a:'Yes. Frozen shoulder usually improves well with guided therapy and patience, and most people regain comfortable movement over time.'},
-   {q:'What causes frozen shoulder in older adults?',a:'It often follows a period of reduced shoulder use, an injury, or surgery, and it links more often to conditions like diabetes.'},
-   {q:'Can exercises alone fix it?',a:'Exercises are central to recovery, and they work best with hands-on therapy and a guided pace so the shoulder opens up safely.'},
    {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
  'cervical-spondylosis':{name:'Cervical spondylosis',
   intro:'Cervical spondylosis is age-related wear in the bones and discs of the neck. As the spine in the neck changes over the years, it can bring stiffness, pain, and at times pressure on nearby nerves, which sends discomfort into the shoulders or arms.',
@@ -2634,15 +2645,6 @@ var COND_CONTENT={
    {q:'What causes cervical spondylosis in older adults?',a:'It comes from natural age-related wear in the neck, often added to by posture habits and past strain.'},
    {q:'Can exercises alone fix it?',a:'Exercises help a great deal, and they hold best alongside posture care and a guided plan.'},
    {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
- 'stroke-recovery':{name:'Stroke recovery',
-  intro:'A stroke happens when blood flow to part of the brain is interrupted, which can affect movement, strength, balance, and speech. Recovery is the work of rebuilding these abilities through steady, guided rehabilitation, and the brain keeps the capacity to relearn with the right support.',
-  signs:['Weakness on one side of the body','Trouble with balance and walking','Stiffness in an arm or leg','Difficulty with speech or daily tasks','Tiredness that builds quickly'],
-  treat:'We rebuild ability step by step, at home where you feel safe to try. Physiotherapy retrains movement, balance, and strength on the affected side, training builds the stamina to keep daily tasks going, and emotional wellbeing supports the patience and mood that recovery asks for. A doctor guides the whole plan and adjusts it as you regain ground. Stroke recovery rewards a steady, connected plan more than any single therapy.',
-  faqs:[
-   {q:'Can stroke recovery improve through therapy and daily care?',a:'Yes. With steady rehabilitation, many people regain meaningful movement and independence over time. Progress depends on the stroke and your full health picture.'},
-   {q:'What causes the difficulties after a stroke?',a:'A stroke affects the part of the brain that controls movement, balance, or speech, so the abilities linked to that area need retraining.'},
-   {q:'Can exercises alone help?',a:'Guided exercises are at the heart of recovery, and they work best with strength, emotional support, and a doctor guiding the pace.'},
-   {q:'Is a doctor involved?',a:'Yes. A doctor guides the recovery plan and decides what would help, including what you do not need.'}]},
  'osteoporosis':{name:'Osteoporosis',
   intro:'Osteoporosis is the thinning and weakening of the bones, which makes them more likely to break. It develops quietly over years and is common in older adults, especially after menopause. With the right care, bones can be supported and the risk of a fracture lowered.',
   signs:['Few clear signs until a bone breaks','A loss of height over time','A stooping posture','Back pain from the spine','Bones that break more easily than expected'],
@@ -2661,15 +2663,15 @@ var COND_CONTENT={
    {q:'What causes diabetic neuropathy in older adults?',a:'It comes from long periods of high blood sugar damaging the nerves, most often in the feet and legs.'},
    {q:'Can exercises alone help?',a:'Exercise helps balance, strength, and circulation, and it works best alongside steady blood sugar care and a doctor&rsquo;s review.'},
    {q:'Is a doctor involved?',a:'Yes. A doctor reviews your reports and decides what would help, including what you do not need.'}]},
- 'knee-pain':{
-  intro:'Knee pain comes from changes in the joint, cartilage, or the soft tissue around it. The common causes are osteoarthritis, post-surgical stiffness, and ligament injury.',
-  signs:['Aching you notice when climbing stairs or getting up from a chair','Stiffness or swelling around the knee, often in the morning','A sense that the knee feels unsteady while you walk'],
-  treat:'We care for knee pain through movement rehabilitation, targeted strengthening, dietary support for joint health, and continuous medical oversight, all delivered at home.',
+ 'knee-pain':{name:'Knee pain',
+  intro:'Knee pain in older adults most often comes from osteoarthritis, the gradual wearing of the cushioning cartilage inside the knee joint. As that cushion thins, the bones move with more friction, which brings pain, stiffness, and swelling. It is one of the most common reasons walking and stairs start to feel harder over time.',
+  signs:['Pain that grows worse with movement and eases with rest','Stiffness in the morning or after sitting','Swelling around the joint','A grinding feeling when you bend the knee','A slow loss of confidence on stairs or uneven ground'],
+  treat:'We work on the knee and on everything that affects it. Physiotherapy eases the pain and restores movement, training builds the muscle around the knee so the joint carries less load, and nutrition helps manage weight and inflammation that add strain to the joint. A doctor reviews the full picture and guides the plan as you improve. Treated together, the knee gets relief that holds, rather than relief that fades.',
   faqs:[
-   {q:'Can knee pain improve without surgery or medication?',a:'Yes. Physiotherapy is often the first and most effective approach, and with early support many people manage well without surgery. Structured home sessions that combine strengthening and mobility work bring meaningful improvement in most cases of osteoarthritis and ligament strain.'},
-   {q:'What causes knee pain in older adults?',a:'The most common cause is osteoarthritis, the gradual wear of the cartilage that cushions the joint. Other causes include post-replacement stiffness, ligament injuries, and meniscal changes. With age, reduced muscle support around the knee adds to the load on the joint.'},
-   {q:'Can exercises alone fix it?',a:'Exercise is the cornerstone of knee care and brings lasting improvement in most cases. A physiotherapist makes sure the right exercises are chosen for your specific cause, since generic exercises without a proper assessment may not suit every condition.'},
-   {q:'Is a doctor involved?',a:'Yes. Doctor oversight is a core pillar at Kinetic Age. Before the programme begins, your medical history and any existing reports are reviewed. The physiotherapist works within the treating doctor&rsquo;s guidelines and flags anything that needs medical review.'}]},
+   {q:'Can knee pain improve through therapy and daily care?',a:'Yes. Many people see real improvement in pain and movement with the right mix of therapy, strength work, and weight care. Results depend on your full health picture.'},
+   {q:'What causes knee pain in older adults?',a:'It builds over years from natural wear, past injuries, extra weight on the joint, and weak muscles around the knee. Several of these usually add up together.'},
+   {q:'Can exercises alone fix it?',a:'Exercises help a great deal, and they work best alongside strength, weight care, and a guided plan, so the relief lasts.'},
+   {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
  'balance-and-falls':{name:'Balance and falls',
   intro:'Balance problems make standing and walking feel unsteady, which raises the chance of a fall. In older adults this often comes from weaker muscles, slower reflexes, inner-ear changes, and lower confidence, all of which build quietly over time.',
   signs:['Unsteadiness when you stand or turn','A fear of walking on uneven ground','Holding on to walls or furniture','Dizziness at times','A slow pull toward staying indoors'],
@@ -2679,39 +2681,43 @@ var COND_CONTENT={
    {q:'What causes balance problems in older adults?',a:'They build from weaker muscles, slower reflexes, inner-ear changes, certain medicines, and lower confidence. These often add up together.'},
    {q:'Can exercises alone fix it?',a:'Strength and balance exercises are central, and they work best alongside confidence-building and a doctor reviewing the causes.'},
    {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
- 'post-stroke-recovery':{
-  intro:'A stroke happens when blood flow to part of the brain is interrupted, affecting the cells that control movement, speech, and sensation.',
-  signs:['Reduced strength on one side of the body, in the arm, leg, or face','Difficulty with walking, balance, or coordinated movement','Changes in speech, memory, or managing daily tasks on your own'],
-  treat:'We support stroke recovery through early movement rehabilitation, progressive strengthening, nutrition for healing, and close coordination with your medical team.',
+ 'post-stroke-recovery':{name:'Post-stroke recovery',
+  intro:'A stroke happens when blood flow to part of the brain is interrupted, which can affect movement, strength, balance, and speech. Recovery is the work of rebuilding these abilities through steady, guided rehabilitation, and the brain keeps the capacity to relearn with the right support.',
+  signs:['Weakness on one side of the body','Trouble with balance and walking','Stiffness in an arm or leg','Difficulty with speech or daily tasks','Tiredness that builds quickly'],
+  treat:'We rebuild ability step by step, at home where you feel safe to try. Physiotherapy retrains movement, balance, and strength on the affected side, training builds the stamina to keep daily tasks going, and emotional wellbeing supports the patience and mood that recovery asks for. A doctor guides the whole plan and adjusts it as you regain ground. Stroke recovery rewards a steady, connected plan more than any single therapy.',
   faqs:[
-   {q:'Can stroke recovery improve without surgery or medication?',a:'Yes. Rehabilitation, not surgery, drives most of the functional recovery after a stroke. The brain&rsquo;s ability to reorganise and form new connections, called neuroplasticity, is supported through consistent, structured physiotherapy, and meaningful improvement is possible for months and years after the event.'},
+   {q:'Can recovery after a stroke continue through therapy and daily care?',a:'Yes. With steady rehabilitation, many people regain meaningful movement and independence over time. Progress depends on the stroke and your full health picture.'},
    {q:'What shapes recovery after a stroke?',a:'Recovery depends on which part of the brain was affected and how soon rehabilitation begins. Starting early gives the brain the best chance to rebuild those functions, which is why a prompt, structured programme matters.'},
-   {q:'Can exercises alone fix it?',a:'Recovery after a stroke involves more than exercise. It includes movement re-education, balance retraining, and practising daily tasks in your own home. A neurophysiotherapist designs the programme around the specific needs from your stroke, rather than a generic fitness routine.'},
-   {q:'Is a doctor involved?',a:'Yes. Every post-stroke programme is coordinated with the neurologist or treating physician. The physiotherapist works within medically approved parameters and shares regular progress updates so the clinical team has a complete picture of your recovery.'}]},
+   {q:'Can exercises alone help?',a:'Guided exercises are at the heart of recovery, and they work best with strength, emotional support, and a doctor guiding the pace.'},
+   {q:'Is a doctor involved?',a:'Yes. A doctor guides the recovery plan and decides what would help, including what you do not need.'}]},
  'post-operative-care-and-rehabilitation':{
   intro:'After major surgery, such as a joint replacement, cardiac procedure, or spinal surgery, the body can lose some strength, mobility, and function. Rehabilitation rebuilds it.',
   signs:['Stiffness or reduced strength in the operated area that limits standing, walking, or daily movement','Lower stamina after the rest of a hospital stay','Swelling or discomfort that limits the range of motion needed for recovery'],
   treat:'We guide recovery through phased rehabilitation, rebuilding strength, supporting tissue repair through nutrition, and working within your surgeon&rsquo;s guidelines throughout.',
   faqs:[
-   {q:'Can post-operative recovery improve without further surgery or medication?',a:'Yes. Physiotherapy is the primary driver of recovery after surgery. Consistent rehabilitation restores strength, keeps tissue supple, and rebuilds the function that surgery alone cannot deliver. When rehabilitation begins early, further procedures are usually not needed.'},
+   {q:'Can recovery after surgery improve through therapy and daily care?',a:'Yes. Physiotherapy is the primary driver of recovery after surgery. Consistent rehabilitation restores strength, keeps tissue supple, and rebuilds the function that comes back through guided care. Starting early gives the smoothest recovery, and most people progress well.'},
    {q:'What shapes recovery after surgery?',a:'Recovery is smoothest when rehabilitation starts soon, ideally within 24 to 48 hours. Muscle naturally softens during hospital rest and tissue heals more gradually with age, so an early, well-paced programme makes a real difference.'},
    {q:'Can exercises alone fix it?',a:'Exercise is central to recovery, and after surgery it is carefully phased: comfort first, then gentle mobilisation, then progressive strengthening, always within the surgeon&rsquo;s precautions. A physiotherapist guides this sequence, which is safer than exercising on your own after surgery.'},
    {q:'Is a doctor involved?',a:'Yes. Every post-operative programme begins with a review of the surgical report and the surgeon&rsquo;s instructions. The physiotherapist works directly within those guidelines and stays in touch with the surgical team throughout recovery.'}]},
- 'shoulder-pain':{
-  intro:'Shoulder pain in seniors usually comes from changes, inflammation, or injury in the rotator cuff, the joint capsule, or the surrounding tendons. The common causes are frozen shoulder, rotator cuff changes, and post-fracture stiffness.',
-  signs:['Aching in the shoulder when you lift the arm or reach overhead','Stiffness that limits how far the arm can rise or rotate','Disturbed sleep when lying on that side'],
-  treat:'We restore shoulder function through mobility work, progressive strengthening, anti-inflammatory nutrition support, and medical oversight where imaging or specialist input is involved.',
+ 'shoulder-pain':{name:'Shoulder pain',
+  intro:'Shoulder pain makes everyday movements like dressing, reaching, and lifting harder. It can come from several causes, and in older adults the most common are a stiffening of the joint, wear in the tendons that move the arm, or pinching of those tendons during movement. The right care depends on which one is behind your pain.',
+  causes:[
+   {h:'Frozen shoulder',p:'The tissue around the joint tightens and thickens, so the shoulder grows stiff and painful, often over several months. Raising the arm or reaching behind the back becomes difficult, and pain can disturb sleep.'},
+   {h:'Rotator cuff strain or tear',p:'The group of tendons that lift and steady the arm can wear or tear with age or strain. This brings weakness, pain when lifting, and trouble holding the arm up.'},
+   {h:'Shoulder impingement',p:'The tendons get pinched as the arm rises, which causes a sharp catch of pain during certain movements, often when reaching overhead.'}],
+  signs:['A deep ache in the shoulder','Stiffness that grows over weeks','Pain when raising or reaching the arm','Weakness when lifting','Discomfort that disturbs sleep on that side'],
+  treat:'We find the cause first, then treat the shoulder and the muscles around it. Physiotherapy uses guided movement and hands-on therapy to ease the stiffness and bring the range back, training keeps the surrounding muscles strong so the shoulder stays supported, and a doctor watches the pace so recovery stays safe and comfortable. Shoulder problems recover gradually, so a steady, guided plan matters more than a quick push.',
   faqs:[
-   {q:'Can shoulder pain improve without surgery or medication?',a:'In most cases, yes. Frozen shoulder, rotator cuff tendinopathy, and impingement all respond well to physiotherapy, and surgery is rarely the first or necessary option. Consistent home sessions that work on stiffness, strength, and movement patterns bring meaningful recovery.'},
-   {q:'What causes shoulder pain in older adults?',a:'The common causes are frozen shoulder (adhesive capsulitis), rotator cuff changes or tears, impingement, and stiffness after a fracture. With age, changes in tendon tissue and reduced muscle support around the joint make the shoulder more sensitive over time.'},
-   {q:'Can exercises alone fix it?',a:'Exercise is central to shoulder recovery, and the type and order matter. The right exercises for a rotator cuff issue or impingement make the difference, so a proper physiotherapy assessment identifies the exact cause first, then a targeted programme is designed around it.'},
-   {q:'Is a doctor involved?',a:'Yes. Where imaging or a specialist opinion is relevant, Kinetic Age coordinates with the treating orthopaedic surgeon or physician. The programme is designed within medical guidelines, and any notable change in symptoms is flagged for clinical review.'}]},
+   {q:'Can shoulder pain improve through therapy and daily care?',a:'Yes. Most shoulder pain improves well with guided therapy and patience, and many people regain comfortable movement over time. Results depend on the cause and your full health picture.'},
+   {q:'What causes shoulder pain in older adults?',a:'It often comes from a stiffening joint, worn tendons, or pinching during movement, sometimes after an injury, surgery, or a period of reduced shoulder use.'},
+   {q:'Can exercises alone fix it?',a:'Exercises are central to recovery, and they work best with hands-on therapy and a guided pace so the shoulder opens up safely.'},
+   {q:'Is a doctor involved?',a:'Yes. A doctor reviews your health and decides what would help, including what you do not need.'}]},
  'diabetes':{
   intro:'Over time, diabetes can affect the muscles and joints, reducing circulation, affecting the nerves in the feet, and lowering strength. Movement and nutrition help manage these effects.',
   signs:['Numbness, tingling, or a burning feeling in the feet and lower legs that affects steady walking','General tiredness and lower strength that limits daily activity','Stiffness or discomfort in several joints, often the shoulders, hands, and feet'],
   treat:'We manage the physical effects of diabetes through structured exercise, personalised nutrition, strength maintenance, and a programme supervised in line with your physician&rsquo;s guidance.',
   faqs:[
-   {q:'Can diabetes improve without surgery or medication?',a:'The physical effects of diabetes, such as nerve changes in the feet, lower strength, and steadiness, respond well to structured physiotherapy and nutrition, with no surgery involved. Blood sugar medication remains a medical decision, while exercise and nutrition directly improve insulin sensitivity and support steady function over time.'},
+   {q:'Can diabetes be managed through therapy and daily care?',a:'Yes. The physical effects of diabetes, such as nerve changes in the feet, lower strength, and steadiness, respond well to structured physiotherapy and nutrition. Blood sugar medication remains a medical decision, while exercise and nutrition directly improve insulin sensitivity and support steady function over time.'},
    {q:'What affects physical wellbeing with diabetes?',a:'Long-term high blood sugar can affect the nerves in the limbs, reduce circulation, and lower muscle strength. Staying active turns this around: regular movement supports muscle, which supports blood sugar control, which supports steady, active days.'},
    {q:'Can exercises alone fix it?',a:'Exercise is one of the most powerful steps for the physical side of diabetes, and it works best alongside nutrition support. Kinetic Age combines physiotherapy and dietitian-led nutrition planning to support both the physical and metabolic sides together.'},
    {q:'Is a doctor involved?',a:'Yes. Exercise intensity and nutrition for seniors with diabetes are always coordinated with the treating physician or diabetologist. The physiotherapist checks vitals before every session and is trained to recognise and respond to signs of low blood sugar.'}]},
@@ -2720,22 +2726,24 @@ var COND_CONTENT={
   signs:['A shuffling walk with shorter steps and less arm swing','Tremor at rest in the hands, arms, or jaw, with stiffness that makes movement slower','A tendency to stoop forward and to feel less steady when turning or changing direction'],
   treat:'We help you keep moving well through movement and gait retraining, strength work, nutritional support, and a programme coordinated with your neurologist and family.',
   faqs:[
-   {q:'Can Parkinson&rsquo;s improve without surgery or medication?',a:'Physiotherapy works alongside medication to support daily movement. Rigidity, a shuffling walk, steadiness, and freezing moments all respond to targeted rehabilitation, with strong clinical evidence behind it. The aim is to keep independence and quality of life for as long as possible.'},
+   {q:'Can Parkinson&rsquo;s be managed through therapy and daily care?',a:'Physiotherapy works alongside medication to support daily movement. Rigidity, a shuffling walk, steadiness, and freezing moments all respond to targeted rehabilitation, with strong clinical evidence behind it. The aim is to keep independence and quality of life for as long as possible.'},
    {q:'What affects Parkinson&rsquo;s symptoms over time?',a:'Parkinson&rsquo;s changes as the brain&rsquo;s dopamine-producing cells reduce over time. Staying active makes a real difference: regular movement keeps muscles strong and supple, and consistent physiotherapy directly supports this.'},
    {q:'Can exercises alone fix it?',a:'Exercise is one of the most evidence-backed steps for Parkinson&rsquo;s, especially large-amplitude movement training, balance work, and gait retraining. Consistent, structured exercise supports daily function, and the earlier it starts, the greater the long-term benefit.'},
    {q:'Is a doctor involved?',a:'Yes. The programme is coordinated with the neurologist managing the Parkinson&rsquo;s. Medication timing, particularly levodopa, affects when sessions work best, so scheduling is aligned with the medication schedule, and any notable change in symptoms is shared with the clinical team.'}]}
 };
+var PLAY_ICO='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+var SIGN_ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.6"/></svg>';
 // shared condition-page template. Per-condition copy comes from COND_CONTENT when present, else a calm fallback.
 function condPage(o){
  var n=lc(o.name), C=COND_CONTENT[o.slug]||{};
- var intro=C.intro||o.intro, signs=C.signs||o.signs||[], treat=C.treat, faqs=C.faqs||condFaqs(o.name);
+ var intro=C.intro||o.intro, signs=C.signs||o.signs||[], treat=C.treat, faqs=C.faqs||condFaqs(o.name), causes=C.causes||[];
  var waCard='<div class="band"><p class="p" style="margin:0">See how we treat your condition, what your plan would include, and how our care works together. We will send it to you on WhatsApp.</p><div style="margin-top:14px">'+waBtn('Can you send me the full plan for '+o.name+'?','Send me the full plan on WhatsApp','orange')+'</div></div>';
  return heroBand('g-field','<a data-go="/conditions" class="hero-back">&larr; All conditions</a>',o.name,o.symptom||'','<button class="btn light" data-lead>Book a free trial</button>')+
  // About the condition
- '<section class="sec"><h2 class="h2">What '+n+' is, and its signs.</h2>'+(intro?'<p class="p">'+intro+'</p>':'<p class="p muted">[PLACEHOLDER] What '+n+' is, and the signs to watch for in older adults.</p>')+(signs.length?'<div class="r-list" style="margin-top:16px">'+signs.map(function(r,i){return '<div class="r-row"><span class="n">0'+(i+1)+'</span><span>'+r+'</span></div>'}).join('')+'</div>':'')+'</section>'+
+ '<section class="sec"><span class="kick green">About the condition</span><h2 class="h2">What '+n+' <span class="it">is.</span></h2>'+(intro?'<p class="cond-lead">'+intro+'</p>':'<p class="p muted">[PLACEHOLDER] What '+n+' is, and the signs to watch for in older adults.</p>')+(causes.length?'<div class="cond-causes">'+causes.map(function(c){return '<div class="cond-cause"><div class="cc-h">'+c.h+'</div><p class="cc-p">'+c.p+'</p></div>'}).join('')+'</div>':'')+(signs.length?'<span class="signs-lbl">'+SIGN_ICO+'Signs you may notice</span><div class="signs">'+signs.map(function(r,i){return '<div class="sign" style="--i:'+i+'"><span class="sign-n">'+(i+1)+'</span><span class="sign-t">'+r+'</span></div>'}).join('')+'</div>':'')+'</section>'+
  (o.photo?'<section class="sec" style="padding-top:4px"><div class="svc-img"><img src="'+o.photo+'?v=3" alt="'+o.name+'" loading="lazy"></div></section>':'')+
  // Top 3 exercises (space reserved, GIFs to come) + the shift
- '<section class="sec"><h2 class="h2">Three exercises that usually help.</h2><div class="swipe">'+[1,2,3].map(function(){return '<div class="card exg"><div class="slot green exg-slot"></div></div>'}).join('')+'</div><p class="shift" style="margin-top:18px">These help, but lasting change needs more than exercises alone.</p></section>'+
+ '<section class="sec"><h2 class="h2">Three exercises that usually help.</h2><p class="p muted" style="margin-top:6px">Short guided demos for '+n+', coming soon.</p><div class="swipe" style="margin-top:18px">'+[1,2,3].map(function(k){return '<div class="card exg"><div class="exg-slot"><span class="exg-ic">'+PLAY_ICO+'</span><span class="exg-cap">Exercise '+k+'</span></div></div>'}).join('')+'</div><p class="shift" style="margin-top:18px">These help, but lasting change needs more than exercises alone.</p></section>'+
  // How we treat (merged: copy + pillar links + WhatsApp hook)
  '<section class="sec"><h2 class="h2">How we treat '+n+'.</h2>'+(treat?'<p class="p">'+treat+'</p>':'<p class="p muted">[PLACEHOLDER] How the five pillars work together for '+n+'.</p>')+'<div class="pillar-links" style="margin-top:16px">'+PILLARS.map(function(p){return link('/services/'+p.slug,p.name)}).join('')+'</div><div style="margin-top:18px">'+waCard+'</div></section>'+
  // Proof: every member story, swipeable
@@ -2767,11 +2775,12 @@ function vService(slug){
  return heroBand('g-blue','',p.name,p.blurb,'<button class="btn light" data-lead>Book a free trial</button>')+
  (p.about
    ? '<section class="sec"><h2 class="h2">What '+n+' is</h2><p class="p">'+p.about.what+'</p></section>'+
+     '<section class="sec" style="padding-top:4px"><div class="svc-img"><img src="'+((p.svcImg||p.photo)+'?v=1')+'" alt="'+p.name+'" loading="lazy"></div></section>'+
      '<section class="sec" style="padding-top:8px"><h2 class="h2">When do you need <span class="it">'+n+'?</span></h2><p class="p">'+p.about.when+'</p>'+
        '<div class="kahome"><span class="kahome-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.4 12 4l9 7.4"/><path d="M5 9.8V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.8"/><path d="M9.5 20v-5.2h5V20"/></svg></span><div class="kahome-bd"><span class="kahome-lbl">Care at home</span><p class="kahome-tx">'+p.about.home+'</p></div></div>'+
      '</section>'
-   : '<section class="sec"><h2 class="h2">What '+n+' is.</h2><p class="p muted">[PLACEHOLDER] What '+n+' covers, who it helps, and what it looks like delivered at home. Specific, with clinical sign-off.</p></section>')+
- '<section class="sec" style="padding-top:4px"><div class="svc-img"><img src="'+((p.svcImg||p.photo)+'?v=1')+'" alt="'+p.name+'" loading="lazy"></div></section>'+
+   : '<section class="sec"><h2 class="h2">What '+n+' is.</h2><p class="p muted">[PLACEHOLDER] What '+n+' covers, who it helps, and what it looks like delivered at home. Specific, with clinical sign-off.</p></section>'+
+     '<section class="sec" style="padding-top:4px"><div class="svc-img"><img src="'+((p.svcImg||p.photo)+'?v=1')+'" alt="'+p.name+'" loading="lazy"></div></section>')+
  '<section class="sec"><h2 class="h2">'+(p.treatsHeading||('Conditions '+n+' helps.'))+'</h2><div class="pillar-links">'+(p.treats||p.conditions.map(function(s){var cc=condBy(s);return [cc?cc.name:s,s];})).map(function(x){return link('/conditions/'+x[1],x[0])}).join('')+'</div></section>'+
  '<section class="sec"><h2 class="h2">'+nC+' does more when it does not work alone.</h2>'+(p.synergy
    ? '<p class="p">'+p.synergy.intro+'</p><div class="syn">'+p.synergy.items.map(function(it){return '<div class="syn-item '+it.lane+'"><div class="syn-lbl">'+it.label+'</div><p class="syn-tx">'+it.text+'</p>'+link(it.to,it.link)+'</div>';}).join('')+'</div>'
@@ -3106,7 +3115,7 @@ function condIsHealth(q){
  for(var i=0;i<words.length;i++){var w=words[i];for(var j=0;j<HEALTH_TERMS.length;j++){var t=HEALTH_TERMS[j];if(w.indexOf(t)>-1||t.indexOf(w)>-1)return true;}}
  return false;
 }
-function condRows(list){return list.map(function(d){return '<a class="cres-row" data-name="'+d.n.toLowerCase()+'" data-go="/conditions/'+condSlugOf(d)+'"><span class="cres-tick">'+CHECK()+'</span><span class="cres-name">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';}).join('')}
+function condRows(list){return list.map(function(d){return '<a class="cres-row" data-name="'+d.n.toLowerCase()+'" data-go="/conditions/'+condTarget(d)+'"><span class="cres-tick">'+CHECK()+'</span><span class="cres-name">'+d.n+'</span><span class="cdir-arr">'+ARR()+'</span></a>';}).join('')}
 function condSearchUpdate(){
  var input=document.getElementById('condSearch'); if(!input)return;
  var browse=document.getElementById('condBrowse'), res=document.getElementById('condResults'); if(!res)return;
